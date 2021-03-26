@@ -1,1 +1,21 @@
 
+What do I want to learn or understand better?
+A: Jag har lite erfarenhet av grupparbete och är inte bra på att arbeta parallellt med många andra
+B: Jag vill kunna arbeta parallellt med arbetskamrater utan problem
+A->B: Dokumentera misstag och försök lära sig utav det samt samarbeta med kamrater istället för att försöka göra allt själv
+ 
+How can I help someone else, or the entire team, to learn something new?
+A:  Inget händer just nu
+B: Jag kan använda mina IT kunskaper för att hjälpa med kodstruktur 
+A->B: Prata med gruppen och få reda på deras kod kunskaper.
+
+
+What is my contribution towards the team’s use of Scrum?
+A:Inget just nu
+B: Dela upp arbetet så alla deltar och arbetar. Jag själv gör det jag ska göra
+A->B: Prata med gruppen och dela upp arbetet så jag vet jag ska arbeta på
+
+What is my contribution towards the team’s deliveries?
+A:Inget just nu
+B: Jag vill fokusera på kod kvalitet och dynamisk programmering
+A->B: Planera koden väl innan vi börjar.
