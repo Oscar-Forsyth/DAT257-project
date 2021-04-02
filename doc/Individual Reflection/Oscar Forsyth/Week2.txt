@@ -1,0 +1,20 @@
+What do I want to learn or understand better?
+A: We have decided to use android Studio to develop our app. I have not used Android Studio before and lack knowledge.
+B: I want to learn Android Studio to the level that i am confident in my knowledge
+A->B: Read and watch tutorials on Android studio but also start to use it and get familiar with it
+ 
+How can I help someone else, or the entire team, to learn something new?
+A:  We all currently have different backgrounds and know different things.
+B: Help people get into coding but also get them familiar with Android Studio
+A->B:  If I can focus on the dynamic programming structure and Android Studio to then work together and communicate about the coding
+
+
+What is my contribution towards the team’s use of Scrum?
+A: Nothing has been added yet
+B: To be able to have good user stories, epics and backlogs in the scrum board 
+A->B: Communicate with the group on what needs to be done in our project and what priorities we have
+
+What is my contribution towards the team’s deliveries?
+A: I have set up Github 
+B: I would like to focus on code quality and make sure the product owner is happy
+A->B: Plan a lot before coding. Keep in regular contact with the product owner.
