@@ -1,13 +1,12 @@
 package com.example.application;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
-import android.widget.Toolbar;
 
 public class MainMenu extends AppCompatActivity {
 
-    private Toolbar toolbarTop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
