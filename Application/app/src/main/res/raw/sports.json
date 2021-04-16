@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Orienteering",
+    "logo": "nice/picture.img",
+    "description": "hello, we run in forest."
+  },
+  {
+    "name": "Football",
+    "logo": "nice/football/picture.img",
+    "description": "hello, we kick ball."
+  }
+]
