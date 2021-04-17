@@ -18,12 +18,7 @@
         android:id="@+id/SecondFragment"
         android:name="com.example.application.SecondFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_second"/>
     <activity
         android:id="@+id/availableSportsActivity"
         android:name="com.example.application.AvailableSportsActivity"
