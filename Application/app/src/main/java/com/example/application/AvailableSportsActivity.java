@@ -30,11 +30,13 @@ public class AvailableSportsActivity extends AppCompatActivity {
      */
     RecyclerView recyclerView;
     List<Sport> sports;
+
     /**
      * the URL for our JSON-file
      * For every update to the JSON-file, a new URL has to be generated so there is probably a better solution
      */
-    private static String JSON_URL = "http://www.json-generator.com/api/json/get/bPOWUqmiwi?indent=2";
+    private static String JSON_URL = "http://www.json-generator.com/api/json/get/cpXYVruRsO?indent=2";
+
     Adapter adapter;
 
     @Override
