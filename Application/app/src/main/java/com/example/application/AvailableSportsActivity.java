@@ -43,6 +43,7 @@ public class AvailableSportsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_available_sports);
+        this.setTitle("Available Sports");
 
         recyclerView = findViewById(R.id.sportsList);
         sports = new ArrayList<>();
