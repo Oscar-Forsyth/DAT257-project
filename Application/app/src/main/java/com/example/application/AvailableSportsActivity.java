@@ -24,7 +24,7 @@ import java.util.List;
 public class AvailableSportsActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<Sport> sports;
-    private static String JSON_URL = "http://www.json-generator.com/api/json/get/cqirzwkCWa?indent=2";
+    private static String JSON_URL = "http://www.json-generator.com/api/json/get/bZZCMqvdXC?indent=2";
     Adapter adapter;
 
     @Override
