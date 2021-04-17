@@ -18,14 +18,13 @@ import java.util.List;
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     LayoutInflater inflater;
     List<Sport> sports;
-    Context ctx;
+
 
     public Adapter(Context ctx, List<Sport> sports){
-        this.ctx=ctx;
+
         this.inflater = LayoutInflater.from(ctx);
         this.sports = sports;
     }
-
 
 
 
@@ -39,6 +38,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // bind the data
+
         holder.name.setText(sports.get(position).getName());
         holder.description.setText(sports.get(position).getDescription());
         Picasso.get().load(sports.get(position).getLogo()).resize(75,75).onlyScaleDown().into(holder.logo);
@@ -53,15 +53,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     public  class ViewHolder extends  RecyclerView.ViewHolder{
+
         TextView name, description;
         ImageView logo;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+
             name = itemView.findViewById(R.id.name);
             description = itemView.findViewById(R.id.description);
             logo = itemView.findViewById(R.id.logo);
+
 
             // handle onClick
 
@@ -73,4 +77,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             });
         }
     }
+
 }
+

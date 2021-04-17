@@ -1,6 +1,5 @@
 package com.example.application;
 
-
 public class Sport {
     private String name;
     private String description;
@@ -12,6 +11,7 @@ public class Sport {
         this.description= description;
         this.logo = logo;
 
+
     }
 
     public String getName() {
@@ -22,6 +22,7 @@ public class Sport {
         this.name = name;
     }
 
+
     public String getDescription() {
         return description;
     }
@@ -29,6 +30,7 @@ public class Sport {
     public void setDescription(String description) {
         this.description = description;
     }
+
 
     public String getLogo() {
         return logo;
@@ -39,3 +41,4 @@ public class Sport {
     }
 
 }
+
