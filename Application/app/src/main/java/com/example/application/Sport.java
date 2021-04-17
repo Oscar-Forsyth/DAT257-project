@@ -1,5 +1,10 @@
 package com.example.application;
 
+/**
+ * Controls one instance of a sport in the AvailableSports section.
+ * A sport has a name, a description of what the sport is about and an URL to the logo of the sport
+ * from the CIS website.
+ */
 public class Sport {
     private String name;
     private String description;
@@ -10,8 +15,6 @@ public class Sport {
         this.name = name;
         this.description= description;
         this.logo = logo;
-
-
     }
 
     public String getName() {
@@ -22,7 +25,6 @@ public class Sport {
         this.name = name;
     }
 
-
     public String getDescription() {
         return description;
     }
@@ -30,7 +32,6 @@ public class Sport {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public String getLogo() {
         return logo;

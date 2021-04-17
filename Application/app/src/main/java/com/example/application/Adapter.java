@@ -16,8 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 /**
- * Controls the RecyclerView
- * for more info, see: https://www.youtube.com/watch?v=e3MDW87mbR8
+ * Controls the RecyclerView and the adding of content to the RecyclerView.
  */
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     LayoutInflater inflater;
