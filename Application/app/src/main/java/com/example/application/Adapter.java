@@ -15,6 +15,10 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * Controls the RecyclerView
+ * for more info, see: https://www.youtube.com/watch?v=e3MDW87mbR8
+ */
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     LayoutInflater inflater;
     List<Sport> sports;
@@ -27,7 +31,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
 
-
+    /**
+     * see RecyclerView.java for more information
+     * @param parent
+     * @param viewType
+     * @return view based on custom_available_sport_layout
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,23 +44,30 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
+    /**
+     * uses the view created above to access data from our customized card
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // bind the data
-
         holder.name.setText(sports.get(position).getName());
         holder.description.setText(sports.get(position).getDescription());
         Picasso.get().load(sports.get(position).getLogo()).resize(75,75).onlyScaleDown().into(holder.logo);
-        //Picasso.get().load(R.drawable.football).resize(75,75).onlyScaleDown().into(holder.logo);
-
-
     }
 
+    /**
+     * @return number of items to be displayed in the recyclerView
+     */
     @Override
     public int getItemCount() {
         return sports.size();
     }
 
+    /**
+     * assigns values to attributes
+     */
     public  class ViewHolder extends  RecyclerView.ViewHolder{
 
         TextView name, description;

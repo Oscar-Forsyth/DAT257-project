@@ -21,10 +21,20 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * the page that contains all sports
+ */
 public class AvailableSportsActivity extends AppCompatActivity {
+    /**
+     * the framework of the list displaying the sports
+     */
     RecyclerView recyclerView;
     List<Sport> sports;
-    private static String JSON_URL = "http://www.json-generator.com/api/json/get/bZZCMqvdXC?indent=2";
+    /**
+     * the URL for our JSON-file
+     * For every update to the JSON-file, a new URL has to be generated so there is probably a better solution
+     */
+    private static String JSON_URL = "http://www.json-generator.com/api/json/get/bPOWUqmiwi?indent=2";
     Adapter adapter;
 
     @Override
@@ -37,6 +47,9 @@ public class AvailableSportsActivity extends AppCompatActivity {
         extractSports();
     }
 
+    /**
+     * JSON content is read and translated
+     */
     private void extractSports() {
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null, new Response.Listener<JSONArray>() {
