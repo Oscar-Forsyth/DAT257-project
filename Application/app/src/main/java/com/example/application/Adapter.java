@@ -66,7 +66,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     /**
-     * assigns values to attributes
+     * assigns values to and holds attributes necessary for the items in recyclerView
      */
     public  class ViewHolder extends  RecyclerView.ViewHolder{
 
