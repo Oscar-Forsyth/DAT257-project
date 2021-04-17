@@ -16,4 +16,13 @@ public class MainMenu extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
+
+    /** Called when the user taps the 'Recommended Sports' button */
+    /**public void uponRecommendedSports(View)
+
+    /** Called when the user taps the 'Upcoming Events' button */
+
+    /** Called when the user taps the 'Sports & Committees' button */
+
+    /** Called when the user tapts the 'Challenges button' */
 }

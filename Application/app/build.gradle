@@ -14,6 +14,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //To add support for vector drawables in Main Menu
+        vectorDrawables.useSupportLibrary = true
+
     }
 
     buildTypes {
