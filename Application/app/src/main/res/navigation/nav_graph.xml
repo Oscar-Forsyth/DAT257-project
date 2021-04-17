@@ -10,10 +10,9 @@
         android:name="com.example.application.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
-
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_FirstFragment_to_availableSportsActivity"
+            app:destination="@id/availableSportsActivity" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -25,4 +24,9 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <activity
+        android:id="@+id/availableSportsActivity"
+        android:name="com.example.application.AvailableSportsActivity"
+        android:label="activity_available_sports"
+        tools:layout="@layout/activity_available_sports" />
 </navigation>

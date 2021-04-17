@@ -6,7 +6,7 @@
   },
   {
     "name": "Football",
-    "logo": "nice/football/picture.img",
+    "logo": "drawable/ic_launcher_background.xml",
     "description": "hello, we kick ball."
   }
 ]
