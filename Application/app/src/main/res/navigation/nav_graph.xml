@@ -3,26 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/mainMenu">
 
-    <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.application.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
 
+    <activity
+        android:id="@+id/availableSportsActivity"
+        android:name="com.example.application.AvailableSportsActivity"
+        android:label="activity_available_sports"
+        tools:layout="@layout/activity_available_sports" />
+    <activity
+        android:id="@+id/mainMenu"
+        android:name="com.example.application.MainMenu"
+        android:label="activity_main_menu"
+        tools:layout="@layout/activity_main_menu" >
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.application.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+            android:id="@+id/action_mainMenu_to_availableSportsActivity"
+            app:destination="@id/availableSportsActivity"
+            app:enterAnim="@anim/fragment_fast_out_extra_slow_in" />
+    </activity>
 </navigation>
