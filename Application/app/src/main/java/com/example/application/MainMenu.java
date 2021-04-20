@@ -33,19 +33,19 @@ public class MainMenu extends AppCompatActivity {
         startActivity(intent);
     }
 
-    *//** Called when the user taps the 'Upcoming Events' button *//*
+    *//** Called when the user taps the 'Upcoming Events' button */
     public void openUpcomingEvents(View view) {
-        Intent intent = new Intent(this, UpcomingEvents.class);
-        EditText editText = (EditText) findViewById(R.id.editText);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
+        Intent intent = new Intent(this, ActivitiesActivity.class);
+        //EditText editText = (EditText) findViewById(R.id.editText);
+        //String message = editText.getText().toString();
+        //intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
 
-    *//** Called when the user taps the 'Sports & Committees' button */
+    /** Called when the user taps the 'Sports & Committees' button */
     public void openSportsAndCommittees(View view) {
         Intent intent = new Intent(this, AvailableSportsActivity.class);
-        EditText editText = (EditText) findViewById(R.id.availableSportsActivity);
+        //EditText editText = (EditText) findViewById(R.id.availableSportsActivity);
         //String message = editText.getText().toString();
         //intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);

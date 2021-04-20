@@ -15,10 +15,18 @@
         android:id="@+id/mainMenu"
         android:name="com.example.application.MainMenu"
         android:label="activity_main_menu"
-        tools:layout="@layout/activity_main_menu" >
+        tools:layout="@layout/activity_main_menu">
         <action
             android:id="@+id/action_mainMenu_to_availableSportsActivity"
             app:destination="@id/availableSportsActivity"
             app:enterAnim="@anim/fragment_fast_out_extra_slow_in" />
+        <action
+            android:id="@+id/action_mainMenu_to_activitiesActivity"
+            app:destination="@id/activitiesActivity" />
     </activity>
+    <activity
+        android:id="@+id/activitiesActivity"
+        android:name="com.example.application.ActivitiesActivity"
+        android:label="activity_activities"
+        tools:layout="@layout/activity_activities" />
 </navigation>
