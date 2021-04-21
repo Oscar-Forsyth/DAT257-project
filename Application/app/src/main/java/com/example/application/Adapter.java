@@ -4,13 +4,16 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.application.animations.Animations;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -21,7 +24,7 @@ import java.util.List;
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     LayoutInflater inflater;
     List<Sport> sports;
-
+    private int mExpandedPosition = -1;
 
     public Adapter(Context ctx, List<Sport> sports){
 
@@ -51,9 +54,50 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // bind the data
+
         holder.name.setText(sports.get(position).getName());
-        holder.description.setText(sports.get(position).getDescription());
+        holder.description.setText(sports.get(position).getDescription()); //Move descrpiton
         Picasso.get().load(sports.get(position).getLogo()).resize(75,75).onlyScaleDown().into(holder.logo);
+
+        final boolean isExpanded = position==mExpandedPosition;
+        holder.layoutExpand.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        holder.itemView.setActivated(isExpanded);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mExpandedPosition = isExpanded ? -1:position;
+                notifyItemChanged(position);
+            }
+        });
+
+        /*
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                boolean show = toggleLayout(!sports.get(position).isExpanded(), v, holder.layoutExpand);
+                sports.get(position).setExpanded(show);
+                Toast.makeText(v.getContext(), "Test", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+
+         */
+    }
+
+    private boolean toggleLayout(boolean isExpanded, View v, LinearLayout layoutExpand){ //Add linearLayout
+        //TODO add animation for arrow
+
+        if (isExpanded) {
+            Animations.expand(layoutExpand);
+        } else {
+            Animations.collapse(layoutExpand);
+        }
+
+        return isExpanded;
     }
 
     /**
@@ -67,19 +111,21 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     /**
      * assigns values to and holds attributes necessary for the items in recyclerView
      */
-    public  class ViewHolder extends  RecyclerView.ViewHolder{
+    public class ViewHolder extends  RecyclerView.ViewHolder{
 
         TextView name, description;
         ImageView logo;
+        ImageButton moreInfo;
+        LinearLayout layoutExpand;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-
             name = itemView.findViewById(R.id.name);
-            description = itemView.findViewById(R.id.description);
+            description = itemView.findViewById(R.id.description);  //Might need to move
             logo = itemView.findViewById(R.id.logo);
+            layoutExpand = itemView.findViewById(R.id.layoutExpand);
 
 
             // handle onClick
@@ -87,7 +133,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "Do Something With this Click", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(v.getContext(), "Do Something With this Click", Toast.LENGTH_SHORT).show();
                 }
             });
         }

@@ -43,7 +43,7 @@ public class AvailableSportsActivity extends AppCompatActivity {
 
 
 
-    private static String JSON_URL = "http://www.json-generator.com/api/json/get/cpXYVruRsO?indent=2";
+
     Adapter adapter;
 
     @Override
@@ -113,6 +113,7 @@ public class AvailableSportsActivity extends AppCompatActivity {
         //Link to URL - Saved for google API
 
         /*
+        private static String JSON_URL = "http://www.json-generator.com/api/json/get/cpXYVruRsO?indent=2";
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null, new Response.Listener<JSONArray>() {
             @Override
