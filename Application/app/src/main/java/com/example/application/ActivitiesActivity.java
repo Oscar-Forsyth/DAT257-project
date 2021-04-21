@@ -12,6 +12,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -84,22 +85,20 @@ public class ActivitiesActivity extends AppCompatActivity {
         //Link to URL - Saved for google API
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null, new Response.Listener<JSONArray>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, JSON_URL, null, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject activityObject = response.getJSONObject(i);
-
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray items = response.getJSONArray("items");
+                    for (int i = 0; i < items.length(); i++) {
                         Activity activity = new Activity();
-                        activity.setTitle(activityObject.getString("name").toString());
-                        activity.setDate(activityObject.getString("logo"));
-                        activity.setDescription(activityObject.getString("description".toString()));
+                        activity.setTitle(items.getJSONObject(i).getString("summary"));
+                        activity.setDate(items.getJSONObject(i).getJSONObject("start").getString("dateTime"));
+                        activity.setDescription(items.getJSONObject(i).getString("description"));
                         activities.add(activity);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -114,7 +113,7 @@ public class ActivitiesActivity extends AppCompatActivity {
 
         });
 
-        queue.add(jsonArrayRequest);
+        queue.add(jsonObjectRequest);
 
 
 
