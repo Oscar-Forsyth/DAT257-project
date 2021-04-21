@@ -37,7 +37,7 @@ public class ActivitiesActivity extends AppCompatActivity {
      * For every update to the JSON-file, a new URL has to be generated so there is probably a better solution
      */
 
-    private static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/n9g9uph6al9l0rh585kk0lo6co@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
+    private static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/cis-chalmers.se_295gphnnjamvidi831rg4f0120@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
     ActivitiesAdapter adapter;
 
     @Override
@@ -92,9 +92,22 @@ public class ActivitiesActivity extends AppCompatActivity {
                     JSONArray items = response.getJSONArray("items");
                     for (int i = 0; i < items.length(); i++) {
                         Activity activity = new Activity();
-                        activity.setTitle(items.getJSONObject(i).getString("summary"));
-                        activity.setDate(items.getJSONObject(i).getJSONObject("start").getString("dateTime"));
-                        activity.setDescription(items.getJSONObject(i).getString("description"));
+                        try {
+                            activity.setTitle(items.getJSONObject(i).getString("summary"));
+                        }   catch (JSONException e) {
+                                activity.setTitle("CIS Aktivitet");
+                        }
+                        try {
+                            activity.setDate(items.getJSONObject(i).getJSONObject("start").getString("dateTime"));
+                        } catch (JSONException e) {
+                            activity.setDate(items.getJSONObject(i).getJSONObject("start").getString("date"));
+                        }
+                        try {
+                            activity.setDescription(items.getJSONObject(i).getString("description"));
+                        } catch (JSONException e) {
+                            activity.setDescription("hej hallå");
+                        }
+
                         activities.add(activity);
                     }
                 } catch (JSONException e) {
