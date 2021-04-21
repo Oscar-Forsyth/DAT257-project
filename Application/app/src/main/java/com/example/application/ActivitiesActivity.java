@@ -5,6 +5,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +36,7 @@ public class ActivitiesActivity extends AppCompatActivity {
      * For every update to the JSON-file, a new URL has to be generated so there is probably a better solution
      */
 
-    private static String JSON_URL = "http://www.json-generator.com/api/json/get/cpXYVruRsO?indent=2";
+    private static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/n9g9uph6al9l0rh585kk0lo6co@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
     ActivitiesAdapter adapter;
 
     @Override
@@ -73,44 +81,21 @@ public class ActivitiesActivity extends AppCompatActivity {
      */
     private void extractActivities() throws JSONException {
 
-        JSONArray arr = new JSONArray(loadJSONFromAsset());
-
-        for (int i = 0; i < arr.length(); i++) {
-            try {
-                JSONObject activityObject = arr.getJSONObject(i);
-
-                Activity activity = new Activity();
-                activity.setTitle(activityObject.getString("title").toString());
-                activity.setDate(activityObject.getString("date"));
-                activity.setDescription(activityObject.getString("description".toString()));
-                activities.add(activity);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        adapter = new ActivitiesAdapter(getApplicationContext(),activities);
-        recyclerView.setAdapter(adapter);
-
-
         //Link to URL - Saved for google API
 
-        /*
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 for (int i = 0; i < response.length(); i++) {
                     try {
-                        JSONObject sportObject = response.getJSONObject(i);
+                        JSONObject activityObject = response.getJSONObject(i);
 
-                        Sport sport = new Sport();
-                        sport.setName(sportObject.getString("name").toString());
-                        sport.setDescription(sportObject.getString("description".toString()));
-                        sport.setLogo(sportObject.getString("logo"));
-                        sports.add(sport);
+                        Activity activity = new Activity();
+                        activity.setTitle(activityObject.getString("name").toString());
+                        activity.setDate(activityObject.getString("logo"));
+                        activity.setDescription(activityObject.getString("description".toString()));
+                        activities.add(activity);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -118,7 +103,7 @@ public class ActivitiesActivity extends AppCompatActivity {
                 }
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                adapter = new Adapter(getApplicationContext(),sports);
+                adapter = new ActivitiesAdapter(getApplicationContext(),activities);
                 recyclerView.setAdapter(adapter);
             }
         }, new Response.ErrorListener() {
@@ -132,6 +117,6 @@ public class ActivitiesActivity extends AppCompatActivity {
         queue.add(jsonArrayRequest);
 
 
-         */
+
     }
 }
