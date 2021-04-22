@@ -20,5 +20,13 @@
             android:id="@+id/action_mainMenu_to_availableSportsActivity"
             app:destination="@id/availableSportsActivity"
             app:enterAnim="@anim/fragment_fast_out_extra_slow_in" />
+        <action
+            android:id="@+id/wizard2"
+            app:destination="@id/wizard" />
     </activity>
+    <activity
+        android:id="@+id/wizard"
+        android:name="com.example.application.Wizard"
+        android:label="activity_wizard"
+        tools:layout="@layout/activity_wizard" />
 </navigation>
