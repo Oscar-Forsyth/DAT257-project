@@ -22,6 +22,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ActivitiesActivity extends AppCompatActivity {
@@ -113,6 +115,13 @@ public class ActivitiesActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                Collections.sort(activities, new Comparator<Activity>() {
+                    @Override
+                    public int compare(Activity object1, Activity object2) {
+                        return object1.getDate().compareTo(object2.getDate());
+                    }
+                });
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 adapter = new ActivitiesAdapter(getApplicationContext(),activities);

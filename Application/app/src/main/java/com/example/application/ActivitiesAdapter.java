@@ -48,7 +48,7 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
     public void onBindViewHolder(@NonNull ActivitiesAdapter.ViewHolder holder, int position) {
         // bind the data
         holder.title.setText(activities.get(position).getTitle());
-        holder.date.setText(activities.get(position).getDate());
+        holder.date.setText(activities.get(position).getPrettyDate());
         holder.description.setText(activities.get(position).getDescription());
     }
 
