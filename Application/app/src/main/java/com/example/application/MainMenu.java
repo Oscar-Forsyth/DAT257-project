@@ -2,6 +2,8 @@ package com.example.application;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,13 +53,25 @@ public class MainMenu extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /** Called when the user taps the 'Challenges button' *//*
+    /** Called when the user taps the 'Challenges button' */
     public void openChallenges(View view) {
+        System.out.println("HEJJ");
+        System.out.println("HEJJg");
+        System.out.println("HEJJsf");
+        System.out.println("sjy");
+        /*FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+        fm.replace(R.id.something, new QuizRecommended()).commit();
+         */
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction().add(R.id.something, new QuizRecommended()).commit();
+        /*
         Intent intent = new Intent(this, Challenges.class);
         EditText editText = (EditText) findViewById(R.id.editText);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
-    }*/
+
+         */
+    }
 
 }

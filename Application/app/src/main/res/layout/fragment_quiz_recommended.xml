@@ -9,6 +9,27 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:text="Here are your recommended sports \n \n Click on a sport for more information" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recommendedList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="150dp" />
+
+    <Button
+        android:id="@+id/buttonToMainMenu"
+        android:layout_width="206dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="600dp"
+        android:text="Main Menu" />
+
 
 </FrameLayout>

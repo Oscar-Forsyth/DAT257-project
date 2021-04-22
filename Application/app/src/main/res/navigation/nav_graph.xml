@@ -20,5 +20,25 @@
             android:id="@+id/action_mainMenu_to_availableSportsActivity"
             app:destination="@id/availableSportsActivity"
             app:enterAnim="@anim/fragment_fast_out_extra_slow_in" />
+        <action
+            android:id="@+id/action_mainMenu_to_quizRecommended"
+            app:destination="@id/quizRecommended" />
+        <action
+            android:id="@+id/action_mainMenu_to_blankFragment"
+            app:destination="@id/blankFragment" />
     </activity>
+    <fragment
+        android:id="@+id/quizRecommended"
+        android:name="com.example.application.QuizRecommended"
+        android:label="fragment_quiz_recommended"
+        tools:layout="@layout/fragment_quiz_recommended" >
+        <action
+            android:id="@+id/action_quizRecommended_to_mainMenu"
+            app:destination="@id/mainMenu" />
+    </fragment>
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.example.application.BlankFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_blank" />
 </navigation>
