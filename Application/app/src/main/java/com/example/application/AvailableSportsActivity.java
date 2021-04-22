@@ -5,8 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -40,11 +44,10 @@ public class AvailableSportsActivity extends AppCompatActivity {
      * For every update to the JSON-file, a new URL has to be generated so there is probably a better solution
      */
 
-
-
-
-
     Adapter adapter;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +57,19 @@ public class AvailableSportsActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.sportsList);
         sports = new ArrayList<>();
+
+
         try {
             extractSports();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
+
     }
+
+
 
     /**
      * JSON content is read from local file
@@ -82,7 +92,6 @@ public class AvailableSportsActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * JSON content is translated from loadJSONFromAsset
      */
@@ -98,6 +107,7 @@ public class AvailableSportsActivity extends AppCompatActivity {
                 sport.setName(sportObject.getString("name").toString());
                 sport.setDescription(sportObject.getString("description".toString()));
                 sport.setLogo(sportObject.getString("logo"));
+                sport.setLink(sportObject.getString("link"));
                 sports.add(sport);
 
             } catch (JSONException e) {
