@@ -1,17 +1,16 @@
 package com.example.application;
 
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -75,8 +74,6 @@ public class ActivitiesActivity extends AppCompatActivity {
         return json;
     }
 
-
-
     /**
      * JSON content is translated from loadJSONFromAsset
      */
@@ -103,9 +100,12 @@ public class ActivitiesActivity extends AppCompatActivity {
                             activity.setDate(items.getJSONObject(i).getJSONObject("start").getString("date"));
                         }
                         try {
-                            activity.setDescription(items.getJSONObject(i).getString("description"));
+                            String location = items.getJSONObject(i).getString("location");
+                            String[] res = location.split("[,]", 0);
+                            activity.setLocation(res[0]);
+                            //activity.setLocation(items.getJSONObject(i).getString("location"));
                         } catch (JSONException e) {
-                            activity.setDescription("hej hallå");
+                            activity.setLocation("Location unknown");
                         }
 
                         activities.add(activity);

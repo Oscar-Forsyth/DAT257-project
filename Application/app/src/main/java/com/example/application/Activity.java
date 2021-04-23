@@ -3,14 +3,14 @@ package com.example.application;
 public class Activity {
     private String title;
     private String date;
-    private String description;
+    private String location;
 
     public Activity(){}
 
     public Activity(String title, String date, String description){
         this.title = title;
         this.date = date;
-        this.description= description;
+        this.location= location;
     }
 
     public String getTitle() {
@@ -29,11 +29,11 @@ public class Activity {
         this.date = date;
     }
 
-    public String getDescription() {
-        return description;
+    public String getLocation() {
+        return location;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
