@@ -49,7 +49,8 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
         // bind the data
         holder.title.setText(activities.get(position).getTitle());
         holder.date.setText(activities.get(position).getPrettyDate());
-        holder.description.setText(activities.get(position).getDescription());
+        holder.location.setText(activities.get(position).getLocation());
+
     }
 
     /**
@@ -65,14 +66,14 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
      */
     public  class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView title, date, description;
+        TextView title, date, location;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             title = itemView.findViewById(R.id.title);
             date = itemView.findViewById(R.id.date);
-            description = itemView.findViewById(R.id.description);
+            location = itemView.findViewById(R.id.location);
 
             // handle onClick
 

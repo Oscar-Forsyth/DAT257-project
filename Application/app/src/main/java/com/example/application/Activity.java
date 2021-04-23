@@ -4,7 +4,7 @@ public class Activity {
     private String title;
     private String date;
     private String prettyDate;
-    private String description;
+    private String location;
 
     public Activity(){}
 
@@ -12,7 +12,8 @@ public class Activity {
         this.title = title;
         this.date = date;
         prettyDate = DateConverter.convertDateFromCalendar(date);
-        this.description= description;
+        this.location= location;
+
     }
 
     public String getTitle() {
@@ -36,11 +37,11 @@ public class Activity {
         prettyDate = DateConverter.convertDateFromCalendar(date);
     }
 
-    public String getDescription() {
-        return description;
+    public String getLocation() {
+        return location;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
