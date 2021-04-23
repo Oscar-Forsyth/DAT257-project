@@ -2,6 +2,7 @@ package com.example.application.sports;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,6 +66,13 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
         holder.description.setText(sports.get(position).getDescription());
         Picasso.get().load(sports.get(position).getLogo()).resize(150,150).onlyScaleDown().into(holder.logo);
 
+/*
+        holder.name.getPaint().setStrokeWidth(4);
+        holder.name.getPaint().setStyle(Paint.Style.STROKE);
+
+
+
+ */
         //Picasso.get().load(String.valueOf(holder.showMore.getDrawable())).into(holder.showMore);
 
         //Make the cardview expandable
@@ -114,6 +122,10 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
 
     }
 
+    /**
+     * @return checks if the box is extended and does the appropriate action depending on what the case is
+     */
+
     private boolean toggleLayout(boolean isExpanded, View v, LinearLayout layoutExpand) {
         Animations.toggleArrow(v, isExpanded);
         if (isExpanded) {
@@ -148,7 +160,7 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            name = itemView.findViewById(R.id.name);
+            name = itemView.findViewById(R.id.sportName);
             description = itemView.findViewById(R.id.description);  //Might need to move
             logo = itemView.findViewById(R.id.logo);
             linkButton = itemView.findViewById(R.id.link);
