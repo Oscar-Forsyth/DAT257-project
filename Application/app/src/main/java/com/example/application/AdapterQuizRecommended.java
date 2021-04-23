@@ -37,7 +37,7 @@ public class AdapterQuizRecommended extends RecyclerView.Adapter<AdapterQuizReco
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.custom_available_sports_layout, parent, false);
+        View view = inflater.inflate(R.layout.custom_recommended_sport, parent, false);
         return new ViewHolder(view);
     }
 
