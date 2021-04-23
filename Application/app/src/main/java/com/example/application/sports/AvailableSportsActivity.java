@@ -1,25 +1,17 @@
-package com.example.application;
+package com.example.application.sports;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.application.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -40,11 +32,10 @@ public class AvailableSportsActivity extends AppCompatActivity {
      * For every update to the JSON-file, a new URL has to be generated so there is probably a better solution
      */
 
+    SportsAdapter sportsAdapter;
 
 
 
-    private static String JSON_URL = "http://www.json-generator.com/api/json/get/cpXYVruRsO?indent=2";
-    Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +45,19 @@ public class AvailableSportsActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.sportsList);
         sports = new ArrayList<>();
+
+
         try {
             extractSports();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
+
     }
+
+
 
     /**
      * JSON content is read from local file
@@ -82,7 +80,6 @@ public class AvailableSportsActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * JSON content is translated from loadJSONFromAsset
      */
@@ -98,6 +95,7 @@ public class AvailableSportsActivity extends AppCompatActivity {
                 sport.setName(sportObject.getString("name").toString());
                 sport.setDescription(sportObject.getString("description".toString()));
                 sport.setLogo(sportObject.getString("logo"));
+                sport.setLink(sportObject.getString("link"));
                 sports.add(sport);
 
             } catch (JSONException e) {
@@ -106,13 +104,14 @@ public class AvailableSportsActivity extends AppCompatActivity {
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        adapter = new Adapter(getApplicationContext(),sports);
-        recyclerView.setAdapter(adapter);
+        sportsAdapter = new SportsAdapter(getApplicationContext(),sports);
+        recyclerView.setAdapter(sportsAdapter);
 
 
         //Link to URL - Saved for google API
 
         /*
+        private static String JSON_URL = "http://www.json-generator.com/api/json/get/cpXYVruRsO?indent=2";
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null, new Response.Listener<JSONArray>() {
             @Override
