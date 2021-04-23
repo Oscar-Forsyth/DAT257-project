@@ -20,7 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * the page that contains all sports
+ * This class more or less extratcs the information that's stored in sports.json and puts it into a
+ * Arraylist so that it can be used later. It also serves as the base for a new activity
  */
 public class AvailableSportsActivity extends AppCompatActivity {
     /**
@@ -45,26 +46,19 @@ public class AvailableSportsActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.sportsList);
         sports = new ArrayList<>();
 
-
-
-
         try {
             extractSports();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-
-
     }
-
-
 
     /**
      * JSON content is read from local file
      */
 
-    private String loadJSONFromAsset() throws JSONException {
+    private String loadJSONFromAsset()  {
         String json = null;
         try {
             InputStream is = getAssets().open("sports.json");
@@ -79,7 +73,6 @@ public class AvailableSportsActivity extends AppCompatActivity {
         }
         return json;
     }
-
 
     /**
      * JSON content is translated from loadJSONFromAsset
@@ -109,45 +102,6 @@ public class AvailableSportsActivity extends AppCompatActivity {
         recyclerView.setAdapter(sportsAdapter);
 
 
-        //Link to URL - Saved for google API
-
-        /*
-        private static String JSON_URL = "http://www.json-generator.com/api/json/get/cpXYVruRsO?indent=2";
-        RequestQueue queue = Volley.newRequestQueue(this);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject sportObject = response.getJSONObject(i);
-
-                        Sport sport = new Sport();
-                        sport.setName(sportObject.getString("name").toString());
-                        sport.setDescription(sportObject.getString("description".toString()));
-                        sport.setLogo(sportObject.getString("logo"));
-                        sports.add(sport);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                adapter = new Adapter(getApplicationContext(),sports);
-                recyclerView.setAdapter(adapter);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("tag", "onErrorResponse: " + error.getMessage());
-            }
-
-        });
-
-        queue.add(jsonArrayRequest);
-
-
-         */
     }
 
 

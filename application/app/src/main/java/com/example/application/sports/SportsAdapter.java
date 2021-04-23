@@ -22,7 +22,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 /**
- * Controls the RecyclerView and the adding of content to the RecyclerView.
+ * Controls the RecyclerView and the adding of content to the RecyclerView, such as the functionality and layout design
+ * (Those parts that are not done in the custom_available_sports_layout are done here instead)
  */
 public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder> {
     private LayoutInflater inflater;
@@ -51,12 +52,11 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
     }
 
     /**
-     * uses the view created above to access data from our customized card
+     * Binds the data from the JSON file that was extracted earlier to the view that was created earlier.
+     * Also sets different OnClick features
      * @param holder
      * @param position
      */
-
-
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -70,38 +70,13 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
         holder.name.getPaint().setStrokeWidth(4);
         holder.name.getPaint().setStyle(Paint.Style.STROKE);
 
-
-
  */
-        //Picasso.get().load(String.valueOf(holder.showMore.getDrawable())).into(holder.showMore);
-
-        //Make the cardview expandable
-        /*
-        final boolean isExpanded = position==mExpandedPosition;
-        holder.layoutExpand.setVisibility(isExpanded?View.VISIBLE:View.GONE);
-        holder.itemView.setActivated(isExpanded);
-
-
-         */
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean show = toggleLayout(!sports.get(position).isExpanded(), v.findViewById(R.id.showMore), holder.layoutExpand);
                 sports.get(position).setExpanded(show);
 
-            /*
-
-                mExpandedPosition = isExpanded ? -1:position;
-                notifyItemChanged(position);
-
-                if (isExpanded) {
-                    v.findViewById(R.id.showMore).animate().setDuration(200).rotation(180);
-
-                } else {
-                    v.findViewById(R.id.showMore).animate().setDuration(200).rotation(0);
-
-                }
-*/
             }
         });
 
@@ -123,7 +98,11 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
     }
 
     /**
-     * @return checks if the box is extended and does the appropriate action depending on what the case is
+     * checks if the box is extended and does the appropriate action depending on what the case is
+     * @param isExpanded Boolean that checks if the layout is expanded or not
+     * @param v The pressed views "showMore" so that it can be rotated
+     * @param layoutExpand The layout that needs to expand
+     * @return
      */
 
     private boolean toggleLayout(boolean isExpanded, View v, LinearLayout layoutExpand) {
@@ -147,7 +126,7 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
     }
 
     /**
-     * assigns values to and holds attributes necessary for the items in recyclerView
+     * Binds values to and holds attributes necessary for the items in recyclerView
      */
     protected class ViewHolder extends  RecyclerView.ViewHolder{
 
@@ -155,7 +134,6 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
         Button linkButton;
         ImageView logo, showMore;
         LinearLayout layoutExpand;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -166,7 +144,6 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
             linkButton = itemView.findViewById(R.id.link);
             layoutExpand = itemView.findViewById(R.id.layoutExpand);
             showMore = itemView.findViewById(R.id.showMore);
-
 
 
         }
