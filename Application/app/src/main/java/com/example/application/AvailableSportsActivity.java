@@ -108,6 +108,11 @@ public class AvailableSportsActivity extends AppCompatActivity {
                 sport.setDescription(sportObject.getString("description".toString()));
                 sport.setLogo(sportObject.getString("logo"));
                 sport.setLink(sportObject.getString("link"));
+
+                JSONArray tagList = sportObject.getJSONArray("tags");
+                for(int j = 0; j < tagList.length(); j++)
+                    sport.addTag(Tag.valueOf(tagList.getString(j)));
+
                 sports.add(sport);
 
             } catch (JSONException e) {
