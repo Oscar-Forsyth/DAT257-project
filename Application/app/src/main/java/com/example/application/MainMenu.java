@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.application.sports.AvailableSportsActivity;
+
 public class MainMenu extends AppCompatActivity {
 
 

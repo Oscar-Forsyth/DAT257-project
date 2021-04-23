@@ -1,4 +1,4 @@
-package com.example.application;
+package com.example.application.sports;
 
 /**
  * Controls one instance of a sport in the AvailableSports section.

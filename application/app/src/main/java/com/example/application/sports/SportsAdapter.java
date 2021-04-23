@@ -1,8 +1,7 @@
-package com.example.application;
+package com.example.application.sports;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.application.R;
 import com.example.application.animations.Animations;
 import com.squareup.picasso.Picasso;
 
@@ -23,13 +23,13 @@ import java.util.List;
 /**
  * Controls the RecyclerView and the adding of content to the RecyclerView.
  */
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder> {
     private LayoutInflater inflater;
 
     private List<Sport> sports;
     private int mExpandedPosition = -1;
 
-    public Adapter(Context ctx, List<Sport> sports){
+    public SportsAdapter(Context ctx, List<Sport> sports){
         this.inflater = LayoutInflater.from(ctx);
         this.sports = sports;
 
@@ -63,7 +63,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         holder.name.setText(sports.get(position).getName());
         holder.description.setText(sports.get(position).getDescription());
-        Picasso.get().load(sports.get(position).getLogo()).resize(75,75).onlyScaleDown().into(holder.logo);
+        Picasso.get().load(sports.get(position).getLogo()).resize(150,150).onlyScaleDown().into(holder.logo);
 
         //Picasso.get().load(String.valueOf(holder.showMore.getDrawable())).into(holder.showMore);
 
@@ -137,7 +137,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     /**
      * assigns values to and holds attributes necessary for the items in recyclerView
      */
-    public class ViewHolder extends  RecyclerView.ViewHolder{
+    protected class ViewHolder extends  RecyclerView.ViewHolder{
 
         TextView name, description;
         Button linkButton;

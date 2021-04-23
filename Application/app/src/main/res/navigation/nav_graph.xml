@@ -8,7 +8,7 @@
 
     <activity
         android:id="@+id/availableSportsActivity"
-        android:name="com.example.application.AvailableSportsActivity"
+        android:name="com.example.application.sports.AvailableSportsActivity"
         android:label="activity_available_sports"
         tools:layout="@layout/activity_available_sports" />
     <activity

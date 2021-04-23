@@ -18,7 +18,7 @@
 
 
         <activity
-            android:name=".AvailableSportsActivity">
+            android:name=".sports.AvailableSportsActivity">
         </activity>
 
         <activity
