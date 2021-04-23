@@ -3,90 +3,90 @@
     "name": "Badminton",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2020/03/Asset-1@4x-150x150.png",
     "description": "hello, we run in forest.",
-    "tags": ["INDIVIDUAL", "INDOORS"]
+    "tags": ["INDIVIDUAL", "INDOORS", "HIGHINTENSITY", "RACKETSPORT"]
   },
   {
     "name": "Basketball",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2020/03/89197372_1536028379897807_3019171995439857664_n-150x150.jpg",
     "description": "hello, we kick ball.",
-    "tags": []
+    "tags": ["INDIVIDUAL", "INDOORS", "HIGHINTENSITY", "BALLGAME"]
   },
   {
     "name": "Bicycle",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/cycle-150x150.jpg",
     "description": "hello, we kick ball.",
-    "tags": []
+    "tags": ["GROUP","INDIVIDUAL", "OUTDOORS", "ENDURANCE"]
   },
   {
     "name": "Football",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/fotball-150x150.png",
     "description": "hello, we kick ball.",
-    "tags": []
+    "tags": ["GROUP", "OUTDOORS", "HIGHINTENSITY", "BALLGAME"]
   },
   {
     "name": "Golf",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/golf-150x150.png",
     "description": "hello, we kick ball.",
-    "tags": []
+    "tags": ["INDIVIDUAL", "OUTDOORS", "TECHNIQUE", "RACKETSPORT"]
   },
   {
     "name": "Floorball",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2020/03/Chalmers-Innebandyklubb-150x150.png",
     "description": "hello, we kick ball.",
-    "tags": []
+    "tags": ["GROUP", "INDOORS", "HIGHINTENSITY", "RACKETSPORT"]
   },
   {
     "name": "Modern Dancing",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2020/10/CMD_logo_v1-150x150.png",
     "description": "hello, we kick ball.",
-    "tags": []
+    "tags": ["GROUP", "INDOORS", "ENDURANCE", "TECHNIQUE"]
   },
   {
     "name": "Padel",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/padel-150x150.png",
     "description": "hello, we kick ball.",
-    "tags": []
+    "tags": ["INDIVIDUAL", "INDOORS", "HIGHINTENSITY", "RACKETSPORT"]
   },
   {
     "name": "Rowing",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/row-150x150.png",
     "description": "hello, we kick ball.",
-    "tags": []
+    "tags": ["GROUP", "OUTDOORS", "ENDURANCE", "WATERSPORT"]
   },
   {
     "name": "Swimming",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2020/12/uttrarna2-150x150.jpg",
     "description": "hello, we kick ball.",
-    "tags": []
+    "tags": ["INDIVIDUAL", "OUTDOORS", "ENDURANCE", "WATERSPORT"]
   },
   {
     "name": "Ultimate Frisbee",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/ultimate-frisbee-150x150.jpg",
     "description": "hello, we kick ball.",
-    "tags": []
+    "tags": ["GROUP", "OUTDOORS", "HIGHINTENSITY", "BALLGAME"]
   },
   {
     "name": "Volleyball",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2020/01/CIS_Volleyboll_New-2-150x150.png",
     "description": "hello, we kick ball.",
-    "tags": []
+    "tags": ["GROUP", "OUTDOORS", "HIGHINTENSITY", "BALLGAME"]
   },
   {
     "name": "Yoga",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2020/03/Chalmers-Yoga-logga_CMYK-150x150.png",
     "description": "hello, we kick ball.",
-    "tags": []
+    "tags": ["GROUP", "INDOORS", "ENDURANCE", "TECHNIQUE"]
   },
   {
     "name": "Outdoors",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2020/10/Outdoors_logo_v1-150x150.png",
     "description": "hello, we kick ball.",
-    "tags": []
+    "tags": ["GROUP", "OUTDOORS", "ENDURANCE", "EXTREMESPORT"]
   },
   {
     "name": "Tennis",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2020/11/Tennis_logo_v1-150x150.png",
     "description": "hello, we kick ball.",
-    "tags": []
+    "tags": ["GROUP", "OUTDOORS", "HIGHINTENSITY", "RACKETSPORT"]
   }
 ]
