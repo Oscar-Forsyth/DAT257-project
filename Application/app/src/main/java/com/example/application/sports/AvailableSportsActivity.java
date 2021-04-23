@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.example.application.R;
 
@@ -26,15 +28,12 @@ public class AvailableSportsActivity extends AppCompatActivity {
      */
     RecyclerView recyclerView;
     List<Sport> sports;
+    SportsAdapter sportsAdapter;
 
     /**
      * the URL for our JSON-file
      * For every update to the JSON-file, a new URL has to be generated so there is probably a better solution
      */
-
-    SportsAdapter sportsAdapter;
-
-
 
 
     @Override
@@ -45,6 +44,8 @@ public class AvailableSportsActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.sportsList);
         sports = new ArrayList<>();
+
+
 
 
         try {
