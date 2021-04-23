@@ -1,11 +1,15 @@
 package com.example.application.calendar;
 
+/**
+ * Class that converts the date from CIS Google Calendars JSON-file to a more readable format.
+ */
 public class DateConverter {
 
     /**
-     *
+     * Method that converts the original string to a more readable format.
      * @param date A date as a string formatted like "2019-11-20T17:00:00+01:00" or
      *             "2020-02-22"
+     * @return A string in the format "20 November 2019 17:00" or "22 February 2020"
      */
     public static String convertDateFromCalendar(String date) {
         StringBuilder sb = new StringBuilder();
@@ -30,6 +34,7 @@ public class DateConverter {
     }
 
     private static String getDay(String date) {
+        // Make sure the 0 is not displayed if it's one of the first nine days in a month.
         if (date.charAt(8) == '0') {
             return date.substring(9, 10);
         }
@@ -66,5 +71,4 @@ public class DateConverter {
                 return "Month";
         }
     }
-
 }

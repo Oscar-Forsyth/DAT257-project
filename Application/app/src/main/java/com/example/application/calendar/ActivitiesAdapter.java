@@ -15,24 +15,22 @@ import com.example.application.R;
 import java.util.List;
 
 /**
- * Controls the RecyclerView and the adding of content to the RecyclerView.
+ * Controls the information that should be visible on the cards in the Upcoming Event tab.
  */
 public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.ViewHolder> {
     LayoutInflater inflater;
     List<Activity> activities;
-
 
     public ActivitiesAdapter(Context ctx, List<Activity> activities){
         this.inflater = LayoutInflater.from(ctx);
         this.activities = activities;
     }
 
-
     /**
-     * see RecyclerView.java for more information
+     * See RecyclerView.java for more information.
      * @param parent
      * @param viewType
-     * @return view based on custom_available_sport_layout
+     * @return view based on custom_activities
      */
     @NonNull
     @Override
@@ -42,21 +40,20 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
     }
 
     /**
-     * uses the view created above to access data from our customized card
+     * Adds data to the cards.
      * @param holder
      * @param position
      */
     @Override
     public void onBindViewHolder(@NonNull ActivitiesAdapter.ViewHolder holder, int position) {
-        // bind the data
         holder.title.setText(activities.get(position).getTitle());
         holder.date.setText(activities.get(position).getPrettyDate());
         holder.location.setText(activities.get(position).getLocation());
-
     }
 
     /**
-     * @return number of items to be displayed in the recyclerView
+     * Returns number of activities.
+     * @return number of activities
      */
     @Override
     public int getItemCount() {
@@ -64,7 +61,7 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
     }
 
     /**
-     * assigns values to and holds attributes necessary for the items in recyclerView
+     * Assigns values to and holds attributes necessary for the cards in the Upcoming Events tab
      */
     protected class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -77,8 +74,10 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
             date = itemView.findViewById(R.id.date);
             location = itemView.findViewById(R.id.location);
 
-            // handle onClick
+            addListener(itemView);
+        }
 
+        private void addListener(View itemView) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

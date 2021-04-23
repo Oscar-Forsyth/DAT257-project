@@ -1,5 +1,8 @@
 package com.example.application.calendar;
 
+/**
+ * Class that holds information about one Activity.
+ */
 public class Activity {
     private String title;
     private String date;
@@ -8,12 +11,11 @@ public class Activity {
 
     public Activity(){}
 
-    public Activity(String title, String date, String description){
+    public Activity(String title, String date, String location){
         this.title = title;
         this.date = date;
         prettyDate = DateConverter.convertDateFromCalendar(date);
         this.location= location;
-
     }
 
     public String getTitle() {
