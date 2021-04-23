@@ -1,4 +1,4 @@
-package com.example.application;
+package com.example.application.calendar;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.application.R;
 
 import java.util.List;
 
@@ -64,7 +66,7 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
     /**
      * assigns values to and holds attributes necessary for the items in recyclerView
      */
-    public  class ViewHolder extends RecyclerView.ViewHolder{
+    protected class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView title, date, location;
 
