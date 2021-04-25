@@ -34,7 +34,7 @@ public class Wizard extends AppCompatActivity {
 
     View v;
 
-    private final int NUMBER_OF_QUESTIONS = 3;
+    private final int NUMBER_OF_QUESTIONS = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +110,7 @@ public class Wizard extends AppCompatActivity {
         mDotLayout.removeAllViews();
         mDots = new TextView[NUMBER_OF_QUESTIONS];
 
+
         for (int i = 0; i < mDots.length; i++) {
             mDots[i] = new TextView(this);
             mDots[i].setText(Html.fromHtml("&#8226;"));
@@ -132,9 +133,12 @@ public class Wizard extends AppCompatActivity {
         @Override
         public void onPageSelected(int position) {
             addDotsIndicator(position);
+            System.out.print(mCurrentPage +"--");
+
             mCurrentPage = position;
+            System.out.print(mCurrentPage);
 
-
+            System.out.println("\n");
 
             if(position == 0){
 
