@@ -18,6 +18,7 @@ public class DateConverter {
         sb.append(getMonth(date));
         sb.append(" ");
         sb.append(getYear(date));
+        // Checks if date string has information about time
         if (date.contains("T")) {
             sb.append(" ");
             sb.append(getTime(date));
@@ -25,14 +26,29 @@ public class DateConverter {
         return sb.toString();
     }
 
+    /**
+     * Method retrieves time from original datetime string.
+     * @param date A date as a string formatted like "2019-11-20T17:00:00+01:00"
+     * @return A string, which represents time, in the format "17:00"
+     */
     private static String getTime(String date) {
         return date.substring(11,16);
     }
 
+    /**
+     * Method retrieves year from original datetime string.
+     * @param date A date as a string formatted like "2019-11-20T17:00:00+01:00"
+     * @return A string, which represents year, in the format "2019"
+     */
     private static String getYear(String date) {
         return date.substring(0, 4);
     }
 
+    /**
+     * Method retrieves day from original datetime string.
+     * @param date A date as a string formatted like "2019-11-20T17:00:00+01:00"
+     * @return A string, which represents day in month, in the format "20"
+     */
     private static String getDay(String date) {
         // Make sure the 0 is not displayed if it's one of the first nine days in a month.
         if (date.charAt(8) == '0') {
@@ -41,7 +57,13 @@ public class DateConverter {
         return date.substring(8, 10);
     }
 
+    /**
+     * Method retrieves month from original datetime string.
+     * @param date A date as a string formatted like "2019-11-20T17:00:00+01:00"
+     * @return A string, which represents month in text, in the format "November"
+     */
     private static String getMonth(String date) {
+        // The month's number is converted to the name of month
         switch (date.substring(5, 7)) {
             case "01":
                 return "January";
