@@ -67,7 +67,13 @@ public class Sport {
         isExpanded = expanded;
     }
 
-    public List<Tag> getTags() {return tags; }
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTag(String tag){
+        this.tags.add(Tag.valueOf(tag));
+    }
 
     /**
      * Adds a Tag to the list of tags.
