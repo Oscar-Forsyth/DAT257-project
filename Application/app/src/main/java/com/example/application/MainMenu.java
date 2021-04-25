@@ -55,18 +55,7 @@ public class MainMenu extends AppCompatActivity {
 
     /** Called when the user taps the 'Challenges button' */
     public void openChallenges(View view) {
-        System.out.println("HEJJ");
-        System.out.println("HEJJg");
-        System.out.println("HEJJsf");
-        System.out.println("sjy");
-        Intent intent = new Intent(this, testActivity.class);
-        EditText editText = (EditText) findViewById(R.id.testActivity);
-        //String message = editText.getText().toString();
-        //intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
 
-        //FragmentManager fm = getSupportFragmentManager();
-        //fm.beginTransaction().replace(R.id.something, new QuizRecommended()).commit();
         /*
         Intent intent = new Intent(this, Challenges.class);
         EditText editText = (EditText) findViewById(R.id.editText);
