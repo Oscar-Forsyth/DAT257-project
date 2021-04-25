@@ -34,6 +34,7 @@ import java.util.Objects;
 public class QuizRecommended extends Fragment {
 
     Button buttonToMainMenu;
+    Button buttonToRetakeQuiz;
     RecyclerView recommendedList;
 
     List<Sport> sports;
@@ -83,6 +84,14 @@ public class QuizRecommended extends Fragment {
                 startActivity(intent);
             }
         });
+        buttonToRetakeQuiz= view.findViewById(R.id.retakeQuizButton);
+        buttonToRetakeQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Wizard.class);
+                startActivity(intent);
+            }
+        });
         // Inflate the layout for this fragment
         return view;
     }
@@ -97,7 +106,6 @@ public class QuizRecommended extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false);
         recommendedList.setLayoutManager(gridLayoutManager);
         recommendedList.setAdapter(adapter);
-
          */
         try {
             extractSports();
@@ -154,4 +162,5 @@ public class QuizRecommended extends Fragment {
  */
 
     }
+
 }

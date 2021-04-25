@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Application.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".QuizActivity"></activity>
+        <activity android:name=".RecommendedActivity"></activity>
         <activity android:name=".Wizard" />
         <activity android:name=".AvailableSportsActivity" />
         <activity

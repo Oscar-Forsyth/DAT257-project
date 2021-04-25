@@ -43,5 +43,14 @@
         android:layout_marginTop="550dp"
         android:text="Main Menu" />
 
+    <Button
+        android:id="@+id/retakeQuizButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="125dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="675dp"
+        android:text="Rekate Quiz" />
+
 
 </FrameLayout>

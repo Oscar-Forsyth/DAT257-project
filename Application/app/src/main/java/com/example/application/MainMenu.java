@@ -28,7 +28,8 @@ public class MainMenu extends AppCompatActivity {
 
   /*  /** Called when the user taps the 'Recommended Sports' button */
     public void openRecommendedSports(View view) {
-        Intent intent = new Intent(this, Wizard.class);
+        //Intent intent = new Intent(this, Wizard.class);
+        Intent intent = new Intent(this, RecommendedActivity.class);
         //EditText editText = (EditText) findViewById(R.id.editText);
         //String message = editText.getText().toString();
         //intent.putExtra(EXTRA_MESSAGE, message);

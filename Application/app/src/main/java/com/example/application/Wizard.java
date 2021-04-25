@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -82,8 +84,12 @@ public class Wizard extends AppCompatActivity {
                 }
 
                 if(mCurrentPage == NUMBER_OF_QUESTIONS -1 ){
-                    //Pressed finished
-                    //TODO
+                    SharedPreferences.Editor editor = getSharedPreferences("Save", MODE_PRIVATE).edit();
+                    editor.putBoolean("takenQuiz", true);
+                    editor.apply();
+
+                    Intent intent = new Intent(getApplicationContext(), RecommendedActivity.class);
+                    startActivity(intent);
                 }
                 else{
                     mSlideViewPager.setCurrentItem(mCurrentPage+1);
