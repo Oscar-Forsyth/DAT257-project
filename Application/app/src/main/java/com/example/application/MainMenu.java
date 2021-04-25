@@ -55,7 +55,9 @@ public class MainMenu extends AppCompatActivity {
 
     /** Called when the user taps the 'Challenges button' */
     public void openChallenges(View view) {
+        Intent intent = new Intent(this, QuizActivity.class);
 
+        startActivity(intent);
         /*
         Intent intent = new Intent(this, Challenges.class);
         EditText editText = (EditText) findViewById(R.id.editText);

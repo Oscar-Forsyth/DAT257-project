@@ -38,5 +38,10 @@
         android:name="com.example.application.Wizard"
         android:label="activity_wizard"
         tools:layout="@layout/activity_wizard" />
+    <activity
+        android:id="@+id/quizActivity"
+        android:name="com.example.application.QuizActivity"
+        android:label="activity_quiz"
+        tools:layout="@layout/activity_quiz" />
 
 </navigation>
