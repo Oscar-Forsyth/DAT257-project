@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,10 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Wizard extends AppCompatActivity {
     private ViewPager2 mSlideViewPager;
@@ -27,31 +32,24 @@ public class Wizard extends AppCompatActivity {
     private Button mWizardBackButton;
 
     private int mCurrentPage;
+    private final int NUMBER_OF_QUESTIONS = 6;
 
-    private RadioButton radioButton1;
-    private RadioButton radioButton2;
-    private RadioButton radioButton3;
-    private RadioGroup radioGroup;
-    private RadioButton selectedRadioButton;
+    private final ArrayList<Integer> resultList = new ArrayList<>(NUMBER_OF_QUESTIONS);
 
     View v;
 
-    private final int NUMBER_OF_QUESTIONS = 6;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wizard);
 
+        initializeArrayList();
+
         wizardAdapter = new WizardAdapter(this);
 
         v = LayoutInflater.from(this).inflate(R.layout.wizard_layout, null);
-
-        radioButton1 = v.findViewById(R.id.radioButton1);
-        radioButton2 = v.findViewById(R.id.radioButton2);
-        radioButton3 = v.findViewById(R.id.radioButton3);
-
-
 
         mSlideViewPager = findViewById(R.id.slideView);
         mDotLayout = findViewById(R.id.dotsLayout);
@@ -62,6 +60,9 @@ public class Wizard extends AppCompatActivity {
         mSlideViewPager.setAdapter(wizardAdapter);
 
         addDotsIndicator(0);
+
+        mSlideViewPager.setCurrentItem(0);
+        //mRadioGroup.check(mRadioGroup.getChildAt(0).getId());
 
         mSlideViewPager.registerOnPageChangeCallback(viewListener);
 
@@ -75,21 +76,31 @@ public class Wizard extends AppCompatActivity {
         mWizardNextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-
-                int id= wizardAdapter.getRadioButton(mCurrentPage);
-                RadioButton rb = findViewById(id);
-
-                if(id!=-1){
-                    System.out.println("text:" + rb.getText().toString());
-                }
-
                 if(mCurrentPage == NUMBER_OF_QUESTIONS -1 ){
-                    SharedPreferences.Editor editor = getSharedPreferences("Save", MODE_PRIVATE).edit();
-                    editor.putBoolean("takenQuiz", true);
-                    editor.apply();
+                    //adds the last question to the result list
+                    addResultToList();
 
-                    Intent intent = new Intent(getApplicationContext(), RecommendedActivity.class);
-                    startActivity(intent);
+                    //for loop that checks if any question is 0 (i.e no answered)
+                    boolean answeredAllQuestions = true;
+                    for (int i = 0; i < resultList.size(); i++) {
+                        if(resultList.get(i).equals(0)){
+                            answeredAllQuestions = false;
+                        }
+                    }
+                    if(!answeredAllQuestions){
+                        Toast.makeText(getApplicationContext(), "Please answer all of the questions ty bruv", Toast.LENGTH_SHORT).show();
+                    }else{
+                        SharedPreferences.Editor editor = getSharedPreferences("Save", MODE_PRIVATE).edit();
+                        editor.putBoolean("takenQuiz", true);
+                        editor.apply();
+
+                        Intent intent = new Intent(getApplicationContext(), RecommendedActivity.class);
+                        intent.putExtra("QUIZ_RESULTS", resultList);
+
+                        startActivity(intent);
+                    }
+
+
                 }
                 else{
                     mSlideViewPager.setCurrentItem(mCurrentPage+1);
@@ -97,18 +108,7 @@ public class Wizard extends AppCompatActivity {
 
             }
         });
-        /*
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                RadioButton radioButton =  group.findViewById(checkedId);
-                if(radioButton != null && checkedId != -1){
-                    System.out.println(radioButton.getText().toString());
-                }
-            }
-        });
 
-         */
 
     }
 
@@ -138,13 +138,20 @@ public class Wizard extends AppCompatActivity {
 
         @Override
         public void onPageSelected(int position) {
+            addResultToList();
+
+
+            System.out.println("--\n");
+            for (int i = 0; i < resultList.size(); i++) {
+                System.out.println("Question: " + i + "result: " + resultList.get(i).toString());
+            }
+            System.out.println("--\n");
+
+
+
+
             addDotsIndicator(position);
-            System.out.print(mCurrentPage +"--");
-
             mCurrentPage = position;
-            System.out.print(mCurrentPage);
-
-            System.out.println("\n");
 
             if(position == 0){
 
@@ -176,5 +183,41 @@ public class Wizard extends AppCompatActivity {
 
         }
     };
+
+    private void addResultToList(){
+        int id= wizardAdapter.getRadioButton(mCurrentPage);
+        RadioButton rb = findViewById(id);
+
+        if(id!=-1){
+            String result = rb.getText().toString();
+            if(mCurrentPage != NUMBER_OF_QUESTIONS -1 ) {
+
+
+                if (result.equalsIgnoreCase(wizardAdapter.radioButtonGroup1[0])) {
+                    resultList.set(mCurrentPage, 1);
+                } else if (result.equalsIgnoreCase(wizardAdapter.radioButtonGroup1[1])) {
+                    resultList.set(mCurrentPage, 2);
+                } else if (result.equalsIgnoreCase(wizardAdapter.radioButtonGroup1[2])) {
+                    resultList.set(mCurrentPage, 3);
+                }
+
+            }else{
+                if (result.equalsIgnoreCase(wizardAdapter.radioButtonGroupLast[0])) {
+                    resultList.set(mCurrentPage, 1);
+                } else if (result.equalsIgnoreCase(wizardAdapter.radioButtonGroupLast[1])) {
+                    resultList.set(mCurrentPage, 2);
+                } else if (result.equalsIgnoreCase(wizardAdapter.radioButtonGroupLast[2])) {
+                    resultList.set(mCurrentPage, 3);
+                }
+            }
+
+
+        }
+    }
+    private void initializeArrayList(){
+        for (int i = 0; i < NUMBER_OF_QUESTIONS; i++) {
+            resultList.add(0);
+        }
+    }
 
 }

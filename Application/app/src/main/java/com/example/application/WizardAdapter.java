@@ -18,7 +18,6 @@ public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardView
 
     Context context;
     LayoutInflater layoutInflater;
-    RadioGroup radioGroup;
     View view;
     Map<Integer, WizardViewHolder> map = new HashMap<>();
     int count= 0;
@@ -46,66 +45,20 @@ public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardView
             "Sports played with rackets",
             "Extreme sports (i.e snowboarding, mountain climbing)"
     };
-    /*
-    public String[] radioButtonGroup2 = {
-            "option 1, question 2 ",
-            "option 2, question 2",
-            "option 3, question 2"
-    };
-    public String[] radioButtonGroup3 = {
-            "option 1, question 3 ",
-            "option 2, question 3",
-            "option 3, question 3"
-    };
-    public String[] radioButtonGroup4 = {
-            "option 1, question 3 ",
-            "option 2, question 3",
-            "option 3, question 3"
-    };
-    public String[] radioButtonGroup5 = {
-            "option 1, question 3 ",
-            "option 2, question 3",
-            "option 3, question 3"
-    };
-    public String[] radioButtonGroup6 = {
-            "option 1, question 3 ",
-            "option 2, question 3",
-            "option 3, question 3"
-    };
-
-
-    public String[][] wizardRadioButtons = {
-            radioButtonGroup1,
-            radioButtonGroup2,
-            radioButtonGroup3
-    };
-    */
 
 
     public int getRadioButton(int key){
         WizardViewHolder wizardViewHolder = map.get(key);
+        //System.out.println("map: "+ map.get(key) + "key: "+ key);
+        assert wizardViewHolder != null;
         RadioGroup radioGroup = wizardViewHolder.getRadioGroup();
-        int result = radioGroup.getCheckedRadioButtonId();
-        /*
-        RadioButton selectedRadioButton;
-            if(result != -1){
-                selectedRadioButton = view.findViewById(result);
-                String RBText = selectedRadioButton.getText().toString();
-                System.out.println(RBText);
-            }else {
-                System.out.println("Nothing selected");
-            }
-
-
-         */
-        return result;
+        return radioGroup.getCheckedRadioButtonId();
     }
 
 
     @NonNull
     @Override
     public WizardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //container.removeView((RelativeLayout) object);
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.wizard_layout, parent, false);
         WizardViewHolder wizardViewHolder = new WizardViewHolder(view);
@@ -155,6 +108,8 @@ public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardView
             radioButton2 = itemView.findViewById(R.id.radioButton2);
             radioButton3 = itemView.findViewById(R.id.radioButton3);
             radioGroup = itemView.findViewById(R.id.radioGroup);
+            radioGroup.check(radioGroup.getChildAt(0).getId());
+            radioGroup.clearCheck();
 
         }
 

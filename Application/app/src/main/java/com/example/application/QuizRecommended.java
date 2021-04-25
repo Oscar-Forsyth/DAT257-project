@@ -101,6 +101,16 @@ public class QuizRecommended extends Fragment {
                 startActivity(intent);
             }
         });
+        List<Integer> resultList = requireActivity().getIntent().getIntegerArrayListExtra("QUIZ_RESULTS");
+        if(resultList!=null){
+            System.out.println("--\n");
+            for (int i = 0; i < resultList.size(); i++) {
+                System.out.println("Question: " + i + "result: " + resultList.get(i).toString());
+            }
+            System.out.println("--\n");
+        }
+
+
         // Inflate the layout for this fragment
         return view;
     }
