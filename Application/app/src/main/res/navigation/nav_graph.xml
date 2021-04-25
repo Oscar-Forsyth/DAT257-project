@@ -20,12 +20,8 @@
             android:id="@+id/action_mainMenu_to_availableSportsActivity"
             app:destination="@id/availableSportsActivity"
             app:enterAnim="@anim/fragment_fast_out_extra_slow_in" />
-        <action
-            android:id="@+id/action_mainMenu_to_quizRecommended"
-            app:destination="@id/quizRecommended" />
-        <action
-            android:id="@+id/action_mainMenu_to_testActivity"
-            app:destination="@id/testActivity" />
+
+
     </activity>
     <fragment
         android:id="@+id/quizRecommended"
@@ -36,29 +32,11 @@
             android:id="@+id/action_quizRecommended_to_mainMenu"
             app:destination="@id/mainMenu" />
     </fragment>
-    <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.application.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
 
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.application.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
     <activity
-        android:id="@+id/testActivity"
-        android:name="com.example.application.testActivity"
-        android:label="activity_test"
-        tools:layout="@layout/activity_test" />
+        android:id="@+id/wizard"
+        android:name="com.example.application.Wizard"
+        android:label="activity_wizard"
+        tools:layout="@layout/activity_wizard" />
+
 </navigation>

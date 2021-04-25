@@ -12,10 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Application.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".testActivity"
-            android:label="@string/title_activity_test"
-            android:theme="@style/Theme.Application.NoActionBar.NoActionBar"></activity>
+        <activity android:name=".Wizard"></activity>
+
         <activity android:name=".AvailableSportsActivity"></activity>
         <activity
             android:name=".MainMenu"

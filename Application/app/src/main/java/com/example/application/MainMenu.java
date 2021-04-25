@@ -26,16 +26,16 @@ public class MainMenu extends AppCompatActivity {
     /** INTENTS TO OPEN NEW ACTIVITIES FROM THE MAIN MENU:
 
 
-  /*  /** Called when the user taps the 'Recommended Sports' button *//*
+  /*  /** Called when the user taps the 'Recommended Sports' button */
     public void openRecommendedSports(View view) {
-        Intent intent = new Intent(this, RecommendedSports.class);
-        EditText editText = (EditText) findViewById(R.id.editText);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
+        Intent intent = new Intent(this, Wizard.class);
+        //EditText editText = (EditText) findViewById(R.id.editText);
+        //String message = editText.getText().toString();
+        //intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
 
-    *//** Called when the user taps the 'Upcoming Events' button *//*
+    /** Called when the user taps the 'Upcoming Events' button *//*
     public void openUpcomingEvents(View view) {
         Intent intent = new Intent(this, UpcomingEvents.class);
         EditText editText = (EditText) findViewById(R.id.editText);
