@@ -28,35 +28,62 @@ public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardView
     }
 
     public String[] wizardQuestions = {
-            "This is question 1",
-            "This is question 2",
-            "This is question 3"
+            "I like to work with others towards a common goal",
+            "I like playing sports outside",
+            "I like longer training sessions rather than short and intense",
+            "I like to move ...",
+            "I like to swim",
+            "Which sport sounds most interesting?"
     };
 
     public String[] radioButtonGroup1 = {
-            "option 1, question 1 ",
-            "option 1, question 2",
-            "option 1, question 3"
+            "Yes",
+            "No",
+            "Sometimes"
     };
+    public String[] radioButtonGroupLast = {
+            "Ball sports",
+            "Sports played with rackets",
+            "Extreme sports (i.e snowboarding, mountain climbing)"
+    };
+    /*
     public String[] radioButtonGroup2 = {
-            "option 2, question 1 ",
+            "option 1, question 2 ",
             "option 2, question 2",
-            "option 2, question 3"
+            "option 3, question 2"
     };
     public String[] radioButtonGroup3 = {
-            "option 3, question 1 ",
-            "option 3, question 2",
+            "option 1, question 3 ",
+            "option 2, question 3",
             "option 3, question 3"
     };
+    public String[] radioButtonGroup4 = {
+            "option 1, question 3 ",
+            "option 2, question 3",
+            "option 3, question 3"
+    };
+    public String[] radioButtonGroup5 = {
+            "option 1, question 3 ",
+            "option 2, question 3",
+            "option 3, question 3"
+    };
+    public String[] radioButtonGroup6 = {
+            "option 1, question 3 ",
+            "option 2, question 3",
+            "option 3, question 3"
+    };
+
+
     public String[][] wizardRadioButtons = {
             radioButtonGroup1,
             radioButtonGroup2,
             radioButtonGroup3
     };
+    */
+
 
     public int getRadioButton(int key){
         WizardViewHolder wizardViewHolder = map.get(key);
-        System.out.println(map.toString());
         RadioGroup radioGroup = wizardViewHolder.getRadioGroup();
         int result = radioGroup.getCheckedRadioButtonId();
         /*
@@ -89,12 +116,19 @@ public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardView
 
     @Override
     public void onBindViewHolder(@NonNull WizardViewHolder holder, int position) {
-
         view = holder.itemView;
         holder.wizardQuestion.setText(wizardQuestions[position]);
-        holder.radioButton1.setText(wizardRadioButtons[0][position]);
-        holder.radioButton2.setText(wizardRadioButtons[1][position]);
-        holder.radioButton3.setText(wizardRadioButtons[2][position]);
+        if(position <5){
+            holder.radioButton1.setText(radioButtonGroup1[0]);
+            holder.radioButton2.setText(radioButtonGroup1[1]);
+            holder.radioButton3.setText(radioButtonGroup1[2]);
+        }else{
+            holder.radioButton1.setText(radioButtonGroupLast[0]);
+            holder.radioButton2.setText(radioButtonGroupLast[1]);
+            holder.radioButton3.setText(radioButtonGroupLast[2]);
+        }
+
+
     }
 
     @Override
