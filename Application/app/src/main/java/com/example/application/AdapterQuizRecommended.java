@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.application.animations.Animations;
+import com.example.application.sports.Sport;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
