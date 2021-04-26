@@ -31,7 +31,7 @@
         tools:layout="@layout/activity_activities" />
     <fragment
         android:id="@+id/quizRecommended"
-        android:name="com.example.application.QuizRecommended"
+        android:name="com.example.application.recommended.QuizRecommended"
         android:label="fragment_quiz_recommended"
         tools:layout="@layout/fragment_quiz_recommended">
         <action
@@ -41,7 +41,7 @@
 
     <activity
         android:id="@+id/wizard"
-        android:name="com.example.application.Wizard"
+        android:name="com.example.application.recommended.Wizard"
         android:label="activity_wizard"
         tools:layout="@layout/activity_wizard" />
 

@@ -1,4 +1,4 @@
-package com.example.application;
+package com.example.application.recommended;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.application.R;
 
 public class RecommendedActivity extends AppCompatActivity {
 

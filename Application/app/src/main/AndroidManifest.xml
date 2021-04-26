@@ -23,8 +23,8 @@
 
         <activity android:name=".calendar.ActivitiesActivity" />
 
-        <activity android:name=".RecommendedActivity"></activity>
-        <activity android:name=".Wizard" />
+        <activity android:name=".recommended.RecommendedActivity"></activity>
+        <activity android:name=".recommended.Wizard" />
 
         <activity
             android:name=".MainMenu"

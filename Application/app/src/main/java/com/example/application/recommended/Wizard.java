@@ -1,25 +1,25 @@
-package com.example.application;
+package com.example.application.recommended;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.application.R;
+import com.example.application.recommended.RecommendedActivity;
+import com.example.application.recommended.WizardAdapter;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class Wizard extends AppCompatActivity {
     private ViewPager2 mSlideViewPager;

@@ -1,4 +1,4 @@
-package com.example.application;
+package com.example.application.recommended;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.application.R;
 
 import java.util.HashMap;
 import java.util.Map;

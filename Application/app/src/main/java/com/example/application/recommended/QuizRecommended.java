@@ -1,4 +1,4 @@
-package com.example.application;
+package com.example.application.recommended;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +28,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import com.example.application.MainMenu;
+import com.example.application.R;
+import com.example.application.Tag;
 import com.example.application.sports.Sport;
 
 /**
@@ -86,7 +90,7 @@ public class QuizRecommended extends Fragment {
         buttonToMainMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),MainMenu.class);
+                Intent intent = new Intent(getActivity(), MainMenu.class);
                 startActivity(intent);
             }
         });

@@ -1,15 +1,13 @@
 package com.example.application;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.application.calendar.ActivitiesActivity;
+import com.example.application.recommended.RecommendedActivity;
 import com.example.application.sports.AvailableSportsActivity;
 
 public class MainMenu extends AppCompatActivity {
