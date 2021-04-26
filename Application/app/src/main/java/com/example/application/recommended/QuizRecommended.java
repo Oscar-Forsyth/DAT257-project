@@ -52,6 +52,7 @@ public class QuizRecommended extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    List<Integer> resultList;
 
     private String mParam1;
     private String mParam2;
@@ -76,10 +77,6 @@ public class QuizRecommended extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        //GridLayoutManager grd = new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false);
-        //adapter = new AdapterQuizRecommended();
-        //gridView.setAdapter(adapter);
     }
 
     @Override
@@ -102,7 +99,7 @@ public class QuizRecommended extends Fragment {
                 startActivity(intent);
             }
         });
-        List<Integer> resultList = requireActivity().getIntent().getIntegerArrayListExtra("QUIZ_RESULTS");
+        resultList = requireActivity().getIntent().getIntegerArrayListExtra("QUIZ_RESULTS");
         if(resultList!=null){
             System.out.println("--\n");
             for (int i = 0; i < resultList.size(); i++) {
@@ -144,63 +141,66 @@ public class QuizRecommended extends Fragment {
     private void converter(List<Integer>list){
         fillSportsWithPointsHashMapWithDefaultValues();
         //adds point to the tag itself by putting it into tagWithPoints
-        for (int questionNr=0; questionNr<list.size(); questionNr++){
-            //answer to question (0,1,2,3) where 0=No answer, 1=Yes, 2=No, 3=Sometimes
-            int ans = list.get(questionNr);
-            switch (questionNr){
-                case 0:
-                    if (ans==1){
-                        tagsWithPoints.add(Tag.GROUP);
-                    }
-                    if (ans==2){
-                        //add INDIVIDUAL
-                        tagsWithPoints.add(Tag.INDIVIDUAL);
-                    }
-                    break;
-                case 1:
-                    if (ans==1){
-                        tagsWithPoints.add(Tag.OUTDOORS);
+        //TODO information from the previous quiz is not saved anywhere, which is why the list is null if the user comes from the main menu
+        if(list!=null){
+            for (int questionNr=0; questionNr<list.size(); questionNr++){
+                //answer to question (0,1,2,3) where 0=No answer, 1=Yes, 2=No, 3=Sometimes
+                int ans = list.get(questionNr);
+                switch (questionNr){
+                    case 0:
+                        if (ans==1){
+                            tagsWithPoints.add(Tag.GROUP);
+                        }
+                        if (ans==2){
+                            //add INDIVIDUAL
+                            tagsWithPoints.add(Tag.INDIVIDUAL);
+                        }
+                        break;
+                    case 1:
+                        if (ans==1){
+                            tagsWithPoints.add(Tag.OUTDOORS);
 
-                    }
-                    if (ans==2){
-                        tagsWithPoints.add(Tag.INDOORS);
-                    }
-                    break;
-                case 2:
-                    if (ans==1){
-                        tagsWithPoints.add(Tag.ENDURANCE);
+                        }
+                        if (ans==2){
+                            tagsWithPoints.add(Tag.INDOORS);
+                        }
+                        break;
+                    case 2:
+                        if (ans==1){
+                            tagsWithPoints.add(Tag.ENDURANCE);
 
-                    }
-                    if (ans==2){
-                        tagsWithPoints.add(Tag.HIGHINTENSITY);
-                    }
-                    break;
-                case 3:
-                    if (ans==1){
-                        tagsWithPoints.add(Tag.TECHNIQUE);
-                    }
-                    break;
-                case 4:
-                    if (ans==1){
-                        tagsWithPoints.add(Tag.WATERSPORT);
-                    }
-                    break;
-                case 5:
-                    if (ans==1){
-                        tagsWithPoints.add(Tag.BALLGAME);
+                        }
+                        if (ans==2){
+                            tagsWithPoints.add(Tag.HIGHINTENSITY);
+                        }
+                        break;
+                    case 3:
+                        if (ans==1){
+                            tagsWithPoints.add(Tag.TECHNIQUE);
+                        }
+                        break;
+                    case 4:
+                        if (ans==1){
+                            tagsWithPoints.add(Tag.WATERSPORT);
+                        }
+                        break;
+                    case 5:
+                        if (ans==1){
+                            tagsWithPoints.add(Tag.BALLGAME);
 
-                    }
-                    if (ans==2){
-                        tagsWithPoints.add(Tag.RACKETSPORT);
-                    }
-                    if (ans==3){
-                        tagsWithPoints.add(Tag.EXTREMESPORT);
-                    }
-                    break;
+                        }
+                        if (ans==2){
+                            tagsWithPoints.add(Tag.RACKETSPORT);
+                        }
+                        if (ans==3){
+                            tagsWithPoints.add(Tag.EXTREMESPORT);
+                        }
+                        break;
+                }
+
             }
-
+            addPointsToSportsWithTag();
         }
-        addPointsToSportsWithTag();
     }
 
     //for each tag in tagWithPoints, add points to the sports with that tag
@@ -284,6 +284,7 @@ public class QuizRecommended extends Fragment {
             }
         }
         //temporary for tests
+
         List <Integer> randList = new ArrayList<>();
         //adds INDIVIDUAL to tagsWithPoints
         randList.add(2);
@@ -297,7 +298,7 @@ public class QuizRecommended extends Fragment {
         randList.add(2);
 
         //adds points to every sport that can be found in tagsWithPoints
-        converter(randList);
+        converter(resultList);
         List <Sport> top5Sports = onlyTop5();
 
         adapter = new AdapterQuizRecommended(requireActivity().getApplicationContext(), top5Sports);
