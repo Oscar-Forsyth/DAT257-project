@@ -1,0 +1,15 @@
+what do I want to learn or understand better?
+Under den första sprinten har jag fått tillräckligt med erfarenhet av AS för att kunna skapa en simpel applikation på egen hand. Jag vet hur man skapar olika vyer, lägger till element/objekt till dessa samt navigerar mellan olika vyer, vilket i grund och botten är tillräckligt. Däremot skulle jag inte förvänta mig att koden blir speciellt vacker utifrån en erfaren Android-utvecklares perspektiv. Till exempel har jag inte full koll på skillnader mellan fragments och activities, men det är något som jag vill lära mig mer om. Ett av mina lärandemål med den nästkommande sprinten är således att förstå när fragments ska användas framför activities och vice versa, eftersom felanvändning i början kan få konsekvenser senare i arbetet. För att lära mig mer om detta har planerar jag dels att kolla på videos om android-utveckling, men också diskutera med resterande gruppmedlemmar.
+how can I help someone else, or the entire team, to learn something new?
+De tasks som skulle göras under sprinten utfördes i mindre grupper istället för enskilt, vilket möjliggjorde omedelbar diskussion om hur diverse problem skulle hanteras. På så sätt blev det lärorikt för samtliga i gruppen. Anledningen att vi arbetade på det sättet berodde dock främst på vår brist på erfarenhet med Android-utveckling. Framöver kan vi göra likadant, dvs jobba i mindre grupper, men allt eftersom kommer vi att vänja oss och därför även kunna arbeta mer självständigt. Detta bör vara inom en snar framtid då alla nu har en grund att utgå ifrån.
+
+
+what is my contribution towards the team’s use of Scrum?
+
+Denna sprint har jag kunnat delta under samtliga möten, och jag bidrog till skapandet av user stories samt divisionen till tasks. Dessutom tryckte jag extra på estimeringen av våra user-stories och följaktligen vårt kategoriseringssystem. Målet för nästa sprint är att vara mer aktiv under mötena med intressent och handledare. För att kunna göra detta kan jag eventuellt skriva ned en punktlista med funderingar och sådant som behöver tas upp för att ha det lätt till hands.
+
+what is my contribution towards the team’s deliveries?
+
+
+Inför veckans tasks som jag skulle göra hittade jag mycket material online om olika sätt att lösa dessa, varav en serie gick igenom precis det som vi hade planerat att använda, nämligen JSON som översätts till ett flöde. Vi stötte dock på några problem ändå, vilket berodde på att vi först använde fragment istället för activity och detta orsakade ett antal problem då fragments inte har tillgång till alla metoder som activities. Efter diskussion med andra i gruppen enades vi om att göra vyn till en activity istället. Överlag gick den första sprinten utmärkt. Till nästa sprint skulle jag vilja arbeta mer individuellt eftersom jag tror att jag är redo för det, men också på grund av att det blev ansträngande att koordinera flera arbetstider utöver de vanliga de vanliga mötena. För att kunna arbeta mer självständigt gäller det att de utvalda user-stories blir uppdelade i tasks som är lättare att utföra parallellt.
+

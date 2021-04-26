@@ -29,4 +29,20 @@
         android:name="com.example.application.calendar.ActivitiesActivity"
         android:label="activity_activities"
         tools:layout="@layout/activity_activities" />
+    <fragment
+        android:id="@+id/quizRecommended"
+        android:name="com.example.application.QuizRecommended"
+        android:label="fragment_quiz_recommended"
+        tools:layout="@layout/fragment_quiz_recommended">
+        <action
+            android:id="@+id/action_quizRecommended_to_mainMenu"
+            app:destination="@id/mainMenu" />
+    </fragment>
+
+    <activity
+        android:id="@+id/wizard"
+        android:name="com.example.application.Wizard"
+        android:label="activity_wizard"
+        tools:layout="@layout/activity_wizard" />
+
 </navigation>

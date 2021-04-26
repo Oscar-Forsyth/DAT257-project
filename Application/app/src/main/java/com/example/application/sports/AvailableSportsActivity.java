@@ -4,11 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+
+
 import com.example.application.R;
+import com.example.application.Tag;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +47,6 @@ public class AvailableSportsActivity extends AppCompatActivity {
      * For every update to the JSON-file, a new URL has to be generated so there is probably a better solution
      */
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +63,8 @@ public class AvailableSportsActivity extends AppCompatActivity {
         }
 
     }
+
+
 
     /**
      * JSON content is read from local file
@@ -90,6 +102,13 @@ public class AvailableSportsActivity extends AppCompatActivity {
                 sport.setDescription(sportObject.getString("description".toString()));
                 sport.setLogo(sportObject.getString("logo"));
                 sport.setLink(sportObject.getString("link"));
+
+
+                JSONArray tagList = sportObject.getJSONArray("tags");
+                for(int j = 0; j < tagList.length(); j++)
+                    sport.addTag(Tag.valueOf(tagList.getString(j)));
+
+
                 sports.add(sport);
 
             } catch (JSONException e) {
