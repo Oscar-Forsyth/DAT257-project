@@ -65,6 +65,7 @@ public class Wizard extends AppCompatActivity {
         //mRadioGroup.check(mRadioGroup.getChildAt(0).getId());
 
         mSlideViewPager.registerOnPageChangeCallback(viewListener);
+        wizardAdapter.notifyItemChanged(0);
 
         mWizardBackButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -138,6 +139,7 @@ public class Wizard extends AppCompatActivity {
 
         @Override
         public void onPageSelected(int position) {
+
             addResultToList();
 
 
