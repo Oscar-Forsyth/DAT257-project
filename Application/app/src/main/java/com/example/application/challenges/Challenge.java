@@ -9,6 +9,7 @@ public class Challenge {
     private String prettyStartDate;
     private String prettyEndDate;
     private String location;
+    private String description;
 
     public Challenge(){}
 
@@ -16,8 +17,9 @@ public class Challenge {
      * @param title The activity’s title.
      * @param startDate The activity’s start date.
      * @param location The activity's location.
+     * @param description The activity's description.
      */
-    public Challenge(String title, String startDate, String endDate, String location){
+    public Challenge(String title, String startDate, String endDate, String location, String description){
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -25,6 +27,7 @@ public class Challenge {
         prettyStartDate = DateConverter.convertDateFromCalendarWithoutTime(startDate);
         prettyEndDate = DateConverter.convertDateFromCalendarWithoutTime(endDate);
         this.location= location;
+        this.description = description;
     }
 
     /** Gets the activity’s title.
@@ -94,5 +97,16 @@ public class Challenge {
      */
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    /** Gets the activity’s description.
+     * @return A string representing the activity’s description.
+     */
+    public String getDescription() { return description; }
+
+    /** Sets the activity’s location.
+     * @param description A String containing the activity’s description.
+     */
+    public void setDescription(String description) { this.description = description;
     }
 }

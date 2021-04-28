@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,10 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
         holder.startDate.setText(activities.get(position).getPrettyStartDate());
         holder.endDate.setText(activities.get(position).getPrettyEndDate());
         holder.location.setText(activities.get(position).getLocation());
+        if(activities.get(position).getLocation().equals(" ")) {
+                holder.locationLogo.setVisibility(View.INVISIBLE);
+        }
+        holder.description.setText(activities.get(position).getDescription());
     }
 
     /**
@@ -63,7 +68,8 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
      */
     protected class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView title, startDate, endDate, location;
+        TextView title, startDate, endDate, location, description;
+        ImageView locationLogo;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,6 +78,8 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
             startDate = itemView.findViewById(R.id.startDate);
             endDate = itemView.findViewById(R.id.endDate);
             location = itemView.findViewById(R.id.location);
+            locationLogo = itemView.findViewById(R.id.locationLogo);
+            description = itemView.findViewById(R.id.description);
 
             addListener(itemView);
         }

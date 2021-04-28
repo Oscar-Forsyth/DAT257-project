@@ -93,7 +93,13 @@ public class ChallengesActivity extends AppCompatActivity {
                     challenge.setLocation(res[0]);
                     //activity.setLocation(items.getJSONObject(i).getString("location"));
                 } catch (JSONException e) {
-                    challenge.setLocation("Location unknown");
+                    challenge.setLocation(" ");
+                }
+                try {
+                    String description = items.getJSONObject(i).getString("description");
+                    challenge.setDescription(description);
+                } catch (JSONException e) {
+                    challenge.setDescription(" ");
                 }
                 challenges.add(challenge);
             }
