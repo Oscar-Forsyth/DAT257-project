@@ -1,32 +1,38 @@
-package com.example.application;
+package com.example.application.sports;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import android.graphics.Paint;
+import android.os.Bundle;
+import android.widget.TextView;
+
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
+
+import com.example.application.R;
+import com.example.application.Tag;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * the page that contains all sports
+ * This class more or less extratcs the information that's stored in sports.json and puts it into a
+ * Arraylist so that it can be used later. It also serves as the base for a new activity
  */
 public class AvailableSportsActivity extends AppCompatActivity {
     /**
@@ -34,17 +40,12 @@ public class AvailableSportsActivity extends AppCompatActivity {
      */
     RecyclerView recyclerView;
     List<Sport> sports;
+    SportsAdapter sportsAdapter;
 
     /**
      * the URL for our JSON-file
      * For every update to the JSON-file, a new URL has to be generated so there is probably a better solution
      */
-
-
-
-
-    private static String JSON_URL = "http://www.json-generator.com/api/json/get/cpXYVruRsO?indent=2";
-    Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,18 +55,22 @@ public class AvailableSportsActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.sportsList);
         sports = new ArrayList<>();
+
         try {
             extractSports();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
     }
+
+
 
     /**
      * JSON content is read from local file
      */
 
-    private String loadJSONFromAsset() throws JSONException {
+    private String loadJSONFromAsset()  {
         String json = null;
         try {
             InputStream is = getAssets().open("sports.json");
@@ -80,8 +85,6 @@ public class AvailableSportsActivity extends AppCompatActivity {
         }
         return json;
     }
-
-
 
     /**
      * JSON content is translated from loadJSONFromAsset
@@ -98,6 +101,14 @@ public class AvailableSportsActivity extends AppCompatActivity {
                 sport.setName(sportObject.getString("name").toString());
                 sport.setDescription(sportObject.getString("description".toString()));
                 sport.setLogo(sportObject.getString("logo"));
+                sport.setLink(sportObject.getString("link"));
+
+
+                JSONArray tagList = sportObject.getJSONArray("tags");
+                for(int j = 0; j < tagList.length(); j++)
+                    sport.addTag(Tag.valueOf(tagList.getString(j)));
+
+
                 sports.add(sport);
 
             } catch (JSONException e) {
@@ -106,48 +117,10 @@ public class AvailableSportsActivity extends AppCompatActivity {
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        adapter = new Adapter(getApplicationContext(),sports);
-        recyclerView.setAdapter(adapter);
+        sportsAdapter = new SportsAdapter(getApplicationContext(),sports);
+        recyclerView.setAdapter(sportsAdapter);
 
 
-        //Link to URL - Saved for google API
-
-        /*
-        RequestQueue queue = Volley.newRequestQueue(this);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject sportObject = response.getJSONObject(i);
-
-                        Sport sport = new Sport();
-                        sport.setName(sportObject.getString("name").toString());
-                        sport.setDescription(sportObject.getString("description".toString()));
-                        sport.setLogo(sportObject.getString("logo"));
-                        sports.add(sport);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                adapter = new Adapter(getApplicationContext(),sports);
-                recyclerView.setAdapter(adapter);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("tag", "onErrorResponse: " + error.getMessage());
-            }
-
-        });
-
-        queue.add(jsonArrayRequest);
-
-
-         */
     }
 
 

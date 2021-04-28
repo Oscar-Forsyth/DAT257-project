@@ -2,76 +2,129 @@
   {
     "name": "Badminton",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2020/03/Asset-1@4x-150x150.png",
-    "description": "hello, we run in forest."
+    "description": "Come play the world's fastest sport with us! We welcome all skill levels and play every other week (even weeks) at Fjäderborgen. Our practices are planned by our organizers who make sure you get the most of each session. Both technical drills and free play at the end are part of the general setup.",
+    "link": "https://www.facebook.com/Chalmersbadminton/?eid=ARDP1Awwu2ENES_eVaPV58cHU2nJQXmM8y74aULzGQz_4MpVIega4ofzJqdMMc6bbfE6BTHpYMRnEWjJ",
+    "tags": ["INDIVIDUAL", "INDOORS", "HIGHINTENSITY", "RACKETSPORT"]
   },
+
   {
     "name": "Basketball",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2020/03/89197372_1536028379897807_3019171995439857664_n-150x150.jpg",
-    "description": "hello, we kick ball."
+    "description": "Join us, for a maximum of fun! Every Friday, 19h00 to 20h30, Valhalla Sporthall C-Hall / Valhallagatan 3 41251",
+    "link": "https://www.facebook.com/CISBasket",
+    "tags": ["GROUP", "INDOORS", "HIGHINTENSITY", "BALLGAME"]
+
   },
+
   {
     "name": "Bicycle",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/cycle-150x150.jpg",
-    "description": "hello, we kick ball."
+    "description": "We bring students who are interested in bicycle training together to train.",
+    "link": "https://www.facebook.com/chalmerscykelklubb/",
+    "tags": ["GROUP","INDIVIDUAL", "OUTDOORS", "ENDURANCE"]
   },
-  {
-    "name": "Football",
-    "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/fotball-150x150.png",
-    "description": "hello, we kick ball."
-  },
-  {
-    "name": "Golf",
-    "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/golf-150x150.png",
-    "description": "hello, we kick ball."
-  },
+
   {
     "name": "Floorball",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2020/03/Chalmers-Innebandyklubb-150x150.png",
-    "description": "hello, we kick ball."
+    "description": "CIS Innebandy är en av de nyaste tillskotten av sporter hos Chalmers Studentkårs Idrottssällskap. Häng med på sidan för mer information. Träningar hålls torsdagar 20-21 i motionshallen i kårhuset Johanneberg.",
+    "link": "https://www.facebook.com/CISInnebandy",
+    "tags": ["GROUP", "INDOORS", "HIGHINTENSITY", "RACKETSPORT"]
+
   },
+
+  {
+    "name": "Football",
+    "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/fotball-150x150.png",
+    "description": "Chalmers Fotbollssällskap erbjuder alla teknologer på Chalmers möjlighet att spela fotboll vid sidan av studierna, på olika nivåer. Fotbollsällskapet grundades hösten 2016 och erbjuder spel i fotboll och futsal, för både tjejer och killar. Chalmers Football Club offers all students at Chalmers a possibility to play football on the side of the studies.",
+    "link": "https://www.facebook.com/CISChalmersfotboll/",
+    "tags": ["GROUP", "OUTDOORS", "HIGHINTENSITY", "BALLGAME"]
+  },
+
+  {
+    "name": "Golf",
+    "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/golf-150x150.png",
+    "description": "Chalmers Golfsällskap är det sociala nätverket och mötesplatsen för golfande teknologer på Chalmers! Roliga tävlingar, nya golfkompisar och riktigt mycket gött häng helt enkelt! Chalmers Golf Club offers a meeting place for golfing students at Chalmers. Fun competition and new golf friends",
+    "link": "https://www.facebook.com/chalmersgolfsallskap/",
+    "tags": ["INDIVIDUAL", "OUTDOORS", "TECHNIQUE", "RACKETSPORT"]
+  },
+
   {
     "name": "Modern Dancing",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2020/10/CMD_logo_v1-150x150.png",
-    "description": "hello, we kick ball."
+    "description": "Modern dance - contemporary style - art jazz technique. No matter what level of prior experience you have or if you just want to try out and challenge yourself with rhythmic exercises. It’s all about fun, individual development and positive group energy.",
+    "link": "https://www.facebook.com/chalmersmoderndance",
+    "tags": ["GROUP", "INDOORS", "ENDURANCE", "TECHNIQUE"]
   },
-  {
-    "name": "Padel",
-    "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/padel-150x150.png",
-    "description": "hello, we kick ball."
-  },
-  {
-    "name": "Rowing",
-    "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/row-150x150.png",
-    "description": "hello, we kick ball."
-  },
-  {
-    "name": "Swimming",
-    "logo": "https://cis-chalmers.se/wp-content/uploads/2020/12/uttrarna2-150x150.jpg",
-    "description": "hello, we kick ball."
-  },
-  {
-    "name": "Ultimate Frisbee",
-    "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/ultimate-frisbee-150x150.jpg",
-    "description": "hello, we kick ball."
-  },
-  {
-    "name": "Volleyball",
-    "logo": "https://cis-chalmers.se/wp-content/uploads/2020/01/CIS_Volleyboll_New-2-150x150.png",
-    "description": "hello, we kick ball."
-  },
-  {
-    "name": "Yoga",
-    "logo": "https://cis-chalmers.se/wp-content/uploads/2020/03/Chalmers-Yoga-logga_CMYK-150x150.png",
-    "description": "hello, we kick ball."
-  },
+
   {
     "name": "Outdoors",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2020/10/Outdoors_logo_v1-150x150.png",
-    "description": "hello, we kick ball."
+    "description": "Chalmers Outdoors is a part of CIS - Chalmers Idrottssällskap. We gather chalmerists who long for a good time outdoors in the Swedish nature, whether it's hiking or canoeing. Come join us!",
+    "link": "https://www.facebook.com/chalmers.outdoors",
+    "tags": ["GROUP", "OUTDOORS", "ENDURANCE", "EXTREMESPORT"]
+  },
+
+  {
+    "name": "Padel",
+    "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/padel-150x150.png",
+    "description": "Trainings, Chalmers Padel League and other padel events",
+    "link": "https://www.facebook.com/chalmerspadelklubb/",
+    "tags": ["INDIVIDUAL", "INDOORS", "HIGHINTENSITY", "RACKETSPORT"]
+  },
+
+  {
+    "name": "Rowing",
+    "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/row-150x150.png",
+    "description": "We offer rowing training on Tuesdays and Fridays during the whole year. We aim to have fun together on the water and those who want can participate with us at the Swedisch student championships.",
+    "link": "https://www.facebook.com/Chalmersroddklubb/",
+    "tags": ["GROUP", "OUTDOORS", "ENDURANCE", "WATERSPORT"]
+  },
+
+  {
+    "name": "Squash",
+    "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/cis-logo-150x150.png",
+    "description": "Welcome to Chalmers Squash! We are in the middle of starting up, so for now we just want to know when you would like to play some squash!",
+    "link": "https://www.facebook.com/ChalmersSquash",
+    "tags": ["INDIVIDUAL", "INDOORS", "HIGHINTENSITY", "RACKETSPORT"]
+  },
+
+  {
+    "name": "Swimming",
+    "logo": "https://cis-chalmers.se/wp-content/uploads/2020/12/uttrarna2-150x150.jpg",
+    "description": "Swim trainings at all levels once a week and competitions and camps together with other swim clubs at Swedish university's. Swedish students championship is the main goal and competition of the year.",
+    "link": "https://www.facebook.com/simsektionenuttrarna/",
+    "tags": ["INDIVIDUAL", "OUTDOORS", "ENDURANCE", "WATERSPORT"]
   },
   {
     "name": "Tennis",
     "logo": "https://cis-chalmers.se/wp-content/uploads/2020/11/Tennis_logo_v1-150x150.png",
-    "description": "hello, we kick ball."
+    "description": "Hello everybody and welcome to CIS-tennis. We are soon ready to start our training, but currently all activities through CIS are canceled until further notice per recommendations from FHM and Riksidrottsförbundet.",
+    "link": "https://www.facebook.com/CIS-Chalmers-Tennis-110787827458866/",
+    "tags": ["INDIVIDUAL", "OUTDOORS", "HIGHINTENSITY", "RACKETSPORT"]
+  },
+
+  {
+    "name": "Ultimate Frisbee",
+    "logo": "https://cis-chalmers.se/wp-content/uploads/2019/09/ultimate-frisbee-150x150.jpg",
+    "description": "We are a team that is practicing Ultimate Frisbee every Tuesday 19-21 in Brunnsboskolan. Ultimate frisbee is a sports that is quite similar to handboll or football but played with a frisbee. Come and try it!",
+    "link": "https://www.facebook.com/CIS-Chalmers-Ultimate-Frisbee-2051690351734304/",
+    "tags": ["GROUP", "OUTDOORS", "HIGHINTENSITY", "TECHNIQUE"]
+  },
+
+  {
+    "name": "Volleyball",
+    "logo": "https://cis-chalmers.se/wp-content/uploads/2020/01/CIS_Volleyboll_New-2-150x150.png",
+    "description": "Vi träffas en gång i veckan för att spela volleyboll tillsammans under matchförhållanden. Välkommen att prova på tre gånger innan du väljer att bli medlem! We meet once every week to play volleyboll together and have fun!",
+    "link": "https://www.facebook.com/CIS-Chalmers-Volleybollklubb-878153389027431/",
+    "tags": ["GROUP", "OUTDOORS", "HIGHINTENSITY", "BALLGAME"]
+  },
+
+  {
+    "name": "Yoga",
+    "logo": "https://cis-chalmers.se/wp-content/uploads/2020/03/Chalmers-Yoga-logga_CMYK-150x150.png",
+    "description": "Chalmers Yoga classes are offered to all students of Chalmers to increase both mental and physical health. The classes are in English, adjusted to all levels and a physical form of yoga (Vinyasa Flow). You will get introduced to tools to increase your ability to focus, as well as physically opening up and strengthening your body.",
+    "link": "https://www.facebook.com/ChalmersYoga/",
+    "tags": ["GROUP", "INDOORS", "ENDURANCE", "TECHNIQUE"]
   }
 ]
