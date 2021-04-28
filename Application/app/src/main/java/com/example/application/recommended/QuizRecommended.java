@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,6 +58,9 @@ public class QuizRecommended extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    private Toolbar toolbar;
+    private TextView textView;
 
     public QuizRecommended() {
         // Required empty public constructor
@@ -108,6 +113,10 @@ public class QuizRecommended extends Fragment {
             System.out.println("--\n");
         }
         // Inflate the layout for this fragment
+
+        toolbar = view.findViewById(R.id.customToolbar);
+        textView = (TextView) view.findViewById(R.id.toolbarText);
+        textView.setText("Recommended Sports");
         return view;
     }
 
