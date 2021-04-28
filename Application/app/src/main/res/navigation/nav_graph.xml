@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_mainMenu_to_activitiesActivity"
             app:destination="@id/activitiesActivity" />
+        <action
+            android:id="@+id/action_mainMenu_to_challengesActivity"
+            app:destination="@id/challengesActivity" />
     </activity>
     <activity
         android:id="@+id/activitiesActivity"
@@ -44,5 +47,10 @@
         android:name="com.example.application.recommended.Wizard"
         android:label="activity_wizard"
         tools:layout="@layout/activity_wizard" />
+    <activity
+        android:id="@+id/challengesActivity"
+        android:name="com.example.application.challenges.ChallengesActivity"
+        android:label="activity_challenges"
+        tools:layout="@layout/activity_challenges" />
 
 </navigation>
