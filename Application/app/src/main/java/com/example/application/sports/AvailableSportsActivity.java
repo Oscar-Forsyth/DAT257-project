@@ -5,17 +5,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import android.graphics.Paint;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.Button;
 
@@ -41,10 +35,11 @@ public class AvailableSportsActivity extends AppCompatActivity {
      * the framework of the list displaying the sports
      */
     RecyclerView recyclerView;
-    FrameLayout frameLayout;
+    FrameLayout frameLayout, backgroundFilter;
     Button filterButton;
     List<Sport> sports;
     SportsAdapter sportsAdapter;
+
 
     /**
      * the URL for our JSON-file
@@ -57,12 +52,16 @@ public class AvailableSportsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_available_sports);
         this.setTitle("Available Sports");
 
+
         frameLayout = findViewById(R.id.frameLayout);
         filterButton = findViewById(R.id.filterButton);
         recyclerView = findViewById(R.id.sportsList);
+        backgroundFilter = findViewById(R.id.backgroundFilter);
+        backgroundFilter.setAlpha((float)(0.6)); //TODO Move to xml
+
+
+        //Fragments
         FragmentManager fm = getSupportFragmentManager();
-
-
 
 
         sports = new ArrayList<>();
@@ -73,13 +72,19 @@ public class AvailableSportsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+
+        //Start filterFragment
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fm.beginTransaction().replace(R.id.frameLayout, new filterSports()).commit();
+                backgroundFilter.setVisibility(View.VISIBLE);
             }
         });
+    }
 
+    protected void backgroundFilterInvis(){
+        backgroundFilter.setVisibility(View.INVISIBLE);
     }
 
 

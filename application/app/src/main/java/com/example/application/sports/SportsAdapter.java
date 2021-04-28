@@ -34,10 +34,8 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
     private int mExpandedPosition = -1;
 
     public SportsAdapter(Context ctx, List<Sport> sports){
-
         this.inflater = LayoutInflater.from(ctx);
         this.sports = sports;
-
     }
 
 
@@ -147,5 +145,9 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
 
         }
     }
+
+
+
+
 }
 

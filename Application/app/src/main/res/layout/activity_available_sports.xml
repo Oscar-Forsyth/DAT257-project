@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".sports.AvailableSportsActivity">
 
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sportsList"
         android:layout_width="match_parent"
@@ -22,9 +25,22 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <FrameLayout
+        android:id="@+id/backgroundFilter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#7A7474"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:clickable="true"/>
+
+
+    <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="367dp"
-        android:layout_height="638dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,12 +58,8 @@
         app:layout_constraintHorizontal_bias="0.069"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" /><![CDATA[
+        app:layout_constraintVertical_bias="0.0" />
 
 
 
-    android:scrollbars="vertical" />
-
-
-]]>
 </androidx.constraintlayout.widget.ConstraintLayout>

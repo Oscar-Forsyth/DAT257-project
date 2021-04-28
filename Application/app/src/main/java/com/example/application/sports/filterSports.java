@@ -1,16 +1,16 @@
 package com.example.application.sports;
 
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
+import android.os.Bundle;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.ImageButton;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.application.R;
 import com.example.application.Tag;
@@ -32,7 +32,8 @@ public class filterSports extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-
+    private ImageButton closeButton;
+    private final Fragment frag = this;
 
 
     // TODO: Rename and change types of parameters
@@ -74,13 +75,11 @@ public class filterSports extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         View rootView = inflater.inflate(R.layout.fragment_filter_sports, container, false);
         List<Tag> tags = new ArrayList<Tag>(EnumSet.allOf(Tag.class));
         FlexboxLayout flexboxLayout = rootView.findViewById(R.id.flexLayout);
         FlexboxLayout.LayoutParams lp = new FlexboxLayout.LayoutParams(FlexboxLayout.LayoutParams.WRAP_CONTENT, FlexboxLayout.LayoutParams.WRAP_CONTENT);
         lp.setMargins(10, 10, 10, 10);
-
 
         for (int i = 0; i < tags.size(); i++) {
             Button b = new Button(getActivity());
@@ -106,9 +105,27 @@ public class filterSports extends Fragment {
             flexboxLayout.addView(b, lp);
         }
 
+
+        //Functionality for closeButton that closes the filter interface
+        closeButton = rootView.findViewById(R.id.closeImage);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO 
+                getActivity().getFragmentManager().popBackStack();
+
+            }
+        });
+
+
+
+
         // Inflate the layout for this fragment
         return rootView;
     }
+
+
+
 
 
 
