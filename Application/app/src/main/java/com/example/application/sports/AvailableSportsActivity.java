@@ -1,12 +1,14 @@
 package com.example.application.sports;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import android.content.Context;
@@ -39,6 +41,8 @@ public class AvailableSportsActivity extends AppCompatActivity {
      * the framework of the list displaying the sports
      */
     RecyclerView recyclerView;
+    FrameLayout frameLayout;
+    Button filterButton;
     List<Sport> sports;
     SportsAdapter sportsAdapter;
 
@@ -53,7 +57,14 @@ public class AvailableSportsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_available_sports);
         this.setTitle("Available Sports");
 
+        frameLayout = findViewById(R.id.frameLayout);
+        filterButton = findViewById(R.id.filterButton);
         recyclerView = findViewById(R.id.sportsList);
+        FragmentManager fm = getSupportFragmentManager();
+
+
+
+
         sports = new ArrayList<>();
 
         try {
@@ -61,6 +72,13 @@ public class AvailableSportsActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fm.beginTransaction().replace(R.id.frameLayout, new filterSports()).commit();
+            }
+        });
 
     }
 
