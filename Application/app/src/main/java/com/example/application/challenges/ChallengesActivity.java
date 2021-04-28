@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -14,8 +15,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.application.R;
-import com.example.application.calendar.ActivitiesAdapter;
-import com.example.application.calendar.Activity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,6 +29,8 @@ public class ChallengesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private List<Challenge> challenges;
+    private List<Challenge> dailyChallenges = new ArrayList<>();
+    private List<Challenge> longChallenges = new ArrayList<>();
 
     private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/c6isg5rcllc2ki81mnpnv92g90@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
 
@@ -113,6 +114,16 @@ public class ChallengesActivity extends AppCompatActivity {
     private void addToLayout() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), challenges);
+        recyclerView.setAdapter(adapter);
+    }
+
+    public void displayDailyChallenges(View view) {
+        ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), dailyChallenges);
+        recyclerView.setAdapter(adapter);
+    }
+
+    public void displayWeeklyChallenges(View view) {
+        ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), longChallenges);
         recyclerView.setAdapter(adapter);
     }
 }
