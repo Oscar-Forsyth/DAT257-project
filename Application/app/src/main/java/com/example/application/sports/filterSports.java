@@ -10,7 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.application.R;
 import com.example.application.Tag;
@@ -19,6 +22,7 @@ import com.google.android.flexbox.FlexboxLayout;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -112,7 +116,17 @@ public class filterSports extends Fragment {
             @Override
             public void onClick(View v) {
                 //TODO 
-                getActivity().getFragmentManager().popBackStack();
+                //requireActivity().getFragmentManager().popBackStack();
+                //requireActivity().onBackPressed();
+                //getActivity().getFragmentManager().beginTransaction().remove(this).commit();
+                //row 123 and 124 accomplish the same thing
+                //getFragmentManager().beginTransaction().remove(filterSports.this).commit();
+                requireActivity().getSupportFragmentManager().beginTransaction().remove(filterSports.this).commit();
+                requireActivity().findViewById(R.id.backgroundFilter).setVisibility(View.INVISIBLE);
+
+
+
+                System.out.println("tryckte på close");
 
             }
         });
