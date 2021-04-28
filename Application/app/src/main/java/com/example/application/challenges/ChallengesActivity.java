@@ -68,6 +68,7 @@ public class ChallengesActivity extends AppCompatActivity {
     }
 
     private void addActivitiesFromJSON(JSONObject response) {
+
         try {
             JSONArray items = response.getJSONArray("items");
             for (int i = 0; i < items.length(); i++) {
@@ -119,7 +120,13 @@ public class ChallengesActivity extends AppCompatActivity {
 
     private void addToLayout() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), challenges);
+        dailyChallenges.clear();
+        for (Challenge c : challenges) {
+            if (c.getPrettyStartDate().equals(c.getPrettyEndDate())) {
+                dailyChallenges.add(c);
+            }
+        }
+        ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), dailyChallenges);
         recyclerView.setAdapter(adapter);
     }
 

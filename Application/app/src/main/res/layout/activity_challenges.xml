@@ -22,7 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/pink_out_line"
-        android:checkedButton="@+id/weekly"
+        android:checkedButton="@+id/daily"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/challengesList"
         app:layout_constraintEnd_toEndOf="parent"

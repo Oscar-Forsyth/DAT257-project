@@ -10,9 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
         app:cardBackgroundColor="#FFCD06"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,8 +53,8 @@
                 android:layout_marginEnd="316dp"
                 android:layout_marginRight="316dp"
                 android:text="Location"
-                android:textSize="14sp"
                 android:textColor="@color/black"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/locationLogo"
@@ -118,9 +117,10 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="391dp"
-        android:layout_height="18dp"
 
+        android:layout_height="18dp"
         android:layout_marginStart="170dp"
         android:layout_marginLeft="170dp"
         android:layout_marginEnd="8dp"
