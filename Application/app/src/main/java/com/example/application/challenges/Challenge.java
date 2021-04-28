@@ -4,22 +4,26 @@ import com.example.application.calendar.DateConverter;
 
 public class Challenge {
     private String title;
-    private String date;
-    private String prettyDate;
+    private String startDate;
+    private String endDate;
+    private String prettyStartDate;
+    private String prettyEndDate;
     private String location;
 
     public Challenge(){}
 
     /** Creates an activity with the specified title, date and location.
      * @param title The activity’s title.
-     * @param date The activity’s date.
+     * @param startDate The activity’s start date.
      * @param location The activity's location.
      */
-    public Challenge(String title, String date, String location){
+    public Challenge(String title, String startDate, String endDate, String location){
         this.title = title;
-        this.date = date;
+        this.startDate = startDate;
+        this.endDate = endDate;
         // Converts date to more readable format
-        prettyDate = DateConverter.convertDateFromCalendar(date);
+        prettyStartDate = DateConverter.convertDateFromCalendar(startDate);
+        prettyEndDate = DateConverter.convertDateFromCalendar(endDate);
         this.location= location;
     }
 
@@ -40,23 +44,42 @@ public class Challenge {
     /** Gets the activity’s date.
      * @return A string representing the activity’s date.
      */
-    public String getDate() {
-        return date;
+    public String getStartDate() {
+        return startDate;
     }
 
-    /** Gets the activity’s date in more readable format.
-     * @return A string representing the activity’s date.
+    /** Gets the activity’s start date in more readable format.
+     * @return A string representing the activity’s start date.
      */
-    public String getPrettyDate() {
-        return prettyDate;
+    public String getPrettyStartDate() {
+        return prettyStartDate;
     }
 
-    /** Sets the activity’s date.
-     * @param date A String containing the activity’s date in original format.
+    /** Sets the activity’s start date.
+     * @param startDate A String containing the activity’s start date in original format.
      */
-    public void setDate(String date) {
-        this.date = date;
-        prettyDate = DateConverter.convertDateFromCalendar(date);
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+        prettyStartDate = DateConverter.convertDateFromCalendar(startDate);
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    /** Gets the activity’s end date in more readable format.
+     * @return A string representing the activity’s end date.
+     */
+    public String getPrettyEndDate() {
+        return prettyEndDate;
+    }
+
+    /** Sets the activity’s end date.
+     * @param endDate A String containing the activity’s end date in original format.
+     */
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+        prettyEndDate = DateConverter.convertDateFromCalendar(endDate);
     }
 
     /** Gets the activity’s location.

@@ -77,9 +77,14 @@ public class ChallengesActivity extends AppCompatActivity {
                     challenge.setTitle("CIS Challenge");
                 }
                 try {
-                    challenge.setDate(items.getJSONObject(i).getJSONObject("start").getString("dateTime"));
+                    challenge.setStartDate(items.getJSONObject(i).getJSONObject("start").getString("dateTime"));
                 } catch (JSONException e) {
-                    challenge.setDate(items.getJSONObject(i).getJSONObject("start").getString("date"));
+                    challenge.setStartDate(items.getJSONObject(i).getJSONObject("start").getString("date"));
+                }
+                try {
+                    challenge.setEndDate(items.getJSONObject(i).getJSONObject("end").getString("dateTime"));
+                } catch (JSONException e) {
+                    challenge.setEndDate(items.getJSONObject(i).getJSONObject("end").getString("date"));
                 }
                 try {
                     String location = items.getJSONObject(i).getString("location");
@@ -100,7 +105,7 @@ public class ChallengesActivity extends AppCompatActivity {
         Collections.sort(challenges, new Comparator<Challenge>() {
             @Override
             public int compare(Challenge object1, Challenge object2) {
-                return object1.getDate().compareTo(object2.getDate());
+                return object1.getStartDate().compareTo(object2.getStartDate());
             }
         });
     }

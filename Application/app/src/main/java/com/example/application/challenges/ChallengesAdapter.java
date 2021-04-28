@@ -44,7 +44,8 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ChallengesAdapter.ViewHolder holder, int position) {
         holder.title.setText(activities.get(position).getTitle());
-        holder.date.setText(activities.get(position).getPrettyDate());
+        holder.startDate.setText(activities.get(position).getPrettyStartDate());
+        holder.endDate.setText(activities.get(position).getPrettyEndDate());
         holder.location.setText(activities.get(position).getLocation());
     }
 
@@ -62,13 +63,14 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
      */
     protected class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView title, date, location;
+        TextView title, startDate, endDate, location;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             title = itemView.findViewById(R.id.title);
-            date = itemView.findViewById(R.id.date);
+            startDate = itemView.findViewById(R.id.startDate);
+            endDate = itemView.findViewById(R.id.endDate);
             location = itemView.findViewById(R.id.location);
 
             addListener(itemView);
