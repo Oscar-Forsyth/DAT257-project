@@ -1,0 +1,12 @@
+what do I want to learn or understand better?
+Efter att ha arbetat med ett par av den senaste sprintens tasks har jag fått en större förståelse över användningen av fragments och activities. Däremot var det lite misskommunikation angående detta område, vilket ledde till en del extra arbete när branches skulle “mergeas”. För nuvarande har jag inga specifika lärandemål till nästa sprint, men jag har kvar de från den föregående, bland annat hur de olika “layoutsen” påverkar fragments vid byte av vyer. Detta borde jag kunna lära mig en del om genom att fortsätta beta av tasks med nya vyer.
+how can I help someone else, or the entire team, to learn something new?
+I fredags hade vi ett uppsamlingsmöte där varje grupp fick presentera det som de har hunnit göra, eventuella problem som uppstått och hur man ska gå vidare. Detta möte tyckte jag personligen var lärorikt då man fick veta lite mer om hur de andra hade löst sina problem. Nästa sprint är målet att göra samma sak, men med noggrannare granskning av varandras kod snarare än resultatet i emulatorn. Detta innebär att så länge som alla har kommit en bit på respektive user story, kommer alla få en bättre förståelse över hur de olika delarna i applikationen fungerar.
+
+what is my contribution towards the team’s use of Scrum?
+Målen från föregående sprint nåddes inte riktigt, vilket delvis berodde på att jag inte följde den plan som jag formulerat, men också för att det inte fanns mycket av intresse som kunde tas upp. Mötena med handledaren är precis i början av sprinten och frågestunden då ger ärligt talat inte så mycket som den hade kunnat om den var en bit in i sprinten. Hur som helst har jag samma mål och plan för nästkommande vecka
+
+ nästa vecka har jag därför samma mål och plan.
+what is my contribution towards the team’s deliveries?
+
+Denna vecka delades tasksen upp bättre, vilket möjliggjorde mer parallellt arbete än tidigare. Däremot blev det ett missförstånd kring hur lösningarna till vissa tasks skulle kodas. Detta innebar att alla som jobbade med den user storyn behövde modifiera koden tillsammans för att det skulle fungera; en process som var mycket energi- och tidskrävande. Nästa vecka gäller det att vi kommer överens om ett sätt att lösa problemen på och sedan kommunicerar det tydligare. Ett sätt att åstadkomma detta är att jobba i grupp hela tiden, vilket inte är optimalt, men beroende på user story kan det vara nödvändigt. 
