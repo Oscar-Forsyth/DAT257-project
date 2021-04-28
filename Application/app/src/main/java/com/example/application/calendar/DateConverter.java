@@ -27,6 +27,22 @@ public class DateConverter {
     }
 
     /**
+     * Method that converts the original string to a more readable format.
+     * @param date A date as a string formatted like "2019-11-20T17:00:00+01:00" or
+     *             "2020-02-22"
+     * @return A string in the format "20 November 2019" or "22 February 2020"
+     */
+    public static String convertDateFromCalendarWithoutTime(String date) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getDay(date));
+        sb.append(" ");
+        sb.append(getMonth(date));
+        sb.append(" ");
+        sb.append(getYear(date));
+        return sb.toString();
+    }
+
+    /**
      * Method retrieves time from original datetime string.
      * @param date A date as a string formatted like "2019-11-20T17:00:00+01:00"
      * @return A string, which represents time, in the format "17:00"

@@ -22,8 +22,8 @@ public class Challenge {
         this.startDate = startDate;
         this.endDate = endDate;
         // Converts date to more readable format
-        prettyStartDate = DateConverter.convertDateFromCalendar(startDate);
-        prettyEndDate = DateConverter.convertDateFromCalendar(endDate);
+        prettyStartDate = DateConverter.convertDateFromCalendarWithoutTime(startDate);
+        prettyEndDate = DateConverter.convertDateFromCalendarWithoutTime(endDate);
         this.location= location;
     }
 
@@ -60,7 +60,7 @@ public class Challenge {
      */
     public void setStartDate(String startDate) {
         this.startDate = startDate;
-        prettyStartDate = DateConverter.convertDateFromCalendar(startDate);
+        prettyStartDate = DateConverter.convertDateFromCalendarWithoutTime(startDate);
     }
 
     public String getEndDate() {
@@ -79,7 +79,7 @@ public class Challenge {
      */
     public void setEndDate(String endDate) {
         this.endDate = endDate;
-        prettyEndDate = DateConverter.convertDateFromCalendar(endDate);
+        prettyEndDate = DateConverter.convertDateFromCalendarWithoutTime(endDate);
     }
 
     /** Gets the activity’s location.

@@ -117,12 +117,26 @@ public class ChallengesActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    // Not optimized at all...
     public void displayDailyChallenges(View view) {
+        dailyChallenges.clear();
+        for (Challenge c : challenges) {
+            if (c.getPrettyStartDate().equals(c.getPrettyEndDate())) {
+                dailyChallenges.add(c);
+            }
+        }
         ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), dailyChallenges);
         recyclerView.setAdapter(adapter);
     }
 
+    // Not optimized at all...
     public void displayWeeklyChallenges(View view) {
+        longChallenges.clear();
+        for (Challenge c : challenges) {
+            if (!c.getPrettyStartDate().equals(c.getPrettyEndDate())) {
+                longChallenges.add(c);
+            }
+        }
         ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), longChallenges);
         recyclerView.setAdapter(adapter);
     }
