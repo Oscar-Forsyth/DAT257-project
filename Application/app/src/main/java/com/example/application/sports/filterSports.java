@@ -126,7 +126,7 @@ public class filterSports extends Fragment {
             @Override
             public void onClick(View v) {
                 requireActivity().getSupportFragmentManager().beginTransaction().remove(filterSports.this).commit();
-                requireActivity().findViewById(R.id.backgroundFilter).setVisibility(View.INVISIBLE);
+                requireActivity().findViewById(R.id.backgroundFilter).setVisibility(View.GONE);
             }
         });
 
@@ -158,7 +158,7 @@ public class filterSports extends Fragment {
 
                 //Makes fragment invisible
                 requireActivity().getSupportFragmentManager().beginTransaction().remove(filterSports.this).commit();
-                requireActivity().findViewById(R.id.backgroundFilter).setVisibility(View.INVISIBLE);
+                requireActivity().findViewById(R.id.backgroundFilter).setVisibility(View.GONE);
 
             }
         });
@@ -204,7 +204,7 @@ public class filterSports extends Fragment {
             getActivity().findViewById(R.id.noSportsFound).setVisibility(View.VISIBLE);
         }
         else{
-            getActivity().findViewById(R.id.noSportsFound).setVisibility(View.INVISIBLE);
+            getActivity().findViewById(R.id.noSportsFound).setVisibility(View.GONE);
         }
     }
 
