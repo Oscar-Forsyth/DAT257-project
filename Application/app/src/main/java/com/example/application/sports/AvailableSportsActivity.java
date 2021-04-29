@@ -40,6 +40,7 @@ public class AvailableSportsActivity extends AppCompatActivity {
     protected List<Sport> sports;
     SportsAdapter sportsAdapter;
     FragmentManager fm;
+    private List<Tag> savedTags;
 
 
     /**
@@ -149,10 +150,21 @@ public class AvailableSportsActivity extends AppCompatActivity {
     }
 
 
-    //For filter
+    /**
+     * This method returns a new copy of the full sports list to the fragment
+     * This was done to remove an alibi problem
+     * @return a new list of the sport
+     */
     protected List<Sport> getSportsList(){
         return new ArrayList<>(sports);
     }
 
+    protected void setSavedTags(List<Tag> t){
+        savedTags = t;
 
+    }
+
+    protected List<Tag> getSavedTags(){
+        return savedTags;
+    }
 }

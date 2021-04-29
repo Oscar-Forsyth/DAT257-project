@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.application.R;
+import com.example.application.Tag;
 import com.example.application.animations.Animations;
 import com.squareup.picasso.Picasso;
 
@@ -31,6 +32,7 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
     private LayoutInflater inflater;
 
     private List<Sport> sports;
+
     private int mExpandedPosition = -1;
 
     public SportsAdapter(Context ctx, List<Sport> sports){

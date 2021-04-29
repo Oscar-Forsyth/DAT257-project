@@ -118,6 +118,8 @@ public class filterSports extends Fragment {
             flexboxLayout.addView(b, lp);
         }
 
+        //Sets the saved buttons when exiting the fragment
+        setSavedButtons();
 
         upperFrame = rootView.findViewById(R.id.upperFrame);
         upperFrame.setOnClickListener(new View.OnClickListener() {
@@ -127,8 +129,6 @@ public class filterSports extends Fragment {
                 requireActivity().findViewById(R.id.backgroundFilter).setVisibility(View.INVISIBLE);
             }
         });
-
-
 
         //Save the filter
         saveButton = rootView.findViewById(R.id.saveButton);
@@ -153,6 +153,9 @@ public class filterSports extends Fragment {
                 //No sports text
                 ifSportEmpty(sports);
 
+                //Save tags
+                ((AvailableSportsActivity) requireActivity()).setSavedTags(savedButtons);
+
                 //Makes fragment invisible
                 requireActivity().getSupportFragmentManager().beginTransaction().remove(filterSports.this).commit();
                 requireActivity().findViewById(R.id.backgroundFilter).setVisibility(View.INVISIBLE);
@@ -160,6 +163,7 @@ public class filterSports extends Fragment {
             }
         });
 
+        //Clears the selected tags
         clearButton = rootView.findViewById(R.id.clearButton);
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,6 +218,20 @@ public class filterSports extends Fragment {
         b.setBackground(getResources().getDrawable(R.drawable.tag_button));
         b.setTextColor(Color.BLACK);
         b.setSelected(false);
+    }
+
+    private void setSavedButtons(){
+        List<Tag> savedTags = ((AvailableSportsActivity) requireActivity()).getSavedTags();
+        for(Button b : allButtons){
+            try{
+                if(savedTags.contains(Tag.valueOf(b.getText().toString()))){
+                    setSelected(b);
+                }
+            }catch(NullPointerException e){
+                System.out.println("This is not a Error, just bypass a empty list for bootup");
+            }
+
+        }
     }
 
 }
