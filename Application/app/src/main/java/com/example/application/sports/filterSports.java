@@ -111,7 +111,7 @@ public class filterSports extends Fragment {
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO 
+                //TODO
                 getActivity().getFragmentManager().popBackStack();
 
             }
