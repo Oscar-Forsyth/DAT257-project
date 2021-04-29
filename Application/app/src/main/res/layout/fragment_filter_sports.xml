@@ -17,8 +17,8 @@
         android:id="@+id/upperFrame"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:clickable="true"
-        android:background="@drawable/layout_border">>
+        android:background="@drawable/layout_border"
+        android:clickable="true">>
 
         <TextView
             android:id="@+id/Filtertext"
@@ -35,6 +35,14 @@
             android:layout_height="60dp"
             android:layout_gravity="left|center_horizontal|center_vertical"
             app:srcCompat="@drawable/filter" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right|center_horizontal|center_vertical"
+            android:layout_marginRight="10dp"
+            app:srcCompat="@drawable/close_tags" />
     </FrameLayout>
 
     <com.google.android.flexbox.FlexboxLayout
