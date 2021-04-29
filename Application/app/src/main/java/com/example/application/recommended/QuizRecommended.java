@@ -1,6 +1,8 @@
 package com.example.application.recommended;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -30,6 +32,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import com.example.application.MainMenu;
 import com.example.application.R;
@@ -307,13 +310,46 @@ public class QuizRecommended extends Fragment {
         randList.add(2);
 
         //adds points to every sport that can be found in tagsWithPoints
-        converter(resultList);
-        List <Sport> top5Sports = onlyTop5();
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("Save", Context.MODE_PRIVATE);
+        String savedSports = prefs.getString("savedRecommendations", null);
+        List <Sport> top5Sports;
+
+        if(savedSports == null) {
+            converter(resultList);
+            top5Sports = onlyTop5();
+            saveList(top5Sports);
+        } else
+            top5Sports = retrieveList(savedSports);
+
 
         adapter = new AdapterQuizRecommended(requireActivity().getApplicationContext(), top5Sports);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireActivity().getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
         recommendedList.setLayoutManager(gridLayoutManager);
         recommendedList.setAdapter(adapter);
+    }
+
+    private void saveList(List<Sport> list){
+        SharedPreferences.Editor editor = this.getActivity().getSharedPreferences("Save", Context.MODE_PRIVATE).edit();
+        String Sports = "";
+
+        for(Sport e : list)
+            Sports = Sports + e.getName() + ",";
+        System.out.println(Sports);
+        editor.putString("savedRecommendations", Sports);
+        editor.apply();
+    }
+
+    private List<Sport> retrieveList(String string){
+        List <Sport> list = new ArrayList<>();
+        Scanner sc = new Scanner(string).useDelimiter(",");
+        String sport;
+        while(sc.hasNext()) {
+            sport = sc.next();
+            for(Sport e : sports)
+                if(e.getName().equals(sport))
+                    list.add(e);
+        }
+        return list;
     }
 
 }
