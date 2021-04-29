@@ -10,7 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.application.R;
 import com.example.application.Tag;
@@ -19,6 +22,7 @@ import com.google.android.flexbox.FlexboxLayout;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,7 +37,8 @@ public class filterSports extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private ImageButton closeButton;
-    private final Fragment frag = this;
+    private Button saveButton;
+    private ArrayList<Button> savedButtons;
 
 
     // TODO: Rename and change types of parameters
@@ -83,6 +88,7 @@ public class filterSports extends Fragment {
 
         for (int i = 0; i < tags.size(); i++) {
             Button b = new Button(getActivity());
+            savedButtons.add(b);
             b.setText(tags.get(i).toString());
             b.setTextSize(20);
             b.setBackground(this.getResources().getDrawable(R.drawable.buttonbackground));
@@ -102,6 +108,7 @@ public class filterSports extends Fragment {
                     }
                 }
             });
+
             flexboxLayout.addView(b, lp);
         }
 
@@ -111,9 +118,17 @@ public class filterSports extends Fragment {
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
-                getActivity().getFragmentManager().popBackStack();
+                requireActivity().getSupportFragmentManager().beginTransaction().remove(filterSports.this).commit();
+                requireActivity().findViewById(R.id.backgroundFilter).setVisibility(View.INVISIBLE);
+                System.out.println("tryckte på close");
+            }
+        });
 
+        saveButton = rootView.findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
             }
         });
 

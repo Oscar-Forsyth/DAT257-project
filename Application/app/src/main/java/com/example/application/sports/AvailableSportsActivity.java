@@ -39,6 +39,7 @@ public class AvailableSportsActivity extends AppCompatActivity {
     Button filterButton;
     List<Sport> sports;
     SportsAdapter sportsAdapter;
+    FragmentManager fm;
 
 
     /**
@@ -61,7 +62,7 @@ public class AvailableSportsActivity extends AppCompatActivity {
 
 
         //Fragments
-        FragmentManager fm = getSupportFragmentManager();
+        fm = getSupportFragmentManager();
 
 
         sports = new ArrayList<>();
@@ -86,6 +87,7 @@ public class AvailableSportsActivity extends AppCompatActivity {
     protected void backgroundFilterInvis(){
         backgroundFilter.setVisibility(View.INVISIBLE);
     }
+
 
 
 
