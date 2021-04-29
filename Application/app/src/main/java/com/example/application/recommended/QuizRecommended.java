@@ -349,6 +349,7 @@ public class QuizRecommended extends Fragment {
                 if(e.getName().equals(sport))
                     list.add(e);
         }
+        sc.close();
         return list;
     }
 
