@@ -2,6 +2,12 @@ package com.example.application.challenges;
 
 import com.example.application.calendar.DateConverter;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Challenge {
     private String title;
     private String startDate;
@@ -80,8 +86,27 @@ public class Challenge {
     /** Sets the activity’s end date.
      * @param endDate A String containing the activity’s end date in original format.
      */
-    public void setEndDate(String endDate) {
+    public void setEndDate(String endDate) throws ParseException {
         this.endDate = endDate;
+
+        if(endDate.length() == 10) {    //Date is on the format "date", eg. yyyy-MM-dd
+
+            //Convert from string to date
+            String pattern = "yyyy-MM-dd";
+            Date endDateDate = new SimpleDateFormat(pattern).parse(endDate);
+
+            //Decrement date with one day
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(endDateDate);
+            cal.add(Calendar.DATE, -1);
+            endDateDate = cal.getTime();
+
+            //Convert back to string
+            DateFormat df = new SimpleDateFormat(pattern);
+            endDate = df.format(endDateDate);
+        }
+        else {          //Date is on the format "dateTime"
+        }
         prettyEndDate = DateConverter.convertDateFromCalendarWithoutTime(endDate);
     }
 

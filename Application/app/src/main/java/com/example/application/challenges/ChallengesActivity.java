@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -87,6 +88,8 @@ public class ChallengesActivity extends AppCompatActivity {
                     challenge.setEndDate(items.getJSONObject(i).getJSONObject("end").getString("dateTime"));
                 } catch (JSONException e) {
                     challenge.setEndDate(items.getJSONObject(i).getJSONObject("end").getString("date"));
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
                 try {
                     String location = items.getJSONObject(i).getString("location");
@@ -104,7 +107,7 @@ public class ChallengesActivity extends AppCompatActivity {
                 }
                 challenges.add(challenge);
             }
-        } catch (JSONException e) {
+        } catch (JSONException | ParseException e) {
             e.printStackTrace();
         }
     }
