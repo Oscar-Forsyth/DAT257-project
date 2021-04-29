@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -37,8 +38,13 @@ public class filterSports extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private ImageButton closeButton;
+
     private Button saveButton;
     private ArrayList<Button> savedButtons;
+
+    private final Fragment frag = this;
+    private FrameLayout upperFrame;
+
 
 
     // TODO: Rename and change types of parameters
@@ -91,18 +97,18 @@ public class filterSports extends Fragment {
             savedButtons.add(b);
             b.setText(tags.get(i).toString());
             b.setTextSize(20);
-            b.setBackground(this.getResources().getDrawable(R.drawable.buttonbackground));
+            b.setBackground(this.getResources().getDrawable(R.drawable.tag_button));
             b.setPadding(25, 5, 25, 5);
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(b.isSelected()){
-                        b.setBackground(getResources().getDrawable(R.drawable.buttonbackground));
+                        b.setBackground(getResources().getDrawable(R.drawable.tag_button));
                         b.setTextColor(Color.BLACK);
                         b.setSelected(false);
                     }
                     else {
-                        b.setBackground(getResources().getDrawable(R.drawable.buttonbackgroundchecked));
+                        b.setBackground(getResources().getDrawable(R.drawable.tag_button_pressed));
                         b.setTextColor(Color.WHITE);
                         b.setSelected(true);
                     }
@@ -112,15 +118,12 @@ public class filterSports extends Fragment {
             flexboxLayout.addView(b, lp);
         }
 
-
-        //Functionality for closeButton that closes the filter interface
-        closeButton = rootView.findViewById(R.id.closeImage);
-        closeButton.setOnClickListener(new View.OnClickListener() {
+        upperFrame = rootView.findViewById(R.id.upperFrame);
+        upperFrame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 requireActivity().getSupportFragmentManager().beginTransaction().remove(filterSports.this).commit();
                 requireActivity().findViewById(R.id.backgroundFilter).setVisibility(View.INVISIBLE);
-                System.out.println("tryckte på close");
             }
         });
 
@@ -128,7 +131,7 @@ public class filterSports extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
 

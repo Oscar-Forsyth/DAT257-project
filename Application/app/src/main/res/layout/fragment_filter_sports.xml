@@ -12,22 +12,30 @@
     android:layout_marginRight="20dp"
     android:layout_marginBottom="30dp">
 
+
     <FrameLayout
         android:id="@+id/upperFrame"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="#594C4C">
+        android:clickable="true"
+        android:background="@drawable/layout_border">>
 
-        <ImageButton
-            android:id="@+id/closeImage"
+        <TextView
+            android:id="@+id/Filtertext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|center_horizontal|center_vertical"
-            android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp"
-            app:srcCompat="@drawable/ic_baseline_gamepad_24" />
-    </FrameLayout>
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:text="Filter"
+            android:textColor="#000000"
+            android:textSize="40sp" />
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="left|center_horizontal|center_vertical"
+            app:srcCompat="@drawable/filter" />
+    </FrameLayout>
 
     <com.google.android.flexbox.FlexboxLayout
 
@@ -36,7 +44,7 @@
         android:layout_height="400dp"
         android:layout_above="@+id/lowerFrame"
         android:layout_below="@+id/upperFrame"
-        android:background="#EC1818"
+        android:background="@drawable/layout_border"
         android:isScrollContainer="true"
         android:padding="10dp"
         app:flexDirection="row"
@@ -52,27 +60,31 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
-        android:background="#817777"
+        android:background="#F3D15A"
         android:paddingTop="30dp"
         android:paddingBottom="30dp">
 
         <Button
             android:id="@+id/clearButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
             android:layout_gravity="left|center_vertical"
-            android:layout_marginStart="50dp"
-            android:layout_marginLeft="50dp"
-            android:text="Clear" />
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Clear"
+            android:textSize="30sp"
+            app:backgroundTint="#CC3F3F" />
 
         <Button
             android:id="@+id/saveButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginEnd="50dp"
-            android:layout_marginRight="50dp"
-            android:text="Save" />
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Save"
+            android:textSize="30sp"
+            app:backgroundTint="#8BC36C" />
     </FrameLayout>
 
 </RelativeLayout>
