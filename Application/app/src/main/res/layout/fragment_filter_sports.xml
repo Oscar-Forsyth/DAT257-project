@@ -82,7 +82,7 @@
             android:layout_gravity="right|center_vertical"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:text="Save"
+            android:text="Set"
             android:textSize="30sp"
             app:backgroundTint="#8BC36C" />
     </FrameLayout>

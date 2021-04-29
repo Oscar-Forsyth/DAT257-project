@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class more or less extratcs the information that's stored in sports.json and puts it into a
+ * This class more or less extracts the information that's stored in sports.json and puts it into a
  * Arraylist so that it can be used later. It also serves as the base for a new activity
  */
 public class AvailableSportsActivity extends AppCompatActivity {
@@ -37,7 +37,7 @@ public class AvailableSportsActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     FrameLayout frameLayout, backgroundFilter;
     Button filterButton;
-    List<Sport> sports;
+    protected List<Sport> sports;
     SportsAdapter sportsAdapter;
     FragmentManager fm;
 
@@ -146,6 +146,12 @@ public class AvailableSportsActivity extends AppCompatActivity {
         recyclerView.setAdapter(sportsAdapter);
 
 
+    }
+
+
+    //For filter
+    protected List<Sport> getSportsList(){
+        return new ArrayList<>(sports);
     }
 
 

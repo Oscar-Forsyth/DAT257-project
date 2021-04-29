@@ -11,10 +11,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.application.R;
 import com.example.application.Tag;
@@ -23,7 +21,6 @@ import com.google.android.flexbox.FlexboxLayout;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,8 +36,12 @@ public class filterSports extends Fragment {
 
     private ImageButton closeButton;
 
-    private Button saveButton;
-    private ArrayList<Button> savedButtons;
+    private Button saveButton, clearButton;
+    private ArrayList<Button> allButtons;
+    private ArrayList<Tag> savedButtons;
+    private List<Sport> sports;
+    private RecyclerView recyclerView;
+    private SportsAdapter sportsAdapter;
 
     private final Fragment frag = this;
     private FrameLayout upperFrame;
@@ -80,6 +81,9 @@ public class filterSports extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        allButtons = new ArrayList<>();
+        savedButtons = new ArrayList<>();
+        sports = new ArrayList<>();
     }
 
     @Override
@@ -94,7 +98,7 @@ public class filterSports extends Fragment {
 
         for (int i = 0; i < tags.size(); i++) {
             Button b = new Button(getActivity());
-            savedButtons.add(b);
+            allButtons.add(b);
             b.setText(tags.get(i).toString());
             b.setTextSize(20);
             b.setBackground(this.getResources().getDrawable(R.drawable.tag_button));
@@ -103,20 +107,17 @@ public class filterSports extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if(b.isSelected()){
-                        b.setBackground(getResources().getDrawable(R.drawable.tag_button));
-                        b.setTextColor(Color.BLACK);
-                        b.setSelected(false);
+                        setNotSelected(b);
                     }
                     else {
-                        b.setBackground(getResources().getDrawable(R.drawable.tag_button_pressed));
-                        b.setTextColor(Color.WHITE);
-                        b.setSelected(true);
+                       setSelected(b);
                     }
                 }
             });
 
             flexboxLayout.addView(b, lp);
         }
+
 
         upperFrame = rootView.findViewById(R.id.upperFrame);
         upperFrame.setOnClickListener(new View.OnClickListener() {
@@ -127,25 +128,92 @@ public class filterSports extends Fragment {
             }
         });
 
+
+
+        //Save the filter
         saveButton = rootView.findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                savedButtons.clear();
+                //Add all selected buttons
+                addAllSelected();
+
+                //Gets the whole list unfiltered
+                sports = ((AvailableSportsActivity) requireActivity()).getSportsList();
+
+                removeFromSportList();
+
+                //Update recycler view (Same as Activity)
+                recyclerView = getActivity().findViewById(R.id.sportsList);
+                sportsAdapter = new SportsAdapter(getActivity().getApplicationContext(), sports);
+                recyclerView.setAdapter(sportsAdapter);
+
+                //No sports text
+                ifSportEmpty(sports);
+
+                //Makes fragment invisible
+                requireActivity().getSupportFragmentManager().beginTransaction().remove(filterSports.this).commit();
+                requireActivity().findViewById(R.id.backgroundFilter).setVisibility(View.INVISIBLE);
+
             }
         });
 
-
+        clearButton = rootView.findViewById(R.id.clearButton);
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(Button b : allButtons){
+                    setNotSelected(b);
+                }
+            }
+        });
 
 
         // Inflate the layout for this fragment
         return rootView;
     }
 
+    private void addAllSelected(){
+        for (Button b : allButtons) {
+            if(b.isSelected()){
+                savedButtons.add(Tag.valueOf(b.getText().toString()));
+            }
+        }
+    }
 
+    private void removeFromSportList(){
+        //Adds all the sports that does not have the wanted tags
+        List<Sport> removeList = new ArrayList<>();
+        for(Sport s : sports){
+            if(!s.getTags().containsAll(savedButtons)){
+                removeList.add(s);
+            }
+        }
+        //Remove from list
+        sports.removeAll(removeList);
+    }
 
+    private void ifSportEmpty(List<Sport> sports){
+        if(sports.isEmpty()){
+            getActivity().findViewById(R.id.noSportsFound).setVisibility(View.VISIBLE);
+        }
+        else{
+            getActivity().findViewById(R.id.noSportsFound).setVisibility(View.INVISIBLE);
+        }
+    }
 
+    private void setSelected(Button b){
+        b.setBackground(getResources().getDrawable(R.drawable.tag_button_pressed));
+        b.setTextColor(Color.WHITE);
+        b.setSelected(true);
+    }
 
-
+    private void setNotSelected(Button b){
+        b.setBackground(getResources().getDrawable(R.drawable.tag_button));
+        b.setTextColor(Color.BLACK);
+        b.setSelected(false);
+    }
 
 }
