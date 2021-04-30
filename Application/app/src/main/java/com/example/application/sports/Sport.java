@@ -1,5 +1,8 @@
 package com.example.application.sports;
 
+import android.net.Uri;
+
+import com.example.application.BuildConfig;
 import com.example.application.Tag;
 
 import java.util.ArrayList;
@@ -14,7 +17,8 @@ public class Sport {
     private String name;
     private String description;
 
-    private String logo;  //If the logos are moved to the application, this should be a int. To reference the correct bytes.
+    //private String logo;  //If the logos are moved to the application, this should be a int. To reference the correct bytes.
+    private Uri logo;
     private String link;
     private boolean isExpanded;
     private List<Tag> tags;
@@ -23,7 +27,7 @@ public class Sport {
     public Sport(String name,String description,String logo, String link, Boolean isExpanded,  List<Tag> tags){
         this.name = name;
         this.description= description;
-        this.logo = logo;
+        this.logo = Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + logo);
         this.link = link;
         this.isExpanded = isExpanded;
         this.tags = tags;
@@ -45,12 +49,13 @@ public class Sport {
         this.description = description;
     }
 
-    public String getLogo() {
+    public Uri getLogo() {
         return logo;
     }
 
     public void setLogo(String logo) {
-        this.logo = logo;
+        this.logo = Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + logo);
+        System.out.println(this.logo);
     }
 
     public String getLink() {
