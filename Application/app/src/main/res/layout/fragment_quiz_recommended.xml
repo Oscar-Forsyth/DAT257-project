@@ -25,10 +25,10 @@
         android:layout_marginBottom="24dp"
         android:background="#FFCD06"
         android:gravity="center_horizontal"
-        android:text="Recommended Sports"
+        android:text="Your Top 5 Recommended Sports"
         android:textColor="#020202"
         android:textColorHint="#020202"
-        android:textSize="36sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/recommendedList"
@@ -41,34 +41,25 @@
         android:id="@+id/recommendedList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
         android:alwaysDrawnWithCache="true"
         android:animateLayoutChanges="false"
         android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/buttonToMainMenu"
+        app:layout_constraintBottom_toTopOf="@+id/retakeQuizButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/buttonToMainMenu"
-        android:layout_width="135dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="8dp"
-        android:text="Main Menu"
-        app:layout_constraintBottom_toTopOf="@+id/retakeQuizButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/retakeQuizButton"
         android:layout_width="135dp"
         android:layout_height="48dp"
+        android:layout_marginTop="24dp"
         android:layout_marginBottom="16dp"
         android:text="Retake Quiz"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recommendedList" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

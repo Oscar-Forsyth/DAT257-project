@@ -91,6 +91,7 @@ public class QuizRecommended extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_quiz_recommended, container, false);
+        /*
         buttonToMainMenu= view.findViewById(R.id.buttonToMainMenu);
         buttonToMainMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +100,8 @@ public class QuizRecommended extends Fragment {
                 startActivity(intent);
             }
         });
+
+         */
         buttonToRetakeQuiz= view.findViewById(R.id.retakeQuizButton);
         buttonToRetakeQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
