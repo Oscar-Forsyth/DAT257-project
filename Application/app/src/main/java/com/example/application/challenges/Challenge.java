@@ -19,11 +19,11 @@ public class Challenge {
 
     public Challenge(){}
 
-    /** Creates an activity with the specified title, date and location.
-     * @param title The activity’s title.
-     * @param startDate The activity’s start date.
-     * @param location The activity's location.
-     * @param description The activity's description.
+    /** Creates a challenge with the specified title, date and location.
+     * @param title The challenge title.
+     * @param startDate The challenge start date.
+     * @param location The challenge location.
+     * @param description The challenge description.
      */
     public Challenge(String title, String startDate, String endDate, String location, String description){
         this.title = title;
@@ -36,36 +36,36 @@ public class Challenge {
         this.description = description;
     }
 
-    /** Gets the activity’s title.
-     * @return A string representing the activity’s title.
+    /** Gets the challenge title.
+     * @return A string representing the challenge title.
      */
     public String getTitle() {
         return title;
     }
 
-    /** Sets the activity’s title.
-     * @param title A String containing the activity’s title.
+    /** Sets the challenge title.
+     * @param title A String containing the challenge title.
      */
     public void setTitle(String title) {
         this.title = title;
     }
 
-    /** Gets the activity’s date.
-     * @return A string representing the activity’s date.
+    /** Gets the challenge date.
+     * @return A string representing the challenge date.
      */
     public String getStartDate() {
         return startDate;
     }
 
-    /** Gets the activity’s start date in more readable format.
-     * @return A string representing the activity’s start date.
+    /** Gets the challenge start date in more readable format.
+     * @return A string representing the challenge start date.
      */
     public String getPrettyStartDate() {
         return prettyStartDate;
     }
 
-    /** Sets the activity’s start date.
-     * @param startDate A String containing the activity’s start date in original format.
+    /** Sets the challenge start date.
+     * @param startDate A String containing the challenge start date in original format.
      */
     public void setStartDate(String startDate) {
         this.startDate = startDate;
@@ -76,15 +76,15 @@ public class Challenge {
         return endDate;
     }
 
-    /** Gets the activity’s end date in more readable format.
-     * @return A string representing the activity’s end date.
+    /** Gets the challenge end date in more readable format.
+     * @return A string representing the challenge end date.
      */
     public String getPrettyEndDate() {
         return prettyEndDate;
     }
 
-    /** Sets the activity’s end date.
-     * @param endDate A String containing the activity’s end date in original format.
+    /** Sets the challenge end date.
+     * @param endDate A String containing the challenge end date in original format.
      */
     public void setEndDate(String endDate) throws ParseException {
         this.endDate = endDate;
@@ -110,27 +110,27 @@ public class Challenge {
         prettyEndDate = DateConverter.convertDateFromCalendarWithoutTime(endDate);
     }
 
-    /** Gets the activity’s location.
-     * @return A string representing the activity’s location.
+    /** Gets the challenge location.
+     * @return A string representing the challenge location.
      */
     public String getLocation() {
         return location;
     }
 
-    /** Sets the activity’s location.
-     * @param location A String containing the activity’s location.
+    /** Sets the challenge location.
+     * @param location A String containing the challenge location.
      */
     public void setLocation(String location) {
         this.location = location;
     }
 
-    /** Gets the activity’s description.
-     * @return A string representing the activity’s description.
+    /** Gets the challenge description.
+     * @return A string representing the challenge description.
      */
     public String getDescription() { return description; }
 
-    /** Sets the activity’s location.
-     * @param description A String containing the activity’s description.
+    /** Sets the challenge location.
+     * @param description A String containing the challenge description.
      */
     public void setDescription(String description) { this.description = description;
     }

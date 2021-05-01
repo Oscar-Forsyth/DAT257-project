@@ -43,19 +43,19 @@ public class ChallengesActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.challengesList);
         challenges = new ArrayList<>();
-        extractActivities();
+        extractChallenges();
     }
 
     /**
-     * Extract information from CIS Google Calendar and add the information to the activity tab.
+     * Extract information from CIS Google Calendar and add the information to the challenge tab.
      */
-    private void extractActivities() {
+    private void extractChallenges() {
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, JSON_URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                addActivitiesFromJSON(response);
-                sortActivities();
+                addChallengesFromJSON(response);
+                sortChallenges();
                 addToLayout();
             }
         }, new Response.ErrorListener() {
@@ -68,7 +68,7 @@ public class ChallengesActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
-    private void addActivitiesFromJSON(JSONObject response) {
+    private void addChallengesFromJSON(JSONObject response) {
 
         try {
             JSONArray items = response.getJSONArray("items");
@@ -95,7 +95,6 @@ public class ChallengesActivity extends AppCompatActivity {
                     String location = items.getJSONObject(i).getString("location");
                     String[] res = location.split("[,]", 0);
                     challenge.setLocation(res[0]);
-                    //activity.setLocation(items.getJSONObject(i).getString("location"));
                 } catch (JSONException e) {
                     challenge.setLocation(" ");
                 }
@@ -112,7 +111,7 @@ public class ChallengesActivity extends AppCompatActivity {
         }
     }
 
-    private void sortActivities() {
+    private void sortChallenges() {
         Collections.sort(challenges, new Comparator<Challenge>() {
             @Override
             public int compare(Challenge object1, Challenge object2) {

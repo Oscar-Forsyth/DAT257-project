@@ -17,18 +17,18 @@ import java.util.List;
 
 public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.ViewHolder>  {
     LayoutInflater inflater;
-    List<Challenge> activities;
+    List<Challenge> challenges;
 
-    public ChallengesAdapter(Context ctx, List<Challenge> activities){
+    public ChallengesAdapter(Context ctx, List<Challenge> challenges){
         this.inflater = LayoutInflater.from(ctx);
-        this.activities = activities;
+        this.challenges = challenges;
     }
 
     /**
      * See RecyclerView.java for more information.
      * @param parent
      * @param viewType
-     * @return view based on custom_activities
+     * @return view based on custom_challenges
      */
     @NonNull
     @Override
@@ -44,27 +44,27 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
      */
     @Override
     public void onBindViewHolder(@NonNull ChallengesAdapter.ViewHolder holder, int position) {
-        holder.title.setText(activities.get(position).getTitle());
-        holder.startDate.setText(activities.get(position).getPrettyStartDate());
-        holder.endDate.setText(activities.get(position).getPrettyEndDate());
-        holder.location.setText(activities.get(position).getLocation());
-        if(activities.get(position).getLocation().equals(" ")) {
+        holder.title.setText(challenges.get(position).getTitle());
+        holder.startDate.setText(challenges.get(position).getPrettyStartDate());
+        holder.endDate.setText(challenges.get(position).getPrettyEndDate());
+        holder.location.setText(challenges.get(position).getLocation());
+        if(challenges.get(position).getLocation().equals(" ")) {
                 holder.locationLogo.setVisibility(View.INVISIBLE);
         }
-        holder.description.setText(activities.get(position).getDescription());
+        holder.description.setText(challenges.get(position).getDescription());
     }
 
     /**
-     * Returns number of activities.
-     * @return number of activities
+     * Returns number of challenges.
+     * @return number of challenges
      */
     @Override
     public int getItemCount() {
-        return activities.size();
+        return challenges.size();
     }
 
     /**
-     * Assigns values to and holds attributes necessary for the cards in the Upcoming Events tab
+     * Assigns values to and holds attributes necessary for the cards in the Challenges tab
      */
     protected class ViewHolder extends RecyclerView.ViewHolder{
 
