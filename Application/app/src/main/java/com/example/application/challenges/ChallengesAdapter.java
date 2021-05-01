@@ -52,6 +52,19 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
                 holder.locationLogo.setVisibility(View.INVISIBLE);
         }
         holder.description.setText(challenges.get(position).getDescription());
+        holder.description.setVisibility(View.GONE);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.description.getVisibility() == View.GONE) {
+                    holder.description.setVisibility(View.VISIBLE);
+                } else {
+                    holder.description.setVisibility(View.GONE);
+                }
+
+            }
+        });
     }
 
     /**
