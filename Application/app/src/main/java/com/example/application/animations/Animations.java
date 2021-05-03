@@ -7,15 +7,11 @@ import android.view.animation.Transformation;
 
 public class Animations {
 
-
-
     public static void expand(View view) {
         Animation animation = expandAction(view);
         view.startAnimation(animation);
     }
-
-
-
+    
     private static Animation expandAction(final View view) {
 
         view.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
