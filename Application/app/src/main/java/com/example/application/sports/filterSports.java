@@ -86,6 +86,8 @@ public class filterSports extends Fragment {
         sports = new ArrayList<>();
     }
 
+    
+    //Sets the view and binds the buttons, does more or less everything
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
