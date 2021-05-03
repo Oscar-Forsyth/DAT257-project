@@ -4,82 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainMenu">
+    tools:context=".MainMenu"
+    android:background="@color/black">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:theme="@style/Theme.Application.AppBarOverlay"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/black">
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginBottom="2dp"
-                android:text="Main menu"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp"
-                android:gravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="72dp"
-                android:layout_height="56dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_sports_basketball_24" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar"/>
 
     <Button
         android:id="@+id/button"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/button1"
         android:drawableRight="@drawable/ic_baseline_thumb_up_24"
+        android:gravity="left|center_vertical"
         android:onClick="openRecommendedSports"
         android:text="Recommended Sports"
         android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:backgroundTint="#001D3D"
+        android:textSize="32sp"
+        app:backgroundTint="#FFCD06"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/button2"
         android:drawableRight="@drawable/ic_baseline_event_24"
+        android:gravity="left|center_vertical"
         android:onClick="openUpcomingEvents"
         android:text="Upcoming Events"
         android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:backgroundTint="#003566"
+        android:textSize="32sp"
+        app:backgroundTint="#DD7B19"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -90,14 +55,16 @@
         android:id="@+id/button3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/button3"
         android:drawableRight="@drawable/ic_baseline_sports_kabaddi_24"
+        android:gravity="left|center_vertical"
         android:onClick="openSportsAndCommittees"
         android:text="Sports and Committees"
         android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:backgroundTint="#FFC300"
+        android:textSize="32sp"
+        app:backgroundTint="#F45625"
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -108,17 +75,19 @@
         android:id="@+id/button4"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/button4"
         android:drawableRight="@drawable/ic_baseline_gamepad_24"
+        android:gravity="left|center_vertical"
         android:onClick="openChallenges"
         android:text="Challenges"
         android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:backgroundTint="#FFD60A"
+        android:textSize="32sp"
+        app:backgroundTint="#143068"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button3" />
 
