@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.application.calendar.ActivitiesActivity;
+import com.example.application.challenges.ChallengesActivity;
 import com.example.application.recommended.RecommendedActivity;
 import com.example.application.sports.AvailableSportsActivity;
 
@@ -27,43 +28,29 @@ public class MainMenu extends AppCompatActivity {
     public void openRecommendedSports(View view) {
         //Intent intent = new Intent(this, Wizard.class);
         Intent intent = new Intent(this, RecommendedActivity.class);
-        //EditText editText = (EditText) findViewById(R.id.editText);
-        //String message = editText.getText().toString();
-        //intent.putExtra(EXTRA_MESSAGE, message);
+
         startActivity(intent);
     }
 
     /** Called when the user taps the 'Upcoming Events' button */
     public void openUpcomingEvents(View view) {
         Intent intent = new Intent(this, ActivitiesActivity.class);
-        //EditText editText = (EditText) findViewById(R.id.editText);
-        //String message = editText.getText().toString();
-        //intent.putExtra(EXTRA_MESSAGE, message);
+
         startActivity(intent);
     }
 
     /** Called when the user taps the 'Sports & Committees' button */
     public void openSportsAndCommittees(View view) {
         Intent intent = new Intent(this, AvailableSportsActivity.class);
-        //EditText editText = (EditText) findViewById(R.id.availableSportsActivity);
-        //String message = editText.getText().toString();
-        //intent.putExtra(EXTRA_MESSAGE, message);
+
         startActivity(intent);
     }
 
     /** Called when the user taps the 'Challenges button' */
     public void openChallenges(View view) {
-        //Intent intent = new Intent(this, QuizActivity.class);
+        Intent intent = new Intent(this, ChallengesActivity.class);
 
-        //startActivity(intent);
-        /*
-        Intent intent = new Intent(this, Challenges.class);
-        EditText editText = (EditText) findViewById(R.id.editText);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
-
-         */
     }
 
 }
