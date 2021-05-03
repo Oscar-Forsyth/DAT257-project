@@ -1,10 +1,13 @@
 package com.example.application.recommended;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +32,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import com.example.application.MainMenu;
 import com.example.application.R;
@@ -57,6 +62,9 @@ public class QuizRecommended extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private Toolbar toolbar;
+    private TextView textView;
+
     public QuizRecommended() {
         // Required empty public constructor
     }
@@ -83,6 +91,7 @@ public class QuizRecommended extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_quiz_recommended, container, false);
+        /*
         buttonToMainMenu= view.findViewById(R.id.buttonToMainMenu);
         buttonToMainMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +100,8 @@ public class QuizRecommended extends Fragment {
                 startActivity(intent);
             }
         });
+
+         */
         buttonToRetakeQuiz= view.findViewById(R.id.retakeQuizButton);
         buttonToRetakeQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +119,10 @@ public class QuizRecommended extends Fragment {
             System.out.println("--\n");
         }
         // Inflate the layout for this fragment
+
+        toolbar = view.findViewById(R.id.customToolbar);
+        textView = (TextView) view.findViewById(R.id.toolbarText);
+        textView.setText("Recommended Sports");
         return view;
     }
 
@@ -298,13 +313,47 @@ public class QuizRecommended extends Fragment {
         randList.add(2);
 
         //adds points to every sport that can be found in tagsWithPoints
-        converter(resultList);
-        List <Sport> top5Sports = onlyTop5();
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("Save", Context.MODE_PRIVATE);
+        String savedSports = prefs.getString("savedRecommendations", null);
+        List <Sport> top5Sports;
+
+        if(savedSports == null) {
+            converter(resultList);
+            top5Sports = onlyTop5();
+            saveList(top5Sports);
+        } else
+            top5Sports = retrieveList(savedSports);
+
 
         adapter = new AdapterQuizRecommended(requireActivity().getApplicationContext(), top5Sports);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireActivity().getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
         recommendedList.setLayoutManager(gridLayoutManager);
         recommendedList.setAdapter(adapter);
+    }
+
+    private void saveList(List<Sport> list){
+        SharedPreferences.Editor editor = this.getActivity().getSharedPreferences("Save", Context.MODE_PRIVATE).edit();
+        String Sports = "";
+
+        for(Sport e : list)
+            Sports = Sports + e.getName() + ",";
+        System.out.println(Sports);
+        editor.putString("savedRecommendations", Sports);
+        editor.apply();
+    }
+
+    private List<Sport> retrieveList(String string){
+        List <Sport> list = new ArrayList<>();
+        Scanner sc = new Scanner(string).useDelimiter(",");
+        String sport;
+        while(sc.hasNext()) {
+            sport = sc.next();
+            for(Sport e : sports)
+                if(e.getName().equals(sport))
+                    list.add(e);
+        }
+        sc.close();
+        return list;
     }
 
 }

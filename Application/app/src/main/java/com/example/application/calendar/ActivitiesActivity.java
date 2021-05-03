@@ -2,8 +2,11 @@ package com.example.application.calendar;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +37,9 @@ public class ActivitiesActivity extends AppCompatActivity {
 
     private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/cis-chalmers.se_295gphnnjamvidi831rg4f0120@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
 
+    private Toolbar toolbar;
+    private TextView textView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +49,10 @@ public class ActivitiesActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.activitiesList);
         activities = new ArrayList<>();
         extractActivities();
+
+        toolbar = findViewById(R.id.customToolbar);
+        textView = (TextView) findViewById(R.id.toolbarText);
+        textView.setText("Upcoming Events");
     }
 
     /**
@@ -110,5 +120,8 @@ public class ActivitiesActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         ActivitiesAdapter adapter = new ActivitiesAdapter(getApplicationContext(), activities);
         recyclerView.setAdapter(adapter);
+    }
+    public void goBack(View view){
+        this.onBackPressed();
     }
 }

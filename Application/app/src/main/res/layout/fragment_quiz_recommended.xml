@@ -1,56 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#009688"
+    android:background="#FFCD06"
     tools:context=".recommended.QuizRecommended">
 
     <!-- TODO: Update blank fragment layout -->
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar"/>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="97dp"
-        android:layout_margin="62dp"
+        android:id="@+id/textView"
+        android:layout_width="301dp"
+        android:layout_height="93dp"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
-        android:background="#009688"
-        android:text="Here are your recommended sports \n \n Click on a sport for more information"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="24dp"
+        android:background="#FFCD06"
+        android:gravity="center_horizontal"
+        android:text="Your Top 5 Recommended Sports"
         android:textColor="#020202"
         android:textColorHint="#020202"
-        android:textSize="18sp"
+        android:textSize="28sp"
         android:textStyle="bold"
-        android:visibility="visible" />
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/recommendedList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recommendedList"
-        android:layout_width="match_parent"
-        android:layout_height="379dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="170dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="150dp"
-        android:background="#8F5555" />
-
-    <Button
-        android:id="@+id/buttonToMainMenu"
-        android:layout_width="206dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="550dp"
-        android:text="Main Menu" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alwaysDrawnWithCache="true"
+        android:animateLayoutChanges="false"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/retakeQuizButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/retakeQuizButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="125dp"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="675dp"
-        android:text="Rekate Quiz" />
+        android:layout_width="135dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        android:text="Retake Quiz"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recommendedList" />
 
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -93,6 +93,7 @@ public class Wizard extends AppCompatActivity {
                     }else{
                         SharedPreferences.Editor editor = getSharedPreferences("Save", MODE_PRIVATE).edit();
                         editor.putBoolean("takenQuiz", true);
+                        editor.putString("savedRecommendations", null);
                         editor.apply();
 
                         Intent intent = new Intent(getApplicationContext(), RecommendedActivity.class);

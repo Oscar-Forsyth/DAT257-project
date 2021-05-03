@@ -1,10 +1,15 @@
 package com.example.application;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.application.calendar.ActivitiesActivity;
 import com.example.application.challenges.ChallengesActivity;
@@ -13,11 +18,24 @@ import com.example.application.sports.AvailableSportsActivity;
 
 public class MainMenu extends AppCompatActivity {
 
+    private Toolbar toolbar;
+    private TextView textView;
+    private ImageView imageView;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        toolbar = findViewById(R.id.customToolbar);
+        textView = (TextView) findViewById(R.id.toolbarText);
+        imageView = (ImageView) findViewById(R.id.toolbarBack);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setLogo(null);
+        getSupportActionBar().setTitle(null);
+        textView.setText("Chalmers Sports");
+        imageView.setVisibility(View.GONE);
     }
 
 
@@ -53,4 +71,7 @@ public class MainMenu extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goBack(View view){
+        this.onBackPressed();
+    }
 }

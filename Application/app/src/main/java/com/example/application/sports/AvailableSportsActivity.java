@@ -2,17 +2,17 @@ package com.example.application.sports;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.appcompat.widget.Toolbar;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
-
 import android.view.View;
 import android.widget.Button;
-
+import android.widget.TextView;
 
 import com.example.application.R;
 import com.example.application.Tag;
@@ -43,6 +43,8 @@ public class AvailableSportsActivity extends AppCompatActivity {
     private List<Tag> savedTags;
 
 
+    private Toolbar toolbar;
+    private TextView textView;
     /**
      * the URL for our JSON-file
      * For every update to the JSON-file, a new URL has to be generated so there is probably a better solution
@@ -52,7 +54,10 @@ public class AvailableSportsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_available_sports);
-        this.setTitle("Available Sports");
+
+        toolbar = findViewById(R.id.customToolbar);
+        textView = (TextView) findViewById(R.id.toolbarText);
+        textView.setText("Sports and Committiees");
 
 
         frameLayout = findViewById(R.id.frameLayout);
@@ -148,7 +153,9 @@ public class AvailableSportsActivity extends AppCompatActivity {
 
 
     }
-
+    public void goBack(View view){
+        this.onBackPressed();
+    }
 
     /**
      * This method returns a new copy of the full sports list to the fragment

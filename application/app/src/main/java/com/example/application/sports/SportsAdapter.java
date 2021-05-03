@@ -67,7 +67,7 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
 
         holder.name.setText(sports.get(position).getName());
         holder.description.setText(sports.get(position).getDescription());
-        Picasso.get().load(sports.get(position).getLogo()).resize(150,150).onlyScaleDown().into(holder.logo);
+        Picasso.get().load(sports.get(position).getLogo()).resize(300,300).onlyScaleDown().into(holder.logo);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
