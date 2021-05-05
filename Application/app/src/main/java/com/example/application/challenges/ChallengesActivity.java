@@ -43,7 +43,7 @@ public class ChallengesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private List<Challenge> challenges;
-    private List<Challenge> dailyChallenges = new ArrayList<>();
+    private List<Challenge> missions = new ArrayList<>();
     private List<Challenge> longChallenges = new ArrayList<>();
     //user story 1.8
     private List<Challenge> allDailyChallenges = new ArrayList<>();
@@ -189,36 +189,24 @@ public class ChallengesActivity extends AppCompatActivity {
 
     private void addToLayout() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        dailyChallenges.clear();
-        for (Challenge c : challenges) {
-            if (c.getPrettyStartDate().equals(c.getPrettyEndDate())) {
-                dailyChallenges.add(c);
-            }
-        }
-        ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), dailyChallenges);
+        missions.clear();
+        missions.addAll(challenges);
+        ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions);
         recyclerView.setAdapter(adapter);
     }
 
     // Not optimized at all...
-    public void displayDailyChallenges(View view) {
-        dailyChallenges.clear();
-        for (Challenge c : challenges) {
-            if (c.getPrettyStartDate().equals(c.getPrettyEndDate())) {
-                dailyChallenges.add(c);
-            }
-        }
-        ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), dailyChallenges);
+    public void displayMissions(View view) {
+        missions.clear();
+        missions.addAll(challenges);
+        ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions);
         recyclerView.setAdapter(adapter);
     }
 
     // Not optimized at all...
     public void displayWeeklyChallenges(View view) {
         longChallenges.clear();
-        for (Challenge c : challenges) {
-            if (!c.getPrettyStartDate().equals(c.getPrettyEndDate())) {
-                longChallenges.add(c);
-            }
-        }
+        //TODO add our own challenges
         ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), longChallenges);
         recyclerView.setAdapter(adapter);
     }
@@ -242,7 +230,7 @@ public class ChallengesActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void checkIfNewDate(){
+    private void checkIfNewDate() {
 
         ZoneId zoneId = ZoneId.of("Europe/Stockholm");
         LocalDate currentDate = LocalDate.now(zoneId);
@@ -255,11 +243,18 @@ public class ChallengesActivity extends AppCompatActivity {
         int oldValue = prefsDateValue.getInt("dateValue", -1);
         String oldDate = prefsDate.getString("date", "2000-01-01");
 
-        if (!currentDateString.equals(oldDate)){
+        if (!currentDateString.equals(oldDate)) {
             prefsDate.edit().putString("date", currentDateString).apply();
 
-            int newValue=(++oldValue)%allDailyChallenges.size();
+            int newValue = (++oldValue) % allDailyChallenges.size();
             prefsDateValue.edit().putInt("dateValue", newValue).apply();
         }
+    }
+
+    public void displayActive(View view){
+        
+    }
+    public void displayCompleted(View view){
+
     }
 }

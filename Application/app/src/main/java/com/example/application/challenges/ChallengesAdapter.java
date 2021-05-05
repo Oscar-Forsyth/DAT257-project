@@ -34,7 +34,7 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
     @Override
     public ChallengesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.custom_challenges,parent,false);
-        return new ChallengesAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     /**
@@ -45,7 +45,7 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ChallengesAdapter.ViewHolder holder, int position) {
         holder.title.setText(challenges.get(position).getTitle());
-        holder.startDate.setText(challenges.get(position).getPrettyStartDate());
+        //holder.startDate.setText(challenges.get(position).getPrettyStartDate());
         holder.endDate.setText(challenges.get(position).getPrettyEndDate());
         holder.location.setText(challenges.get(position).getLocation());
         if(challenges.get(position).getLocation().equals(" ")) {
@@ -79,7 +79,7 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
     /**
      * Assigns values to and holds attributes necessary for the cards in the Challenges tab
      */
-    protected class ViewHolder extends RecyclerView.ViewHolder{
+    protected static class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView title, startDate, endDate, location, description;
         ImageView locationLogo;
@@ -88,7 +88,7 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
             super(itemView);
 
             title = itemView.findViewById(R.id.title);
-            startDate = itemView.findViewById(R.id.startDate);
+            //startDate = itemView.findViewById(R.id.startDate);
             endDate = itemView.findViewById(R.id.endDate);
             location = itemView.findViewById(R.id.location);
             locationLogo = itemView.findViewById(R.id.locationLogo);
