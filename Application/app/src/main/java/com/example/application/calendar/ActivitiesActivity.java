@@ -1,5 +1,6 @@
 package com.example.application.calendar;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,12 +20,14 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.application.R;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
+import com.github.sundeepk.compactcalendarview.domain.Event;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -79,6 +82,19 @@ public class ActivitiesActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         savedDate = sdf.format(date);
 
+        Event er = new Event(Color.BLUE, System.currentTimeMillis());
+        calendarView.addEvent(er);
+
+        for (Activity a : activities) {
+            try {
+                Date d = sdf.parse(a.getDate().substring(0,10));
+                Event e = new Event(Color.BLUE, d.getTime());
+                calendarView.addEvent(e);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
         toolbar = findViewById(R.id.customToolbar);
         textView = (TextView) findViewById(R.id.toolbarText);
         textView.setText("Upcoming Events");
@@ -100,7 +116,6 @@ public class ActivitiesActivity extends AppCompatActivity {
     private void compareDate(String date) {
         specificActivities = new ArrayList<>();
         for(Activity a : activities) {
-            System.out.println(a.getDate().substring(0,10));
             if (a.getDate().substring(0,10).equals(date)) {
                 specificActivities.add(a);
             }

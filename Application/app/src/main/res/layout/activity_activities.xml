@@ -61,7 +61,6 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <com.github.sundeepk.compactcalendarview.CompactCalendarView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/calendarView"
         android:layout_width="fill_parent"
         android:paddingRight="10dp"
