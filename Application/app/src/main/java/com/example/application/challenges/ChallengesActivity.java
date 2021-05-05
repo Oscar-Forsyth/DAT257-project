@@ -31,7 +31,7 @@ public class ChallengesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private List<Challenge> challenges;
-    private List<Challenge> dailyChallenges = new ArrayList<>();
+    private List<Challenge> missions = new ArrayList<>();
     private List<Challenge> longChallenges = new ArrayList<>();
 
     private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/c6isg5rcllc2ki81mnpnv92g90@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
@@ -125,37 +125,31 @@ public class ChallengesActivity extends AppCompatActivity {
 
     private void addToLayout() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        dailyChallenges.clear();
-        for (Challenge c : challenges) {
-            if (c.getPrettyStartDate().equals(c.getPrettyEndDate())) {
-                dailyChallenges.add(c);
-            }
-        }
-        ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), dailyChallenges);
+        missions.clear();
+        missions.addAll(challenges);
+        ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions);
         recyclerView.setAdapter(adapter);
     }
 
     // Not optimized at all...
-    public void displayDailyChallenges(View view) {
-        dailyChallenges.clear();
-        for (Challenge c : challenges) {
-            if (c.getPrettyStartDate().equals(c.getPrettyEndDate())) {
-                dailyChallenges.add(c);
-            }
-        }
-        ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), dailyChallenges);
+    public void displayMissions(View view) {
+        missions.clear();
+        missions.addAll(challenges);
+        ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions);
         recyclerView.setAdapter(adapter);
     }
 
     // Not optimized at all...
     public void displayWeeklyChallenges(View view) {
         longChallenges.clear();
-        for (Challenge c : challenges) {
-            if (!c.getPrettyStartDate().equals(c.getPrettyEndDate())) {
-                longChallenges.add(c);
-            }
-        }
+        //TODO add our own challenges
         ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), longChallenges);
         recyclerView.setAdapter(adapter);
+    }
+    public void displayActive(View view){
+        
+    }
+    public void displayCompleted(View view){
+
     }
 }
