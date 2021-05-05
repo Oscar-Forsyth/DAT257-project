@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -62,12 +63,17 @@ public class ChallengesActivity extends AppCompatActivity {
         challenges = new ArrayList<>();
         extractChallenges();
 
+
         //creates daily challenges based on jsonChallenges
         try {
             extractChallenges2();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
+        TextView textView = (TextView) findViewById(R.id.toolbarText);
+        textView.setText("Challenges");
 
     }
 

@@ -6,42 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".challenges.ChallengesActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/challengesList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="64dp"
+        android:layout_width="411dp"
+        android:layout_height="589dp"
         android:background="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="142dp" />
 
     <RadioGroup
         android:id="@+id/toggle"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="411dp"
+        android:layout_height="64dp"
         android:background="@drawable/pink_out_line"
         android:checkedButton="@+id/daily"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/challengesList"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:layout_editor_absoluteY="667dp">
 
         <RadioButton
             android:id="@+id/daily"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="1dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
             android:layout_weight="1"
-            android:onClick="displayDailyChallenges"
             android:background="@drawable/toggle_widget_background"
             android:button="@null"
             android:gravity="center"
-            android:text="Daily challenge"
+            android:onClick="displayDailyChallenges"
+            android:text="CIS Missions"
             android:textColor="@color/white" />
 
         <RadioButton
@@ -52,12 +50,38 @@
             android:layout_marginRight="1dp"
             android:layout_marginBottom="1dp"
             android:layout_weight="1"
-            android:onClick="displayWeeklyChallenges"
-            android:background="@drawable/toggle_widget_background"
             android:button="@null"
             android:gravity="center"
-            android:text="Weekly challenge"
+            android:onClick="displayWeeklyChallenges"
+            android:text="Daily Challenges"
             android:textColor="@color/white" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="70dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/activeButton"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="Active" />
+
+        <Button
+            android:id="@+id/completedButton"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="Completed"
+            android:textSize="14sp" />
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
