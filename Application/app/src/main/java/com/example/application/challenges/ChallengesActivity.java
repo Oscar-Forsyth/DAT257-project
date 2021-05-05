@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -44,6 +45,8 @@ public class ChallengesActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.challengesList);
         challenges = new ArrayList<>();
         extractChallenges();
+        TextView textView = (TextView) findViewById(R.id.toolbarText);
+        textView.setText("Challenges");
     }
 
     /**
