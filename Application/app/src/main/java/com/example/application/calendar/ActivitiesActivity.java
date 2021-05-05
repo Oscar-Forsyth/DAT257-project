@@ -35,7 +35,9 @@ public class ActivitiesActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<Activity> activities;
 
-    private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/cis-chalmers.se_295gphnnjamvidi831rg4f0120@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
+    //private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/cis-chalmers.se_295gphnnjamvidi831rg4f0120@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
+    private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/c6isg5rcllc2ki81mnpnv92g90@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
+
 
     private Toolbar toolbar;
     private TextView textView;
@@ -96,9 +98,14 @@ public class ActivitiesActivity extends AppCompatActivity {
                     String location = items.getJSONObject(i).getString("location");
                     String[] res = location.split("[,]", 0);
                     activity.setLocation(res[0]);
-                    //activity.setLocation(items.getJSONObject(i).getString("location"));
                 } catch (JSONException e) {
                     activity.setLocation("Location unknown");
+                }
+                try {
+                    String description = items.getJSONObject(i).getString("description");
+                    activity.setDescription(description);
+                } catch (JSONException e) {
+                    activity.setDescription(" ");
                 }
                 activities.add(activity);
             }
