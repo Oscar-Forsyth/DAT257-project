@@ -3,6 +3,7 @@ package com.example.application.calendar;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CalendarView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,14 +18,19 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.application.R;
+import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,11 +40,15 @@ public class ActivitiesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private List<Activity> activities;
+    private List<Activity> specificActivities;
 
     private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/cis-chalmers.se_295gphnnjamvidi831rg4f0120@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
 
     private Toolbar toolbar;
     private TextView textView;
+    private CompactCalendarView calendarView;
+    private String savedDate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +60,53 @@ public class ActivitiesActivity extends AppCompatActivity {
         activities = new ArrayList<>();
         extractActivities();
 
+        calendarView = findViewById(R.id.calendarView);
+        calendarView.setVisibility(View.GONE);
+
+        calendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
+            @Override
+            public void onDayClick(Date dateClicked) {
+                showTodaysActivities(dateClicked);
+            }
+
+            @Override
+            public void onMonthScroll(Date firstDayOfNewMonth) {
+
+            }
+        });
+
+        long date = Calendar.getInstance().getTimeInMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        savedDate = sdf.format(date);
+
         toolbar = findViewById(R.id.customToolbar);
         textView = (TextView) findViewById(R.id.toolbarText);
         textView.setText("Upcoming Events");
+
+
+    }
+
+    private void showTodaysActivities(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = dateFormat.format(date);
+        savedDate = formattedDate;
+        compareDate(formattedDate);
+    }
+
+    private void showTodaysActivities(String date) {
+        compareDate(date);
+    }
+
+    private void compareDate(String date) {
+        specificActivities = new ArrayList<>();
+        for(Activity a : activities) {
+            System.out.println(a.getDate().substring(0,10));
+            if (a.getDate().substring(0,10).equals(date)) {
+                specificActivities.add(a);
+            }
+        }
+        ActivitiesAdapter adapter = new ActivitiesAdapter(getApplicationContext(), specificActivities);
+        recyclerView.setAdapter(adapter);
     }
 
     /**
@@ -78,6 +132,8 @@ public class ActivitiesActivity extends AppCompatActivity {
     }
 
     private void addActivitiesFromJSON(JSONObject response) {
+        activities.add(new Activity("test test", "2021-05-05", "Hemma hos mig")); //temp
+        activities.add(new Activity("test imorgon", "2021-05-06", "Hemma hos dig")); //temp
         try {
             JSONArray items = response.getJSONArray("items");
             for (int i = 0; i < items.length(); i++) {
@@ -123,5 +179,16 @@ public class ActivitiesActivity extends AppCompatActivity {
     }
     public void goBack(View view){
         this.onBackPressed();
+    }
+
+    public void changeToFlow(View view) {
+        findViewById(R.id.calendarView).setVisibility(View.GONE);
+        ActivitiesAdapter adapter = new ActivitiesAdapter(getApplicationContext(), activities);
+        recyclerView.setAdapter(adapter);
+    }
+
+    public void changeToCalendar(View view) {
+        findViewById(R.id.calendarView).setVisibility(View.VISIBLE);
+        showTodaysActivities(savedDate);
     }
 }

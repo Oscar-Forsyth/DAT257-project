@@ -21,7 +21,7 @@
         android:id="@+id/toggle"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/pink_out_line"
+        android:background="@drawable/yellow_out_line"
         android:checkedButton="@+id/daily"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/challengesList"
