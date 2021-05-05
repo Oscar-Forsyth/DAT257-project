@@ -234,6 +234,7 @@ public class ChallengesActivity extends AppCompatActivity {
 
         while(currentDailyChallenges.size()<dailyChallengesPerDay){
             currentDailyChallenges.add(allDailyChallenges.get(currentIndex));
+            currentIndex++;
         }
 
         DailyChallengesAdapter adapter = new DailyChallengesAdapter(getApplicationContext(), currentDailyChallenges);

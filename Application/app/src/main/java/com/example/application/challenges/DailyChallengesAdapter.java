@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.application.R;
 
 import java.util.List;
-
+//this adapter may not be needed if dailyChallenges' and CIS-missions' xml-layouts are very similar
 public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallengesAdapter.ViewHolder>  {
     LayoutInflater inflater;
     List<Challenge> challenges;
@@ -30,11 +30,11 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
      * @param viewType
      * @return view based on custom_challenges
      */
-    //TODO should have another custom xml layout that does not hold variables such as date and location
+
     @NonNull
     @Override
     public DailyChallengesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.custom_challenges,parent,false);
+        View view = inflater.inflate(R.layout.custom_challenges_daily,parent,false);
         return new DailyChallengesAdapter.ViewHolder(view);
     }
 

@@ -52,7 +52,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:onClick="displayWeeklyChallenges"
+            android:onClick="displayDailyChallenges2"
             android:text="Daily Challenges"
             android:textColor="@color/white" />
     </RadioGroup>
