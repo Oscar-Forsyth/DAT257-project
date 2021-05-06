@@ -48,9 +48,12 @@ public class ActivitiesActivity extends AppCompatActivity {
     private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/cis-chalmers.se_295gphnnjamvidi831rg4f0120@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
 
     private Toolbar toolbar;
-    private TextView textView;
+    private TextView textView, monthView;
     private CompactCalendarView calendarView;
     private String savedDate;
+    private SimpleDateFormat sdf;
+    private SimpleDateFormat calendarHeader;
+
 
 
     @Override
@@ -66,6 +69,11 @@ public class ActivitiesActivity extends AppCompatActivity {
         calendarView = findViewById(R.id.calendarView);
         calendarView.setVisibility(View.GONE);
 
+        calendarHeader = new SimpleDateFormat("MMMM yyyy");
+
+
+        monthView = findViewById(R.id.monthYear);
+
         calendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
@@ -74,6 +82,8 @@ public class ActivitiesActivity extends AppCompatActivity {
 
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
+                String monthString = calendarHeader.format(calendarView.getFirstDayOfCurrentMonth());
+
 
             }
         });
@@ -82,21 +92,13 @@ public class ActivitiesActivity extends AppCompatActivity {
         activities.add(new Activity("test imorgon", "2021-05-06", "Hemma hos dig")); //temp
 
         long date = Calendar.getInstance().getTimeInMillis();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf = new SimpleDateFormat("yyyy-MM-dd");
         savedDate = sdf.format(date);
 
         Event er = new Event(Color.BLUE, System.currentTimeMillis());
         calendarView.addEvent(er);
+        calendarView.setUseThreeLetterAbbreviation(true);
 
-        for (Activity a : activities) {
-            try {
-                Date d = sdf.parse(a.getDate().substring(0,10));
-                Event e = new Event(Color.BLUE, d.getTime());
-                calendarView.addEvent(e);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
 
         toolbar = findViewById(R.id.customToolbar);
         textView = (TextView) findViewById(R.id.toolbarText);
@@ -175,6 +177,17 @@ public class ActivitiesActivity extends AppCompatActivity {
                 }
                 activities.add(activity);
             }
+
+            for (Activity a : activities) {
+                try {
+                    Date d = sdf.parse(a.getDate().substring(0,10));
+                    Event e = new Event(Color.BLUE, d.getTime());
+                    calendarView.addEvent(e);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
