@@ -59,10 +59,13 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(holder.description.getVisibility() == View.GONE) {
+                if(holder.description.getVisibility() == View.GONE && !activities.get(position).getDescription().equals(" ")) {
                     holder.description.setVisibility(View.VISIBLE);
+                    holder.descriptionLogo.animate().setDuration(100).rotation(180);
+
                 } else {
                     holder.description.setVisibility(View.GONE);
+                    holder.descriptionLogo.animate().setDuration(100).rotation(0);
                 }
 
             }
