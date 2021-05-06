@@ -35,6 +35,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -178,32 +179,11 @@ public class ActivitiesActivity extends AppCompatActivity {
     }
 
     private void addActivitiesFromJSON(JSONObject response) {
-
         try {
             JSONArray items = response.getJSONArray("items");
             for (int i = 0; i < items.length(); i++) {
-                Activity activity = new Activity();
-                try {
-                    activity.setTitle(items.getJSONObject(i).getString("summary"));
-                }   catch (JSONException e) {
-                    activity.setTitle("CIS Aktivitet");
-                }
-                try {
-                    activity.setDate(items.getJSONObject(i).getJSONObject("start").getString("dateTime"));
-                } catch (JSONException e) {
-                    activity.setDate(items.getJSONObject(i).getJSONObject("start").getString("date"));
-                }
-                try {
-                    String location = items.getJSONObject(i).getString("location");
-                    String[] res = location.split("[,]", 0);
-                    activity.setLocation(res[0]);
-                    //activity.setLocation(items.getJSONObject(i).getString("location"));
-                } catch (JSONException e) {
-                    activity.setLocation("Location unknown");
-                }
-                activities.add(activity);
+                addJSONObjectToActivities(items.getJSONObject(i));
             }
-
             for (Activity a : activities) {
                 try {
                     Date d = sdf.parse(a.getDate().substring(0,10));
@@ -217,6 +197,70 @@ public class ActivitiesActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void addJSONObjectToActivities(JSONObject item) {
+        Activity activity = new Activity();
+        String startDate;
+        try {
+            activity.setTitle(item.getString("summary"));
+        }   catch (JSONException e) {
+            activity.setTitle("CIS Aktivitet");
+        }
+        try {
+            startDate = item.getJSONObject("start").getString("dateTime");
+        } catch (JSONException noTime) {
+            try {
+                startDate = item.getJSONObject("start").getString("date");
+            } catch (JSONException noDate) {
+                try {
+                    startDate = item.getString("start");
+                } catch (JSONException notRecurring) {
+                    startDate = "1970-01-01";
+                }
+            }
+        }
+        activity.setDate(startDate);
+        try {
+            String location = item.getString("location");
+            String[] res = location.split("[,]", 0);
+            activity.setLocation(res[0]);
+            //activity.setLocation(items.getJSONObject(i).getString("location"));
+        } catch (JSONException e) {
+            activity.setLocation("Location unknown");
+        }
+        try {
+            String recurrence = item.getString("recurrence");
+            DateFormat until = new SimpleDateFormat("yyyyMMdd");
+            DateFormat from = new SimpleDateFormat("yyyy-MM-dd");
+            Date lastDate = until.parse(recurrence.substring(26,34));
+            Date currentDate = from.parse(startDate.substring(0,10));
+            currentDate = addDaysToDate(currentDate, 7);
+            while (currentDate.compareTo(lastDate) < 0) {
+                JSONObject newActivity = new JSONObject();
+                newActivity.put("start", from.format(currentDate)+startDate.substring(10));
+                newActivity.put("summary", item.getString("summary"));
+                try {
+                    newActivity.put("location", item.getString("location"));
+                } catch (JSONException noLoc) {
+                    // skip location
+                }
+                addJSONObjectToActivities(newActivity);
+                currentDate = addDaysToDate(currentDate, 7);
+            }
+        } catch (JSONException | ParseException e) {
+            // no recurrence, nice
+        }
+        activities.add(activity);
+    }
+
+    private Date addDaysToDate(Date date, int noOfDays) {
+        Date newDate = new Date(date.getTime());
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(newDate);
+        calendar.add(Calendar.DATE, noOfDays);
+        newDate.setTime(calendar.getTime().getTime());
+        return newDate;
     }
 
     private void sortActivities() {
