@@ -4,11 +4,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.CalendarView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,6 +37,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+
 /**
  * Activity responsible for the information that can later be used in the Upcoming Events tab
  */
@@ -52,8 +54,10 @@ public class ActivitiesActivity extends AppCompatActivity {
     private CompactCalendarView calendarView;
     private String savedDate;
     private SimpleDateFormat sdf;
-    private SimpleDateFormat calendarHeader;
+    private SimpleDateFormat calendarTextHeader;
+    private ConstraintLayout calendarConstraint;
 
+    private ImageButton calendarLeft, calendarRight;
 
 
     @Override
@@ -67,12 +71,16 @@ public class ActivitiesActivity extends AppCompatActivity {
         extractActivities();
 
         calendarView = findViewById(R.id.calendarView);
-        calendarView.setVisibility(View.GONE);
 
-        calendarHeader = new SimpleDateFormat("MMMM yyyy");
+
+        findViewById(R.id.calendarHeader).setVisibility(View.GONE);
+
+        calendarTextHeader = new SimpleDateFormat("MMMM yyyy");
 
 
         monthView = findViewById(R.id.monthYear);
+        monthView.setText(calendarTextHeader.format(System.currentTimeMillis()));
+
 
         calendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
@@ -82,9 +90,8 @@ public class ActivitiesActivity extends AppCompatActivity {
 
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
-                String monthString = calendarHeader.format(calendarView.getFirstDayOfCurrentMonth());
-
-
+                String monthString = calendarTextHeader.format(calendarView.getFirstDayOfCurrentMonth());
+                monthView.setText(monthString);
             }
         });
 
@@ -98,6 +105,25 @@ public class ActivitiesActivity extends AppCompatActivity {
         Event er = new Event(Color.BLUE, System.currentTimeMillis());
         calendarView.addEvent(er);
         calendarView.setUseThreeLetterAbbreviation(true);
+
+        //Left and right button for calendar
+        calendarLeft = findViewById(R.id.calendarLeft);
+        calendarRight = findViewById(R.id.calendarRight);
+
+        calendarLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendarView.scrollLeft();
+            }
+        });
+
+        calendarRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendarView.scrollRight();
+            }
+        });
+
 
 
         toolbar = findViewById(R.id.customToolbar);
@@ -181,7 +207,7 @@ public class ActivitiesActivity extends AppCompatActivity {
             for (Activity a : activities) {
                 try {
                     Date d = sdf.parse(a.getDate().substring(0,10));
-                    Event e = new Event(Color.BLUE, d.getTime());
+                    Event e = new Event(Color.parseColor("#FFDD7B19"), d.getTime());
                     calendarView.addEvent(e);
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -212,13 +238,13 @@ public class ActivitiesActivity extends AppCompatActivity {
     }
 
     public void changeToFlow(View view) {
-        findViewById(R.id.calendarView).setVisibility(View.GONE);
+        findViewById(R.id.calendarHeader).setVisibility(View.GONE);
         ActivitiesAdapter adapter = new ActivitiesAdapter(getApplicationContext(), activities);
         recyclerView.setAdapter(adapter);
     }
 
     public void changeToCalendar(View view) {
-        findViewById(R.id.calendarView).setVisibility(View.VISIBLE);
+        findViewById(R.id.calendarHeader).setVisibility(View.VISIBLE);
         showTodaysActivities(savedDate);
     }
 }

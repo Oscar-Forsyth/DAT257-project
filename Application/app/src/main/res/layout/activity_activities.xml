@@ -27,11 +27,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/toggle_widget_background"
+            android:foreground="?attr/selectableItemBackground"
+            android:clickable="true"
             android:button="@null"
             android:gravity="center"
             android:onClick="changeToFlow"
             android:text="Flow"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            />
 
 
         <RadioButton
@@ -40,6 +43,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/toggle_widget_background"
+            android:foreground="?attr/selectableItemBackground"
+            android:clickable="true"
             android:button="@null"
             android:gravity="center"
             android:onClick="changeToCalendar"
@@ -55,6 +60,7 @@
         android:background="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/toggle"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calendarHeader">
 
@@ -68,22 +74,27 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toTopOf="@+id/activitiesList"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <com.github.sundeepk.compactcalendarview.CompactCalendarView
             android:id="@+id/calendarView"
             android:layout_width="fill_parent"
-            android:layout_height="250dp"
+            android:layout_height="300dp"
+            android:clickable="false"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            app:compactCalendarBackgroundColor="#ffe95451"
-            app:compactCalendarCurrentDayBackgroundColor="#B71C1C"
-            app:compactCalendarCurrentSelectedDayBackgroundColor="#E57373"
-            app:compactCalendarMultiEventIndicatorColor="#fff"
-            app:compactCalendarTargetHeight="250dp"
-            app:compactCalendarTextColor="#fff"
-            app:compactCalendarTextSize="12sp"
+            app:compactCalendarBackgroundColor="@color/cis_yellow"
+            app:compactCalendarCurrentDayBackgroundColor="@color/cis_orange"
+            app:compactCalendarCurrentSelectedDayBackgroundColor="#66DD7B19"
+            app:compactCalendarDisplayOtherMonthDays="false"
+            app:compactCalendarEventIndicatorStyle="small_indicator"
+            app:compactCalendarMultiEventIndicatorColor="#989595"
+            app:compactCalendarShouldSelectFirstDayOfMonthOnScroll="false"
+            app:compactCalendarTargetHeight="300dp"
+            app:compactCalendarTextColor="#000000"
+            app:compactCalendarTextSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -102,6 +113,33 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/calendarLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_left_24"
+            android:text="Left"
+            app:layout_constraintBottom_toTopOf="@+id/calendarView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.777" />
+
+        <ImageButton
+            android:id="@+id/calendarRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_right_24"
+            android:text="Right"
+            app:layout_constraintBottom_toTopOf="@+id/calendarView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.777" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
