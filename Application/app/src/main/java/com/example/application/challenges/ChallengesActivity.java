@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -51,6 +52,8 @@ public class ChallengesActivity extends AppCompatActivity {
 
     private final int dailyChallengesPerDay=3;
 
+    private boolean isOnMissions = true;
+
     private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/c6isg5rcllc2ki81mnpnv92g90@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
 
     @Override
@@ -72,7 +75,7 @@ public class ChallengesActivity extends AppCompatActivity {
         }
 
 
-        TextView textView = (TextView) findViewById(R.id.toolbarText);
+        TextView textView =  findViewById(R.id.toolbarText);
         textView.setText("Challenges");
 
     }
@@ -149,6 +152,8 @@ public class ChallengesActivity extends AppCompatActivity {
                 return object1.getStartDate().compareTo(object2.getStartDate());
             }
         });
+
+
     }
     /**
      * JSON content is read from local file
@@ -197,23 +202,40 @@ public class ChallengesActivity extends AppCompatActivity {
 
     // Not optimized at all...
     public void displayMissions(View view) {
+        isOnMissions = true;
         missions.clear();
-        missions.addAll(challenges);
+        for (Challenge c : challenges) {
+                if(!c.isCompleted()){
+                    missions.add(c);
+                }
+        }
         ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions);
         recyclerView.setAdapter(adapter);
     }
-
-    // Not optimized at all...
-    public void displayWeeklyChallenges(View view) {
-        longChallenges.clear();
-        //TODO add our own challenges
-        ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), longChallenges);
-        recyclerView.setAdapter(adapter);
+    public void displayActive(View view){
+        if(isOnMissions){
+            displayMissions(view);
+        } else{
+            //TODO daily challenges on press active
+        }
     }
+    public void displayCompleted(View view){
+        if(isOnMissions){
+            missions.clear();
+            for (Challenge c : challenges) {
+                    if(c.isCompleted()){
+                        missions.add(c);
+                    }
+            }
+            ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions);
+            recyclerView.setAdapter(adapter);
+        }
+    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void displayDailyChallenges2(View view){
-
+        isOnMissions = false;
         currentDailyChallenges.clear();
         checkIfNewDate();
 
@@ -228,6 +250,7 @@ public class ChallengesActivity extends AppCompatActivity {
         DailyChallengesAdapter adapter = new DailyChallengesAdapter(getApplicationContext(), currentDailyChallenges);
         recyclerView.setAdapter(adapter);
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void checkIfNewDate() {
@@ -251,10 +274,5 @@ public class ChallengesActivity extends AppCompatActivity {
         }
     }
 
-    public void displayActive(View view){
-        
-    }
-    public void displayCompleted(View view){
 
-    }
 }

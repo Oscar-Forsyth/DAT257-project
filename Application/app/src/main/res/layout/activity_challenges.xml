@@ -26,8 +26,8 @@
 
 
     <RadioGroup
-        android:id="@+id/radioGroup2"
-        android:layout_width="wrap_content"
+        android:id="@+id/toggle2"
+        android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="70dp"
         android:orientation="horizontal"
@@ -37,27 +37,38 @@
         app:layout_constraintTop_toTopOf="parent"
         android:checkedButton="@+id/activeButton">
 
-        <Button
+        <RadioButton
             android:id="@+id/activeButton"
-            android:layout_width="130dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_weight="1"
             android:background="@drawable/toggle_widget_background"
-            android:onClick="displayActive"
             android:button="@null"
-            android:text="Active" />
+            android:onClick="displayActive"
+            android:text="Active"
+            android:textColor="@color/white" />
 
-        <Button
+        <RadioButton
             android:id="@+id/completedButton"
-            android:layout_width="130dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_weight="1"
             android:background="@drawable/toggle_widget_background"
             android:onClick="displayCompleted"
             android:text="Completed"
             android:button="@null"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="0dp" />
     </RadioGroup>
+
     <RadioGroup
         android:id="@+id/toggle"
         android:layout_width="match_parent"
@@ -80,7 +91,8 @@
             android:gravity="center"
             android:onClick="displayMissions"
             android:text="CIS Missions"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:layout_marginStart="0dp" />
 
         <RadioButton
             android:id="@+id/daily"
@@ -95,7 +107,8 @@
             android:gravity="center"
             android:onClick="displayDailyChallenges2"
             android:text="Daily Challenges"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:layout_marginEnd="0dp" />
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
