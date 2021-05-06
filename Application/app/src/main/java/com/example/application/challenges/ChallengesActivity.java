@@ -49,6 +49,7 @@ public class ChallengesActivity extends AppCompatActivity {
     //user story 1.8
     private List<Challenge> allDailyChallenges = new ArrayList<>();
     private List<Challenge> currentDailyChallenges = new ArrayList<>();
+    private List<Challenge> completedDailyChallenges = new ArrayList<>();
 
     private final int dailyChallengesPerDay=3;
 
@@ -212,10 +213,12 @@ public class ChallengesActivity extends AppCompatActivity {
         ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions);
         recyclerView.setAdapter(adapter);
     }
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void displayActive(View view){
         if(isOnMissions){
             displayMissions(view);
         } else{
+            displayDailyChallenges2(view);
             //TODO daily challenges on press active
         }
     }
@@ -230,6 +233,17 @@ public class ChallengesActivity extends AppCompatActivity {
             ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions);
             recyclerView.setAdapter(adapter);
         }
+        else{
+            completedDailyChallenges.clear();
+            for (Challenge c : allDailyChallenges){
+                if (c.isCompleted()){
+                    currentDailyChallenges.remove(c);
+                    completedDailyChallenges.add(c);
+                }
+            }
+            DailyChallengesAdapter adapter = new DailyChallengesAdapter(getApplicationContext(), completedDailyChallenges);
+            recyclerView.setAdapter(adapter);
+        }
     }
 
 
@@ -242,9 +256,17 @@ public class ChallengesActivity extends AppCompatActivity {
         SharedPreferences prefsDateValue = PreferenceManager.getDefaultSharedPreferences(this);
         int currentIndex = prefsDateValue.getInt("dateValue", -1);
 
-        while(currentDailyChallenges.size()<dailyChallengesPerDay){
-            currentDailyChallenges.add(allDailyChallenges.get(currentIndex));
+        int tmpSizeOfChallenges = dailyChallengesPerDay;
+
+        while(currentDailyChallenges.size()<tmpSizeOfChallenges){
+            if (!allDailyChallenges.get(currentIndex).isCompleted()){
+                currentDailyChallenges.add(allDailyChallenges.get(currentIndex));
+            }
+            else{
+                tmpSizeOfChallenges--;
+            }
             currentIndex++;
+
         }
 
         DailyChallengesAdapter adapter = new DailyChallengesAdapter(getApplicationContext(), currentDailyChallenges);
@@ -269,7 +291,7 @@ public class ChallengesActivity extends AppCompatActivity {
         if (!currentDateString.equals(oldDate)) {
             prefsDate.edit().putString("date", currentDateString).apply();
 
-            int newValue = (++oldValue) % allDailyChallenges.size();
+            int newValue = (oldValue+3) % allDailyChallenges.size();
             prefsDateValue.edit().putInt("dateValue", newValue).apply();
         }
     }
