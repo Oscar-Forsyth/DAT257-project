@@ -295,6 +295,9 @@ public class ChallengesActivity extends AppCompatActivity {
             prefsDateValue.edit().putInt("dateValue", newValue).apply();
         }
     }
+    public void goBack(View view){
+        this.onBackPressed();
+    }
 
 
 }
