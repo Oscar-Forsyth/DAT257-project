@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,11 +42,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ChallengesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+
     private List<Challenge> challenges;
     private List<Challenge> missions = new ArrayList<>();
     private List<Challenge> longChallenges = new ArrayList<>();
@@ -56,20 +61,22 @@ public class ChallengesActivity extends AppCompatActivity {
     private RadioButton completedButton;
 
 
-
-    private final int dailyChallengesPerDay=3;
-
     private boolean isOnMissions = true;
 
     private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/c6isg5rcllc2ki81mnpnv92g90@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenges);
         this.setTitle("Challenges");
 
+        TextView textView =  findViewById(R.id.toolbarText);
+        textView.setText("Challenges");
+
         recyclerView = findViewById(R.id.challengesList);
+
         activeButton = findViewById(R.id.activeButton);
         completedButton = findViewById(R.id.completedButton);
 
@@ -83,12 +90,43 @@ public class ChallengesActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-        TextView textView =  findViewById(R.id.toolbarText);
-        textView.setText("Challenges");
-
     }
+    public void extractSavedMissions(){
+        SharedPreferences completedMissions = getSharedPreferences("CompletedMissions", MODE_PRIVATE);
+        Set<String> set = completedMissions.getStringSet("completedMission",new HashSet<>());
+        for (int i = 0; i < set.size(); i++) {
+            System.out.println("SET:" + i + ":" +set.toArray()[i].toString());
+        }
+        for (int i = 0; i < set.size(); i++) {
+            for (int j = 0; j < missions.size(); j++) {
+                System.out.println(set.toArray()[i].toString()+ ":" +missions.get(j).getTitle());
+                if(set.toArray()[i].toString().equals(missions.get(j).getTitle())){
+                    if(missions.get(j).isCompleted()){
+                        missions.get(j).setCompleted(false);
+                    }else{
+                        missions.get(j).setCompleted(true);
+                    }
+
+                    System.out.println("accepted");
+                    break;
+                }
+            }
+
+        }
+    }
+
+    public void saveCompletedMission(){
+        SharedPreferences.Editor editor = getSharedPreferences("CompletedMissions", MODE_PRIVATE).edit();
+        Set<String> savedMissionsSet = new HashSet<>();
+        for (Challenge c : challenges) {
+            if(c.isCompleted()){
+                savedMissionsSet.add(c.getTitle());
+            }
+        }
+        editor.putStringSet("completedMission",savedMissionsSet);
+        editor.apply();
+    }
+
 
     /**
      * Extract information from CIS Google Calendar and add the information to the challenge tab.
@@ -100,6 +138,8 @@ public class ChallengesActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 addChallengesFromJSON(response);
                 sortChallenges();
+
+                extractSavedMissions();
                 addToLayout();
             }
         }, new Response.ErrorListener() {
@@ -150,6 +190,7 @@ public class ChallengesActivity extends AppCompatActivity {
                 }
                 challenges.add(challenge);
             }
+            missions.addAll(challenges);
         } catch (JSONException | ParseException e) {
             e.printStackTrace();
         }
@@ -192,8 +233,8 @@ public class ChallengesActivity extends AppCompatActivity {
                 JSONObject challengeObject = arr.getJSONObject(i);
 
                 Challenge challenge = new Challenge();
-                challenge.setTitle(challengeObject.getString("title").toString());
-                challenge.setDescription(challengeObject.getString("description".toString()));
+                challenge.setTitle(challengeObject.getString("title"));
+                challenge.setDescription(challengeObject.getString("description"));
                 allDailyChallenges.add(challenge);
 
             } catch (JSONException e) {
@@ -202,16 +243,33 @@ public class ChallengesActivity extends AppCompatActivity {
         }
     }
 
+
     private void addToLayout() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         missions.clear();
-        missions.addAll(challenges);
-        ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions);
+        for (Challenge c : challenges) {
+            if(!c.isCompleted()){
+                missions.add(c);
+            }
+        }
+        ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions,this);
         recyclerView.setAdapter(adapter);
     }
 
-    // Not optimized at all...
+    //it had to be done... but at what cost
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void refresh(View view){
+        RadioButton button = findViewById(R.id.activeButton);
+        if(button.isChecked()){
+            displayActive(view);
+        }else{
+            displayCompleted(view);
+        }
+    }
+
     public void displayMissions(View view) {
+        RadioButton button = findViewById(R.id.activeButton);
+        button.setChecked(true);
         isOnMissions = true;
         missions.clear();
         activeButton.setChecked(true);
@@ -220,7 +278,7 @@ public class ChallengesActivity extends AppCompatActivity {
                     missions.add(c);
                 }
         }
-        ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions);
+        ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions,this);
         recyclerView.setAdapter(adapter);
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -229,7 +287,7 @@ public class ChallengesActivity extends AppCompatActivity {
             displayMissions(view);
         } else{
             displayDailyChallenges2(view);
-            //TODO daily challenges on press active
+
         }
     }
     public void displayCompleted(View view){
@@ -240,7 +298,7 @@ public class ChallengesActivity extends AppCompatActivity {
                         missions.add(c);
                     }
             }
-            ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions);
+            ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions,this);
             recyclerView.setAdapter(adapter);
         }
         else{
@@ -251,6 +309,7 @@ public class ChallengesActivity extends AppCompatActivity {
                     completedDailyChallenges.add(c);
                 }
             }
+
             DailyChallengesAdapter adapter = new DailyChallengesAdapter(this);
             recyclerView.setAdapter(adapter);
         }
@@ -259,6 +318,8 @@ public class ChallengesActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void displayDailyChallenges2(View view){
+        RadioButton button = findViewById(R.id.activeButton);
+        button.setChecked(true);
         isOnMissions = false;
         currentDailyChallenges.clear();
         checkIfNewDate();
@@ -268,6 +329,7 @@ public class ChallengesActivity extends AppCompatActivity {
         SharedPreferences prefsDateValue = PreferenceManager.getDefaultSharedPreferences(this);
         int currentIndex = prefsDateValue.getInt("dateValue", -1);
 
+        int dailyChallengesPerDay = 3;
         int tmpSizeOfChallenges = dailyChallengesPerDay;
 
         while(currentDailyChallenges.size()<tmpSizeOfChallenges){
@@ -282,6 +344,7 @@ public class ChallengesActivity extends AppCompatActivity {
         }
 
         DailyChallengesAdapter adapter = new DailyChallengesAdapter(this);
+
         recyclerView.setAdapter(adapter);
     }
 

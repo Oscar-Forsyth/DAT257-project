@@ -3,6 +3,7 @@ package com.example.application.challenges;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,18 +23,18 @@ import java.util.List;
 public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallengesAdapter.ViewHolder>  {
     LayoutInflater inflater;
     List<Challenge> challenges;
-    List<Challenge> challenges2;
-    Context ctx;
+
     ChallengesActivity activity;
     RecyclerView recyclerView;
-    //Activity activity;
+
 
     public DailyChallengesAdapter(ChallengesActivity activity){
         this.inflater = LayoutInflater.from(activity);
-        //this.challenges = challenges;
+
         this.activity=activity;
         this.recyclerView=activity.getRecyclerView();
         System.out.println("constructor");
+
     }
 
     /**
@@ -106,13 +108,14 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
         checkBox.setOnClickListener( new View.OnClickListener(){
 
 
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 if(checkBox.isChecked()){
 
                     challenge.setCompleted(true);
-                    activity.getCompletedDailyChallenges().add(challenge);
 
+                    activity.getCompletedDailyChallenges().add(challenge);
 
                 }else{
 
@@ -125,6 +128,7 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
                 challenges.remove(challenge);
                 animateBox(view,-1);
                 recyclerView.setAdapter(new DailyChallengesAdapter(activity));
+
             }
         });
 

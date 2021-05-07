@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.os.Build;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,21 +16,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.application.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.ViewHolder>  {
     private final LayoutInflater inflater;
-    private List<Challenge> challenges;
+    private final List<Challenge> challenges;
+    private final ChallengesActivity parent;
+    private List<View> viewList = new ArrayList<>();
 
-    public ChallengesAdapter(Context ctx, List<Challenge> challenges){
+    public ChallengesAdapter(Context ctx, List<Challenge> challenges,ChallengesActivity parent){
         this.inflater = LayoutInflater.from(ctx);
         this.challenges = challenges;
-        System.out.println("constructor");
+
+        this.parent = parent;
+
     }
 
     /**
@@ -43,7 +50,7 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
     public ChallengesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         System.out.println("onCreateViewHolder");
         View view = inflater.inflate(R.layout.custom_challenges,parent,false);
-
+        viewList.add(view);
         return new ViewHolder(view);
     }
 
@@ -52,9 +59,9 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
      * @param holder
      * @param position
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull ChallengesAdapter.ViewHolder holder, int position) {
-        System.out.println("onBindViewHolder");
         String description = challenges.get(position).getDescription();
         holder.title.setText(challenges.get(position).getTitle());
         //holder.startDate.setText(challenges.get(position).getPrettyStartDate());
@@ -86,51 +93,57 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
                     holder.description.setVisibility(View.GONE);
                 }
 
+
             }
+
         });
     }
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void addCheckBoxListener(View view, int position){
         CheckBox checkBox = view.findViewById(R.id.checkBox);
         Challenge challenge = challenges.get(position);
 
-        checkBox.setOnClickListener( new View.OnClickListener(){
+        checkBox.setOnClickListener(v -> {
+            //animations just dont work on this....
 
-            @Override
-            public void onClick(View v) {
-                if(checkBox.isChecked()){
-                    challenge.setCompleted(true);
-                    animateBox(view,1);
-                }else{
-                    challenge.setCompleted(false);
-                    animateBox(view,-1);
-                }
+            if(checkBox.isChecked()){
+                challenge.setCompleted(true);
+               // animateBoxes(view,1);
+            }else{
+                challenge.setCompleted(false);
+                //animateBoxes(view,-1);
             }
+            parent.refresh(view);
+            parent.saveCompletedMission();
+
+
         });
 
     }
 
 
-    private void animateBox(View view,int direction){
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void animateBoxes(View view, int direction){
         CardView cardView = view.findViewById(R.id.cardView);
         TextView deadlineText = view.findViewById(R.id.deadlineText);
         TextView dateText = view.findViewById(R.id.endDate);
 
         ObjectAnimator animationForBox = ObjectAnimator.ofFloat(cardView, "translationX", direction * 1500f);
-        ObjectAnimator animationForText = ObjectAnimator.ofFloat(deadlineText, "translationX", direction * 1500f);
-        ObjectAnimator animationForText2 = ObjectAnimator.ofFloat(dateText, "translationX", direction * 1500f);
+        ObjectAnimator animationForDeadlineText = ObjectAnimator.ofFloat(deadlineText, "translationX", direction * 1500f);
+        ObjectAnimator animationForDateText = ObjectAnimator.ofFloat(dateText, "translationX", direction * 1500f);
 
         AnimatorSet animations = new AnimatorSet();
-        animations.play(animationForBox).with(animationForText);
-        animations.play(animationForBox).with(animationForText2);
-
-        animations.setDuration(850);
+        animations.play(animationForBox).with(animationForDeadlineText);
+        animations.play(animationForBox).with(animationForDateText);
+        animations.setDuration(550);
         animations.start();
+
+
+
+
     }
 
-    /**
-     * Returns number of challenges.
-     * @return number of challenges
-     */
+
     @Override
     public int getItemCount() {
         return challenges.size();
