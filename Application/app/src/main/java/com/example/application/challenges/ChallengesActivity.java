@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -50,6 +52,10 @@ public class ChallengesActivity extends AppCompatActivity {
     private List<Challenge> allDailyChallenges = new ArrayList<>();
     private List<Challenge> currentDailyChallenges = new ArrayList<>();
     private List<Challenge> completedDailyChallenges = new ArrayList<>();
+    private RadioButton activeButton;
+    private RadioButton completedButton;
+
+
 
     private final int dailyChallengesPerDay=3;
 
@@ -64,6 +70,9 @@ public class ChallengesActivity extends AppCompatActivity {
         this.setTitle("Challenges");
 
         recyclerView = findViewById(R.id.challengesList);
+        activeButton = findViewById(R.id.activeButton);
+        completedButton = findViewById(R.id.completedButton);
+
         challenges = new ArrayList<>();
         extractChallenges();
 
@@ -205,6 +214,7 @@ public class ChallengesActivity extends AppCompatActivity {
     public void displayMissions(View view) {
         isOnMissions = true;
         missions.clear();
+        activeButton.setChecked(true);
         for (Challenge c : challenges) {
                 if(!c.isCompleted()){
                     missions.add(c);
@@ -241,7 +251,7 @@ public class ChallengesActivity extends AppCompatActivity {
                     completedDailyChallenges.add(c);
                 }
             }
-            DailyChallengesAdapter adapter = new DailyChallengesAdapter(getApplicationContext(), completedDailyChallenges);
+            DailyChallengesAdapter adapter = new DailyChallengesAdapter(this);
             recyclerView.setAdapter(adapter);
         }
     }
@@ -252,6 +262,8 @@ public class ChallengesActivity extends AppCompatActivity {
         isOnMissions = false;
         currentDailyChallenges.clear();
         checkIfNewDate();
+        activeButton.setChecked(true);
+
 
         SharedPreferences prefsDateValue = PreferenceManager.getDefaultSharedPreferences(this);
         int currentIndex = prefsDateValue.getInt("dateValue", -1);
@@ -269,7 +281,7 @@ public class ChallengesActivity extends AppCompatActivity {
 
         }
 
-        DailyChallengesAdapter adapter = new DailyChallengesAdapter(getApplicationContext(), currentDailyChallenges);
+        DailyChallengesAdapter adapter = new DailyChallengesAdapter(this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -299,5 +311,20 @@ public class ChallengesActivity extends AppCompatActivity {
         this.onBackPressed();
     }
 
+    public List<Challenge> getAllDailyChallenges(){
+        return allDailyChallenges;
+    }
+    public List<Challenge> getCurrentDailyChallenges(){
+        return currentDailyChallenges;
+    }
+    public List<Challenge> getCompletedDailyChallenges(){
+        return completedDailyChallenges;
+    }
+    public boolean isShowingActive(){
+        return activeButton.isChecked();
+    }
+    public RecyclerView getRecyclerView(){
+        return recyclerView;
+    }
 
 }

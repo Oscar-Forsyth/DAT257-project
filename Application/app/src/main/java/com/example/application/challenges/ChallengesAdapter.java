@@ -29,6 +29,7 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
     public ChallengesAdapter(Context ctx, List<Challenge> challenges){
         this.inflater = LayoutInflater.from(ctx);
         this.challenges = challenges;
+        System.out.println("constructor");
     }
 
     /**
@@ -40,6 +41,7 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
     @NonNull
     @Override
     public ChallengesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        System.out.println("onCreateViewHolder");
         View view = inflater.inflate(R.layout.custom_challenges,parent,false);
 
         return new ViewHolder(view);
@@ -52,6 +54,7 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
      */
     @Override
     public void onBindViewHolder(@NonNull ChallengesAdapter.ViewHolder holder, int position) {
+        System.out.println("onBindViewHolder");
         String description = challenges.get(position).getDescription();
         holder.title.setText(challenges.get(position).getTitle());
         //holder.startDate.setText(challenges.get(position).getPrettyStartDate());
