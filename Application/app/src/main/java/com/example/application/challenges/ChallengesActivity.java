@@ -50,17 +50,13 @@ public class ChallengesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
-    private List<Challenge> challenges = new ArrayList<>();;
+    private final List<Challenge> challenges = new ArrayList<>();;
     private final List<Challenge> missions = new ArrayList<>();
     private final List<Challenge> allDailyChallenges = new ArrayList<>();
     private final List<Challenge> currentDailyChallenges = new ArrayList<>();
     private final List<Challenge> completedDailyChallenges = new ArrayList<>();
 
-
-
-
     private boolean isOnMissions = true;
-
 
     private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/c6isg5rcllc2ki81mnpnv92g90@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
 
@@ -78,16 +74,12 @@ public class ChallengesActivity extends AppCompatActivity {
 
         extractChallenges();
 
-
         //creates daily challenges based on jsonChallenges
         try {
             extractChallenges2();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-
     }
     public void extractSavedMissions(){
         SharedPreferences completedMissions = getSharedPreferences("CompletedMissions", MODE_PRIVATE);
@@ -366,6 +358,4 @@ public class ChallengesActivity extends AppCompatActivity {
     public void goBack(View view){
         this.onBackPressed();
     }
-
-
 }
