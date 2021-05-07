@@ -96,9 +96,6 @@ public class ActivitiesActivity extends AppCompatActivity {
             }
         });
 
-        activities.add(new Activity("test test", "2021-05-05", "Hemma hos mig")); //temp
-        activities.add(new Activity("test imorgon", "2021-05-06", "Hemma hos dig")); //temp
-
         long date = Calendar.getInstance().getTimeInMillis();
         sdf = new SimpleDateFormat("yyyy-MM-dd");
         savedDate = sdf.format(date);
