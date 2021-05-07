@@ -9,6 +9,7 @@ public class Activity {
     private String date;
     private String prettyDate;
     private String location;
+    private String description;
 
     public Activity(){}
 
@@ -23,6 +24,7 @@ public class Activity {
         // Converts date to more readable format
         prettyDate = DateConverter.convertDateFromCalendar(date);
         this.location= location;
+        this.description = description;
     }
 
     /** Gets the activity’s title.
@@ -73,5 +75,19 @@ public class Activity {
      */
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    /** Gets the activity description.
+     * @return A string representing the activity description.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /** Sets the activity location.
+     * @param description A String containing the activity description.
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

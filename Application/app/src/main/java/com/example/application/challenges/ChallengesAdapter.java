@@ -57,7 +57,7 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(holder.description.getVisibility() == View.GONE) {
+                if(holder.description.getVisibility() == View.GONE && !challenges.get(position).getDescription().equals(" ")) {
                     holder.description.setVisibility(View.VISIBLE);
                 } else {
                     holder.description.setVisibility(View.GONE);

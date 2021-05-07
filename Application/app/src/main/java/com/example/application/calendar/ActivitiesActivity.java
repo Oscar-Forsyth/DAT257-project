@@ -230,6 +230,12 @@ public class ActivitiesActivity extends AppCompatActivity {
             activity.setLocation("Location unknown");
         }
         try {
+            String description = item.getString("description");
+            activity.setDescription(description);
+        } catch (JSONException e) {
+            activity.setDescription(" ");
+        }
+        try {
             String recurrence = item.getString("recurrence");
             DateFormat until = new SimpleDateFormat("yyyyMMdd");
             DateFormat from = new SimpleDateFormat("yyyy-MM-dd");
@@ -244,6 +250,11 @@ public class ActivitiesActivity extends AppCompatActivity {
                     newActivity.put("location", item.getString("location"));
                 } catch (JSONException noLoc) {
                     // skip location
+                }
+                try {
+                    newActivity.put("description", item.getString("description"));
+                } catch (JSONException noDes) {
+                    // skip description
                 }
                 addJSONObjectToActivities(newActivity);
                 currentDate = addDaysToDate(currentDate, 7);
