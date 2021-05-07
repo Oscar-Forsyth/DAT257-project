@@ -21,21 +21,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activitiesList">
 
+
         <RadioButton
             android:id="@+id/daily"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/toggle_widget_background"
-            android:foreground="?attr/selectableItemBackground"
-            android:clickable="true"
             android:button="@null"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
             android:onClick="changeToFlow"
             android:text="Flow"
-            android:textColor="@color/white"
-            />
-
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/weekly"
