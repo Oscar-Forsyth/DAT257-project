@@ -60,7 +60,7 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
         holder.description.setText(description);
         holder.description.setVisibility(View.GONE);
 
-        addDescriptionListener(holder);
+        addDescriptionListener(holder, position);
         addCheckBoxListener(holder.itemView,position);
 
         if(challenges.get(position).getLocation().equals(" ")) {
@@ -73,7 +73,7 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
         }
 
     }
-    private void addDescriptionListener(ChallengesAdapter.ViewHolder holder){
+    private void addDescriptionListener(ChallengesAdapter.ViewHolder holder, int position){
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
