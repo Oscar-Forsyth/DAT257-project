@@ -16,6 +16,7 @@ public class Challenge {
     private String prettyEndDate;
     private String location;
     private String description;
+    private boolean completed;
 
     public Challenge(){}
 
@@ -34,6 +35,15 @@ public class Challenge {
         prettyEndDate = DateConverter.convertDateFromCalendarWithoutTime(endDate);
         this.location= location;
         this.description = description;
+        this.completed = false;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     /** Gets the challenge title.

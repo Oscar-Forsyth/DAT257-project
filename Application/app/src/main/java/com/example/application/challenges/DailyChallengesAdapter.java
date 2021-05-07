@@ -2,14 +2,11 @@ package com.example.application.challenges;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,12 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.application.R;
 
 import java.util.List;
+//this adapter may not be needed if dailyChallenges' and CIS-missions' xml-layouts are very similar
+public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallengesAdapter.ViewHolder>  {
+    LayoutInflater inflater;
+    List<Challenge> challenges;
 
-public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.ViewHolder>  {
-    private final LayoutInflater inflater;
-    private List<Challenge> challenges;
-
-    public ChallengesAdapter(Context ctx, List<Challenge> challenges){
+    public DailyChallengesAdapter(Context ctx, List<Challenge> challenges){
         this.inflater = LayoutInflater.from(ctx);
         this.challenges = challenges;
     }
@@ -37,12 +34,12 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
      * @param viewType
      * @return view based on custom_challenges
      */
+
     @NonNull
     @Override
-    public ChallengesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.custom_challenges,parent,false);
-
-        return new ViewHolder(view);
+    public DailyChallengesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = inflater.inflate(R.layout.custom_challenges_daily,parent,false);
+        return new DailyChallengesAdapter.ViewHolder(view);
     }
 
     /**
@@ -51,33 +48,20 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
      * @param position
      */
     @Override
-    public void onBindViewHolder(@NonNull ChallengesAdapter.ViewHolder holder, int position) {
-        String description = challenges.get(position).getDescription();
+    public void onBindViewHolder(@NonNull DailyChallengesAdapter.ViewHolder holder, int position) {
         holder.title.setText(challenges.get(position).getTitle());
-        //holder.startDate.setText(challenges.get(position).getPrettyStartDate());
-        holder.endDate.setText(challenges.get(position).getPrettyEndDate());
-        holder.location.setText(challenges.get(position).getLocation());
-        holder.description.setText(description);
+        holder.description.setText(challenges.get(position).getDescription());
         holder.description.setVisibility(View.GONE);
-
-        addDescriptionListener(holder);
         addCheckBoxListener(holder.itemView,position);
-
-        if(challenges.get(position).getLocation().equals(" ")) {
-            holder.locationLogo.setVisibility(View.INVISIBLE);
-        }
-
         if(challenges.get(position).isCompleted()){
             CheckBox checkBox = holder.itemView.findViewById(R.id.checkBox);
             checkBox.setChecked(true);
         }
 
-    }
-    private void addDescriptionListener(ChallengesAdapter.ViewHolder holder){
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(holder.description.getVisibility() == View.GONE && !challenges.get(position).getDescription().equals(" ")) {
+                if(holder.description.getVisibility() == View.GONE) {
                     holder.description.setVisibility(View.VISIBLE);
                 } else {
                     holder.description.setVisibility(View.GONE);
@@ -86,6 +70,7 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
             }
         });
     }
+
     private void addCheckBoxListener(View view, int position){
         CheckBox checkBox = view.findViewById(R.id.checkBox);
         Challenge challenge = challenges.get(position);
@@ -109,16 +94,11 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
 
     private void animateBox(View view,int direction){
         CardView cardView = view.findViewById(R.id.cardView);
-        TextView deadlineText = view.findViewById(R.id.deadlineText);
-        TextView dateText = view.findViewById(R.id.endDate);
 
         ObjectAnimator animationForBox = ObjectAnimator.ofFloat(cardView, "translationX", direction * 1500f);
-        ObjectAnimator animationForText = ObjectAnimator.ofFloat(deadlineText, "translationX", direction * 1500f);
-        ObjectAnimator animationForText2 = ObjectAnimator.ofFloat(dateText, "translationX", direction * 1500f);
 
         AnimatorSet animations = new AnimatorSet();
-        animations.play(animationForBox).with(animationForText);
-        animations.play(animationForBox).with(animationForText2);
+        animations.play(animationForBox).with(animationForBox);
 
         animations.setDuration(850);
         animations.start();
@@ -136,18 +116,14 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
     /**
      * Assigns values to and holds attributes necessary for the cards in the Challenges tab
      */
-    protected static class ViewHolder extends RecyclerView.ViewHolder{
+    protected class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView title, startDate, endDate, location, description;
-        ImageView locationLogo;
+        TextView title, description;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             title = itemView.findViewById(R.id.title);
-            //startDate = itemView.findViewById(R.id.startDate);
-            endDate = itemView.findViewById(R.id.endDate);
-            location = itemView.findViewById(R.id.location);
-            locationLogo = itemView.findViewById(R.id.locationLogo);
             description = itemView.findViewById(R.id.description);
 
             addListener(itemView);
@@ -161,6 +137,6 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
                 }
             });
         }
-
     }
 }
+

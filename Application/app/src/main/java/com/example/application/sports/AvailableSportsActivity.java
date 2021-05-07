@@ -100,7 +100,6 @@ public class AvailableSportsActivity extends AppCompatActivity {
     /**
      * JSON content is read from local file
      */
-
     private String loadJSONFromAsset()  {
         String json = null;
         try {
