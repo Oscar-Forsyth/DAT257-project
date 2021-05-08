@@ -21,11 +21,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+//TODO Documentation on what this class does is missing
 public class AdapterQuizRecommended extends RecyclerView.Adapter<AdapterQuizRecommended.ViewHolder>{
 
     private LayoutInflater inflater;
 
     private List<Sport> sports;
+    //TODO Not used?
     private int mExpandedPosition = -1;
 
     public AdapterQuizRecommended(Context ctx, List<Sport> sports){
@@ -34,6 +36,7 @@ public class AdapterQuizRecommended extends RecyclerView.Adapter<AdapterQuizReco
 
     }
     //super methods---------------------------------------------------------------------------------------
+    //TODO JavaDoc might be useful here
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,6 +44,7 @@ public class AdapterQuizRecommended extends RecyclerView.Adapter<AdapterQuizReco
         return new ViewHolder(view);
     }
 
+    //TODO JavaDoc might be useful here
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
@@ -69,6 +73,7 @@ public class AdapterQuizRecommended extends RecyclerView.Adapter<AdapterQuizReco
             }
         });
     }
+
     private boolean toggleLayout(boolean isExpanded, View v, LinearLayout layoutExpand) {
         Animations.toggleArrow(v, isExpanded);
         if (isExpanded) {
@@ -79,12 +84,14 @@ public class AdapterQuizRecommended extends RecyclerView.Adapter<AdapterQuizReco
         return isExpanded;
     }
 
+    //TODO JavaDoc might be useful here
     @Override
     public int getItemCount() {
         return sports.size();
     }
     //---------------------------------------------------------------------------------------
 
+    //TODO JavaDoc might be useful here
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView name, description;
         Button linkButton;

@@ -39,6 +39,7 @@ import com.example.application.R;
 import com.example.application.Tag;
 import com.example.application.sports.Sport;
 
+//TODO JavaDoc doesn't really describe what the class does
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link QuizRecommended#newInstance} factory method to
@@ -46,6 +47,7 @@ import com.example.application.sports.Sport;
  */
 public class QuizRecommended extends Fragment {
 
+    //TODO Clean up unused variable
     Button buttonToMainMenu;
     Button buttonToRetakeQuiz;
     RecyclerView recommendedList;
@@ -69,6 +71,7 @@ public class QuizRecommended extends Fragment {
         // Required empty public constructor
     }
 
+    //TODO Is this used? Maybe it is actually. JavaDoc might be needed if used
     public static QuizRecommended newInstance(String param1, String param2) {
         QuizRecommended fragment = new QuizRecommended();
         Bundle args = new Bundle();
@@ -78,6 +81,7 @@ public class QuizRecommended extends Fragment {
         return fragment;
     }
 
+    //TODO JavaDoc to describe what the method does, variable names might be vague
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +91,7 @@ public class QuizRecommended extends Fragment {
         }
     }
 
+    //TODO Clean up if finished, JavaDoc might be needed and this method is rather big. Breaking it down to smaller methods with clear names might be good
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -126,6 +131,7 @@ public class QuizRecommended extends Fragment {
         return view;
     }
 
+    //TODO JavaDoc might be needed
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recommendedList= requireActivity().findViewById(R.id.recommendedList);
@@ -137,6 +143,8 @@ public class QuizRecommended extends Fragment {
             e.printStackTrace();
         }
     }
+
+    //TODO Small cleanup
     private String loadJSONFromAsset() throws JSONException {
         String json = null;
         try {
@@ -153,6 +161,7 @@ public class QuizRecommended extends Fragment {
         return json;
     }
 
+    //TODO Looks like it's not completely finished (the TODO in the method was not me), and the name is rather vague, so that could be made clearer
     private void converter(List<Integer>list){
         fillSportsWithPointsHashMapWithDefaultValues();
         //adds point to the tag itself by putting it into tagWithPoints
@@ -218,6 +227,8 @@ public class QuizRecommended extends Fragment {
         }
     }
 
+    //TODO I feel like these comments could be JavaDoc as they are now, but the name is very clear
+    // so the documentation might not be necessary
     //for each tag in tagWithPoints, add points to the sports with that tag
     private void addPointsToSportsWithTag(){
         for (Tag t : tagsWithPoints){
@@ -235,6 +246,8 @@ public class QuizRecommended extends Fragment {
         }
     }
 
+    //TODO The name is vague and there are still System.out.println() that should be removed.
+    // The method might do too much, so consider breaking it down in smaller private methods
     //returns a list that only contains the 5 sports with the most points
     private List<Sport> onlyTop5(){
         List<Sport>top5Sports = new ArrayList<>();
@@ -274,6 +287,9 @@ public class QuizRecommended extends Fragment {
             sportsWithPointsHashMap.put(s, 0);
         }
     }
+
+    //TODO This method is really big, breaking it down to smaller private methods with clear names could help
+    // There is also some temporary code for tests
     private void extractSports() throws JSONException {
 
         JSONArray arr = new JSONArray(loadJSONFromAsset());
