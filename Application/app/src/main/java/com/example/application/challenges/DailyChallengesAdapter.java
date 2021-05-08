@@ -3,6 +3,7 @@ package com.example.application.challenges;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,10 +24,12 @@ import java.util.List;
 public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallengesAdapter.ViewHolder>  {
     LayoutInflater inflater;
     List<Challenge> challenges;
+    private ChallengesActivity parent;
 
-    public DailyChallengesAdapter(Context ctx, List<Challenge> challenges){
+    public DailyChallengesAdapter(Context ctx, List<Challenge> challenges,ChallengesActivity parent){
         this.inflater = LayoutInflater.from(ctx);
         this.challenges = challenges;
+        this.parent = parent;
     }
 
     /**
@@ -77,15 +81,17 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
 
         checkBox.setOnClickListener( new View.OnClickListener(){
 
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 if(checkBox.isChecked()){
                     challenge.setCompleted(true);
-                    animateBox(view,1);
+                    //animateBox(view,1);
                 }else{
                     challenge.setCompleted(false);
-                    animateBox(view,-1);
+                    //animateBox(view,-1);
                 }
+                parent.refresh(view);
             }
         });
 
