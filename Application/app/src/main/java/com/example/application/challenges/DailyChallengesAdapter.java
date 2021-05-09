@@ -33,8 +33,6 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
 
         this.activity=activity;
         this.recyclerView=activity.getRecyclerView();
-        System.out.println("constructor");
-
     }
 
     /**
@@ -48,7 +46,6 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
     @Override
     public DailyChallengesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.custom_challenges_daily,parent,false);
-        System.out.println("onCreateViewHolder");
         return new DailyChallengesAdapter.ViewHolder(view);
     }
 
@@ -59,25 +56,22 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
      */
     @Override
     public void onBindViewHolder(@NonNull DailyChallengesAdapter.ViewHolder holder, int position) {
-        System.out.println("onBindViewHolder");
         if (activity.isShowingActive()){
             challenges = activity.getCurrentDailyChallenges();
-            System.out.println("isShowingActive");
         }
         else{
             challenges = activity.getCompletedDailyChallenges();
-            System.out.println("isShowingCompleted");
         }
         holder.title.setText(challenges.get(position).getTitle());
         holder.description.setText(challenges.get(position).getDescription());
         holder.description.setVisibility(View.GONE);
         addCheckBoxListener(holder.itemView,position);
-//TODO dont know if this is necessary if checkbox onClick sets completed
+        //if in "Completed"-tab every challenge should have its checkbox checked
         if(challenges.get(position).isCompleted()){
             CheckBox checkBox = holder.itemView.findViewById(R.id.checkBox);
             checkBox.setChecked(true);
         }
-
+        //shows challenge's description on click
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,12 +80,11 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
                 } else {
                     holder.description.setVisibility(View.GONE);
                 }
-
             }
         });
     }
 
-
+//moves item between completedDailyChallenges and currentDailyChallenges when checkbox is clicked
     private void addCheckBoxListener(View view, int position){
         if (activity.isShowingActive()){
             challenges = activity.getCurrentDailyChallenges();
@@ -103,7 +96,6 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
 
         Challenge challenge = challenges.get(position);
         checkBox.setOnClickListener( new View.OnClickListener(){
-
 
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -117,7 +109,6 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
 
                     challenge.setCompleted(false);
                     activity.getCurrentDailyChallenges().add(challenge);
-
 
                 }
                 challenges.remove(challenge);

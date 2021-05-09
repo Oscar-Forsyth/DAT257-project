@@ -109,7 +109,7 @@
             android:background="@drawable/toggle_widget_background"
             android:button="@null"
             android:gravity="center"
-            android:onClick="displayDailyChallenges2"
+            android:onClick="displayCurrentDailyChallenges"
             android:text="Daily Challenges"
             android:textColor="@color/white" />
     </RadioGroup>
