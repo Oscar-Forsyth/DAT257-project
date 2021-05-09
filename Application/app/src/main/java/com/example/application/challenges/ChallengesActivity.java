@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -55,9 +56,10 @@ public class ChallengesActivity extends AppCompatActivity {
     private List<Challenge> completedDailyChallenges = new ArrayList<>();
     private RadioButton activeButton;
 
-
     private boolean isOnMissions = true;
+    //specifies how many active daily challenges that will be shown each day
     private final int dailyChallengesPerDay = 3;
+    //variables used to store the daily challenge lists (keys accessed by gson)
     private final String completedDailyChallengesKey = "completedDailyChallengesKey";
     private final String completedDailyChallengesJson = "completedDailyChallengesJson";
     private final String currentDailyChallengesKey = "currentDailyChallengesKey";
@@ -69,6 +71,7 @@ public class ChallengesActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenges);
         this.setTitle("Challenges");
@@ -139,6 +142,9 @@ public class ChallengesActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    /**
+     * loads the daily challenges from last time
+     */
     private void extractSavedDailyChallenges(){
         //TODO might not be necessary to have 2 different sharedpreferences
         SharedPreferences sharedPreferences = getSharedPreferences(currentDailyChallengesKey, MODE_PRIVATE);
@@ -151,14 +157,17 @@ public class ChallengesActivity extends AppCompatActivity {
         Type type = new TypeToken<ArrayList<Challenge>>(){}.getType();
         currentDailyChallenges = gson.fromJson(json,type);
         completedDailyChallenges = gson2.fromJson(json2, type);
-        //when the app is run for the first time, creates default list of daily challenges
+        //when challenges is pressed for the first time ever, creates default list of daily challenges
         if (json==null){
-            System.out.println("json is null so lists have to be created");
             currentDailyChallenges = new ArrayList<>();
+            completedDailyChallenges = new ArrayList<>();
+            /*
             for (int i = 0; i<dailyChallengesPerDay; i++){
                 currentDailyChallenges.add(allDailyChallenges.get(i));
             }
             completedDailyChallenges = new ArrayList<>();
+
+             */
         }
 
     }
@@ -261,6 +270,9 @@ public class ChallengesActivity extends AppCompatActivity {
         }
         return json;
     }
+    /**
+     * extracts the daily challenges from jsonChallenges and puts them into the list allDailyChallenges
+     */
     private void extractAllDailyChallenges() throws JSONException {
 
         JSONArray arr = new JSONArray(loadJSONFromAsset());
@@ -280,7 +292,6 @@ public class ChallengesActivity extends AppCompatActivity {
         }
     }
 
-
     private void addToLayout() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         missions.clear();
@@ -296,8 +307,8 @@ public class ChallengesActivity extends AppCompatActivity {
     //it had to be done... but at what cost
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void refresh(View view){
-        RadioButton button = findViewById(R.id.activeButton);
-        if(button.isChecked()){
+
+        if(activeButton.isChecked()){
             displayActive(view);
         }else{
             displayCompleted(view);
@@ -305,8 +316,6 @@ public class ChallengesActivity extends AppCompatActivity {
     }
 
     public void displayMissions(View view) {
-        RadioButton button = findViewById(R.id.activeButton);
-        button.setChecked(true);
         isOnMissions = true;
         missions.clear();
         activeButton.setChecked(true);
@@ -318,6 +327,9 @@ public class ChallengesActivity extends AppCompatActivity {
         ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions,this);
         recyclerView.setAdapter(adapter);
     }
+    /**
+     * either displays Missions or DailyChallenges (both have Active-tab selected)
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void displayActive(View view){
         if(isOnMissions){
@@ -327,6 +339,9 @@ public class ChallengesActivity extends AppCompatActivity {
 
         }
     }
+    /**
+     * either displays Missions or DailyChallenges (both have Completed-tab selected)
+     */
     public void displayCompleted(View view){
         if(isOnMissions){
             missions.clear();
@@ -345,7 +360,9 @@ public class ChallengesActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * displays DailyChallenges (Active-tab selected)
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void displayCurrentDailyChallenges(View view){
         isOnMissions = false;
@@ -358,11 +375,13 @@ public class ChallengesActivity extends AppCompatActivity {
         DailyChallengesAdapter adapter = new DailyChallengesAdapter(this);
         recyclerView.setAdapter(adapter);
     }
-
+    /**
+     * loads new daily challenges
+     */
     private void loadNewCurrentDailyChallenges(){
         currentDailyChallenges.clear();
         SharedPreferences prefsDateValue = PreferenceManager.getDefaultSharedPreferences(this);
-        int currentIndex = prefsDateValue.getInt("dateValue", -1);
+        int currentIndex = prefsDateValue.getInt("dateValue", 0);
 
         for (int i=0; i<dailyChallengesPerDay;i++){
             Challenge c = allDailyChallenges.get(currentIndex%allDailyChallenges.size());
@@ -371,32 +390,38 @@ public class ChallengesActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * checks if new date
+     * @return whether there has been a change in date or not, since the last time the app was opened
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     private boolean checkIfNewDate() {
 
         ZoneId zoneId = ZoneId.of("Europe/Stockholm");
+        //current date in Sweden
         LocalDate currentDate = LocalDate.now(zoneId);
         String currentDateString = currentDate.toString();
 
         SharedPreferences prefsDate = PreferenceManager.getDefaultSharedPreferences(this);
         //prefsDateValue is used to separate allDailyChallenges into partitions of size specified by dailyChallengesPerDay
+        //example: prefsDateValue==0 --> challenge nr: {0,1,2...dailyChallengesPerDay}  will be the challenges presented that day
         SharedPreferences prefsDateValue = PreferenceManager.getDefaultSharedPreferences(this);
         /* defValues will only be used the first time the program is ever run, and they will be overwritten immediately with the lines below
            because current date will never be 2000-01-01 */
-        int oldValue = prefsDateValue.getInt("dateValue", -1);
+        int oldValue = prefsDateValue.getInt("dateValue", 0);
         String oldDate = prefsDate.getString("date", "2000-01-01");
 
         if (!currentDateString.equals(oldDate)) {
-
             prefsDate.edit().putString("date", currentDateString).apply();
-
             int newValue = (oldValue+dailyChallengesPerDay) % allDailyChallenges.size();
             prefsDateValue.edit().putInt("dateValue", newValue).apply();
             return true;
         }
         return false;
     }
+    /**
+     * goes back to previous activity
+     */
     public void goBack(View view){
         this.onBackPressed();
     }
@@ -409,9 +434,6 @@ public class ChallengesActivity extends AppCompatActivity {
     }
     public boolean isShowingActive(){
         return activeButton.isChecked();
-    }
-    public RecyclerView getRecyclerView(){
-        return recyclerView;
     }
 
 }

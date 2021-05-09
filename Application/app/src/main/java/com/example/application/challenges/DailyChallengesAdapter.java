@@ -25,14 +25,12 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
     List<Challenge> challenges;
 
     ChallengesActivity activity;
-    RecyclerView recyclerView;
-
 
     public DailyChallengesAdapter(ChallengesActivity activity){
         this.inflater = LayoutInflater.from(activity);
 
         this.activity=activity;
-        this.recyclerView=activity.getRecyclerView();
+
     }
 
     /**
@@ -114,7 +112,7 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
                 challenges.remove(challenge);
                 activity.saveDailyChallenges();
                 animateBox(view,-1);
-                recyclerView.setAdapter(new DailyChallengesAdapter(activity));
+                activity.refresh(view);
 
             }
         });
