@@ -2,8 +2,6 @@ package com.example.application.sports;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.application.R;
-import com.example.application.Tag;
 import com.example.application.animations.Animations;
 import com.squareup.picasso.Picasso;
 
@@ -29,17 +26,15 @@ import java.util.List;
  */
 
 public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder> {
+    //TODO make changes that Intellij recommends here
     private LayoutInflater inflater;
-
     private List<Sport> sports;
-
-    private int mExpandedPosition = -1;
+    private int mExpandedPosition = -1; //TODO old can be removed
 
     public SportsAdapter(Context ctx, List<Sport> sports){
         this.inflater = LayoutInflater.from(ctx);
         this.sports = sports;
     }
-
 
     /**
      * see RecyclerView.java for more information
@@ -63,16 +58,17 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // bind the data
-
+        //This part binds the necessary information to the dynamic TextViews and ImageViews.
         holder.name.setText(sports.get(position).getName());
         holder.description.setText(sports.get(position).getDescription());
         Picasso.get().load(sports.get(position).getLogo()).resize(300,300).onlyScaleDown().into(holder.logo);
 
+        //When clicking on a sports card
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean show = toggleLayout(!sports.get(position).isExpanded(), v.findViewById(R.id.showMore), holder.layoutExpand);
+                //Controls the expanded state
+                boolean show = toggleLayout(sports.get(position).isExpanded(), v.findViewById(R.id.showMore), holder.layoutExpand);
                 sports.get(position).setExpanded(show);
             }
         });
@@ -89,21 +85,15 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
                 v.getContext().startActivity(i);
             }
         });
-
-
     }
 
     /**
      * checks if the box is extended and does the appropriate action depending on what the case is
      * @param isExpanded Boolean that checks if the layout is expanded or not
-     * @param v The pressed views "showMore" so that it can be rotated
+     * @param v The pressed views "showMore" arrow so that it can be rotated
      * @param layoutExpand The layout that needs to expand
      * @return
      */
-
-
-
-
 
     private boolean toggleLayout(boolean isExpanded, View v, LinearLayout layoutExpand) {
         Animations.toggleArrow(v, isExpanded);
@@ -116,7 +106,6 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
 
     }
 
-
     /**
      * @return number of items to be displayed in the recyclerView
      */
@@ -126,10 +115,11 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
     }
 
     /**
+     * Own small class needed for the adapter.
      * Binds values to and holds attributes necessary for the items in recyclerView
      */
+    //TODO change to static (Intellij recommendation)
     protected class ViewHolder extends  RecyclerView.ViewHolder{
-
         TextView name, description;
         Button linkButton;
         ImageView logo, showMore;
@@ -137,19 +127,14 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             name = itemView.findViewById(R.id.sportName);
             description = itemView.findViewById(R.id.description);  //Might need to move
             logo = itemView.findViewById(R.id.logo);
             linkButton = itemView.findViewById(R.id.link);
             layoutExpand = itemView.findViewById(R.id.layoutExpand);
             showMore = itemView.findViewById(R.id.showMore);
-
         }
     }
-
-
-
 
 }
 
