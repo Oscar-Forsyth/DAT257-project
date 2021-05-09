@@ -100,9 +100,6 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
             challenges = activity.getCompletedDailyChallenges();
         }
         CheckBox checkBox = view.findViewById(R.id.checkBox);
-        List <Challenge> completedDailyChallenges = activity.getCompletedDailyChallenges();
-        List <Challenge> currentDailyChallenges = activity.getCurrentDailyChallenges();
-        List <Challenge> allDailyChallenges = activity.getAllDailyChallenges();
 
         Challenge challenge = challenges.get(position);
         checkBox.setOnClickListener( new View.OnClickListener(){
@@ -114,18 +111,17 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
                 if(checkBox.isChecked()){
 
                     challenge.setCompleted(true);
-
                     activity.getCompletedDailyChallenges().add(challenge);
 
                 }else{
 
                     challenge.setCompleted(false);
-
                     activity.getCurrentDailyChallenges().add(challenge);
 
 
                 }
                 challenges.remove(challenge);
+                activity.saveDailyChallenges();
                 animateBox(view,-1);
                 recyclerView.setAdapter(new DailyChallengesAdapter(activity));
 

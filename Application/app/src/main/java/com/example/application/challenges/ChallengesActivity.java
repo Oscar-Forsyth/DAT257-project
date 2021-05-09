@@ -28,6 +28,8 @@ import com.example.application.R;
 import com.example.application.Tag;
 import com.example.application.sports.Sport;
 import com.example.application.sports.SportsAdapter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +37,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -62,6 +65,12 @@ public class ChallengesActivity extends AppCompatActivity {
 
 
     private boolean isOnMissions = true;
+    private final int dailyChallengesPerDay = 3;
+    private final String completedDailyChallengesKey = "completedDailyChallengesKey";
+    private final String completedDailyChallengesJson = "completedDailyChallengesJson";
+    private final String currentDailyChallengesKey = "currentDailyChallengesKey";
+    private final String currentDailyChallengesJson = "currentDailyChallengesJson";
+
 
     private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/c6isg5rcllc2ki81mnpnv92g90@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
 
@@ -90,6 +99,7 @@ public class ChallengesActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        extractSavedDailyChallenges();
     }
     public void extractSavedMissions(){
         SharedPreferences completedMissions = getSharedPreferences("CompletedMissions", MODE_PRIVATE);
@@ -126,6 +136,41 @@ public class ChallengesActivity extends AppCompatActivity {
         editor.putStringSet("completedMission",savedMissionsSet);
         editor.apply();
     }
+
+    public void saveDailyChallenges(){
+       saveListOfChallenges(currentDailyChallenges, currentDailyChallengesKey, currentDailyChallengesJson);
+       saveListOfChallenges(completedDailyChallenges, completedDailyChallengesKey, completedDailyChallengesJson);
+    }
+    private void saveListOfChallenges(List<Challenge>listOfChallenges, String key, String key2){
+        SharedPreferences.Editor editor = getSharedPreferences(key, MODE_PRIVATE).edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(listOfChallenges);
+        editor.putString(key2, json);
+        editor.apply();
+    }
+
+    private void extractSavedDailyChallenges(){
+        //TODO might not be necessary to have 2 different sharedpreferences
+        SharedPreferences sharedPreferences = getSharedPreferences(currentDailyChallengesKey, MODE_PRIVATE);
+        SharedPreferences sharedPreferences2 = getSharedPreferences(completedDailyChallengesKey, MODE_PRIVATE);
+        Gson gson = new Gson();
+        Gson gson2 = new Gson();
+        String json = sharedPreferences.getString(currentDailyChallengesJson, null);
+        String json2 = sharedPreferences.getString(completedDailyChallengesJson, null);
+        //tells gson to convert the json-file into an arraylist of type Challenge
+        Type type = new TypeToken<ArrayList<Challenge>>(){}.getType();
+        currentDailyChallenges = gson.fromJson(json,type);
+        completedDailyChallenges = gson2.fromJson(json2, type);
+        //when the app is run for the first time, creates default list of daily challenges
+        if (json==null){
+            currentDailyChallenges = new ArrayList<>();
+            for (int i = 0; i<dailyChallengesPerDay; i++){
+                currentDailyChallenges.add(allDailyChallenges.get(i));
+            }
+            completedDailyChallenges = new ArrayList<>();
+        }
+    }
+
 
 
     /**
@@ -325,11 +370,11 @@ public class ChallengesActivity extends AppCompatActivity {
         checkIfNewDate();
         activeButton.setChecked(true);
 
-
+//TODO om det är ett nytt datum ska den ta 3 nästa challenges från allDailyChallenges
+        //TODO om inte är nytt datum ska den ta sparade listan av currentDailyChallenges
         SharedPreferences prefsDateValue = PreferenceManager.getDefaultSharedPreferences(this);
         int currentIndex = prefsDateValue.getInt("dateValue", -1);
 
-        int dailyChallengesPerDay = 3;
         int tmpSizeOfChallenges = dailyChallengesPerDay;
 
         while(currentDailyChallenges.size()<tmpSizeOfChallenges){
@@ -339,7 +384,7 @@ public class ChallengesActivity extends AppCompatActivity {
             else{
                 tmpSizeOfChallenges--;
             }
-            currentIndex++;
+            currentIndex=(++currentIndex)%allDailyChallenges.size();
 
         }
 
@@ -366,7 +411,7 @@ public class ChallengesActivity extends AppCompatActivity {
         if (!currentDateString.equals(oldDate)) {
             prefsDate.edit().putString("date", currentDateString).apply();
 
-            int newValue = (oldValue+3) % allDailyChallenges.size();
+            int newValue = (oldValue+dailyChallengesPerDay) % allDailyChallenges.size();
             prefsDateValue.edit().putInt("dateValue", newValue).apply();
         }
     }
