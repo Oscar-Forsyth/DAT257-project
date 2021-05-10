@@ -10,6 +10,8 @@
     <color name="darker_white">#cccccc</color>
     <color name="cis_yellow">#FFFFCD06</color>
     <color name="cis_orange">#FFDD7B19</color>
+    <color name= "blue">#142e67</color>
+    <color name="light_blue">#B5c7f1</color>
 
 
 </resources>

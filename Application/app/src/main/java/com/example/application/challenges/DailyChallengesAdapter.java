@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,12 +23,14 @@ import java.util.List;
 public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallengesAdapter.ViewHolder>  {
     LayoutInflater inflater;
     List<Challenge> challenges;
-    private ChallengesActivity parent;
 
-    public DailyChallengesAdapter(Context ctx, List<Challenge> challenges,ChallengesActivity parent){
-        this.inflater = LayoutInflater.from(ctx);
-        this.challenges = challenges;
-        this.parent = parent;
+    ChallengesActivity activity;
+
+    public DailyChallengesAdapter(ChallengesActivity activity){
+        this.inflater = LayoutInflater.from(activity);
+
+        this.activity=activity;
+
     }
 
     /**
@@ -53,15 +54,22 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
      */
     @Override
     public void onBindViewHolder(@NonNull DailyChallengesAdapter.ViewHolder holder, int position) {
+        if (activity.isShowingActive()){
+            challenges = activity.getCurrentDailyChallenges();
+        }
+        else{
+            challenges = activity.getCompletedDailyChallenges();
+        }
         holder.title.setText(challenges.get(position).getTitle());
         holder.description.setText(challenges.get(position).getDescription());
         holder.description.setVisibility(View.GONE);
         addCheckBoxListener(holder.itemView,position);
+        //if in "Completed"-tab every challenge should have its checkbox checked
         if(challenges.get(position).isCompleted()){
             CheckBox checkBox = holder.itemView.findViewById(R.id.checkBox);
             checkBox.setChecked(true);
         }
-
+        //shows challenge's description on click
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,28 +78,42 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
                 } else {
                     holder.description.setVisibility(View.GONE);
                 }
-
             }
         });
     }
 
+//moves item between completedDailyChallenges and currentDailyChallenges when checkbox is clicked
     private void addCheckBoxListener(View view, int position){
+        if (activity.isShowingActive()){
+            challenges = activity.getCurrentDailyChallenges();
+        }
+        else{
+            challenges = activity.getCompletedDailyChallenges();
+        }
         CheckBox checkBox = view.findViewById(R.id.checkBox);
-        Challenge challenge = challenges.get(position);
 
+        Challenge challenge = challenges.get(position);
         checkBox.setOnClickListener( new View.OnClickListener(){
 
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 if(checkBox.isChecked()){
+
                     challenge.setCompleted(true);
-                    //animateBox(view,1);
+                    activity.getCompletedDailyChallenges().add(challenge);
+
                 }else{
+
                     challenge.setCompleted(false);
-                    //animateBox(view,-1);
+                    activity.getCurrentDailyChallenges().add(challenge);
+
                 }
-                parent.refresh(view);
+                challenges.remove(challenge);
+                activity.saveDailyChallenges();
+                animateBox(view,-1);
+                activity.refresh(view);
+
             }
         });
 
@@ -116,7 +138,12 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
      */
     @Override
     public int getItemCount() {
-        return challenges.size();
+        if(activity.isShowingActive()){
+            return activity.getCurrentDailyChallenges().size();
+        }
+        else{
+            return activity.getCompletedDailyChallenges().size();
+        }
     }
 
     /**
