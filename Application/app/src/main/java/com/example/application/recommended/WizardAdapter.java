@@ -32,26 +32,26 @@ public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardView
             "I like to work with others towards a common goal",
             "I like playing sports outside",
             "I like longer training sessions rather than short and intense",
-            "I like to move ...",
-            "I like to swim",
+            "I like to move ...",          //TODO: Change to e.g. I like to move in coordinated patterns
+            "I like to swim",              //TODO: Change to e.g. I like water sports
             "Which sport sounds most interesting?"
     };
 
-    public String[] radioButtonGroup1 = {
+    public String[] radioButtonGroup1 = {  //TODO: Change to radioButtonGroupFirst to be more consistent with the other group?
             "Yes",
             "No",
             "Sometimes"
     };
-    public String[] radioButtonGroupLast = {
+    public String[] radioButtonGroupLast = {      //TODO: Change to a multi-choice question
             "Ball sports",
-            "Sports played with rackets",
+            "Sports played with rackets",         //TODO: Change to Racket sports
             "Extreme sports (i.e snowboarding, mountain climbing)"
     };
 
 
     public int getRadioButton(int key){
         WizardViewHolder wizardViewHolder = map.get(key);
-        //System.out.println("map: "+ map.get(key) + "key: "+ key);
+        //System.out.println("map: "+ map.get(key) + "key: "+ key);  //TODO: Remove?
         assert wizardViewHolder != null;
         RadioGroup radioGroup = wizardViewHolder.getRadioGroup();
         return radioGroup.getCheckedRadioButtonId();
@@ -93,7 +93,7 @@ public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardView
 
 
     /**
-     * assigns values to and holds attributes necessary for the items in recyclerView
+     * Assigns values to and holds attributes necessary for the items in recyclerView
      */
     public static class WizardViewHolder extends RecyclerView.ViewHolder {
 

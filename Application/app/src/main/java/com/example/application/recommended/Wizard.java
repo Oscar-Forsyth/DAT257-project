@@ -51,7 +51,7 @@ public class Wizard extends AppCompatActivity {
 
         v = LayoutInflater.from(this).inflate(R.layout.wizard_layout, null);
 
-        mSlideViewPager = findViewById(R.id.slideView);
+        mSlideViewPager = findViewById(R.id.slideView);      //TODO: Change the background image (in the XML?)
         mDotLayout = findViewById(R.id.dotsLayout);
 
         mWizardNextButton = findViewById(R.id.wizardNextButton);
@@ -62,26 +62,26 @@ public class Wizard extends AppCompatActivity {
         addDotsIndicator(0);
 
         mSlideViewPager.setCurrentItem(0);
-        //mRadioGroup.check(mRadioGroup.getChildAt(0).getId());
+        //mRadioGroup.check(mRadioGroup.getChildAt(0).getId());   //TODO: Remove?
 
         mSlideViewPager.registerOnPageChangeCallback(viewListener);
         wizardAdapter.notifyItemChanged(0);
 
-        mWizardBackButton.setOnClickListener(new View.OnClickListener(){
+        mWizardBackButton.setOnClickListener(new View.OnClickListener(){   //TODO: Replace with lambda?
             @Override
             public void onClick(View view){
                 mSlideViewPager.setCurrentItem(mCurrentPage-1);
             }
         });
 
-        mWizardNextButton.setOnClickListener(new View.OnClickListener(){
+        mWizardNextButton.setOnClickListener(new View.OnClickListener(){   //TODO: Replace with lambda?
             @Override
             public void onClick(View view){
                 if(mCurrentPage == NUMBER_OF_QUESTIONS -1 ){
-                    //adds the last question to the result list
+                    //Adds the last question to the result list
                     addResultToList();
 
-                    //for loop that checks if any question is 0 (i.e no answered)
+                    //For loop that checks if any question is 0 (i.e not answered)
                     boolean answeredAllQuestions = true;
                     for (int i = 0; i < resultList.size(); i++) {
                         if(resultList.get(i).equals(0)){
@@ -89,7 +89,7 @@ public class Wizard extends AppCompatActivity {
                         }
                     }
                     if(!answeredAllQuestions){
-                        Toast.makeText(getApplicationContext(), "Please answer all of the questions ty bruv", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Please answer all of the questions", Toast.LENGTH_SHORT).show();
                     }else{
                         SharedPreferences.Editor editor = getSharedPreferences("Save", MODE_PRIVATE).edit();
                         editor.putBoolean("takenQuiz", true);
@@ -113,7 +113,7 @@ public class Wizard extends AppCompatActivity {
 
 
     }
-
+    //TODO: Add java-doc
     public void addDotsIndicator(int position){
         mDotLayout.removeAllViews();
         mDots = new TextView[NUMBER_OF_QUESTIONS];
@@ -143,14 +143,11 @@ public class Wizard extends AppCompatActivity {
 
             addResultToList();
 
-
             System.out.println("--\n");
             for (int i = 0; i < resultList.size(); i++) {
                 System.out.println("Question: " + i + "result: " + resultList.get(i).toString());
             }
             System.out.println("--\n");
-
-
 
 
             addDotsIndicator(position);
@@ -187,11 +184,12 @@ public class Wizard extends AppCompatActivity {
         }
     };
 
+    //TODO: Add java-doc
     private void addResultToList(){
-        int id= wizardAdapter.getRadioButton(mCurrentPage);
+        int id = wizardAdapter.getRadioButton(mCurrentPage);
         RadioButton rb = findViewById(id);
 
-        if(id!=-1){
+        if(id != -1){
             String result = rb.getText().toString();
             if(mCurrentPage != NUMBER_OF_QUESTIONS -1 ) {
 
