@@ -26,7 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/toggle_widget_background"
+            android:background="@drawable/toggle_widget_background_yellow"
             android:foreground="?attr/selectableItemBackground"
             android:clickable="true"
             android:button="@null"
@@ -42,7 +42,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/toggle_widget_background"
+            android:background="@drawable/toggle_widget_background_yellow"
             android:foreground="?attr/selectableItemBackground"
             android:clickable="true"
             android:button="@null"
@@ -117,10 +117,8 @@
 
         <ImageButton
             android:id="@+id/calendarLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_width="50dp"
+            android:layout_height="0dp"
             android:background="@color/cis_yellow"
             android:text="Left"
             app:layout_constraintBottom_toTopOf="@+id/calendarView"
@@ -132,10 +130,8 @@
 
         <ImageButton
             android:id="@+id/calendarRight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_width="50dp"
+            android:layout_height="0dp"
             android:background="@color/cis_yellow"
             android:text="Right"
             app:layout_constraintBottom_toTopOf="@+id/calendarView"
