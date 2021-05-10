@@ -11,19 +11,21 @@ import java.util.List;
 /**
  * Controls one instance of a sport in the AvailableSports section.
  * A sport has a name, a description of what the sport is about and an URL to the logo of the sport
- * from the CIS website.
+ * The logo are stored locally.
  */
 public class Sport {
     private String name;
     private String description;
-
-    //private String logo;  //If the logos are moved to the application, this should be a int. To reference the correct bytes.
     private Uri logo;
     private String link;
     private boolean isExpanded;
     private List<Tag> tags;
 
-    public  Sport(){ tags = new ArrayList<>(); }
+
+    public Sport(){ tags = new ArrayList<>(); }
+
+    //TODO This constructor is never called, this is due to that the sports values are set with the set methods instead, feels like bad practice
+    //TODO This is done in QuizRecommended and AvailableSportsActivity
     public Sport(String name,String description,String logo, String link, Boolean isExpanded,  List<Tag> tags){
         this.name = name;
         this.description= description;
@@ -66,8 +68,11 @@ public class Sport {
         this.link = link;
     }
 
+    /**
+     * @return whether or not the card is expanded
+     */
     public boolean isExpanded() {
-        return isExpanded;
+        return !isExpanded;
     }
 
     public void setExpanded(boolean expanded) {
@@ -78,6 +83,7 @@ public class Sport {
         return tags;
     }
 
+    //TODO vad är det för skillnad på setTag och addTag??? De gör väll samma sak bara att ena tar in en string och den andra en tag. Borde gå att ändra, känns dumt med båda metoderna.
     public void setTag(String tag){
         this.tags.add(Tag.valueOf(tag));
     }

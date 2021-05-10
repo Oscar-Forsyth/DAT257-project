@@ -55,7 +55,7 @@ public class AdapterQuizRecommended extends RecyclerView.Adapter<AdapterQuizReco
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean show = toggleLayout(!sports.get(position).isExpanded(), v.findViewById(R.id.showMore), holder.layoutExpand);
+                boolean show = toggleLayout(sports.get(position).isExpanded(), v.findViewById(R.id.showMore), holder.layoutExpand);
                 sports.get(position).setExpanded(show);
             }
         });
