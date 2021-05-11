@@ -19,7 +19,7 @@
         android:drawableRight="@drawable/ic_baseline_thumb_up_24"
         android:gravity="left|center_vertical"
         android:onClick="openRecommendedSports"
-        android:text="Recommended Sports"
+        android:text="Your Sports"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#FFFFFF"

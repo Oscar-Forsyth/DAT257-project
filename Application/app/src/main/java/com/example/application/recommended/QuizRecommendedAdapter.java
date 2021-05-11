@@ -22,7 +22,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 //TODO Documentation on what this class does is missing
-public class AdapterQuizRecommended extends RecyclerView.Adapter<AdapterQuizRecommended.ViewHolder>{
+public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommendedAdapter.ViewHolder>{
 
     private LayoutInflater inflater;
 
@@ -30,7 +30,7 @@ public class AdapterQuizRecommended extends RecyclerView.Adapter<AdapterQuizReco
     //TODO Not used?
     private int mExpandedPosition = -1;
 
-    public AdapterQuizRecommended(Context ctx, List<Sport> sports){
+    public QuizRecommendedAdapter(Context ctx, List<Sport> sports){
         this.inflater = LayoutInflater.from(ctx);
         this.sports = sports;
 

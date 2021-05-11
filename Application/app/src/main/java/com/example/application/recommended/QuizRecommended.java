@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import com.example.application.MainMenu;
 import com.example.application.R;
 import com.example.application.Tag;
 import com.example.application.sports.Sport;
@@ -53,7 +52,7 @@ public class QuizRecommended extends Fragment {
     RecyclerView recommendedList;
 
     List<Sport> sports;
-    AdapterQuizRecommended adapter;
+    QuizRecommendedAdapter adapter;
     HashMap<Sport, Integer> sportsWithPointsHashMap = new HashMap<>();
     List <Tag> tagsWithPoints = new ArrayList<>();
 
@@ -341,7 +340,7 @@ public class QuizRecommended extends Fragment {
             top5Sports = retrieveList(savedSports);
 
 
-        adapter = new AdapterQuizRecommended(requireActivity().getApplicationContext(), top5Sports);
+        adapter = new QuizRecommendedAdapter(requireActivity().getApplicationContext(), top5Sports);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireActivity().getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
         recommendedList.setLayoutManager(gridLayoutManager);
         recommendedList.setAdapter(adapter);
