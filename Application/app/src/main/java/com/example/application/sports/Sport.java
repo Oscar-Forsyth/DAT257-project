@@ -18,6 +18,7 @@ public class Sport {
     private String description;
     private Uri logo;
     private String link;
+    private String email; // Needed to filter activities
     private boolean isExpanded;
     private List<Tag> tags;
 
@@ -94,5 +95,13 @@ public class Sport {
      */
     public void addTag(Tag tag) { tags.add(tag); }
 
+    //TODO Fix JSON
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }
 

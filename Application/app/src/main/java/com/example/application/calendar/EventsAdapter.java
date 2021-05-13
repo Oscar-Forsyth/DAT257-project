@@ -18,11 +18,11 @@ import java.util.List;
 /**
  * Controls the information that should be visible on the cards in the Upcoming Event tab.
  */
-public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.ViewHolder> {
+public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
     LayoutInflater inflater;
-    List<Activity> activities;
+    List<Event> activities;
 
-    public ActivitiesAdapter(Context ctx, List<Activity> activities){
+    public EventsAdapter(Context ctx, List<Event> activities){
         this.inflater = LayoutInflater.from(ctx);
         this.activities = activities;
     }
@@ -35,9 +35,9 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
      */
     @NonNull
     @Override
-    public ActivitiesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.custom_activites,parent,false);
-        return new ActivitiesAdapter.ViewHolder(view);
+    public EventsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = inflater.inflate(R.layout.custom_events,parent,false);
+        return new EventsAdapter.ViewHolder(view);
     }
 
     /**
@@ -46,7 +46,7 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
      * @param position
      */
     @Override
-    public void onBindViewHolder(@NonNull ActivitiesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull EventsAdapter.ViewHolder holder, int position) {
         holder.title.setText(activities.get(position).getTitle());
         holder.date.setText(activities.get(position).getPrettyDate());
         holder.location.setText(activities.get(position).getLocation());
