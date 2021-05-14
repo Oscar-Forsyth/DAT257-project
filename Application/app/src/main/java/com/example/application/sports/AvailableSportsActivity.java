@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.application.R;
@@ -34,17 +35,11 @@ public class AvailableSportsActivity extends AppCompatActivity {
     /**
      * the framework of the list displaying the sports
      */
-    RecyclerView recyclerView;
-    FrameLayout frameLayout, backgroundFilter;
-    Button filterButton;
+    private RecyclerView recyclerView;
+    private FrameLayout backgroundFilter;
     protected List<Sport> sports;
-    SportsAdapter sportsAdapter;
-    FragmentManager fm;
     private List<Tag> savedTags;
 
-
-    private Toolbar toolbar;
-    private TextView textView;
     /**
      * the URL for our JSON-file
      * For every update to the JSON-file, a new URL has to be generated so there is probably a better solution
@@ -55,21 +50,13 @@ public class AvailableSportsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_available_sports);
 
-        toolbar = findViewById(R.id.customToolbar);
-        textView = (TextView) findViewById(R.id.toolbarText);
-        textView.setText("Sports and Committiees");
+        TextView textView = findViewById(R.id.toolbarText);
+        textView.setText("Sports and Committees");
 
 
-        frameLayout = findViewById(R.id.frameLayout);
-        filterButton = findViewById(R.id.filterButton);
         recyclerView = findViewById(R.id.sportsList);
         backgroundFilter = findViewById(R.id.backgroundFilter);
         backgroundFilter.setAlpha((float)(0.6)); //TODO Move to xml
-
-
-        //Fragments
-        fm = getSupportFragmentManager();
-
 
         sports = new ArrayList<>();
 
@@ -79,29 +66,21 @@ public class AvailableSportsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        FragmentManager fm = getSupportFragmentManager();
+        RelativeLayout filterButton = findViewById(R.id.filterButton);
 
-        //Start filterFragment
-        filterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fm.beginTransaction().replace(R.id.frameLayout, new filterSports()).commit();
-                backgroundFilter.setVisibility(View.VISIBLE);
-            }
+        filterButton.setOnClickListener(v -> {
+            fm.beginTransaction().replace(R.id.frameLayout, new filterSports()).commit();
+            backgroundFilter.setVisibility(View.VISIBLE);
         });
     }
-
-    protected void backgroundFilterInvis(){
-        backgroundFilter.setVisibility(View.INVISIBLE);
-    }
-
-
 
 
     /**
      * JSON content is read from local file
      */
     private String loadJSONFromAsset()  {
-        String json = null;
+        String json;
         try {
             InputStream is = getAssets().open("sports.json");
             int size = is.available();
@@ -147,7 +126,7 @@ public class AvailableSportsActivity extends AppCompatActivity {
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        sportsAdapter = new SportsAdapter(getApplicationContext(),sports);
+        SportsAdapter sportsAdapter = new SportsAdapter(getApplicationContext(), sports);
         recyclerView.setAdapter(sportsAdapter);
 
 

@@ -13,27 +13,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.application.R;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardViewHolder> {
 
     Context context;
     LayoutInflater layoutInflater;
-    View view;
-    Map<Integer, WizardViewHolder> map = new HashMap<>();
-    int count= 0;
+
+    private final ArrayList<Integer> quizResults = new ArrayList<>();
 
     public WizardAdapter(Context context) {
         this.context = context;
+        initializeArrayList();
     }
 
     public String[] wizardQuestions = {
             "I like to work with others towards a common goal",
             "I like playing sports outside",
             "I like longer training sessions rather than short and intense",
-            "I like to move ...",          //TODO: Change to e.g. I like to move in coordinated patterns
-            "I like to swim",              //TODO: Change to e.g. I like water sports
+            "I like to move with precision and coordination",
+            "I like water sports",
             "Which sport sounds most interesting?"
     };
 
@@ -49,29 +48,29 @@ public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardView
     };
 
 
-    public int getRadioButton(int key){
-        WizardViewHolder wizardViewHolder = map.get(key);
-        //System.out.println("map: "+ map.get(key) + "key: "+ key);  //TODO: Remove?
-        assert wizardViewHolder != null;
-        RadioGroup radioGroup = wizardViewHolder.getRadioGroup();
-        return radioGroup.getCheckedRadioButtonId();
+
+    public ArrayList<Integer> getQuizResults() {
+        return quizResults;
+    }
+
+    private void initializeArrayList(){
+        for (int i = 0; i < getItemCount(); i++) {
+            quizResults.add(0);
+        }
+
     }
 
 
     @NonNull
     @Override
     public WizardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.wizard_layout, parent, false);
-        WizardViewHolder wizardViewHolder = new WizardViewHolder(view);
-        map.put(count,wizardViewHolder);
-        count++;
-        return wizardViewHolder;
+        return new WizardViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull WizardViewHolder holder, int position) {
-        view = holder.itemView;
         holder.wizardQuestion.setText(wizardQuestions[position]);
         if(position <5){
             holder.radioButton1.setText(radioButtonGroup1[0]);
@@ -83,7 +82,33 @@ public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardView
             holder.radioButton3.setText(radioButtonGroupLast[2]);
         }
 
-
+        RadioGroup radioGroup = holder.getRadioGroup();
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            RadioButton radioButton = holder.itemView.findViewById(checkedId);
+            setButtonResult(checkedId,radioButton,position);
+        });
+    }
+    private void setButtonResult(int id,RadioButton radioButton,int position){
+        if(id!=-1){
+            String result = radioButton.getText().toString();
+            if(position != getItemCount() -1 ) {
+                if (result.equalsIgnoreCase(radioButtonGroup1[0])) {
+                    quizResults.set(position, 1);
+                } else if (result.equalsIgnoreCase(radioButtonGroup1[1])) {
+                    quizResults.set(position, 2);
+                } else if (result.equalsIgnoreCase(radioButtonGroup1[2])) {
+                    quizResults.set(position, 3);
+                }
+            }else{
+                if (result.equalsIgnoreCase(radioButtonGroupLast[0])) {
+                    quizResults.set(position, 1);
+                } else if (result.equalsIgnoreCase(radioButtonGroupLast[1])) {
+                    quizResults.set(position, 2);
+                } else if (result.equalsIgnoreCase(radioButtonGroupLast[2])) {
+                    quizResults.set(position, 3);
+                }
+            }
+        }
     }
 
     @Override
@@ -110,8 +135,8 @@ public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardView
             radioButton2 = itemView.findViewById(R.id.radioButton2);
             radioButton3 = itemView.findViewById(R.id.radioButton3);
             radioGroup = itemView.findViewById(R.id.radioGroup);
-            radioGroup.check(radioGroup.getChildAt(0).getId());
-            radioGroup.clearCheck();
+            //radioGroup.check(radioGroup.getChildAt(0).getId());
+           // radioGroup.clearCheck();
 
         }
 
