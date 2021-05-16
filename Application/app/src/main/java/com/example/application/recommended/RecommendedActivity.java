@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.application.R;
+import com.example.application.sports.Sport;
 
 import org.json.JSONException;
 
@@ -27,6 +28,7 @@ public class RecommendedActivity extends AppCompatActivity {
     private TextView textView;
     private RadioButton recommendedButton;
     private RadioButton favouritesButton;
+    private ArrayList<Sport>favouriteSports;
 
     //TODO add comment explaining what this method does
     @Override
@@ -71,6 +73,8 @@ public class RecommendedActivity extends AppCompatActivity {
                 System.out.println("clicked on favourites");
             }
         });
+
+
     }
 
     //TODO add comment explaining the method here
@@ -82,5 +86,9 @@ public class RecommendedActivity extends AppCompatActivity {
     //TODO add comment explaining the method here
     public void goBack(View view){
         this.onBackPressed();
+    }
+
+    public ArrayList<Sport> getFavouriteSports(){
+        return favouriteSports;
     }
 }

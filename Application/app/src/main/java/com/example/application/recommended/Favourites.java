@@ -17,8 +17,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.application.R;
-import com.example.application.challenges.Challenge;
-import com.example.application.challenges.ChallengesAdapter;
 import com.example.application.sports.Sport;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -115,26 +113,30 @@ public class Favourites extends Fragment {
 
     //TODO the key Strings are dummies atm
     private void extractSavedFavourites(){
-        //TODO might not be necessary to have 2 different sharedpreferences
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("favouritesKey", Context.MODE_PRIVATE);
 
         Gson gson = new Gson();
 
         String json = sharedPreferences.getString("favouritesJson", null);
 
-        //tells gson to convert the json-file into an arraylist of type Challenge
-        Type type = new TypeToken<ArrayList<Challenge>>(){}.getType();
+        //tells gson to convert the json-file into an arraylist of type Sport
+        Type type = new TypeToken<List<Sport>>(){}.getType();
         favouriteSportsList = gson.fromJson(json,type);
-        //when challenges is pressed for the first time ever, creates default list of daily challenges
+
         if (json==null){
             favouriteSportsList = new ArrayList<>();
-            emptyListTextView.setVisibility(View.VISIBLE);
+            System.out.println("Json is null");
+            System.out.println(favouriteSportsList.isEmpty());
         }
-        else if (favouriteSportsList.isEmpty()){
+        if (favouriteSportsList.isEmpty()){
             emptyListTextView.setVisibility(View.VISIBLE);
+            favouritesRecyclerView.setVisibility(View.INVISIBLE);
+            System.out.println("list is empty");
         }
         else {
             emptyListTextView.setVisibility(View.INVISIBLE);
+            favouritesRecyclerView.setVisibility(View.VISIBLE);
+            System.out.println("list is not empty");
         }
         refreshRecyclerView();
     }

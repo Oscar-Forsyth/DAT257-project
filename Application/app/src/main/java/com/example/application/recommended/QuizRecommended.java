@@ -313,19 +313,6 @@ public class QuizRecommended extends Fragment {
                 e.printStackTrace();
             }
         }
-        //temporary for tests
-
-        List <Integer> randList = new ArrayList<>();
-        //adds INDIVIDUAL to tagsWithPoints
-        randList.add(2);
-        //adds OUTDOORS
-        randList.add(1);
-        //adds HIGHINTENSITY
-        randList.add(2);
-        randList.add(0);
-        randList.add(0);
-        //adds RACKETSPORT
-        randList.add(2);
 
         //adds points to every sport that can be found in tagsWithPoints
         SharedPreferences prefs = this.getActivity().getSharedPreferences("Save", Context.MODE_PRIVATE);
