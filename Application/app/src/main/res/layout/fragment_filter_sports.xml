@@ -5,70 +5,29 @@
     android:id="@+id/layoutFilter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="20dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginTop="30dp"
-    android:layout_marginEnd="20dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginBottom="30dp">
-
-
-    <FrameLayout
-        android:id="@+id/upperFrame"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/layout_border"
-        android:clickable="true">>
-
-        <TextView
-            android:id="@+id/Filtertext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|center_horizontal|center_vertical"
-            android:text="Filter"
-            android:textColor="#000000"
-            android:textSize="40sp" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="left|center_horizontal|center_vertical"
-            app:srcCompat="@drawable/filter" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="right|center_horizontal|center_vertical"
-            android:layout_marginRight="10dp"
-            app:srcCompat="@drawable/close_tags" />
-    </FrameLayout>
+    >
 
     <com.google.android.flexbox.FlexboxLayout
 
         android:id="@+id/flexLayout"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_above="@+id/lowerFrame"
-        android:layout_below="@+id/upperFrame"
-        android:background="@drawable/layout_border"
+        android:layout_height="wrap_content"
+        android:background="@color/cis_yellow"
         android:isScrollContainer="true"
         android:padding="10dp"
         app:flexDirection="row"
         app:flexWrap="wrap"
-        app:layout_constraintTop_toBottomOf="@id/upperFrame"
+        app:layout_constraintTop_toBottomOf="parent"
         tools:context=".sports.AvailableSportsActivity$filterSports">
-
     </com.google.android.flexbox.FlexboxLayout>
 
     <FrameLayout
         android:id="@+id/lowerFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/flexLayout"
         android:layout_marginBottom="0dp"
-        android:background="#F3D15A"
+        android:background="@color/cis_yellow"
         android:paddingTop="30dp"
         android:paddingBottom="30dp">
 
@@ -93,6 +52,16 @@
             android:text="Save"
             android:textSize="30sp"
             app:backgroundTint="#8BC36C" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/filterBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lowerFrame"
+        android:background="#7A7474"
+        android:alpha="0.6"
+        android:clickable="true">
     </FrameLayout>
 
 </RelativeLayout>

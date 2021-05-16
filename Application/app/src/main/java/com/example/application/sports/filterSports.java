@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.application.R;
 import com.example.application.Tag;
+import com.example.application.animations.Animations;
 import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class filterSports extends Fragment {
     private SportsAdapter sportsAdapter;
 
     private final Fragment frag = this;
-    private FrameLayout upperFrame;
+    private FrameLayout background;
 
 
 
@@ -123,12 +124,11 @@ public class filterSports extends Fragment {
         //Sets the saved buttons when exiting the fragment
         setSavedButtons();
 
-        upperFrame = rootView.findViewById(R.id.upperFrame);
-        upperFrame.setOnClickListener(new View.OnClickListener() {
+        background = rootView.findViewById(R.id.filterBackground);
+        background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requireActivity().getSupportFragmentManager().beginTransaction().remove(filterSports.this).commit();
-                requireActivity().findViewById(R.id.backgroundFilter).setVisibility(View.GONE);
+                hideFilter();
             }
         });
 
@@ -159,8 +159,7 @@ public class filterSports extends Fragment {
                 ((AvailableSportsActivity) requireActivity()).setSavedTags(savedButtons);
 
                 //Makes fragment invisible
-                requireActivity().getSupportFragmentManager().beginTransaction().remove(filterSports.this).commit();
-                requireActivity().findViewById(R.id.backgroundFilter).setVisibility(View.GONE);
+                hideFilter();
 
             }
         });
@@ -234,6 +233,12 @@ public class filterSports extends Fragment {
             }
 
         }
+    }
+
+    private void hideFilter(){
+        AvailableSportsActivity.toggleFilterExpanded();
+        Animations.toggleArrow(requireActivity().findViewById(R.id.downFilterImg), false);
+        Animations.collapse(requireActivity().findViewById(R.id.frameLayout));
     }
 
 }
