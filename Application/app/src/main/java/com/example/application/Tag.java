@@ -6,13 +6,14 @@ package com.example.application;
 public enum Tag {
     GROUP,
     INDIVIDUAL,
-    OUTDOORS,
-    INDOORS,
-    HIGHINTENSITY,
+    GROUP_AND_INDIVIDUAL,
+    OUTDOOR,
+    INDOOR,
+    INTENSE,
     ENDURANCE,
-    TECHNIQUE,
     BALLGAME,
-    RACKETSPORT,
-    WATERSPORT,
-    EXTREMESPORT
+    RACKET_SPORT,
+    PRECISION,
+    NATURE,
+    COMPLEX_MOVEMENTS
 }

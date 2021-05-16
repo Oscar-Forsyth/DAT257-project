@@ -170,55 +170,57 @@ public class QuizRecommended extends Fragment {
                 //answer to question (0,1,2,3) where 0=No answer, 1=Yes, 2=No, 3=Sometimes
                 int ans = list.get(questionNr);
                 switch (questionNr){
+
                     case 0:
                         if (ans==1){
-                            tagsWithPoints.add(Tag.GROUP);
+                            tagsWithPoints.add(Tag.INDOOR);
                         }
                         if (ans==2){
                             //add INDIVIDUAL
-                            tagsWithPoints.add(Tag.INDIVIDUAL);
+                            tagsWithPoints.add(Tag.OUTDOOR);
                         }
                         break;
                     case 1:
                         if (ans==1){
-                            tagsWithPoints.add(Tag.OUTDOORS);
+                            tagsWithPoints.add(Tag.GROUP);
 
                         }
                         if (ans==2){
-                            tagsWithPoints.add(Tag.INDOORS);
+                            tagsWithPoints.add(Tag.INDIVIDUAL);
+                        }
+                        if (ans==3){
+                            tagsWithPoints.add(Tag.GROUP_AND_INDIVIDUAL);
                         }
                         break;
                     case 2:
                         if (ans==1){
-                            tagsWithPoints.add(Tag.ENDURANCE);
+                            tagsWithPoints.add(Tag.INTENSE);
 
                         }
                         if (ans==2){
-                            tagsWithPoints.add(Tag.HIGHINTENSITY);
+                            tagsWithPoints.add(Tag.ENDURANCE);
                         }
                         break;
                     case 3:
                         if (ans==1){
-                            tagsWithPoints.add(Tag.TECHNIQUE);
-                        }
-                        break;
-                    case 4:
-                        if (ans==1){
-                            tagsWithPoints.add(Tag.WATERSPORT);
-                        }
-                        break;
-                    case 5:
-                        if (ans==1){
                             tagsWithPoints.add(Tag.BALLGAME);
-
                         }
-                        if (ans==2){
-                            tagsWithPoints.add(Tag.RACKETSPORT);
+                        if(ans ==2){
+                            tagsWithPoints.add(Tag.RACKET_SPORT);
                         }
-                        if (ans==3){
-                            tagsWithPoints.add(Tag.EXTREMESPORT);
+                        if(ans ==3){
+                            tagsWithPoints.add(Tag.PRECISION);
+                        }
+                        if(ans ==4){
+                            tagsWithPoints.add(Tag.NATURE);
+                        }
+                        if(ans ==5){
+                            tagsWithPoints.add(Tag.COMPLEX_MOVEMENTS);
                         }
                         break;
+
+
+
                 }
 
             }

@@ -32,7 +32,7 @@ public class Wizard extends AppCompatActivity {
     private Button mWizardBackButton;
 
     private int mCurrentPage;
-    private final int NUMBER_OF_QUESTIONS = 6;
+    private final int NUMBER_OF_QUESTIONS = 4;
 
     private ArrayList<Integer> resultList = new ArrayList<>();
 
