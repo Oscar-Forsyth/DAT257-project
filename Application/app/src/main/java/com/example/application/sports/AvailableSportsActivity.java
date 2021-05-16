@@ -67,7 +67,7 @@ public class AvailableSportsActivity extends AppCompatActivity {
         }
 
         FragmentManager fm = getSupportFragmentManager();
-        RelativeLayout filterButton = findViewById(R.id.filterButton);
+        Button filterButton = findViewById(R.id.filterButton);
 
         filterButton.setOnClickListener(v -> {
             fm.beginTransaction().replace(R.id.frameLayout, new filterSports()).commit();
