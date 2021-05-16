@@ -122,7 +122,7 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
     protected class ViewHolder extends  RecyclerView.ViewHolder{
         TextView name, description;
         Button linkButton;
-        ImageView logo, showMore;
+        ImageView logo, showMore, favoriteStar;
         LinearLayout layoutExpand;
 
         public ViewHolder(@NonNull View itemView) {
@@ -133,6 +133,7 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
             linkButton = itemView.findViewById(R.id.link);
             layoutExpand = itemView.findViewById(R.id.layoutExpand);
             showMore = itemView.findViewById(R.id.showMore);
+            favoriteStar = itemView.findViewById(R.id.favorite);
         }
     }
 
