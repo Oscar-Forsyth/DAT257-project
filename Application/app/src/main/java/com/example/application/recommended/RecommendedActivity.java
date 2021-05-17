@@ -48,31 +48,33 @@ public class RecommendedActivity extends AppCompatActivity {
             setContentView(R.layout.activity_recommended_empty);
             FragmentManager fm = getSupportFragmentManager();
             fm.beginTransaction().replace(R.id.ActivityRecommendedLayout, new QuizRecommended()).commit();
+            recommendedButton = findViewById(R.id.recommendedButton);
+            favouritesButton = findViewById(R.id.favouritesButton);
+            recommendedButton.setChecked(true);
+
+            recommendedButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentManager fm = getSupportFragmentManager();
+                    fm.beginTransaction().replace(R.id.ActivityRecommendedLayout, new QuizRecommended()).commit();
+                    System.out.println("clicked on recommended");
+                }
+            });
+            favouritesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentManager fm = getSupportFragmentManager();
+                    fm.beginTransaction().replace(R.id.ActivityRecommendedLayout, new Favourites()).commit();
+                    System.out.println("clicked on favourites");
+                }
+            });
         } else {
             setContentView(R.layout.activity_recommended);
         }
-        recommendedButton = findViewById(R.id.recommendedButton);
-        favouritesButton = findViewById(R.id.favouritesButton);
-        recommendedButton.setChecked(true);
         toolbar = findViewById(R.id.customToolbar);
         textView = (TextView) findViewById(R.id.toolbarText);
         textView.setText("Your Sports");
-        recommendedButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getSupportFragmentManager();
-                fm.beginTransaction().replace(R.id.ActivityRecommendedLayout, new QuizRecommended()).commit();
-                System.out.println("clicked on recommended");
-            }
-        });
-        favouritesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getSupportFragmentManager();
-                fm.beginTransaction().replace(R.id.ActivityRecommendedLayout, new Favourites()).commit();
-                System.out.println("clicked on favourites");
-            }
-        });
+
 
 
     }
