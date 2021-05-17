@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.application.calendar.ActivitiesActivity;
+import com.example.application.calendar.EventsActivity;
 import com.example.application.challenges.ChallengesActivity;
 import com.example.application.recommended.RecommendedActivity;
 import com.example.application.sports.AvailableSportsActivity;
@@ -52,7 +52,7 @@ public class MainMenu extends AppCompatActivity {
 
     /** Called when the user taps the 'Upcoming Events' button */
     public void openUpcomingEvents(View view) {
-        Intent intent = new Intent(this, ActivitiesActivity.class);
+        Intent intent = new Intent(this, EventsActivity.class);
 
         startActivity(intent);
     }

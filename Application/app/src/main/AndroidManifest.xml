@@ -17,7 +17,7 @@
         tools:targetApi="m">
         <activity android:name=".challenges.ChallengesActivity"></activity>
         <activity android:name=".sports.AvailableSportsActivity"></activity>
-        <activity android:name=".calendar.ActivitiesActivity" />
+        <activity android:name=".calendar.EventsActivity" />
         <activity android:name=".recommended.RecommendedActivity" />
         android:theme="@style/Theme.Application"
         android:usesCleartextTraffic="true"
