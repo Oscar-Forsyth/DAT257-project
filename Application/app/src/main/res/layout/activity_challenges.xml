@@ -58,14 +58,17 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/challengesList"
         android:layout_width="match_parent"
-        android:layout_height="525dp"
+        android:layout_height="0dp"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="142dp"
+        android:layout_marginTop="0dp"
         android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/toggle2"
+        app:layout_constraintBottom_toTopOf="@id/toggle">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 
@@ -113,5 +116,15 @@
             android:text="Daily Challenges"
             android:textColor="@color/white" />
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/noChallengeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
