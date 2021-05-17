@@ -124,9 +124,9 @@ public class QuizRecommended extends Fragment {
         }
         // Inflate the layout for this fragment
 
-        toolbar = view.findViewById(R.id.customToolbar);
-        textView = (TextView) view.findViewById(R.id.toolbarText);
-        textView.setText("Recommended Sports");
+        //toolbar = view.findViewById(R.id.customToolbar);
+        //textView = (TextView) view.findViewById(R.id.toolbarText);
+        //textView.setText("Recommended Sports");
         return view;
     }
 
@@ -164,7 +164,7 @@ public class QuizRecommended extends Fragment {
     private void converter(List<Integer>list){
         fillSportsWithPointsHashMapWithDefaultValues();
         //adds point to the tag itself by putting it into tagWithPoints
-        //TODO information from the previous quiz is not saved anywhere, which is why the list is null if the user comes from the main menu
+
         if(list!=null){
             for (int questionNr=0; questionNr<list.size(); questionNr++){
                 //answer to question (0,1,2,3) where 0=No answer, 1=Yes, 2=No, 3=Sometimes
@@ -315,19 +315,6 @@ public class QuizRecommended extends Fragment {
                 e.printStackTrace();
             }
         }
-        //temporary for tests
-
-        List <Integer> randList = new ArrayList<>();
-        //adds INDIVIDUAL to tagsWithPoints
-        randList.add(2);
-        //adds OUTDOORS
-        randList.add(1);
-        //adds HIGHINTENSITY
-        randList.add(2);
-        randList.add(0);
-        randList.add(0);
-        //adds RACKETSPORT
-        randList.add(2);
 
         //adds points to every sport that can be found in tagsWithPoints
         SharedPreferences prefs = this.getActivity().getSharedPreferences("Save", Context.MODE_PRIVATE);

@@ -6,44 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".sports.AvailableSportsActivity">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/custom_toolbar" />
-
-    <RelativeLayout
-        android:id="@+id/filterButton"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:background="@color/cis_yellow"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
-        <ImageView
-            android:id="@+id/filterImg"
-            android:layout_width="25dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="2dp"
-            app:srcCompat="@drawable/filter" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/filterImg"
-            android:layout_toRightOf="@+id/filterImg"
-            android:text="Filters"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            tools:text="Filters" />
-
-        <ImageView
-            android:id="@+id/downFilterImg"
-            android:layout_width="35dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            app:srcCompat="@drawable/ic_baseline_arrow_drop_down_24"
-            android:layout_alignParentEnd="true" />
-
-    </RelativeLayout>
-
-
 
 
     <TextView
@@ -61,19 +23,27 @@
         app:layout_constraintVertical_bias="0.442" />
 
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar"/>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sportsList"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="1dp"
-        android:scrollbars="vertical"
+        android:layout_marginTop="100dp"
         android:visibility="visible"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/filterButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
     </androidx.recyclerview.widget.RecyclerView>
-
 
     <FrameLayout
         android:id="@+id/backgroundFilter"
@@ -86,6 +56,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:clickable="true"/>
+
+
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="wrap_content"
@@ -96,5 +68,29 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
+
+    <Button
+        android:id="@+id/filterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.076" />
+
+    <CheckBox
+        android:id="@+id/favoriteCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Favorites"
+        app:layout_constraintBottom_toBottomOf="@+id/sportsList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.641"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.083" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
