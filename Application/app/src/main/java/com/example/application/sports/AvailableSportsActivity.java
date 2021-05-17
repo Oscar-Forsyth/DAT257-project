@@ -1,8 +1,8 @@
 package com.example.application.sports;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.appcompat.widget.Toolbar;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,12 +11,12 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import android.view.View;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.application.R;
 import com.example.application.Tag;
+import com.example.application.animations.Animations;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +39,8 @@ public class AvailableSportsActivity extends AppCompatActivity {
     private FrameLayout backgroundFilter;
     protected List<Sport> sports;
     private List<Tag> savedTags;
+    private Fragment filterFragment;
+    private static boolean filterExpanded;
 
     /**
      * the URL for our JSON-file
@@ -55,8 +57,8 @@ public class AvailableSportsActivity extends AppCompatActivity {
 
 
         recyclerView = findViewById(R.id.sportsList);
-        backgroundFilter = findViewById(R.id.backgroundFilter);
-        backgroundFilter.setAlpha((float)(0.6)); //TODO Move to xml
+        filterFragment = new filterSports();
+        filterExpanded = false;
 
         sports = new ArrayList<>();
 
@@ -67,11 +69,19 @@ public class AvailableSportsActivity extends AppCompatActivity {
         }
 
         FragmentManager fm = getSupportFragmentManager();
-        Button filterButton = findViewById(R.id.filterButton);
+        fm.beginTransaction().replace(R.id.frameLayout, filterFragment).commit();
+        RelativeLayout filterButton = findViewById(R.id.filterButton);
 
         filterButton.setOnClickListener(v -> {
-            fm.beginTransaction().replace(R.id.frameLayout, new filterSports()).commit();
-            backgroundFilter.setVisibility(View.VISIBLE);
+            if(filterExpanded){
+                Animations.toggleArrow(findViewById(R.id.downFilterImg), false);
+                Animations.collapse(findViewById(R.id.frameLayout));
+                filterExpanded = false;
+            } else {
+                Animations.toggleArrow(findViewById(R.id.downFilterImg), true);
+                Animations.expand(findViewById(R.id.frameLayout));
+                filterExpanded = true;
+            }
         });
     }
 
@@ -151,5 +161,9 @@ public class AvailableSportsActivity extends AppCompatActivity {
 
     protected List<Tag> getSavedTags(){
         return savedTags;
+    }
+
+    protected static void toggleFilterExpanded() {
+        filterExpanded = !filterExpanded;
     }
 }
