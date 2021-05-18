@@ -21,6 +21,7 @@ public class Sport {
     private String email; // Needed to filter activities
     private boolean isExpanded;
     private List<Tag> tags;
+    private boolean favourite;
 
 
     public Sport(){ tags = new ArrayList<>(); }
@@ -34,7 +35,17 @@ public class Sport {
         this.link = link;
         this.isExpanded = isExpanded;
         this.tags = tags;
+        this.favourite = false;
     }
+
+    public boolean isFavourite() {
+        return favourite;
+    }
+
+    public void setCompleted(boolean favourite) {
+        this.favourite = favourite;
+    }
+
 
     public String getName() {
         return name;

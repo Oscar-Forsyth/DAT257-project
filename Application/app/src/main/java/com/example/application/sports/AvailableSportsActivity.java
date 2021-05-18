@@ -13,10 +13,12 @@ import android.widget.FrameLayout;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.example.application.R;
 import com.example.application.Tag;
 import com.example.application.animations.Animations;
+import com.example.application.recommended.Favourites;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +43,11 @@ public class AvailableSportsActivity extends AppCompatActivity {
     private List<Tag> savedTags;
     private Fragment filterFragment;
     private static boolean filterExpanded;
+    private ToggleButton button_favorite;
+    private List<Sport> favouriteSports = new ArrayList<>();
+
+    private final String favouriteSportsKey = "favouriteSportsKey";
+    private final String favouriteSportsJson = "favouriteSportsJson";
 
     /**
      * the URL for our JSON-file
@@ -60,6 +67,8 @@ public class AvailableSportsActivity extends AppCompatActivity {
         filterFragment = new filterSports();
         filterExpanded = false;
 
+        button_favorite = findViewById(R.id.button_favorite);
+
         sports = new ArrayList<>();
 
         try {
@@ -67,10 +76,13 @@ public class AvailableSportsActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        //TODO: To be fixed
+        Favourites.newInstance(favouriteSportsKey, favouriteSportsJson);
 
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.frameLayout, filterFragment).commit();
         RelativeLayout filterButton = findViewById(R.id.filterButton);
+
 
         filterButton.setOnClickListener(v -> {
             if(filterExpanded){
@@ -84,6 +96,7 @@ public class AvailableSportsActivity extends AppCompatActivity {
             }
         });
     }
+
 
 
     /**

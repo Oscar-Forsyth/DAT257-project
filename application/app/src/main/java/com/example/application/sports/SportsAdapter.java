@@ -3,19 +3,23 @@ package com.example.application.sports;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.application.R;
 import com.example.application.animations.Animations;
+import com.example.application.challenges.Challenge;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -85,6 +89,29 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
                 v.getContext().startActivity(i);
             }
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void addStarListener(View view, int position){
+        ImageView star = view.findViewById(R.id.button_favorite);
+        Sport sport = sports.get(position);
+
+        star.setOnClickListener(v -> {
+            //animations just dont work on this....
+
+            if(star.getDrawableState().equals(true)){
+                sport.setFavourite(true);
+                // animateBoxes(view,1);
+            }else{
+                sport.setFavourite(false);
+                //animateBoxes(view,-1);
+            }
+            parent.refresh(view);
+            parent.saveFavouriteSport();
+
+
+        });
+
     }
 
     /**
