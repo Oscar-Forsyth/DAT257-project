@@ -10,6 +10,7 @@
         android:id="@+id/filterButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/cis_gray"
         app:layout_constraintBottom_toTopOf="@id/activitiesList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -106,13 +107,12 @@
         android:id="@+id/activitiesList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#FFFFFF"
+        android:background="@color/cis_gray"
         app:layout_constraintBottom_toTopOf="@+id/toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/filterButton">
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@id/filterButton"></androidx.recyclerview.widget.RecyclerView>
 
     <TextView
         android:id="@+id/noEventsText"

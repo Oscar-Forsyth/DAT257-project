@@ -66,7 +66,7 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
         addCheckBoxListener(holder.itemView,position);
         //if in "Completed"-tab every challenge should have its checkbox checked
         if(challenges.get(position).isCompleted()){
-            CheckBox checkBox = holder.itemView.findViewById(R.id.checkBox);
+            CheckBox checkBox = holder.itemView.findViewById(R.id.checkBoxDaily);
             checkBox.setChecked(true);
         }
         //shows challenge's description on click
@@ -90,7 +90,7 @@ public class DailyChallengesAdapter extends RecyclerView.Adapter<DailyChallenges
         else{
             challenges = activity.getCompletedDailyChallenges();
         }
-        CheckBox checkBox = view.findViewById(R.id.checkBox);
+        CheckBox checkBox = view.findViewById(R.id.checkBoxDaily);
 
         Challenge challenge = challenges.get(position);
         checkBox.setOnClickListener( new View.OnClickListener(){

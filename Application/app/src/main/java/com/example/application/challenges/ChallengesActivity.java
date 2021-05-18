@@ -319,6 +319,7 @@ public class ChallengesActivity extends AppCompatActivity {
             }
         }
         ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions,this);
+        updateNoChallengesText("You've completed all active challenges!", adapter.getItemCount() == 0);
         recyclerView.setAdapter(adapter);
     }
 

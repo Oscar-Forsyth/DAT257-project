@@ -4,21 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cis_gray"
     tools:context=".challenges.ChallengesActivity">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/custom_toolbar" />
+
     <RadioGroup
         android:id="@+id/toggle2"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/yellow_out_line"
+        android:checkedButton="@+id/activeButton"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/welcomeText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-
-        android:checkedButton="@+id/activeButton"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <RadioButton
@@ -35,43 +44,37 @@
             android:gravity="center"
             android:onClick="displayActive"
             android:text="Active"
-            android:textColor="@color/white" />
+            android:textColor="@drawable/text_color_toggle" />
 
         <RadioButton
             android:id="@+id/completedButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             android:layout_weight="1"
             android:background="@drawable/toggle_widget_background"
+            android:button="@null"
+            android:gravity="center"
             android:onClick="displayCompleted"
             android:text="Completed"
-            android:gravity="center"
-            android:button="@null"
-            android:textSize="14sp"
-            android:textColor="@color/white"
-            android:layout_marginStart="0dp" />
+            android:textColor="@drawable/text_color_toggle"
+            android:textSize="14sp" />
     </RadioGroup>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/challengesList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
-        android:background="#FFFFFF"
+        android:background="@color/cis_gray"
+        app:layout_constraintBottom_toTopOf="@id/toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toggle2"
-        app:layout_constraintBottom_toTopOf="@id/toggle">
+        app:layout_constraintTop_toBottomOf="@id/welcomeText">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-
-
 
 
     <RadioGroup
@@ -93,12 +96,12 @@
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             android:layout_weight="1"
-            android:background="@drawable/toggle_widget_background"
+            android:background="@drawable/toggle_widget_background_yellow"
             android:button="@null"
             android:gravity="center"
             android:onClick="displayMissions"
             android:text="CIS Missions"
-            android:textColor="@color/white" />
+            android:textColor="@drawable/text_color_toggle" />
 
         <RadioButton
             android:id="@+id/daily"
@@ -109,12 +112,12 @@
             android:layout_marginRight="0dp"
             android:layout_marginBottom="0dp"
             android:layout_weight="1"
-            android:background="@drawable/toggle_widget_background"
+            android:background="@drawable/toggle_widget_background_yellow"
             android:button="@null"
             android:gravity="center"
             android:onClick="displayCurrentDailyChallenges"
             android:text="Daily Challenges"
-            android:textColor="@color/white" />
+            android:textColor="@drawable/text_color_toggle" />
     </RadioGroup>
 
     <TextView
@@ -126,5 +129,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/welcomeText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="Welcome to Challenges!\nEngage in fun missions and new challenges every day"
+        android:textColor="@color/cis_darker_gray"
+        app:layout_constraintBottom_toTopOf="@+id/challengesList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toggle2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
