@@ -30,8 +30,8 @@ public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardView
     public String[] wizardQuestions = {
             "Do you prefer to play sports indoors or outdoors?",
             "Do you prefer to play sports in a group or individually?",
-            "Do you prefer to exercise more intensively (Shorter but harder) or more enduring (Calmer but longer)",
-            "If you had to choose a category of sport, which of the following would you choose?"
+            "Do you prefer more intense or enduring exercise?",
+            "Choose a sport category that intrigues you the most:"
     };
 
     //TODO Make new String[] to fit the new answers (Do like radioButtonGroup Last but for each question)

@@ -105,7 +105,16 @@ public class Wizard extends AppCompatActivity {
         });
 
 
+        //Set toolbar text
+        TextView toolbarText = findViewById(R.id.toolbarText);
+        toolbarText.setText("Quiz");
+
     }
+    //Måste vara public av någon anledning??? Venne hur denna funkar
+    public void goBack(View view){
+        this.onBackPressed();
+    }
+
     //TODO: Add java-doc
     public void addDotsIndicator(int position){
         mDotLayout.removeAllViews();
