@@ -42,7 +42,7 @@ public class Sport {
         return favourite;
     }
 
-    public void setCompleted(boolean favourite) {
+    public void setFavourite(boolean favourite) {
         this.favourite = favourite;
     }
 

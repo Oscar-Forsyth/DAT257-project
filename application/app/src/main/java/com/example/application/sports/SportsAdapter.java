@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.application.R;
 import com.example.application.animations.Animations;
 import com.example.application.challenges.Challenge;
+import com.example.application.challenges.ChallengesActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -34,8 +36,14 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
     private LayoutInflater inflater;
     private List<Sport> sports;
     private int mExpandedPosition = -1; //TODO old can be removed
+    private AvailableSportsActivity parent;
 
-    public SportsAdapter(Context ctx, List<Sport> sports){
+    public SportsAdapter(Context ctx, List<Sport> sports, AvailableSportsActivity parent) {
+        this.inflater = LayoutInflater.from(ctx);
+        this.sports = sports;
+        this.parent = parent;
+    }
+    public SportsAdapter(Context ctx, List<Sport> sports) {
         this.inflater = LayoutInflater.from(ctx);
         this.sports = sports;
     }
@@ -60,12 +68,16 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
      * @param position
      */
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //This part binds the necessary information to the dynamic TextViews and ImageViews.
         holder.name.setText(sports.get(position).getName());
         holder.description.setText(sports.get(position).getDescription());
         Picasso.get().load(sports.get(position).getLogo()).resize(300,300).onlyScaleDown().into(holder.logo);
+
+        addStarListener(holder.itemView, position);
+        addFavouriteCheckBoxListener(holder.itemView, position);
 
         //When clicking on a sports card
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -93,26 +105,42 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void addStarListener(View view, int position){
-        ImageView star = view.findViewById(R.id.button_favorite);
+        ToggleButton star = view.findViewById(R.id.button_favorite);
         Sport sport = sports.get(position);
 
         star.setOnClickListener(v -> {
-            //animations just dont work on this....
 
-            if(star.getDrawableState().equals(true)){
+            if(star.isChecked()){
                 sport.setFavourite(true);
-                // animateBoxes(view,1);
+                System.out.println("ok");  //TODO: Remove
             }else{
                 sport.setFavourite(false);
-                //animateBoxes(view,-1);
             }
-            parent.refresh(view);
-            parent.saveFavouriteSport();
-
+            parent.saveFavoriteSport();
 
         });
 
     }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void addFavouriteCheckBoxListener(View view, int position) {
+        CheckBox checkBox = view.findViewById(R.id.favoriteCheckBox);
+        Sport sport = sports.get(position);
+
+        checkBox.setOnClickListener(v -> {
+
+            if(checkBox.isChecked()){
+                sport.setFavourite(true);   //TODO: ???
+                parent.displayFavourites(view);
+                System.out.println("displaying favorites");  //TODO: Remove
+            }else{
+                parent.getSportsList();
+            }
+
+        });
+    }
+
 
     /**
      * checks if the box is extended and does the appropriate action depending on what the case is
@@ -149,8 +177,10 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
     protected class ViewHolder extends  RecyclerView.ViewHolder{
         TextView name, description;
         Button linkButton;
-        ImageView logo, showMore, favoriteStar;
+        ImageView logo, showMore;
         LinearLayout layoutExpand;
+        ToggleButton favouriteStar;
+        CheckBox showFavourites;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -160,7 +190,8 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
             linkButton = itemView.findViewById(R.id.link);
             layoutExpand = itemView.findViewById(R.id.layoutExpand);
             showMore = itemView.findViewById(R.id.showMore);
-            favoriteStar = itemView.findViewById(R.id.favorite);
+            favouriteStar = itemView.findViewById(R.id.button_favorite);
+            showFavourites = itemView.findViewById(R.id.favoriteCheckBox);
         }
     }
 

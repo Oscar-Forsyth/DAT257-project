@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
@@ -18,6 +19,9 @@ import android.widget.ToggleButton;
 import com.example.application.R;
 import com.example.application.Tag;
 import com.example.application.animations.Animations;
+import com.example.application.challenges.Challenge;
+import com.example.application.challenges.ChallengesAdapter;
+import com.example.application.challenges.DailyChallengesAdapter;
 import com.example.application.recommended.Favourites;
 
 import org.json.JSONArray;
@@ -27,7 +31,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * This class more or less extracts the information that's stored in sports.json and puts it into a
@@ -76,8 +82,7 @@ public class AvailableSportsActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        //TODO: To be fixed
-        Favourites.newInstance(favouriteSportsKey, favouriteSportsJson);
+        extractFavouriteSports();
 
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.frameLayout, filterFragment).commit();
@@ -97,7 +102,54 @@ public class AvailableSportsActivity extends AppCompatActivity {
         });
     }
 
+    public void extractFavouriteSports(){
+        SharedPreferences favouriteSports = getSharedPreferences("FavouriteSports", MODE_PRIVATE);
+        Set<String> set = favouriteSports.getStringSet("favouritedSport",new HashSet<>());
+        for (int i = 0; i < set.size(); i++) {
+            System.out.println("SET:" + i + ":" +set.toArray()[i].toString());
+        }
+        for (int i = 0; i < set.size(); i++) {
+            for (int j = 0; j < sports.size(); j++) {
+                System.out.println(set.toArray()[i].toString()+ ":" + sports.get(j).getName());
+                if(set.toArray()[i].toString().equals(sports.get(j).getName())){
+                    if(sports.get(j).isFavourite()){
+                        sports.get(j).setFavourite(false);
+                    }else{
+                        sports.get(j).setFavourite(true);
+                    }
 
+                    System.out.println("accepted");
+                    break;
+                }
+            }
+
+        }
+    }
+
+    public void saveFavoriteSport(){
+        SharedPreferences.Editor editor = getSharedPreferences("FavouriteSports", MODE_PRIVATE).edit();
+        Set<String> favouriteSportsSet = new HashSet<>();
+        for (Sport s : sports) {
+            if(s.isFavourite()){
+                favouriteSportsSet.add(s.getName());
+            }
+        }
+        editor.putStringSet("favouritedSport", favouriteSportsSet);
+        editor.apply();
+    }
+
+    public void displayFavourites(View view){
+        sports.clear();
+
+        for (Sport s : sports) {
+            if(s.isFavourite()){
+                sports.add(s);
+            }
+        }
+        //displays favourited sports
+        SportsAdapter adapter = new SportsAdapter(getApplicationContext(), sports, this);
+        recyclerView.setAdapter(adapter);
+    }
 
     /**
      * JSON content is read from local file
@@ -149,7 +201,7 @@ public class AvailableSportsActivity extends AppCompatActivity {
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        SportsAdapter sportsAdapter = new SportsAdapter(getApplicationContext(), sports);
+        SportsAdapter sportsAdapter = new SportsAdapter(getApplicationContext(), sports, this);
         recyclerView.setAdapter(sportsAdapter);
 
 
