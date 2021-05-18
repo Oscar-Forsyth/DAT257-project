@@ -1,5 +1,6 @@
 package com.example.application.recommended;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -7,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,21 +25,35 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 //TODO Documentation on what this class does is missing
+
+/**
+ * This class is responsible for creating(painting) the cards that appear in the recyclerviews in "Your Sports"
+ */
 public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommendedAdapter.ViewHolder>{
 
     private LayoutInflater inflater;
+    private QuizRecommendedAdapter thisAdapter;
+    private boolean isInFavourites=false;
 
     private List<Sport> sports;
-    //TODO Not used?
-    private int mExpandedPosition = -1;
 
-    public QuizRecommendedAdapter(Context ctx, List<Sport> sports){
+    /**
+     * the used constructor for this adapter
+     * @param ctx its activity
+     * @param sports contains all sports that should have a cardview created for them
+     * @param isInFavourites true/false depending on which fragment this was called from
+     */
+    public QuizRecommendedAdapter(Context ctx, List<Sport> sports, boolean isInFavourites){
         this.inflater = LayoutInflater.from(ctx);
         this.sports = sports;
+        thisAdapter=this;
+        this.isInFavourites=isInFavourites;
 
     }
-    //super methods---------------------------------------------------------------------------------------
-    //TODO JavaDoc might be useful here
+    /**
+     * Paints a custom_recommended_sport.xml for each sport. It is called once for every Sport in list sports
+     * @return the view of the specified xml
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,7 +61,12 @@ public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommended
         return new ViewHolder(view);
     }
 
-    //TODO JavaDoc might be useful here
+    /**
+     * Modifies the fields for each Sport's xml view, for example sets the xml's Text to the name of the Sport.
+     * Also sets listeners to various buttons on the xml
+     * @param holder the card (xml)
+     * @param position the index in sports that it is currently working on
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
@@ -72,8 +94,37 @@ public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommended
                 v.getContext().startActivity(i);
             }
         });
+        holder.favouriteButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(isChecked){
+                    //add to favourites and save
+
+                }
+                else if(isInFavourites){
+                    String nameOfListItem = holder.name.getText().toString();
+                    int index=0;
+                    for(int i=0;i<sports.size();i++){
+                        if(sports.get(i).getName().equals(nameOfListItem)){
+                            index=i;
+                            break;
+                        }
+                    }
+                    sports.remove(index);
+                    thisAdapter.notifyItemRemoved(index);
+                }
+            }
+        });
     }
 
+    /**
+     * expands the card and shows more information
+     * @param isExpanded if it is already expanded
+     * @param v the view that was interacted with
+     * @param layoutExpand the hidden parts of the card
+     * @return
+     */
     private boolean toggleLayout(boolean isExpanded, View v, LinearLayout layoutExpand) {
         Animations.toggleArrow(v, isExpanded);
         if (isExpanded) {
@@ -84,19 +135,25 @@ public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommended
         return isExpanded;
     }
 
-    //TODO JavaDoc might be useful here
+    /**
+     * returns the length of the list that holds items to be painted
+     * @return the length of the list input
+     */
     @Override
     public int getItemCount() {
         return sports.size();
     }
     //---------------------------------------------------------------------------------------
 
-    //TODO JavaDoc might be useful here
+    /**
+     * The class that holds the information of the actual view, ie what appears on the screen.
+     */
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView name, description;
         Button linkButton;
         ImageView logo, showMore;
         LinearLayout layoutExpand;
+        ToggleButton favouriteButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -107,6 +164,9 @@ public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommended
             linkButton = itemView.findViewById(R.id.link);
             layoutExpand = itemView.findViewById(R.id.layoutExpand);
             showMore = itemView.findViewById(R.id.showMore);
+            favouriteButton = itemView.findViewById(R.id.favouriteButton);
+
+
         }
     }
 }
