@@ -20,7 +20,9 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-//TODO add explaining comment what this class should do
+/**
+ * The activity that is created when "Your Sports" is clicked in the main menu
+ */
 public class RecommendedActivity extends AppCompatActivity {
 
     private boolean TAKEN_QUIZ;
@@ -30,20 +32,18 @@ public class RecommendedActivity extends AppCompatActivity {
     private RadioButton favouritesButton;
     private ArrayList<Sport>favouriteSports;
 
-    //TODO add comment explaining what this method does
+    /**
+     * Checks if the user has taken the quiz previously (TAKEN_QUIZ). If not, one activity is created, and if not, another is instead.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //TODO remove the line below if it is unnecessary
-        //setContentView(R.layout.activity_recommended);
-
-
-
         SharedPreferences prefs = getSharedPreferences("Save", MODE_PRIVATE);
         TAKEN_QUIZ = prefs.getBoolean("takenQuiz", false);
 
-        // TODO explain what happens here?
+        //if the user has taken the quiz previously, one layout is seen, and if not, another layout that prompts the user to start the quiz is shown
         if(TAKEN_QUIZ){
             setContentView(R.layout.activity_recommended_empty);
             FragmentManager fm = getSupportFragmentManager();
@@ -52,6 +52,7 @@ public class RecommendedActivity extends AppCompatActivity {
             favouritesButton = findViewById(R.id.favouritesButton);
             recommendedButton.setChecked(true);
 
+            //when the user clicks on the Recommended-tab, the QuizRecommended fragment replaces the layout in the middle
             recommendedButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -60,6 +61,7 @@ public class RecommendedActivity extends AppCompatActivity {
                     System.out.println("clicked on recommended");
                 }
             });
+            //when the user clicks on the Favourite-tab, the Favourites fragment replaces the layout in the middle
             favouritesButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -75,17 +77,22 @@ public class RecommendedActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.toolbarText);
         textView.setText("Your Sports");
 
-
-
     }
 
-    //TODO add comment explaining the method here
+    /**
+     * opens the quiz activity
+     * @param view
+     */
     public void openQuizWizard(View view) {
         Intent intent = new Intent(this, Wizard.class);
         startActivity(intent);
     }
 
-    //TODO add comment explaining the method here
+    /**
+     * goes back to the previous activity (works just like the back button on the android phone)
+     * @param view
+     */
+
     public void goBack(View view){
         this.onBackPressed();
     }

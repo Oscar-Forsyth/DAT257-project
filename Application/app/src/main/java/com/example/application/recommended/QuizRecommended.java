@@ -329,7 +329,7 @@ public class QuizRecommended extends Fragment {
             top5Sports = retrieveList(savedSports);
 
 
-        adapter = new QuizRecommendedAdapter(requireActivity().getApplicationContext(), top5Sports);
+        adapter = new QuizRecommendedAdapter(requireActivity().getApplicationContext(), top5Sports, false);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireActivity().getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
         recommendedList.setLayoutManager(gridLayoutManager);
         recommendedList.setAdapter(adapter);

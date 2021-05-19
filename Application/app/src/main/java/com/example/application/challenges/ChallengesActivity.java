@@ -49,7 +49,6 @@ public class ChallengesActivity extends AppCompatActivity {
 
     private List<Challenge> challenges;
     private List<Challenge> missions = new ArrayList<>();
-    private List<Challenge> longChallenges = new ArrayList<>();
     //user story 1.8
     private List<Challenge> allDailyChallenges = new ArrayList<>();
     private List<Challenge> currentDailyChallenges = new ArrayList<>();

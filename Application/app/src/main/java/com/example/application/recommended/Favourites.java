@@ -141,7 +141,7 @@ public class Favourites extends Fragment {
         refreshRecyclerView();
     }
     private void refreshRecyclerView(){
-        adapter = new QuizRecommendedAdapter(requireActivity().getApplicationContext(), favouriteSportsList);
+        adapter = new QuizRecommendedAdapter(requireActivity().getApplicationContext(), favouriteSportsList, true);
         favouritesRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity().getApplicationContext()));
         favouritesRecyclerView.setAdapter(adapter);
     }
