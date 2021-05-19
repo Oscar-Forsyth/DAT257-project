@@ -7,12 +7,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.provider.MediaStore;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -111,8 +113,8 @@ public class Wizard extends AppCompatActivity {
         //Set toolbar text
         TextView toolbarText = findViewById(R.id.toolbarText);
         toolbarText.setText("Quiz");
-
     }
+
     //Måste vara public av någon anledning??? Venne hur denna funkar
     public void goBack(View view){
         this.onBackPressed();
@@ -156,7 +158,6 @@ public class Wizard extends AppCompatActivity {
 
 
             if(position == 0){
-
                 mWizardNextButton.setEnabled(true);
                 mWizardBackButton.setEnabled(false);
                 mWizardBackButton.setVisibility(View.INVISIBLE);
