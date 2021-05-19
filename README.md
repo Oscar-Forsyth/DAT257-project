@@ -6,11 +6,11 @@ KPI - https://docs.google.com/spreadsheets/d/15tQEvGoZsbjJtdT7QCStofYVAN74xMPMvo
 Mockup - https://miro.com/app/board/o9J_lLFV7rY=/
 
 
-Team members:
-Hannes Svahn
-Mantas Trakanavicius
-Oscar Forsyth
-Oscar Johansson
-Simon Larsson
-Simon Schuster
-Victor Koch
+Team members:\n
+Hannes Svahn - Hemlos\n
+Mantas Trakanavicius - Trakanavicius\n
+Oscar Forsyth - goatlover\n
+Oscar Johansson - OscarJohansson1\n
+Simon Larsson - silarss\n
+Simon Schuster - simonindek\n
+Victor Koch - victor-koch
