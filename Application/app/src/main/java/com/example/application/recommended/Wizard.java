@@ -49,7 +49,7 @@ public class Wizard extends AppCompatActivity {
 
         v = LayoutInflater.from(this).inflate(R.layout.wizard_layout, null);
 
-        mSlideViewPager = findViewById(R.id.slideView);      //TODO: Change the background image (in the XML?)
+        mSlideViewPager = findViewById(R.id.slideView);
         mDotLayout = findViewById(R.id.dotsLayout);
 
         mWizardNextButton = findViewById(R.id.wizardNextButton);
@@ -59,7 +59,11 @@ public class Wizard extends AppCompatActivity {
 
         addDotsIndicator(0);
 
+        //Stupid bug that forces these method calls, due to dotLayout nor appearing
+        mSlideViewPager.setCurrentItem(1);
         mSlideViewPager.setCurrentItem(0);
+        viewListener.onPageSelected(0);
+
         //mRadioGroup.check(mRadioGroup.getChildAt(0).getId());   //TODO: Remove?
 
         mSlideViewPager.registerOnPageChangeCallback(viewListener);
@@ -104,7 +108,6 @@ public class Wizard extends AppCompatActivity {
 
         });
 
-
         //Set toolbar text
         TextView toolbarText = findViewById(R.id.toolbarText);
         toolbarText.setText("Quiz");
@@ -119,8 +122,7 @@ public class Wizard extends AppCompatActivity {
     public void addDotsIndicator(int position){
         mDotLayout.removeAllViews();
         TextView[] mDots = new TextView[NUMBER_OF_QUESTIONS];
-
-
+        
         for (int i = 0; i < mDots.length; i++) {
             mDots[i] = new TextView(this);
             mDots[i].setText(Html.fromHtml("&#8226;"));
