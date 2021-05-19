@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.application.MainMenu;
 import com.example.application.R;
 import com.example.application.sports.Sport;
 
@@ -84,8 +85,7 @@ public class RecommendedActivity extends AppCompatActivity {
      * @param view
      */
     public void openQuizWizard(View view) {
-        Intent intent = new Intent(this, Wizard.class);
-        startActivity(intent);
+        this.onBackPressed();
     }
 
     /**
@@ -94,7 +94,9 @@ public class RecommendedActivity extends AppCompatActivity {
      */
 
     public void goBack(View view){
-        this.onBackPressed();
+        Intent intent = new Intent(this,MainMenu.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 
     public ArrayList<Sport> getFavouriteSports(){

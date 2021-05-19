@@ -9,7 +9,11 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/custom_toolbar" />
+        layout="@layout/custom_toolbar"
+        app:layout_constraintBottom_toTopOf="@+id/slideView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/wizardBackButton"

@@ -18,6 +18,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.application.MainMenu;
 import com.example.application.R;
 import com.example.application.recommended.RecommendedActivity;
 import com.example.application.recommended.WizardAdapter;
@@ -115,10 +116,7 @@ public class Wizard extends AppCompatActivity {
         toolbarText.setText("Quiz");
     }
 
-    //Måste vara public av någon anledning??? Venne hur denna funkar
-    public void goBack(View view){
-        this.onBackPressed();
-    }
+
 
     //TODO: Add java-doc
     public void addDotsIndicator(int position){
