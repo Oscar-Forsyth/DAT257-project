@@ -85,7 +85,8 @@ public class RecommendedActivity extends AppCompatActivity {
      * @param view
      */
     public void openQuizWizard(View view) {
-        this.onBackPressed();
+        Intent intent = new Intent(this, Wizard.class);
+        startActivity(intent);;
     }
 
     /**

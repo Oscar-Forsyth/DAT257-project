@@ -32,7 +32,7 @@ public class Animations {
 
                 view.getLayoutParams().height = interpolatedTime == 1
                         ? ViewGroup.LayoutParams.WRAP_CONTENT
-                        : (int) (actualheight * interpolatedTime);
+                        : Math.max(1, (int) (actualheight * interpolatedTime));
                 view.requestLayout();
             }
         };

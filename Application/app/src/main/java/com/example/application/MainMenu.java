@@ -71,7 +71,11 @@ public class MainMenu extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //TODO Should not be needed here !?
     public void goBack(View view){
         this.onBackPressed();
     }
+
+    @Override
+    public void onBackPressed(){ moveTaskToBack(true); }
 }

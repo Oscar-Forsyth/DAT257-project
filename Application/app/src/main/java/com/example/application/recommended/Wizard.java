@@ -184,4 +184,10 @@ public class Wizard extends AppCompatActivity {
 
         }
     };
+
+    public void goBack(View view){
+        Intent intent = new Intent(this,MainMenu.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
 }
