@@ -244,7 +244,7 @@ public class ChallengesActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     challenge.setDescription(" ");
                 }
-                if(challenge.getEndDate().compareTo(currentDate) >= 0) {
+                if(challenge.getEndDate().compareTo(currentDate) > 0) { //TODO Works for days without ending time
                     challenges.add(challenge);
                 }
             }

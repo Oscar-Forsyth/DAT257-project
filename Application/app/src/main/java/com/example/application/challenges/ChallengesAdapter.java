@@ -89,8 +89,10 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
             public void onClick(View v) {
                 if(holder.description.getVisibility() == View.GONE && !challenges.get(position).getDescription().equals(" ")) {
                     holder.description.setVisibility(View.VISIBLE);
+                    holder.title.setSingleLine(false);
                 } else {
                     holder.description.setVisibility(View.GONE);
+                    holder.title.setSingleLine(true);
                 }
 
 
