@@ -120,6 +120,7 @@ public class AvailableSportsActivity extends AppCompatActivity {
                 sport.setName(sportObject.getString("name").toString());
                 sport.setDescription(sportObject.getString("description".toString()));
                 sport.setLogo(sportObject.getString("logo"));
+                sport.setEmail(sportObject.getString("email"));
                 sport.setLink(sportObject.getString("link"));
 
 

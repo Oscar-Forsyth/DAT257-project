@@ -48,11 +48,11 @@ public class EventsActivity extends AppCompatActivity {
     private List<Event> events;
     private final List<Event> currentEvents = new ArrayList<>();
     private final List<Event> dayEvents = new ArrayList<>();
-    private final List<Sport> recommendedSports = new ArrayList<>();
-    private final List<Sport> favouriteSports = new ArrayList<>();
+    private List<Sport> recommendedSports;
+    private List<Sport> favouriteSports;
     private boolean isCalenderViewOpen = false;
 
-    private EventsJSONConverter eventsJSONConverter = new EventsJSONConverter();
+    private final EventsJSONConverter eventsJSONConverter = new EventsJSONConverter();
     private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/cis-chalmers.se_295gphnnjamvidi831rg4f0120@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
 
     private TextView headerTitle, monthView, noEventsText;
@@ -194,6 +194,28 @@ public class EventsActivity extends AppCompatActivity {
         sdf = new SimpleDateFormat("yyyy-MM-dd");
         savedDate = sdf.format(date);
         headerTitle.setText("Upcoming Events");
+        initiateRecAndFavSports();
+    }
+
+    private void initiateRecAndFavSports() {
+        recommendedSports = new ArrayList<>();
+        Sport badminton = new Sport();
+        badminton.setEmail("ida.hoglundpersson@cis-chalmers.se");
+        Sport basket = new Sport();
+        basket.setEmail("basket@cis-chalmers.se");
+        Sport innebandy = new Sport();
+        innebandy.setEmail("jonathan.stalberg@cis-chalmers.se");
+        Sport tennis = new Sport();
+        tennis.setEmail("tennis@cis-chalmers.se");
+        Sport volley = new Sport();
+        volley.setEmail("jonathan.stalberg@cis-chalmers.se");
+        recommendedSports.add(badminton);
+        recommendedSports.add(basket);
+        recommendedSports.add(innebandy);
+        recommendedSports.add(tennis);
+        recommendedSports.add(volley);
+        favouriteSports = new ArrayList<>();
+        favouriteSports.add(badminton);
     }
 
     private void filterUpdated() {
@@ -222,10 +244,10 @@ public class EventsActivity extends AppCompatActivity {
     }
 
     private void findActivitiesFromSports(List<Sport> sports) {
-        for (Event a : events) {
+        for (Event e : events) {
             for (Sport s : sports) {
-                if (s.getEmail().equals(a.getCreator()) && !currentEvents.contains(a)) {
-                    currentEvents.add(a);
+                if (s.getEmail().equals(e.getCreator()) && !currentEvents.contains(e)) {
+                    currentEvents.add(e);
                     break;
                 }
             }

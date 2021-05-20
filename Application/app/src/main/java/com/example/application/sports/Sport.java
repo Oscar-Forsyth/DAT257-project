@@ -27,11 +27,12 @@ public class Sport {
 
     //TODO This constructor is never called, this is due to that the sports values are set with the set methods instead, feels like bad practice
     //TODO This is done in QuizRecommended and AvailableSportsActivity
-    public Sport(String name,String description,String logo, String link, Boolean isExpanded,  List<Tag> tags){
+    public Sport(String name,String description,String logo, String link, String email, Boolean isExpanded,  List<Tag> tags){
         this.name = name;
         this.description= description;
         this.logo = Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + logo);
         this.link = link;
+        this.email = email;
         this.isExpanded = isExpanded;
         this.tags = tags;
     }
