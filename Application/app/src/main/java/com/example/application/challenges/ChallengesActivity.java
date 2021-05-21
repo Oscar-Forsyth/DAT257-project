@@ -167,6 +167,7 @@ public class ChallengesActivity extends AppCompatActivity {
         if (json==null){
             currentDailyChallenges = new ArrayList<>();
             completedDailyChallenges = new ArrayList<>();
+            System.out.println("json nulllllllllllllllll.");
             /*
             for (int i = 0; i<dailyChallengesPerDay; i++){
                 currentDailyChallenges.add(allDailyChallenges.get(i));
@@ -175,6 +176,7 @@ public class ChallengesActivity extends AppCompatActivity {
 
              */
         }
+        currentDailyChallenges.size();
 
     }
 
@@ -401,7 +403,10 @@ public class ChallengesActivity extends AppCompatActivity {
         activeButton.setChecked(true);
         //if the date has changed since the last time the app was opened, new daily challenges are presented, else it just loads the saved daily challenges
         if (checkIfNewDate()){
+            System.out.println("there was a new date and therefore new daily challenges are loaded");
             loadNewCurrentDailyChallenges();
+            saveDailyChallenges();
+            System.out.println("........................................................................................................................");
         }
         DailyChallengesAdapter adapter = new DailyChallengesAdapter(this);
         updateNoChallengesText("You've completed all today's challenges!", adapter.getItemCount() == 0);
