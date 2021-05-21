@@ -195,6 +195,7 @@ public class ChallengesActivity extends AppCompatActivity {
 
                 extractSavedMissions();
                 addToLayout();
+                //scrollToToday();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -245,7 +246,7 @@ public class ChallengesActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     challenge.setDescription(" ");
                 }
-                if(challenge.getEndDate().compareTo(currentDate) > 0) { //TODO Works for days without ending time
+                if(challenge.getEndDate().compareTo(currentDate) > 0) {
                     challenges.add(challenge);
                 }
             }
@@ -324,10 +325,20 @@ public class ChallengesActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    private void scrollToToday() {
+        String currentDate = dateToday();
+        int i;
+        for (i = 0; i < challenges.size()-1; i++) {
+            if(challenges.get(i).getEndDate().compareTo(currentDate) >= 0) {
+                break;
+            }
+        }
+        recyclerView.scrollToPosition(i);
+    }
+
     //it had to be done... but at what cost
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void refresh(View view){
-
         if(activeButton.isChecked()){
             displayActive(view);
         }else{
@@ -347,7 +358,6 @@ public class ChallengesActivity extends AppCompatActivity {
         ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions,this);
         updateNoChallengesText("You've completed all active challenges!", adapter.getItemCount() == 0);
         recyclerView.setAdapter(adapter);
-
     }
     /**
      * either displays Missions or DailyChallenges (both have Active-tab selected)
@@ -356,7 +366,6 @@ public class ChallengesActivity extends AppCompatActivity {
     public void displayActive(View view){
         if(isOnMissions){
             displayMissions(view);
-
         } else{
             displayCurrentDailyChallenges(view);
         }

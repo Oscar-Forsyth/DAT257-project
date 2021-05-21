@@ -48,7 +48,6 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
     @NonNull
     @Override
     public ChallengesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        System.out.println("onCreateViewHolder");
         View view = inflater.inflate(R.layout.custom_challenges,parent,false);
         viewList.add(view);
         return new ViewHolder(view);
