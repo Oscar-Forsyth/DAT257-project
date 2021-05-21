@@ -46,8 +46,6 @@ import com.example.application.sports.Sport;
  */
 public class QuizRecommended extends Fragment {
 
-    //TODO Clean up unused variable
-    Button buttonToMainMenu;
     Button buttonToRetakeQuiz;
     RecyclerView recommendedList;
 
@@ -70,7 +68,7 @@ public class QuizRecommended extends Fragment {
         // Required empty public constructor
     }
 
-    //TODO Is this used? Maybe it is actually. JavaDoc might be needed if used
+    //Required for fragment, just leave
     public static QuizRecommended newInstance(String param1, String param2) {
         QuizRecommended fragment = new QuizRecommended();
         Bundle args = new Bundle();
@@ -80,7 +78,7 @@ public class QuizRecommended extends Fragment {
         return fragment;
     }
 
-    //TODO JavaDoc to describe what the method does, variable names might be vague
+    //Required for fragment, just leave
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,22 +88,11 @@ public class QuizRecommended extends Fragment {
         }
     }
 
-    //TODO Clean up if finished, JavaDoc might be needed and this method is rather big. Breaking it down to smaller methods with clear names might be good
+    //Required for fragment, just leave
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_quiz_recommended, container, false);
-        /*
-        buttonToMainMenu= view.findViewById(R.id.buttonToMainMenu);
-        buttonToMainMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainMenu.class);
-                startActivity(intent);
-            }
-        });
-
-         */
         buttonToRetakeQuiz= view.findViewById(R.id.retakeQuizButton);
         buttonToRetakeQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +102,8 @@ public class QuizRecommended extends Fragment {
             }
         });
         resultList = requireActivity().getIntent().getIntegerArrayListExtra("QUIZ_RESULTS");
+
+        //TODO @Laban / @Goat, ta bort era SOUTS >:(
         if(resultList!=null){
             System.out.println("--\n");
             for (int i = 0; i < resultList.size(); i++) {
@@ -122,15 +111,10 @@ public class QuizRecommended extends Fragment {
             }
             System.out.println("--\n");
         }
-        // Inflate the layout for this fragment
-
-        //toolbar = view.findViewById(R.id.customToolbar);
-        //textView = (TextView) view.findViewById(R.id.toolbarText);
-        //textView.setText("Recommended Sports");
         return view;
     }
 
-    //TODO JavaDoc might be needed
+    //Required for fragment, just leave
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recommendedList= requireActivity().findViewById(R.id.recommendedList);
@@ -160,8 +144,7 @@ public class QuizRecommended extends Fragment {
         return json;
     }
 
-    //TODO Looks like it's not completely finished (the TODO in the method was not me), and the name is rather vague, so that could be made clearer
-    private void converter(List<Integer>list){
+    private void addQuizPoints(List<Integer>list){
         fillSportsWithPointsHashMapWithDefaultValues();
         //adds point to the tag itself by putting it into tagWithPoints
 
@@ -218,9 +201,6 @@ public class QuizRecommended extends Fragment {
                             tagsWithPoints.add(Tag.COMPLEX_MOVEMENTS);
                         }
                         break;
-
-
-
                 }
 
             }
@@ -228,8 +208,6 @@ public class QuizRecommended extends Fragment {
         }
     }
 
-    //TODO I feel like these comments could be JavaDoc as they are now, but the name is very clear
-    // so the documentation might not be necessary
     //for each tag in tagWithPoints, add points to the sports with that tag
     private void addPointsToSportsWithTag(){
         for (Tag t : tagsWithPoints){
@@ -247,8 +225,6 @@ public class QuizRecommended extends Fragment {
         }
     }
 
-    //TODO The name is vague and there are still System.out.println() that should be removed.
-    // The method might do too much, so consider breaking it down in smaller private methods
     //returns a list that only contains the 5 sports with the most points
     private List<Sport> onlyTop5(){
         List<Sport>top5Sports = new ArrayList<>();
@@ -260,16 +236,6 @@ public class QuizRecommended extends Fragment {
                 return o1.getValue().compareTo(o2.getValue());
             }
         }));
-        int b=0;
-
-        System.out.println("Sorterat: -----------------------------------");
-        for (Map.Entry<Sport, Integer> a : tmpListForSorting){
-
-            System.out.println("tmpList på plats " +b+": " + a.getKey().getName()+ ", poäng: " + a.getValue());
-
-            b++;
-        }
-
         int iterationCount=0;
         for (Map.Entry<Sport, Integer> a : tmpListForSorting){
             if(iterationCount>=5){
@@ -281,7 +247,7 @@ public class QuizRecommended extends Fragment {
 
         return top5Sports;
     }
-
+    //TODO Shorten name plox holy shit
     private void fillSportsWithPointsHashMapWithDefaultValues(){
         sportsWithPointsHashMap = new HashMap<>();
         for (Sport s : sports){
@@ -322,7 +288,7 @@ public class QuizRecommended extends Fragment {
         List <Sport> top5Sports;
 
         if(savedSports == null) {
-            converter(resultList);
+            addQuizPoints(resultList);
             top5Sports = onlyTop5();
             saveList(top5Sports);
         } else
