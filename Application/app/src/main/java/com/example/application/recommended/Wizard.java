@@ -185,6 +185,7 @@ public class Wizard extends AppCompatActivity {
         }
     };
 
+    /** Called when the back arrow is pressed in the toolbar */
     public void goBack(View view){
         Intent intent = new Intent(this,MainMenu.class);
         startActivity(intent);

@@ -76,6 +76,7 @@ public class MainMenu extends AppCompatActivity {
         this.onBackPressed();
     }
 
+    /** Make the back button close the application */
     @Override
     public void onBackPressed(){ moveTaskToBack(true); }
 }
