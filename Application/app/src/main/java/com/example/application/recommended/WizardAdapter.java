@@ -26,36 +26,34 @@ public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardView
         this.context = context;
         initializeArrayList();
     }
-    //TODO Change to new questions in CIS-Quiz
     public String[] wizardQuestions = {
             "Do you prefer to play sports indoors or outdoors?",
             "Do you prefer to play sports in a group or individually?",
-            "Do you prefer more intense or enduring exercise?",
-            "Choose a sport category that intrigues you the most:"
+            "What type of of performance level do you prefer?",
+            "If you had to choose a a category of sports, which would it be?"
     };
 
-    //TODO Make new String[] to fit the new answers (Do like radioButtonGroup Last but for each question)
-    public String[] radioButtonGroup1 = {  //TODO: Change to radioButtonGroupFirst to be more consistent with the other group?
+    public String[] radioButtonGroup1 = {
             "Indoors",
             "Outdoors",
             "No preference"
     };
-    public String[] radioButtonGroup2 = {  //TODO: Change to radioButtonGroupFirst to be more consistent with the other group?
+    public String[] radioButtonGroup2 = {
             "In groups",
             "Individually",
-            "Both work equally well"
+            "No preference"
     };
-    public String[] radioButtonGroup3 = {  //TODO: Change to radioButtonGroupFirst to be more consistent with the other group?
-            "Intense",
-            "Enduring",
-            "I like both"
+    public String[] radioButtonGroup3 = {
+            "Intensive",
+            "Endurance",
+            "Both"
     };
-    public String[] radioButtonGroup4 = {      //TODO: Change to a multi-choice question
+    public String[] radioButtonGroup4 = {
             "Ball sports",
             "Racket sports",
             "Precision sports",
             "Sports that are close to nature",
-            "Sports that challenge the body with complex movements"
+            "Sports with complex movements"
     };
 
 
