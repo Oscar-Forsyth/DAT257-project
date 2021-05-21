@@ -33,12 +33,15 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,6 +57,7 @@ public class ChallengesActivity extends AppCompatActivity {
     private List<Challenge> currentDailyChallenges = new ArrayList<>();
     private List<Challenge> completedDailyChallenges = new ArrayList<>();
     private RadioButton activeButton;
+    private TextView noChallengeText;
 
     private boolean isOnMissions = true;
     //specifies how many active daily challenges that will be shown each day
@@ -81,6 +85,9 @@ public class ChallengesActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.challengesList);
 
         activeButton = findViewById(R.id.activeButton);
+
+        noChallengeText = findViewById(R.id.noChallengeText);
+        noChallengeText.setVisibility(View.INVISIBLE);
 
         challenges = new ArrayList<>();
         extractChallenges();
@@ -197,8 +204,11 @@ public class ChallengesActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
+    //TODO This method now only adds challenges that has not ended. The check can't be made right
+    // after the try-catch (probably because the error takes some time to catch when the date has a
+    // time) so I put it just before the add
     private void addChallengesFromJSON(JSONObject response) {
-
+        String currentDate = dateToday();
         try {
             JSONArray items = response.getJSONArray("items");
             for (int i = 0; i < items.length(); i++) {
@@ -233,12 +243,20 @@ public class ChallengesActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     challenge.setDescription(" ");
                 }
-                challenges.add(challenge);
+                if(challenge.getEndDate().compareTo(currentDate) > 0) { //TODO Works for days without ending time
+                    challenges.add(challenge);
+                }
             }
             missions.addAll(challenges);
         } catch (JSONException | ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    private String dateToday() {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        return df.format(date);
     }
 
     private void sortChallenges() {
@@ -300,6 +318,7 @@ public class ChallengesActivity extends AppCompatActivity {
             }
         }
         ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions,this);
+        updateNoChallengesText("You've completed all active challenges!", adapter.getItemCount() == 0);
         recyclerView.setAdapter(adapter);
     }
 
@@ -324,7 +343,9 @@ public class ChallengesActivity extends AppCompatActivity {
                 }
         }
         ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions,this);
+        updateNoChallengesText("You've completed all active challenges!", adapter.getItemCount() == 0);
         recyclerView.setAdapter(adapter);
+
     }
     /**
      * either displays Missions or DailyChallenges (both have Active-tab selected)
@@ -333,9 +354,9 @@ public class ChallengesActivity extends AppCompatActivity {
     public void displayActive(View view){
         if(isOnMissions){
             displayMissions(view);
+
         } else{
             displayCurrentDailyChallenges(view);
-
         }
     }
     /**
@@ -351,11 +372,22 @@ public class ChallengesActivity extends AppCompatActivity {
             }
             ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions,this);
             recyclerView.setAdapter(adapter);
+            updateNoChallengesText("You haven't completed any challenges yet", adapter.getItemCount() == 0);
         }
         else{
             //displays completed daily challenges
             DailyChallengesAdapter adapter = new DailyChallengesAdapter(this);
             recyclerView.setAdapter(adapter);
+            updateNoChallengesText("You haven't completed any daily challenges yet", adapter.getItemCount() == 0);
+        }
+    }
+
+    private void updateNoChallengesText(String text, boolean isListEmpty) {
+        if(isListEmpty) {
+            noChallengeText.setText(text);
+            noChallengeText.setVisibility(View.VISIBLE);
+        } else {
+            noChallengeText.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -372,6 +404,7 @@ public class ChallengesActivity extends AppCompatActivity {
             loadNewCurrentDailyChallenges();
         }
         DailyChallengesAdapter adapter = new DailyChallengesAdapter(this);
+        updateNoChallengesText("You've completed all today's challenges!", adapter.getItemCount() == 0);
         recyclerView.setAdapter(adapter);
     }
     /**

@@ -4,6 +4,7 @@
     "logo": "/drawable/badminton",
     "description": "Come play the world's fastest sport with us! We welcome all skill levels and play every other week (even weeks) at Fjäderborgen. Our practices are planned by our organizers who make sure you get the most of each session. Both technical drills and free play at the end are part of the general setup.",
     "link": "https://www.facebook.com/Chalmersbadminton/?eid=ARDP1Awwu2ENES_eVaPV58cHU2nJQXmM8y74aULzGQz_4MpVIega4ofzJqdMMc6bbfE6BTHpYMRnEWjJ",
+    "email": "ida.hoglundpersson@cis-chalmers.se",
     "tags": ["INDOOR", "GROUP_AND_INDIVIDUAL", "INTENSE", "RACKET_SPORT"]
   },
 
@@ -12,6 +13,7 @@
     "logo": "/drawable/basketball",
     "description": "Join us, for a maximum of fun! Every Friday, 19h00 to 20h30, Valhalla Sporthall C-Hall / Valhallagatan 3 41251",
     "link": "https://www.facebook.com/CISBasket",
+    "email": "basket@cis-chalmers.se",
     "tags": ["INDOOR", "GROUP", "INTENSE", "BALLGAME"]
 
   },
@@ -21,6 +23,7 @@
     "logo": "/drawable/bicycle",
     "description": "We bring students who are interested in bicycle training together to train.",
     "link": "https://www.facebook.com/chalmerscykelklubb/",
+    "email": "cykel@cis-chalmers.se",
     "tags": ["OUTDOOR","INDIVIDUAL", "ENDURANCE", "NATURE"]
   },
 
@@ -29,6 +32,7 @@
     "logo": "/drawable/floorball",
     "description": "CIS Innebandy är en av de nyaste tillskotten av sporter hos Chalmers Studentkårs Idrottssällskap. Häng med på sidan för mer information. Träningar hålls torsdagar 20-21 i motionshallen i kårhuset Johanneberg.",
     "link": "https://www.facebook.com/CISInnebandy",
+    "email": "jonathan.stalberg@cis-chalmers.se",
     "tags": ["INDOOR", "GROUP", "INTENSE", "RACKET_SPORT"]
 
   },
@@ -38,6 +42,7 @@
     "logo": "/drawable/football",
     "description": "Chalmers Fotbollssällskap erbjuder alla teknologer på Chalmers möjlighet att spela fotboll vid sidan av studierna, på olika nivåer. Fotbollsällskapet grundades hösten 2016 och erbjuder spel i fotboll och futsal, för både tjejer och killar. Chalmers Football Club offers all students at Chalmers a possibility to play football on the side of the studies.",
     "link": "https://www.facebook.com/CISChalmersfotboll/",
+    "email": "jens.lundgren@cis-chalmers.se",
     "tags": ["OUTDOOR", "GROUP", "INTENSE", "BALLGAME"]
   },
 
@@ -46,6 +51,7 @@
     "logo": "/drawable/golf",
     "description": "Chalmers Golfsällskap är det sociala nätverket och mötesplatsen för golfande teknologer på Chalmers! Roliga tävlingar, nya golfkompisar och riktigt mycket gött häng helt enkelt! Chalmers Golf Club offers a meeting place for golfing students at Chalmers. Fun competition and new golf friends",
     "link": "https://www.facebook.com/chalmersgolfsallskap/",
+    "email": "golf@cis-chalmers.se",
     "tags": ["OUTDOOR", "INDIVIDUAL", "INTENSE", "PRECISION"]
   },
 
@@ -54,6 +60,7 @@
     "logo": "/drawable/modern_dancing",
     "description": "Modern dance - contemporary style - art jazz technique. No matter what level of prior experience you have or if you just want to try out and challenge yourself with rhythmic exercises. It’s all about fun, individual development and positive group energy.",
     "link": "https://www.facebook.com/chalmersmoderndance",
+    "email": "dance@cis-chalmers.se",
     "tags": ["INDOOR", "INDIVIDUAL", "ENDURANCE", "COMPLEX_MOVEMENTS"]
   },
 
@@ -62,6 +69,7 @@
     "logo": "/drawable/outdoors",
     "description": "Chalmers Outdoors is a part of CIS - Chalmers Idrottssällskap. We gather chalmerists who long for a good time outdoors in the Swedish nature, whether it's hiking or canoeing. Come join us!",
     "link": "https://www.facebook.com/chalmers.outdoors",
+    "email": "outdoor@cis-chalmers.se",
     "tags": ["OUTDOOR", "GROUP", "ENDURANCE", "NATURE"]
   },
 
@@ -70,6 +78,7 @@
     "logo": "/drawable/padel",
     "description": "Trainings, Chalmers Padel League and other padel events",
     "link": "https://www.facebook.com/chalmerspadelklubb/",
+    "email": "padel@cis-chalmers.se",
     "tags": ["OUTDOOR", "GROUP_AND_INDIVIDUAL", "INTENSE", "RACKET_SPORT"]
   },
 
@@ -78,6 +87,7 @@
     "logo": "/drawable/rowing",
     "description": "We offer rowing training on Tuesdays and Fridays during the whole year. We aim to have fun together on the water and those who want can participate with us at the Swedisch student championships.",
     "link": "https://www.facebook.com/Chalmersroddklubb/",
+    "email": "michael.bergmann@cis-chalmers.se",
     "tags": ["OUTDOOR", "GROUP_AND_INDIVIDUAL", "ENDURANCE", "NATURE"]
   },
 
@@ -86,6 +96,7 @@
     "logo": "/drawable/squash",
     "description": "Welcome to Chalmers Squash! We are in the middle of starting up, so for now we just want to know when you would like to play some squash!",
     "link": "https://www.facebook.com/ChalmersSquash",
+    "email": "squash@cis-chalmers.se",
     "tags": ["INDOOR", "GROUP_AND_INDIVIDUAL", "INTENSE", "RACKET_SPORT"]
   },
 
@@ -94,6 +105,7 @@
     "logo": "/drawable/swimming",
     "description": "Swim trainings at all levels once a week and competitions and camps together with other swim clubs at Swedish university's. Swedish students championship is the main goal and competition of the year.",
     "link": "https://www.facebook.com/simsektionenuttrarna/",
+    "email": "simning@cis-chalmers.se",
     "tags": ["INDOOR", "INDIVIDUAL", "INTENSE", "COMPLEX_MOVEMENTS"]
   },
   {
@@ -101,6 +113,7 @@
     "logo": "/drawable/tennis",
     "description": "Hello everybody and welcome to CIS-tennis. We are soon ready to start our training, but currently all activities through CIS are canceled until further notice per recommendations from FHM and Riksidrottsförbundet.",
     "link": "https://www.facebook.com/CIS-Chalmers-Tennis-110787827458866/",
+    "email": "tennis@cis-chalmers.se",
     "tags": ["INDOOR", "GROUP_AND_INDIVIDUAL", "INTENSE", "RACKET_SPORT"]
   },
 
@@ -109,6 +122,7 @@
     "logo": "/drawable/ultimate_frisbee",
     "description": "We are a team that is practicing Ultimate Frisbee every Tuesday 19-21 in Brunnsboskolan. Ultimate frisbee is a sports that is quite similar to handboll or football but played with a frisbee. Come and try it!",
     "link": "https://www.facebook.com/CIS-Chalmers-Ultimate-Frisbee-2051690351734304/",
+    "email": "chalmersultimatefrisbee@cis-chalmers.se",
     "tags": ["OUTDOOR", "GROUP", "INTENSE", "PRECISION"]
   },
 
@@ -117,6 +131,7 @@
     "logo": "/drawable/volleyball",
     "description": "Vi träffas en gång i veckan för att spela volleyboll tillsammans under matchförhållanden. Välkommen att prova på tre gånger innan du väljer att bli medlem! We meet once every week to play volleyboll together and have fun!",
     "link": "https://www.facebook.com/CIS-Chalmers-Volleybollklubb-878153389027431/",
+    "email": "jonathan.stalberg@cis-chalmers.se",
     "tags": ["INDOOR", "GROUP", "INTENSE", "BALLGAME"]
   },
 
@@ -125,6 +140,7 @@
     "logo": "/drawable/yoga",
     "description": "Chalmers Yoga classes are offered to all students of Chalmers to increase both mental and physical health. The classes are in English, adjusted to all levels and a physical form of yoga (Vinyasa Flow). You will get introduced to tools to increase your ability to focus, as well as physically opening up and strengthening your body.",
     "link": "https://www.facebook.com/ChalmersYoga/",
+    "email": "yoga@cis-chalmers.se",
     "tags": ["INDOOR", "GROUP", "ENDURANCE", "COMPLEX_MOVEMENTS"]
   }
 ]
