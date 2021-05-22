@@ -1,7 +1,6 @@
-# DAT257-project
+# IBM System/360 - DAT257-project
 DAT257 Agile software project management
 
-IBM System/360
 
 Links:
 
