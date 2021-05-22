@@ -106,12 +106,10 @@ public class Favourites extends Fragment {
         if (favouriteSportsList.isEmpty()){
             emptyListTextView.setVisibility(View.VISIBLE);
             favouritesRecyclerView.setVisibility(View.INVISIBLE);
-            System.out.println("list is empty");
         }
         else {
             emptyListTextView.setVisibility(View.INVISIBLE);
             favouritesRecyclerView.setVisibility(View.VISIBLE);
-            System.out.println("list is not empty");
         }
         refreshRecyclerView();
     }

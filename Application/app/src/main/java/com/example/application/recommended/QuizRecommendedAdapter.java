@@ -53,7 +53,7 @@ public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommended
         //thisAdapter=this;
         this.isInFavourites=isInFavourites;
         favouriteSports=SportsLoader.extractSavedSports("SavedFavouritesFile", "SavedFavouritesKey", ctx);
-        System.out.println("size of favourites when this was created: " + favouriteSports.size());
+
     }
     /**
      * Paints a custom_recommended_sport.xml for each sport. It is called once for every Sport in list sports
@@ -80,7 +80,6 @@ public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommended
         for(Sport fs : favouriteSports){
            if (fs.getName().equals(sports.get(position).getName())){
                holder.favouriteButton.setChecked(true);
-               System.out.println("this was a favourite: "+ fs.getName());
            }
         }
 

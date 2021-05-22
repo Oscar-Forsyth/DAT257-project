@@ -94,7 +94,6 @@ public class SportsLoader {
         Type type = new TypeToken<ArrayList<Sport>>(){}.getType();
         sports = gson.fromJson(json,type);
         if (json==null){
-            System.out.println("json is null in SportsLoader.extractSavedSports");
             sports = new ArrayList<>();
         }
         return sports;

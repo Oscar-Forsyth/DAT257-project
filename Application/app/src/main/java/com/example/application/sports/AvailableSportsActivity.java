@@ -70,11 +70,8 @@ public class AvailableSportsActivity extends AppCompatActivity {
         favoriteCheckBox = findViewById(R.id.favoriteCheckBox);
 
 
-        try {
-            extractSports();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        extractSports();
+
 
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.frameLayout, filterFragment).commit();
@@ -94,11 +91,8 @@ public class AvailableSportsActivity extends AppCompatActivity {
         favoriteCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                try {
-                    extractSports();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                extractSports();
+
                 if(isChecked){
                     refreshView(favouriteSports);
                 }
@@ -111,29 +105,11 @@ public class AvailableSportsActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * JSON content is read from local file
-     */
-    private String loadJSONFromAsset()  {
-        String json;
-        try {
-            InputStream is = getAssets().open("sports.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
 
     /**
      * JSON content is translated from loadJSONFromAsset
      */
-    private void extractSports() throws JSONException {
+    private void extractSports(){
         sports = SportsLoader.extractSavedSports("SavedSportsFile", "SavedSportsKey", this);
         favouriteSports = SportsLoader.extractSavedSports("SavedFavouritesFile", "SavedFavouritesKey", this);
     }

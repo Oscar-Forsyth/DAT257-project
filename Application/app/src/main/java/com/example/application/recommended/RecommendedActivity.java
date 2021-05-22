@@ -61,7 +61,6 @@ public class RecommendedActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     FragmentManager fm = getSupportFragmentManager();
                     fm.beginTransaction().replace(R.id.ActivityRecommendedLayout, new QuizRecommended()).commit();
-                    System.out.println("clicked on recommended");
                 }
             });
             //when the user clicks on the Favourite-tab, the Favourites fragment replaces the layout in the middle
@@ -70,7 +69,6 @@ public class RecommendedActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     FragmentManager fm = getSupportFragmentManager();
                     fm.beginTransaction().replace(R.id.ActivityRecommendedLayout, new Favourites()).commit();
-                    System.out.println("clicked on favourites");
                 }
             });
         } else {
@@ -79,7 +77,6 @@ public class RecommendedActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.customToolbar);
         textView = (TextView) findViewById(R.id.toolbarText);
         textView.setText("Your Sports");
-        //favouriteSports=SportsLoader.extractSavedSports("SavedFavouritesFile", "SavedFavouritesKey", this);
 
     }
 

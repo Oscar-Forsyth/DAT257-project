@@ -64,7 +64,6 @@ public class MainMenu extends AppCompatActivity {
                 e.printStackTrace();
             }
             SportsLoader.saveList(sports, "SavedSportsFile","SavedSportsKey", this);
-            System.out.println("first time in main menu");
             for (Sport s : sports){
                 System.out.println(s.getName());
             }

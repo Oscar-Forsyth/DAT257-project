@@ -128,22 +128,7 @@ public class QuizRecommended extends Fragment {
         }
     }
 
-    //TODO Small cleanup
-    private String loadJSONFromAsset() throws JSONException {
-        String json = null;
-        try {
-            InputStream is = requireActivity().getAssets().open("sports.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
+
 
     private void addQuizPoints(List<Integer>list){
         fillSportsWithPointsHashMapWithDefaultValues();
@@ -260,31 +245,6 @@ public class QuizRecommended extends Fragment {
     // There is also some temporary code for tests
     private void extractSports() throws JSONException {
         sports = SportsLoader.extractSavedSports("SavedSportsFile", "SavedSportsKey", requireActivity());
-/*
-        JSONArray arr = new JSONArray(loadJSONFromAsset());
-
-        for (int i = 0; i < arr.length(); i++) {
-            try {
-                JSONObject sportObject = arr.getJSONObject(i);
-
-                Sport sport = new Sport();
-                sport.setName(sportObject.getString("name").toString());
-                sport.setDescription(sportObject.getString("description".toString()));
-                sport.setLogo(sportObject.getString("logo"));
-                sport.setLink(sportObject.getString("link"));
-                JSONArray arrOfTags = sportObject.getJSONArray("tags");
-                for (int j = 0; j < arrOfTags.length(); j++) {
-                    sport.setTag(arrOfTags.getString(j));
-                }
-                
-                sports.add(sport);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
- */
 
         //adds points to every sport that can be found in tagsWithPoints
         SharedPreferences prefs = this.getActivity().getSharedPreferences("Save", Context.MODE_PRIVATE);
