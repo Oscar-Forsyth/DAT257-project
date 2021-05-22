@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.application.R;
+import com.example.application.SportsLoader;
 import com.example.application.Tag;
 import com.example.application.animations.Animations;
 
@@ -24,6 +27,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,10 +41,13 @@ public class AvailableSportsActivity extends AppCompatActivity {
      */
     private RecyclerView recyclerView;
     private FrameLayout backgroundFilter;
-    protected List<Sport> sports;
+
     private List<Tag> savedTags;
     private Fragment filterFragment;
     private static boolean filterExpanded;
+    private CheckBox favoriteCheckBox;
+    protected List<Sport> sports;
+    private List<Sport>favouriteSports;
 
     /**
      * the URL for our JSON-file
@@ -60,7 +67,8 @@ public class AvailableSportsActivity extends AppCompatActivity {
         filterFragment = new filterSports();
         filterExpanded = false;
 
-        sports = new ArrayList<>();
+        favoriteCheckBox = findViewById(R.id.favoriteCheckBox);
+
 
         try {
             extractSports();
@@ -83,6 +91,23 @@ public class AvailableSportsActivity extends AppCompatActivity {
                 filterExpanded = true;
             }
         });
+        favoriteCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                try {
+                    extractSports();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(isChecked){
+                    refreshView(favouriteSports);
+                }
+                else{
+                    refreshView(sports);
+                }
+            }
+        });
+        refreshView(sports);
     }
 
 
@@ -109,39 +134,19 @@ public class AvailableSportsActivity extends AppCompatActivity {
      * JSON content is translated from loadJSONFromAsset
      */
     private void extractSports() throws JSONException {
-
-        JSONArray arr = new JSONArray(loadJSONFromAsset());
-
-        for (int i = 0; i < arr.length(); i++) {
-            try {
-                JSONObject sportObject = arr.getJSONObject(i);
-
-                Sport sport = new Sport();
-                sport.setName(sportObject.getString("name").toString());
-                sport.setDescription(sportObject.getString("description".toString()));
-                sport.setLogo(sportObject.getString("logo"));
-                sport.setEmail(sportObject.getString("email"));
-                sport.setLink(sportObject.getString("link"));
-
-
-                JSONArray tagList = sportObject.getJSONArray("tags");
-                for(int j = 0; j < tagList.length(); j++)
-                    sport.addTag(Tag.valueOf(tagList.getString(j)));
-
-
-                sports.add(sport);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        SportsAdapter sportsAdapter = new SportsAdapter(getApplicationContext(), sports);
-        recyclerView.setAdapter(sportsAdapter);
-
-
+        sports = SportsLoader.extractSavedSports("SavedSportsFile", "SavedSportsKey", this);
+        favouriteSports = SportsLoader.extractSavedSports("SavedFavouritesFile", "SavedFavouritesKey", this);
     }
+    private void refreshView(List<Sport>theSports){
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        SportsAdapter sportsAdapter = new SportsAdapter(getApplicationContext(), theSports, favoriteCheckBox.isChecked());
+        recyclerView.setItemViewCacheSize(theSports.size());
+        recyclerView.setAdapter(sportsAdapter);
+    }
+    public boolean getStateOfFavoriteCheckBox(){
+        return favoriteCheckBox.isChecked();
+    }
+
     public void goBack(View view){
         this.onBackPressed();
     }

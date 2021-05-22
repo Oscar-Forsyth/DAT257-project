@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.application.R;
+import com.example.application.SportsLoader;
 import com.example.application.sports.Sport;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -43,7 +44,6 @@ public class Favourites extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    //TODO dummy list for testing purposes (the actual saved list has not been created yet)
     List<Sport> favouriteSportsList = new ArrayList<>();
     RecyclerView favouritesRecyclerView;
     QuizRecommendedAdapter adapter;
@@ -100,37 +100,9 @@ public class Favourites extends Fragment {
         extractSavedFavourites();
     }
 
-
-    //TODO save favourite (used after a sport's checkbox(star) was clicked)
-    //the key Strings are dummies atm
-    private void saveFavourites(){
-        saveList(favouriteSportsList, "favouritesKey", "favouritesJson");
-    }
-    private void saveList(List<Sport>list, String key, String key2){
-        SharedPreferences.Editor editor = requireActivity().getSharedPreferences(key, Context.MODE_PRIVATE).edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(list);
-        editor.putString(key2, json);
-        editor.apply();
-    }
-
-    //TODO the key Strings are dummies atm
     private void extractSavedFavourites(){
-        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("favouritesKey", Context.MODE_PRIVATE);
+        favouriteSportsList = SportsLoader.extractSavedSports("SavedFavouritesFile", "SavedFavouritesKey", requireActivity());
 
-        Gson gson = new Gson();
-
-        String json = sharedPreferences.getString("favouritesJson", null);
-
-        //tells gson to convert the json-file into an arraylist of type Sport
-        Type type = new TypeToken<List<Sport>>(){}.getType();
-        favouriteSportsList = gson.fromJson(json,type);
-
-        if (json==null){
-            favouriteSportsList = new ArrayList<>();
-            System.out.println("Json is null");
-            System.out.println(favouriteSportsList.isEmpty());
-        }
         if (favouriteSportsList.isEmpty()){
             emptyListTextView.setVisibility(View.VISIBLE);
             favouritesRecyclerView.setVisibility(View.INVISIBLE);
@@ -145,6 +117,7 @@ public class Favourites extends Fragment {
     }
     private void refreshRecyclerView(){
         adapter = new QuizRecommendedAdapter(requireActivity().getApplicationContext(), favouriteSportsList, true);
+        favouritesRecyclerView.setItemViewCacheSize(favouriteSportsList.size());
         favouritesRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity().getApplicationContext()));
         favouritesRecyclerView.setAdapter(adapter);
     }

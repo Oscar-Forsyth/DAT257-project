@@ -145,11 +145,13 @@ public class filterSports extends Fragment {
                 //Gets the whole list unfiltered
                 sports = ((AvailableSportsActivity) requireActivity()).getSportsList();
 
+
                 removeFromSportList();
 
                 //Update recycler view (Same as Activity)
                 recyclerView = getActivity().findViewById(R.id.sportsList);
-                sportsAdapter = new SportsAdapter(getActivity().getApplicationContext(), sports);
+                sportsAdapter = new SportsAdapter(getActivity().getApplicationContext(), sports, ((AvailableSportsActivity) requireActivity()).getStateOfFavoriteCheckBox());
+                recyclerView.setItemViewCacheSize(sports.size());
                 recyclerView.setAdapter(sportsAdapter);
 
                 //No sports text

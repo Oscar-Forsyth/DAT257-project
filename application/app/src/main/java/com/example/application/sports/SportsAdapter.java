@@ -7,14 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.application.R;
+import com.example.application.SportsLoader;
 import com.example.application.animations.Animations;
 import com.squareup.picasso.Picasso;
 
@@ -29,11 +32,17 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
     //TODO make changes that Intellij recommends here
     private LayoutInflater inflater;
     private List<Sport> sports;
-    private int mExpandedPosition = -1; //TODO old can be removed
+    private List<Sport> favouriteSports;
+    private boolean favouriteFilterOn;
+    private Context ctx;
 
-    public SportsAdapter(Context ctx, List<Sport> sports){
+
+    public SportsAdapter(Context ctx, List<Sport> sports, boolean isFavouriteFilterOn){
         this.inflater = LayoutInflater.from(ctx);
+        this.ctx = ctx;
         this.sports = sports;
+        favouriteFilterOn = isFavouriteFilterOn;
+        favouriteSports=SportsLoader.extractSavedSports("SavedFavouritesFile", "SavedFavouritesKey", ctx);
     }
 
     /**
@@ -63,6 +72,12 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
         holder.description.setText(sports.get(position).getDescription());
         Picasso.get().load(sports.get(position).getLogo()).resize(300,300).onlyScaleDown().into(holder.logo);
 
+        for(Sport fs : favouriteSports){
+            if (fs.getName().equals(sports.get(position).getName())){
+                holder.button_favorite.setChecked(true);
+            }
+        }
+
         //When clicking on a sports card
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +100,58 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
                 v.getContext().startActivity(i);
             }
         });
+
+        holder.button_favorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                String nameOfListItem = holder.name.getText().toString();
+                int index=0;
+                for(int i=0;i<sports.size();i++){
+                    if(sports.get(i).getName().equals(nameOfListItem)){
+                        index=i;
+                        break;
+                    }
+                }
+                Sport sportOfCurrentCard = sports.get(index);
+                if(isChecked){
+                    favouriteSports.add(sportOfCurrentCard);
+                }
+                else{
+                    removeSportFromFavourites(sportOfCurrentCard);
+                    if(favouriteFilterOn){
+                        sports.remove(sportOfCurrentCard);
+                        removeItemFromRecyclerView(index);
+                    }
+                }
+                SportsLoader.saveList(favouriteSports, "SavedFavouritesFile", "SavedFavouritesKey", ctx);
+                System.out.println("current saved favourites: -------------------------");
+                for(Sport s : favouriteSports){
+                    System.out.println(s.getName());
+                }
+            }
+        });
+    }
+    private void removeSportFromFavourites(Sport sport){
+        int indexOfSportToBeRemoved=-1;
+        for (int i=0; i<favouriteSports.size(); i++){
+            if(favouriteSports.get(i).getName().equals(sport.getName())){
+                indexOfSportToBeRemoved = i;
+            }
+        }
+        if(indexOfSportToBeRemoved!=-1){
+            favouriteSports.remove(indexOfSportToBeRemoved);
+        }
+    }
+    private void removeItemFromRecyclerView(int index){
+        this.notifyItemRemoved(index);
+    }
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     /**
@@ -122,7 +189,9 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
     protected class ViewHolder extends  RecyclerView.ViewHolder{
         TextView name, description;
         Button linkButton;
-        ImageView logo, showMore, favoriteStar;
+        ImageView logo, showMore;
+        ToggleButton button_favorite;
+
         LinearLayout layoutExpand;
 
         public ViewHolder(@NonNull View itemView) {
@@ -133,7 +202,7 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
             linkButton = itemView.findViewById(R.id.link);
             layoutExpand = itemView.findViewById(R.id.layoutExpand);
             showMore = itemView.findViewById(R.id.showMore);
-            favoriteStar = itemView.findViewById(R.id.favorite);
+            button_favorite = itemView.findViewById(R.id.button_favorite);
         }
     }
 

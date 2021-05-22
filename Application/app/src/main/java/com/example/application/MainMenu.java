@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -15,12 +16,21 @@ import com.example.application.calendar.EventsActivity;
 import com.example.application.challenges.ChallengesActivity;
 import com.example.application.recommended.RecommendedActivity;
 import com.example.application.sports.AvailableSportsActivity;
+import com.example.application.sports.Sport;
+
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 
 public class MainMenu extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView textView;
     private ImageView imageView;
+    private boolean firstTimeInMainMenu;
+    private ArrayList<Sport>sports;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -36,6 +46,29 @@ public class MainMenu extends AppCompatActivity {
         getSupportActionBar().setTitle(null);
         textView.setText("Chalmers Sports");
         imageView.setVisibility(View.GONE);
+        sports = new ArrayList<>();
+
+        SharedPreferences prefs = getSharedPreferences("SavedState", MODE_PRIVATE);
+        //if there is nothing saved, it is the first time the user opens the app and "firstTimeInMainMenu" should therefore be true
+        firstTimeInMainMenu = prefs.getBoolean("firstTimeInMainMenu", true);
+
+        if(firstTimeInMainMenu){
+            SharedPreferences.Editor editor = getSharedPreferences("SavedState", MODE_PRIVATE).edit();
+            editor.putBoolean("firstTimeInMainMenu", false);
+            editor.apply();
+            try {
+                sports = SportsLoader.extractSportsFromJson(getAssets().open("sports.json"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            SportsLoader.saveList(sports, "SavedSportsFile","SavedSportsKey", this);
+            System.out.println("first time in main menu");
+            for (Sport s : sports){
+                System.out.println(s.getName());
+            }
+        }
     }
 
 
@@ -79,4 +112,8 @@ public class MainMenu extends AppCompatActivity {
     /** Make the back button close the application */
     @Override
     public void onBackPressed(){ moveTaskToBack(true); }
+
+    private void saveList (){
+
+    }
 }

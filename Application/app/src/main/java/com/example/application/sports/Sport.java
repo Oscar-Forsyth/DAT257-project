@@ -16,7 +16,7 @@ import java.util.List;
 public class Sport {
     private String name;
     private String description;
-    private Uri logo;
+    private String logo;
     private String link;
     private String email; // Needed to filter activities
     private boolean isExpanded;
@@ -27,15 +27,18 @@ public class Sport {
 
     //TODO This constructor is never called, this is due to that the sports values are set with the set methods instead, feels like bad practice
     //TODO This is done in QuizRecommended and AvailableSportsActivity
+    /*
     public Sport(String name,String description,String logo, String link, String email, Boolean isExpanded,  List<Tag> tags){
         this.name = name;
         this.description= description;
-        this.logo = Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + logo);
+        this.logo = "android.resource://" + BuildConfig.APPLICATION_ID + logo;
         this.link = link;
         this.email = email;
         this.isExpanded = isExpanded;
         this.tags = tags;
     }
+
+     */
 
     public String getName() {
         return name;
@@ -54,11 +57,12 @@ public class Sport {
     }
 
     public Uri getLogo() {
-        return logo;
+        return Uri.parse(logo);
     }
 
     public void setLogo(String logo) {
-        this.logo = Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + logo);
+        this.logo = "android.resource://" + BuildConfig.APPLICATION_ID + logo;
+        //Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + logo);
         System.out.println(this.logo);
     }
 
@@ -104,5 +108,7 @@ public class Sport {
     public String getEmail() {
         return email;
     }
+
+
 }
 

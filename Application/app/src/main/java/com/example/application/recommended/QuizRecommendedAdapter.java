@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.application.R;
+import com.example.application.SportsLoader;
 import com.example.application.animations.Animations;
 import com.example.application.sports.Sport;
 import com.squareup.picasso.Picasso;
@@ -32,10 +33,12 @@ import java.util.List;
 public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommendedAdapter.ViewHolder>{
 
     private LayoutInflater inflater;
-    private QuizRecommendedAdapter thisAdapter;
-    private boolean isInFavourites=false;
+    //private QuizRecommendedAdapter thisAdapter;
+    private boolean isInFavourites;
 
     private List<Sport> sports;
+    private List<Sport> favouriteSports;
+    private Context ctx;
 
     /**
      * the used constructor for this adapter
@@ -45,10 +48,12 @@ public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommended
      */
     public QuizRecommendedAdapter(Context ctx, List<Sport> sports, boolean isInFavourites){
         this.inflater = LayoutInflater.from(ctx);
+        this.ctx=ctx;
         this.sports = sports;
-        thisAdapter=this;
+        //thisAdapter=this;
         this.isInFavourites=isInFavourites;
-
+        favouriteSports=SportsLoader.extractSavedSports("SavedFavouritesFile", "SavedFavouritesKey", ctx);
+        System.out.println("size of favourites when this was created: " + favouriteSports.size());
     }
     /**
      * Paints a custom_recommended_sport.xml for each sport. It is called once for every Sport in list sports
@@ -69,10 +74,15 @@ public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommended
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
         holder.name.setText(sports.get(position).getName());
         holder.description.setText(sports.get(position).getDescription());
         Picasso.get().load(sports.get(position).getLogo()).resize(300,300).onlyScaleDown().into(holder.logo);
+        for(Sport fs : favouriteSports){
+           if (fs.getName().equals(sports.get(position).getName())){
+               holder.favouriteButton.setChecked(true);
+               System.out.println("this was a favourite: "+ fs.getName());
+           }
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,25 +107,45 @@ public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommended
         holder.favouriteButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if(isChecked){
-                    //add to favourites and save
-
-                }
-                else if(isInFavourites){
-                    String nameOfListItem = holder.name.getText().toString();
-                    int index=0;
-                    for(int i=0;i<sports.size();i++){
-                        if(sports.get(i).getName().equals(nameOfListItem)){
-                            index=i;
-                            break;
-                        }
+                String nameOfListItem = holder.name.getText().toString();
+                int index=0;
+                for(int i=0;i<sports.size();i++){
+                    if(sports.get(i).getName().equals(nameOfListItem)){
+                        index=i;
+                        break;
                     }
-                    sports.remove(index);
-                    thisAdapter.notifyItemRemoved(index);
                 }
+                Sport sportOfCurrentCard = sports.get(index);
+                if(isChecked){
+                    favouriteSports.add(sportOfCurrentCard);
+                }
+                else{
+                    removeSportFromFavourites(sportOfCurrentCard);
+                    if(isInFavourites){
+                        sports.remove(sportOfCurrentCard);
+                        //thisAdapter.notifyItemRemoved(index);
+                        removeItemFromRecyclerView(index);
+                    }
+                }
+                SportsLoader.saveList(favouriteSports, "SavedFavouritesFile", "SavedFavouritesKey", ctx);
             }
         });
+    }
+
+    private void removeSportFromFavourites(Sport sport){
+        int indexOfSportToBeRemoved=-1;
+        for (int i=0; i<favouriteSports.size(); i++){
+            if(favouriteSports.get(i).getName().equals(sport.getName())){
+                indexOfSportToBeRemoved = i;
+            }
+        }
+        if(indexOfSportToBeRemoved!=-1){
+            favouriteSports.remove(indexOfSportToBeRemoved);
+        }
+    }
+
+    private void removeItemFromRecyclerView(int index){
+        this.notifyItemRemoved(index);
     }
 
     /**

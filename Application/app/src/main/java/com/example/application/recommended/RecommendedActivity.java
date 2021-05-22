@@ -15,11 +15,13 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.application.MainMenu;
 import com.example.application.R;
+import com.example.application.SportsLoader;
 import com.example.application.sports.Sport;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The activity that is created when "Your Sports" is clicked in the main menu
@@ -31,7 +33,7 @@ public class RecommendedActivity extends AppCompatActivity {
     private TextView textView;
     private RadioButton recommendedButton;
     private RadioButton favouritesButton;
-    private ArrayList<Sport>favouriteSports;
+    private List<Sport> favouriteSports;
 
     /**
      * Checks if the user has taken the quiz previously (TAKEN_QUIZ). If not, one activity is created, and if not, another is instead.
@@ -77,6 +79,7 @@ public class RecommendedActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.customToolbar);
         textView = (TextView) findViewById(R.id.toolbarText);
         textView.setText("Your Sports");
+        //favouriteSports=SportsLoader.extractSavedSports("SavedFavouritesFile", "SavedFavouritesKey", this);
 
     }
 
@@ -100,7 +103,4 @@ public class RecommendedActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 
-    public ArrayList<Sport> getFavouriteSports(){
-        return favouriteSports;
-    }
 }

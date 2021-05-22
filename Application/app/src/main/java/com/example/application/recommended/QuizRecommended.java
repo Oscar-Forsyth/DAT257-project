@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.example.application.R;
+import com.example.application.SportsLoader;
 import com.example.application.Tag;
 import com.example.application.sports.Sport;
 
@@ -258,7 +259,8 @@ public class QuizRecommended extends Fragment {
     //TODO This method is really big, breaking it down to smaller private methods with clear names could help
     // There is also some temporary code for tests
     private void extractSports() throws JSONException {
-
+        sports = SportsLoader.extractSavedSports("SavedSportsFile", "SavedSportsKey", requireActivity());
+/*
         JSONArray arr = new JSONArray(loadJSONFromAsset());
 
         for (int i = 0; i < arr.length(); i++) {
@@ -281,6 +283,8 @@ public class QuizRecommended extends Fragment {
                 e.printStackTrace();
             }
         }
+
+ */
 
         //adds points to every sport that can be found in tagsWithPoints
         SharedPreferences prefs = this.getActivity().getSharedPreferences("Save", Context.MODE_PRIVATE);
