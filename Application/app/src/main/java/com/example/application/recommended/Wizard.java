@@ -118,7 +118,7 @@ public class Wizard extends AppCompatActivity {
 
 
 
-    //TODO: Add java-doc
+    /** Add navigation dots to show user which page it is on*/
     public void addDotsIndicator(int position){
         mDotLayout.removeAllViews();
         TextView[] mDots = new TextView[NUMBER_OF_QUESTIONS];

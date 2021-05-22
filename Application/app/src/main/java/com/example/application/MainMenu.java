@@ -21,14 +21,13 @@ import com.example.application.sports.Sport;
 import org.json.JSONException;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class MainMenu extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView textView;
-    private ImageView imageView;
+    private ImageView backButton;
     private boolean firstTimeInMainMenu;
     private ArrayList<Sport>sports;
 
@@ -40,12 +39,12 @@ public class MainMenu extends AppCompatActivity {
 
         toolbar = findViewById(R.id.customToolbar);
         textView = (TextView) findViewById(R.id.toolbarText);
-        imageView = (ImageView) findViewById(R.id.toolbarBack);
+        backButton = (ImageView) findViewById(R.id.toolbarBack);
         setSupportActionBar(toolbar);
         getSupportActionBar().setLogo(null);
         getSupportActionBar().setTitle(null);
         textView.setText("Chalmers Sports");
-        imageView.setVisibility(View.GONE);
+        backButton.setVisibility(View.GONE);
         sports = new ArrayList<>();
 
         SharedPreferences prefs = getSharedPreferences("SavedState", MODE_PRIVATE);
@@ -71,10 +70,10 @@ public class MainMenu extends AppCompatActivity {
     }
 
 
-    /** INTENTS TO OPEN NEW ACTIVITIES FROM THE MAIN MENU:
+    /** INTENTS TO OPEN NEW ACTIVITIES FROM THE MAIN MENU: */
 
 
-  /*  /** Called when the user taps the 'Recommended Sports' button */
+    /** Called when the user taps the 'Recommended Sports' button */
     public void openRecommendedSports(View view) {
         //Intent intent = new Intent(this, Wizard.class);
         Intent intent = new Intent(this, RecommendedActivity.class);
