@@ -4,7 +4,7 @@
     "logo": "/drawable/badminton",
     "description": "Come play the world's fastest sport with us! We welcome all skill levels and play every other week (even weeks) at Fjäderborgen. Our practices are planned by our organizers who make sure you get the most of each session. Both technical drills and free play at the end are part of the general setup.",
     "link": "https://www.facebook.com/Chalmersbadminton/?eid=ARDP1Awwu2ENES_eVaPV58cHU2nJQXmM8y74aULzGQz_4MpVIega4ofzJqdMMc6bbfE6BTHpYMRnEWjJ",
-    "email": "ida.hoglundpersson@cis-chalmers.se",
+    "email": "badminton@cis-chalmers.se",
     "tags": ["INDOOR", "GROUP_AND_INDIVIDUAL", "INTENSE", "RACKET_SPORT"]
   },
 
@@ -32,7 +32,7 @@
     "logo": "/drawable/floorball",
     "description": "CIS Innebandy är en av de nyaste tillskotten av sporter hos Chalmers Studentkårs Idrottssällskap. Häng med på sidan för mer information. Träningar hålls torsdagar 20-21 i motionshallen i kårhuset Johanneberg.",
     "link": "https://www.facebook.com/CISInnebandy",
-    "email": "jonathan.stalberg@cis-chalmers.se",
+    "email": "Innebandy@cis-chalmers.se",
     "tags": ["INDOOR", "GROUP", "INTENSE", "RACKET_SPORT"]
 
   },
@@ -42,7 +42,7 @@
     "logo": "/drawable/football",
     "description": "Chalmers Fotbollssällskap erbjuder alla teknologer på Chalmers möjlighet att spela fotboll vid sidan av studierna, på olika nivåer. Fotbollsällskapet grundades hösten 2016 och erbjuder spel i fotboll och futsal, för både tjejer och killar. Chalmers Football Club offers all students at Chalmers a possibility to play football on the side of the studies.",
     "link": "https://www.facebook.com/CISChalmersfotboll/",
-    "email": "jens.lundgren@cis-chalmers.se",
+    "email": "fotboll@cis-chalmers.se",
     "tags": ["OUTDOOR", "GROUP", "INTENSE", "BALLGAME"]
   },
 
@@ -87,7 +87,7 @@
     "logo": "/drawable/rowing",
     "description": "We offer rowing training on Tuesdays and Fridays during the whole year. We aim to have fun together on the water and those who want can participate with us at the Swedisch student championships.",
     "link": "https://www.facebook.com/Chalmersroddklubb/",
-    "email": "michael.bergmann@cis-chalmers.se",
+    "email": "rodd@cis-chalmers.se",
     "tags": ["OUTDOOR", "GROUP_AND_INDIVIDUAL", "ENDURANCE", "NATURE"]
   },
 
@@ -131,7 +131,7 @@
     "logo": "/drawable/volleyball",
     "description": "Vi träffas en gång i veckan för att spela volleyboll tillsammans under matchförhållanden. Välkommen att prova på tre gånger innan du väljer att bli medlem! We meet once every week to play volleyboll together and have fun!",
     "link": "https://www.facebook.com/CIS-Chalmers-Volleybollklubb-878153389027431/",
-    "email": "jonathan.stalberg@cis-chalmers.se",
+    "email": "volleyboll@cis-chalmers.se",
     "tags": ["INDOOR", "GROUP", "INTENSE", "BALLGAME"]
   },
 
