@@ -24,6 +24,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * This class is responsible for:
+ * - loading information from JSON and converting it into an actual list that can be used
+ * - saving and loading said list
+ * At the moment, these methods are static, but a better solution would probably be for other classes to extend this,
+ * or perhaps make this an interface/-s instead which can be then be implemented by classes interested in these methods
+ */
 public class SportsLoader {
     public SportsLoader(){
     }
@@ -78,6 +85,13 @@ public class SportsLoader {
         return sports;
     }
 
+    /**
+     * saves a list of sports in SharedPreferences
+     * @param sports the list to be saved  (optimizations: could be generic type)
+     * @param key the name of the file where information is saved
+     * @param key2 the key to the saved information
+     * @param ctx the activity of the class that calls this method (required to get SharedPreferences)
+     */
     public static void saveList(List<Sport> sports, String key, String key2, Context ctx){
         SharedPreferences.Editor editor = ctx.getSharedPreferences(key, Context.MODE_PRIVATE).edit();
         Gson gson = new Gson();
@@ -86,6 +100,13 @@ public class SportsLoader {
         editor.apply();
     }
 
+    /**
+     * extracts saved list from SharedPreferences
+     * @param key the name of the file where information is saved
+     * @param key2 the key to the saved information
+     * @param ctx the activity of the class that calls this method (required to get SharedPreferences)
+     * @return the saved list (optimizations: could be generic type)
+     */
     public static List<Sport>extractSavedSports(String key, String key2, Context ctx){
         ArrayList<Sport>sports;
         SharedPreferences sp = ctx.getSharedPreferences(key, Context.MODE_PRIVATE);
