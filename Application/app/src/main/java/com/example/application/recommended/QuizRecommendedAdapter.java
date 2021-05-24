@@ -1,6 +1,5 @@
 package com.example.application.recommended;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -25,20 +24,17 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-//TODO Documentation on what this class does is missing
-
 /**
  * This class is responsible for creating(painting) the cards that appear in the recyclerviews in "Your Sports"
  */
 public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommendedAdapter.ViewHolder>{
 
-    private LayoutInflater inflater;
-    //private QuizRecommendedAdapter thisAdapter;
-    private boolean isInFavourites;
+    private final LayoutInflater inflater;
+    private final boolean isInFavourites;
 
-    private List<Sport> sports;
-    private List<Sport> favouriteSports;
-    private Context ctx;
+    private final List<Sport> sports;
+    private final List<Sport> favouriteSports;
+    private final Context ctx;
 
     /**
      * the used constructor for this adapter
@@ -50,7 +46,6 @@ public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommended
         this.inflater = LayoutInflater.from(ctx);
         this.ctx=ctx;
         this.sports = sports;
-        //thisAdapter=this;
         this.isInFavourites=isInFavourites;
         favouriteSports=SportsLoader.extractSavedSports("SavedFavouritesFile", "SavedFavouritesKey", ctx);
 
@@ -122,7 +117,6 @@ public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommended
                     removeSportFromFavourites(sportOfCurrentCard);
                     if(isInFavourites){
                         sports.remove(sportOfCurrentCard);
-                        //thisAdapter.notifyItemRemoved(index);
                         removeItemFromRecyclerView(index);
                     }
                 }
@@ -152,7 +146,7 @@ public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommended
      * @param isExpanded if it is already expanded
      * @param v the view that was interacted with
      * @param layoutExpand the hidden parts of the card
-     * @return
+     * @return whether expanded or not
      */
     private boolean toggleLayout(boolean isExpanded, View v, LinearLayout layoutExpand) {
         Animations.toggleArrow(v, isExpanded);
@@ -177,7 +171,7 @@ public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommended
     /**
      * The class that holds the information of the actual view, ie what appears on the screen.
      */
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView name, description;
         Button linkButton;
         ImageView logo, showMore;

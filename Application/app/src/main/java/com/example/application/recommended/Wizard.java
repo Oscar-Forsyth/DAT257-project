@@ -6,25 +6,21 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.provider.MediaStore;
+
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.application.MainMenu;
 import com.example.application.R;
-import com.example.application.recommended.RecommendedActivity;
-import com.example.application.recommended.WizardAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class Wizard extends AppCompatActivity {
     private ViewPager2 mSlideViewPager;
@@ -67,11 +63,7 @@ public class Wizard extends AppCompatActivity {
         mSlideViewPager.setCurrentItem(0);
         viewListener.onPageSelected(0);
 
-        //mRadioGroup.check(mRadioGroup.getChildAt(0).getId());   //TODO: Remove?
-
         mSlideViewPager.registerOnPageChangeCallback(viewListener);
-        //wizardAdapter.notifyItemChanged(0);
-
 
         mWizardBackButton.setOnClickListener(view -> mSlideViewPager.setCurrentItem(mCurrentPage-1));
 
@@ -147,12 +139,6 @@ public class Wizard extends AppCompatActivity {
             addDotsIndicator(position);
             mCurrentPage = position;
             resultList = wizardAdapter.getQuizResults();
-
-            System.out.println("--\n");
-            for (int i = 0; i < resultList.size(); i++) {
-                System.out.println("Question: " + i + "result: " + resultList.get(i).toString());
-            }
-            System.out.println("--\n");
 
 
             if(position == 0){

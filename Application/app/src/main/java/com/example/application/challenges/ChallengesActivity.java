@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.application.R;
@@ -51,11 +49,15 @@ public class ChallengesActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
     private List<Challenge> challenges;
-    private List<Challenge> missions = new ArrayList<>();
-    //user story 1.8
-    private List<Challenge> allDailyChallenges = new ArrayList<>();
+
+    private final List<Challenge> missions = new ArrayList<>();
+    //all Daily Challenges specified in the file jsonChallenges that can be found in "assets"-folder
+    private final List<Challenge> allDailyChallenges = new ArrayList<>();
+    //list of Daily Challenges in Active-tab
     private List<Challenge> currentDailyChallenges = new ArrayList<>();
+    //list of Daily Challenges in Completed-tab
     private List<Challenge> completedDailyChallenges = new ArrayList<>();
+
     private RadioButton activeButton;
     private TextView noChallengeText;
 
@@ -68,9 +70,13 @@ public class ChallengesActivity extends AppCompatActivity {
     private final String currentDailyChallengesKey = "currentDailyChallengesKey";
     private final String currentDailyChallengesJson = "currentDailyChallengesJson";
 
-
+    //the URL for the google calendar that CIS Missions are gathered from
     private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/c6isg5rcllc2ki81mnpnv92g90@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
 
+    /**
+     * sets attributes for UI-elements, and loads lists with what was saved from the previous time this Activity was opened
+     * @param savedInstanceState
+     */
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +106,10 @@ public class ChallengesActivity extends AppCompatActivity {
         }
         extractSavedDailyChallenges();
     }
+
+    /**
+     * loads saved CIS Missions
+     */
     public void extractSavedMissions(){
         SharedPreferences completedMissions = getSharedPreferences("CompletedMissions", MODE_PRIVATE);
         Set<String> set = completedMissions.getStringSet("completedMission",new HashSet<>());
@@ -110,11 +120,7 @@ public class ChallengesActivity extends AppCompatActivity {
             for (int j = 0; j < missions.size(); j++) {
                 System.out.println(set.toArray()[i].toString()+ ":" +missions.get(j).getTitle());
                 if(set.toArray()[i].toString().equals(missions.get(j).getTitle())){
-                    if(missions.get(j).isCompleted()){
-                        missions.get(j).setCompleted(false);
-                    }else{
-                        missions.get(j).setCompleted(true);
-                    }
+                    missions.get(j).setCompleted(!missions.get(j).isCompleted());
 
                     System.out.println("accepted");
                     break;
@@ -124,6 +130,9 @@ public class ChallengesActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * saves the CIS Missions in Completed-tab to a HashSet
+     */
     public void saveCompletedMission(){
         SharedPreferences.Editor editor = getSharedPreferences("CompletedMissions", MODE_PRIVATE).edit();
         Set<String> savedMissionsSet = new HashSet<>();
@@ -136,10 +145,20 @@ public class ChallengesActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    /**
+     * saves the Daily Challenges (both the list of Active Daily Challenges and Completed Daily Challenges)
+     */
     public void saveDailyChallenges(){
        saveListOfChallenges(currentDailyChallenges, currentDailyChallengesKey, currentDailyChallengesJson);
        saveListOfChallenges(completedDailyChallenges, completedDailyChallengesKey, completedDailyChallengesJson);
     }
+
+    /**
+     * saves list of challenges to a specified file (key) and key (key2).
+     * @param listOfChallenges the list to be saved
+     * @param key  the key to the file where the list is saved
+     * @param key2 the key to the actual list
+     */
     private void saveListOfChallenges(List<Challenge>listOfChallenges, String key, String key2){
         SharedPreferences.Editor editor = getSharedPreferences(key, MODE_PRIVATE).edit();
         Gson gson = new Gson();
@@ -149,10 +168,11 @@ public class ChallengesActivity extends AppCompatActivity {
     }
 
     /**
-     * loads the daily challenges from last time
+     * loads the saved Daily Challenges
      */
     private void extractSavedDailyChallenges(){
-        //TODO might not be necessary to have 2 different sharedpreferences
+        //might not be necessary work with 2 different sharedpreferences. The saved lists can probably be in the same file as long as they are coupled to different keys
+        //but unsure whether this would be a good or bad change
         SharedPreferences sharedPreferences = getSharedPreferences(currentDailyChallengesKey, MODE_PRIVATE);
         SharedPreferences sharedPreferences2 = getSharedPreferences(completedDailyChallengesKey, MODE_PRIVATE);
         Gson gson = new Gson();
@@ -187,15 +207,8 @@ public class ChallengesActivity extends AppCompatActivity {
 
                 extractSavedMissions();
                 addToLayout();
-                //scrollToToday();
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("tag", "onErrorResponse: " + error.getMessage());
-            }
-
-        });
+        }, error -> Log.d("tag", "onErrorResponse: " + error.getMessage()));
         queue.add(jsonObjectRequest);
     }
 
@@ -248,12 +261,19 @@ public class ChallengesActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * getter for date today
+     * @return today's date
+     */
     private String dateToday() {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         return df.format(date);
     }
 
+    /**
+     * sorts challenges by due date
+     */
     private void sortChallenges() {
         Collections.sort(challenges, new Comparator<Challenge>() {
             @Override
@@ -304,6 +324,9 @@ public class ChallengesActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * displays the default list (Active CIS Missions)
+     */
     private void addToLayout() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         missions.clear();
@@ -328,7 +351,10 @@ public class ChallengesActivity extends AppCompatActivity {
         recyclerView.scrollToPosition(i);
     }
 
-    //it had to be done... but at what cost
+    /**
+     * depending on the state of the radiogroup with "activeButton" and "completedButton", shows either the list of Active or Completed
+     * @param view the current view
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void refresh(View view){
         if(activeButton.isChecked()){
@@ -338,6 +364,10 @@ public class ChallengesActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * displays CIS Missions
+     * @param view the current view
+     */
     public void displayMissions(View view) {
         isOnMissions = true;
         missions.clear();
@@ -385,6 +415,11 @@ public class ChallengesActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * displays a textview if the list of the current view is empty,
+     * @param text the textview
+     * @param isListEmpty true if list is empty, false otherwise
+     */
     private void updateNoChallengesText(String text, boolean isListEmpty) {
         if(isListEmpty) {
             noChallengeText.setText(text);
@@ -462,12 +497,26 @@ public class ChallengesActivity extends AppCompatActivity {
         this.onBackPressed();
     }
 
+    /**
+     * getter for list that contains Current Daily Challenges
+     * @return List of the Daily Challenges in Active-tab
+     */
     public List<Challenge> getCurrentDailyChallenges(){
         return currentDailyChallenges;
     }
+
+    /**
+     * getter for list that contains Completed Daily Challenges
+     * @return list of the Daily Challenges in Completed-tab
+     */
     public List<Challenge> getCompletedDailyChallenges(){
         return completedDailyChallenges;
     }
+
+    /**
+     * shows whether Active-tab is selected or not
+     * @return the state of activeButton
+     */
     public boolean isShowingActive(){
         return activeButton.isChecked();
     }

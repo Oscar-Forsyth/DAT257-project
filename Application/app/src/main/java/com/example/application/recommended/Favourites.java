@@ -1,13 +1,10 @@
 package com.example.application.recommended;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,17 +16,13 @@ import android.widget.TextView;
 import com.example.application.R;
 import com.example.application.SportsLoader;
 import com.example.application.sports.Sport;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONException;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 /**
+ * Responsible for the fragment that is opened when the user clicks on "Favourites"-tab in "Your Sports"
  * A simple {@link Fragment} subclass.
  * Use the {@link Favourites#newInstance} factory method to
  * create an instance of this fragment.
@@ -41,6 +34,7 @@ public class Favourites extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    // Could be used when factory method is
     private String mParam1;
     private String mParam2;
 
@@ -61,7 +55,6 @@ public class Favourites extends Fragment {
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
      * @return A new instance of fragment Favourites.
@@ -76,6 +69,10 @@ public class Favourites extends Fragment {
         return fragment;
     }
 
+    /**
+     * called when this fragment is being created, atm default implementation of onCreate, ie does nothing particular for our fragment
+     * @param savedInstanceState last state
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +82,10 @@ public class Favourites extends Fragment {
         }
     }
 
+    /**
+     * assigns some data to the view
+     * @return a view of fragment_favourites.xml
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -94,12 +95,20 @@ public class Favourites extends Fragment {
         // Inflate the layout for this fragment
         return view;
     }
+
+    /**
+     * extracts the saved list of favourites and displays them in the fragment's recyclerview
+     * @param view the view that was created
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         favouritesRecyclerView = requireActivity().findViewById(R.id.favouritesList);
         extractSavedFavourites();
     }
 
+    /**
+     * loads data from saved list of favourite sports and displays them
+     */
     private void extractSavedFavourites(){
         favouriteSportsList = SportsLoader.extractSavedSports("SavedFavouritesFile", "SavedFavouritesKey", requireActivity());
 
@@ -113,6 +122,10 @@ public class Favourites extends Fragment {
         }
         refreshRecyclerView();
     }
+
+    /**
+     * displays updated version of the list of favourites
+     */
     private void refreshRecyclerView(){
         adapter = new QuizRecommendedAdapter(requireActivity().getApplicationContext(), favouriteSportsList, true);
         favouritesRecyclerView.setItemViewCacheSize(favouriteSportsList.size());

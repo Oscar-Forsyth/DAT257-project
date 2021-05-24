@@ -8,6 +8,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Represents either a CIS-Mission or a Daily Challenge
+ */
 public class Challenge {
     private String title;
     private String startDate;
@@ -65,13 +68,6 @@ public class Challenge {
      */
     public String getStartDate() {
         return startDate;
-    }
-
-    /** Gets the challenge start date in more readable format.
-     * @return A string representing the challenge start date.
-     */
-    public String getPrettyStartDate() {
-        return prettyStartDate;
     }
 
     /** Sets the challenge start date.
