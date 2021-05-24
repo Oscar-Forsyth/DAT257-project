@@ -20,6 +20,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.application.R;
+import com.example.application.SportsLoader;
+import com.example.application.recommended.Favourites;
+import com.example.application.recommended.QuizRecommended;
 import com.example.application.sports.Sport;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 
@@ -198,24 +201,8 @@ public class EventsActivity extends AppCompatActivity {
     }
 
     private void initiateRecAndFavSports() {
-        recommendedSports = new ArrayList<>();
-        Sport badminton = new Sport();
-        badminton.setEmail("ida.hoglundpersson@cis-chalmers.se");
-        Sport basket = new Sport();
-        basket.setEmail("basket@cis-chalmers.se");
-        Sport innebandy = new Sport();
-        innebandy.setEmail("jonathan.stalberg@cis-chalmers.se");
-        Sport tennis = new Sport();
-        tennis.setEmail("tennis@cis-chalmers.se");
-        Sport volley = new Sport();
-        volley.setEmail("jonathan.stalberg@cis-chalmers.se");
-        recommendedSports.add(badminton);
-        recommendedSports.add(basket);
-        recommendedSports.add(innebandy);
-        recommendedSports.add(tennis);
-        recommendedSports.add(volley);
-        favouriteSports = new ArrayList<>();
-        favouriteSports.add(badminton);
+        favouriteSports = SportsLoader.extractSavedSports("SavedFavouritesFile", "SavedFavouritesKey", this);
+        recommendedSports = SportsLoader.extractSavedSports("SavedSportsFile", "SavedSportsKey", this);
     }
 
     private void filterUpdated() {

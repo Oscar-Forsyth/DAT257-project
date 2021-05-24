@@ -289,5 +289,4 @@ public class QuizRecommended extends Fragment {
         sc.close();
         return list;
     }
-
 }

@@ -119,5 +119,4 @@ public class Favourites extends Fragment {
         favouritesRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity().getApplicationContext()));
         favouritesRecyclerView.setAdapter(adapter);
     }
-
 }
