@@ -270,7 +270,7 @@ public class ChallengesActivity extends AppCompatActivity {
     private String loadJSONFromAsset()  {
         String json = null;
         try {
-            InputStream is = getAssets().open("jsonChallenges");
+            InputStream is = getAssets().open("jsonChallenges.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
