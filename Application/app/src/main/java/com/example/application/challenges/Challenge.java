@@ -13,33 +13,13 @@ import java.util.Date;
  */
 public class Challenge {
     private String title;
-    private String startDate;
     private String endDate;
-    private String prettyStartDate;
     private String prettyEndDate;
     private String location;
     private String description;
     private boolean completed;
 
     public Challenge(){}
-
-    /** Creates a challenge with the specified title, date and location.
-     * @param title The challenge title.
-     * @param startDate The challenge start date.
-     * @param location The challenge location.
-     * @param description The challenge description.
-     */
-    public Challenge(String title, String startDate, String endDate, String location, String description){
-        this.title = title;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        // Converts date to more readable format
-        prettyStartDate = DateConverter.convertDateFromCalendarWithoutTime(startDate);
-        prettyEndDate = DateConverter.convertDateFromCalendarWithoutTime(endDate);
-        this.location= location;
-        this.description = description;
-        this.completed = false;
-    }
 
     public boolean isCompleted() {
         return completed;
@@ -61,21 +41,6 @@ public class Challenge {
      */
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    /** Gets the challenge date.
-     * @return A string representing the challenge date.
-     */
-    public String getStartDate() {
-        return startDate;
-    }
-
-    /** Sets the challenge start date.
-     * @param startDate A String containing the challenge start date in original format.
-     */
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-        prettyStartDate = DateConverter.convertDateFromCalendarWithoutTime(startDate);
     }
 
     public String getEndDate() {
