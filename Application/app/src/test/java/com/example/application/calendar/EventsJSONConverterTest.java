@@ -1,4 +1,4 @@
-package com.example.application;
+package com.example.application.calendar;
 
 import com.example.application.calendar.EventsJSONConverter;
 
@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class JSONTest {
+public class EventsJSONConverterTest {
     public static EventsJSONConverter eventsJSONConverter;
     private final DateFormat JSONFormat = new SimpleDateFormat("yyyy-MM-dd");
 
