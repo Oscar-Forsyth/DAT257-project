@@ -29,7 +29,6 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
     private final LayoutInflater inflater;
     private final List<Challenge> challenges;
     private final ChallengesActivity parent;
-    private final List<View> viewList = new ArrayList<>();
 
     /**
      *
@@ -55,7 +54,6 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
     @Override
     public ChallengesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.custom_challenges,parent,false);
-        viewList.add(view);
         return new ViewHolder(view);
     }
 
