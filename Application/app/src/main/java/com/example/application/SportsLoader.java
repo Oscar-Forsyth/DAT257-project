@@ -29,7 +29,7 @@ import java.util.Set;
  * - loading information from JSON and converting it into an actual list that can be used
  * - saving and loading said list
  * At the moment, these methods are static, but a better solution would probably be for other classes to extend this,
- * or perhaps make this an interface/-s instead which can be then be implemented by classes interested in these methods
+ * or perhaps make this an interface/-s instead which can be then be implemented by classes interested in these functions
  */
 public class SportsLoader {
     public SportsLoader(){

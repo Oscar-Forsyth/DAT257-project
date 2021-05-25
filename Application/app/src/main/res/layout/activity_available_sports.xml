@@ -47,11 +47,11 @@
             android:id="@+id/favoriteCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
             android:layout_toEndOf="@+id/filter"
             android:layout_toRightOf="@+id/filter"
-            android:text="Show Favorites"
-            app:layout_constraintStart_toEndOf="@id/filter"
-            android:layout_marginLeft="16dp" />
+            android:text="Show Favourites"
+            app:layout_constraintStart_toEndOf="@id/filter" />
 
     </RelativeLayout>
 

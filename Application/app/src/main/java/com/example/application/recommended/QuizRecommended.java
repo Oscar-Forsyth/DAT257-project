@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
 
 import com.example.application.R;
@@ -39,8 +40,9 @@ import com.example.application.SportsLoader;
 import com.example.application.Tag;
 import com.example.application.sports.Sport;
 
-//TODO JavaDoc doesn't really describe what the class does
 /**
+ * the fragment that contains the recommended sports
+ * it refreshes its recyclerview based on the user's quiz answers
  * A simple {@link Fragment} subclass.
  * Use the {@link QuizRecommended#newInstance} factory method to
  * create an instance of this fragment.
@@ -54,16 +56,15 @@ public class QuizRecommended extends Fragment {
     QuizRecommendedAdapter adapter;
     HashMap<Sport, Integer> sportsWithPointsHashMap = new HashMap<>();
     List <Tag> tagsWithPoints = new ArrayList<>();
-
+    // Used in fragments, don't need to change
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     List<Integer> resultList;
 
+    // Could be used when factory method is
     private String mParam1;
     private String mParam2;
-
-    private Toolbar toolbar;
-    private TextView textView;
 
     public QuizRecommended() {
         // Required empty public constructor
@@ -79,7 +80,10 @@ public class QuizRecommended extends Fragment {
         return fragment;
     }
 
-    //Required for fragment, just leave
+    /**
+     * called when this fragment is being created, atm default implementation of onCreate, ie does nothing particular for our fragment
+     * @param savedInstanceState last state
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,50 +93,44 @@ public class QuizRecommended extends Fragment {
         }
     }
 
-    //Required for fragment, just leave
+    /**
+     * assigns xml-file to the view, and sets listener to a button
+     * @return a view of fragment_quiz_recommended.xml
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_quiz_recommended, container, false);
         buttonToRetakeQuiz= view.findViewById(R.id.retakeQuizButton);
-        buttonToRetakeQuiz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Wizard.class);
-                startActivity(intent);
-            }
+        buttonToRetakeQuiz.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Wizard.class);
+            startActivity(intent);
         });
         resultList = requireActivity().getIntent().getIntegerArrayListExtra("QUIZ_RESULTS");
 
-        //TODO @Laban / @Goat, ta bort era SOUTS >:(
-        if(resultList!=null){
-            System.out.println("--\n");
-            for (int i = 0; i < resultList.size(); i++) {
-                System.out.println("Question: " + i + "result: " + resultList.get(i).toString());
-            }
-            System.out.println("--\n");
-        }
         return view;
     }
 
     //Required for fragment, just leave
+
+    /**
+     * gets list of sports
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recommendedList= requireActivity().findViewById(R.id.recommendedList);
         sports=new ArrayList<>();
+        extractSports();
 
-        try {
-            extractSports();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 
-
-
+    /**
+     * adds points to a tag itself based on the user's answers in the quiz
+     * @param list the user's answers from the quiz
+     */
     private void addQuizPoints(List<Integer>list){
+
         fillSportsWithPointsHashMapWithDefaultValues();
-        //adds point to the tag itself by putting it into tagWithPoints
 
         if(list!=null){
             for (int questionNr=0; questionNr<list.size(); questionNr++){
@@ -194,7 +192,9 @@ public class QuizRecommended extends Fragment {
         }
     }
 
-    //for each tag in tagWithPoints, add points to the sports with that tag
+    /**
+     * for each tag in tagWithPoints, add points to the sports with that tag
+     */
     private void addPointsToSportsWithTag(){
         for (Tag t : tagsWithPoints){
             for (Sport s : sportsWithPointsHashMap.keySet()){
@@ -211,6 +211,10 @@ public class QuizRecommended extends Fragment {
         }
     }
 
+    /**
+     * sorts the list of sports based on how many paints they got from the quiz and returns top 5
+     * @return list with the 5 sports that got the greatest number of points
+     */
     //returns a list that only contains the 5 sports with the most points
     private List<Sport> onlyTop5(){
         List<Sport>top5Sports = new ArrayList<>();
@@ -233,7 +237,11 @@ public class QuizRecommended extends Fragment {
 
         return top5Sports;
     }
-    //TODO Shorten name plox holy shit
+
+    /**
+     * fills the hashmap with default values (0).
+     * These values are later modified based on quiz answers
+     */
     private void fillSportsWithPointsHashMapWithDefaultValues(){
         sportsWithPointsHashMap = new HashMap<>();
         for (Sport s : sports){
@@ -241,9 +249,10 @@ public class QuizRecommended extends Fragment {
         }
     }
 
-    //TODO This method is really big, breaking it down to smaller private methods with clear names could help
-    // There is also some temporary code for tests
-    private void extractSports() throws JSONException {
+    /**
+     * loads the saved recommended sports and displays them
+     */
+    private void extractSports(){
         sports = SportsLoader.extractSavedSports("SavedSportsFile", "SavedSportsKey", requireActivity());
 
         //adds points to every sport that can be found in tagsWithPoints
@@ -257,16 +266,26 @@ public class QuizRecommended extends Fragment {
             saveList(top5Sports);
         } else
             top5Sports = retrieveList(savedSports);
+       displayTop5(top5Sports);
+    }
 
-
+    /**
+     * displays the top 5 sports in the recyclerview
+     * @param top5Sports the sports to be displayed in the recyclerview
+     */
+    private void displayTop5(List <Sport> top5Sports){
         adapter = new QuizRecommendedAdapter(requireActivity().getApplicationContext(), top5Sports, false);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireActivity().getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
         recommendedList.setLayoutManager(gridLayoutManager);
         recommendedList.setAdapter(adapter);
     }
 
+    /**
+     * saves list of recommendations
+     * @param list the list to be saved
+     */
     private void saveList(List<Sport> list){
-        SharedPreferences.Editor editor = this.getActivity().getSharedPreferences("Save", Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = this.requireActivity().getSharedPreferences("Save", Context.MODE_PRIVATE).edit();
         String Sports = "";
 
         for(Sport e : list)
@@ -276,6 +295,11 @@ public class QuizRecommended extends Fragment {
         editor.apply();
     }
 
+    /**
+     * converts recommendations in string format to an actual list with Sport-objects
+     * @param string recommendations in string format
+     * @return list of recommendations
+     */
     private List<Sport> retrieveList(String string){
         List <Sport> list = new ArrayList<>();
         Scanner sc = new Scanner(string).useDelimiter(",");

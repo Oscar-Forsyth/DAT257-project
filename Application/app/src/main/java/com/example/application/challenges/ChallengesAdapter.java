@@ -2,15 +2,12 @@ package com.example.application.challenges;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Build;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,12 +22,21 @@ import com.example.application.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * paints CIS Missions
+ */
 public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.ViewHolder>  {
     private final LayoutInflater inflater;
     private final List<Challenge> challenges;
     private final ChallengesActivity parent;
-    private List<View> viewList = new ArrayList<>();
+    private final List<View> viewList = new ArrayList<>();
 
+    /**
+     *
+     * @param ctx the activity within which ChallengesAdapter is used
+     * @param challenges the CIS Missions that the recyclerView should paint
+     * @param parent a ChallengesActivity that is used to access a few methods
+     */
     public ChallengesAdapter(Context ctx, List<Challenge> challenges,ChallengesActivity parent){
         this.inflater = LayoutInflater.from(ctx);
         this.challenges = challenges;
@@ -63,7 +69,6 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
     public void onBindViewHolder(@NonNull ChallengesAdapter.ViewHolder holder, int position) {
         String description = challenges.get(position).getDescription();
         holder.title.setText(challenges.get(position).getTitle());
-        //holder.startDate.setText(challenges.get(position).getPrettyStartDate());
         holder.endDate.setText(challenges.get(position).getPrettyEndDate());
         holder.location.setText(challenges.get(position).getLocation());
         holder.description.setText(description);
@@ -99,21 +104,22 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
 
         });
     }
+
+    /**
+     * sets listener to checkbox
+     * @param view the current view
+     * @param position position in recyclerView
+     */
+    //might be some problems if there are more than 9 CIS Mission because default recyclerView reuses "position" after 9 objects.
+    //To fix this problem: would have to add setItemViewCacheSize to recyclerview
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void addCheckBoxListener(View view, int position){
         CheckBox checkBox = view.findViewById(R.id.checkBox);
         Challenge challenge = challenges.get(position);
 
         checkBox.setOnClickListener(v -> {
-            //animations just dont work on this....
 
-            if(checkBox.isChecked()){
-                challenge.setCompleted(true);
-               // animateBoxes(view,1);
-            }else{
-                challenge.setCompleted(false);
-                //animateBoxes(view,-1);
-            }
+            challenge.setCompleted(checkBox.isChecked());
             parent.refresh(view);
             parent.saveCompletedMission();
 
@@ -144,7 +150,10 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
 
     }
 
-
+    /**
+     * get the amount of challenges in challenges-list
+     * @return size of list that is painted in recyclerview
+     */
     @Override
     public int getItemCount() {
         return challenges.size();
@@ -155,13 +164,12 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
      */
     protected static class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView title, startDate, endDate, location, description;
+        TextView title, endDate, location, description;
         ImageView locationLogo;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
-            //startDate = itemView.findViewById(R.id.startDate);
             endDate = itemView.findViewById(R.id.endDate);
             location = itemView.findViewById(R.id.location);
             locationLogo = itemView.findViewById(R.id.locationLogo);
@@ -171,12 +179,7 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
         }
 
         private void addListener(View itemView) {
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "Do Something With this Click", Toast.LENGTH_SHORT).show();
-                }
-            });
+            itemView.setOnClickListener(v -> Toast.makeText(v.getContext(), "Do Something With this Click", Toast.LENGTH_SHORT).show());
         }
 
     }
