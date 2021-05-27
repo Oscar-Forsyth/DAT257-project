@@ -1,6 +1,12 @@
-# IBM System/360 - DAT257-project
-DAT257 Agile software project management
+# IBM System/360
+DAT257 Agile Software Project Management
 
+Project name - Chalmers Sports
+
+This Android application is developed by students at Chalmers University of Technology as a part of the course DAT257, in collaboration with CIS (Chalmers Sports Society). The purpose of the application is to promote the sports under CIS, and help students find activities and sports that they are interested in. Please refer to the Application Demo below for a more in-depth explanation.
+
+
+All relevant documentation can be found in the /doc folder
 
 Links:
 
@@ -11,6 +17,10 @@ KPI - https://docs.google.com/spreadsheets/d/15tQEvGoZsbjJtdT7QCStofYVAN74xMPMvo
 Mockup - https://miro.com/app/board/o9J_lLFV7rY=/
 
 Individual and Team Reflections - https://github.com/goatlover/DAT257-project/tree/main/doc
+
+Technical Description - TBD
+
+Application Demo - https://drive.google.com/file/d/1lpSQjsHaBJmKrv94kAhCRouL7M6VtEnT/view?usp=sharing
 
 Team members:
 
