@@ -31,3 +31,5 @@ Team members:
 - Simon Larsson - silarss
 - Simon Schuster - simonindek
 - Victor Koch - victor-koch
+
+© 2021 All rights reserved.
