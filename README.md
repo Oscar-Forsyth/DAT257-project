@@ -20,6 +20,8 @@ Individual and Team Reflections - https://github.com/goatlover/DAT257-project/tr
 
 Technical Description - TBD
 
+Test Documentation - https://github.com/goatlover/DAT257-project/blob/main/doc/Test%20Dokument.pdf
+
 Application Demo - https://drive.google.com/file/d/1lpSQjsHaBJmKrv94kAhCRouL7M6VtEnT/view?usp=sharing
 
 Team members:
