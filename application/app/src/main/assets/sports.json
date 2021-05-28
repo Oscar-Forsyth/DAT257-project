@@ -11,7 +11,7 @@
   {
     "name": "Basketball",
     "logo": "/drawable/basketball",
-    "description": "Join us, for a maximum of fun! Every Friday, 19h00 to 20h30, Valhalla Sporthall C-Hall / Valhallagatan 3 41251",
+    "description": "Basketball fans and passionate, students and employees, welcome to join Chalmers Basketball Team. We have trainings every Friday, 19h00 to 20h30, Valhalla Sporthall C-Hall / Valhallagatan 3 41251.",
     "link": "https://www.facebook.com/CISBasket",
     "email": "basket@cis-chalmers.se",
     "tags": ["INDOOR", "GROUP", "INTENSE", "BALLGAME"]
@@ -21,7 +21,7 @@
   {
     "name": "Bicycle",
     "logo": "/drawable/bicycle",
-    "description": "We bring students who are interested in bicycle training together to train.",
+    "description": "Chalmers Cykelklubb är till för alla chalmersanknytna med ett intresse i cykel oavsett kategori och ambitionsnivå. Vi hoppas kunna sprida vårt intresse så att fler kan upptäcka nöjet i cykelsporten.",
     "link": "https://www.facebook.com/chalmerscykelklubb/",
     "email": "cykel@cis-chalmers.se",
     "tags": ["OUTDOOR","INDIVIDUAL", "ENDURANCE", "NATURE"]
@@ -49,7 +49,7 @@
   {
     "name": "Golf",
     "logo": "/drawable/golf",
-    "description": "Chalmers Golfsällskap är det sociala nätverket och mötesplatsen för golfande teknologer på Chalmers! Roliga tävlingar, nya golfkompisar och riktigt mycket gött häng helt enkelt! Chalmers Golf Club offers a meeting place for golfing students at Chalmers. Fun competition and new golf friends",
+    "description": "Chalmers Golfsällskap är det sociala nätverket och mötesplatsen för golfande teknologer på Chalmers! Roliga tävlingar, nya golfkompisar och riktigt mycket gött häng helt enkelt! Chalmers Golf Club offers a meeting place for golfing students at Chalmers. Fun competition and new golf friends.",
     "link": "https://www.facebook.com/chalmersgolfsallskap/",
     "email": "golf@cis-chalmers.se",
     "tags": ["OUTDOOR", "INDIVIDUAL", "INTENSE", "PRECISION"]
@@ -76,7 +76,7 @@
   {
     "name": "Padel",
     "logo": "/drawable/padel",
-    "description": "Trainings, Chalmers Padel League and other padel events",
+    "description": "Trainings, Chalmers Padel League and other padel events.",
     "link": "https://www.facebook.com/chalmerspadelklubb/",
     "email": "padel@cis-chalmers.se",
     "tags": ["OUTDOOR", "GROUP_AND_INDIVIDUAL", "INTENSE", "RACKET_SPORT"]
@@ -85,7 +85,7 @@
   {
     "name": "Rowing",
     "logo": "/drawable/rowing",
-    "description": "We offer rowing training on Tuesdays and Fridays during the whole year. We aim to have fun together on the water and those who want can participate with us at the Swedisch student championships.",
+    "description": "We offer rowing training on Tuesdays and Fridays during the whole year. We aim to have fun together on the water and those who want can participate with us at the Swedish student championships.",
     "link": "https://www.facebook.com/Chalmersroddklubb/",
     "email": "rodd@cis-chalmers.se",
     "tags": ["OUTDOOR", "GROUP_AND_INDIVIDUAL", "ENDURANCE", "NATURE"]
