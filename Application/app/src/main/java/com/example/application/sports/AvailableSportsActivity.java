@@ -21,13 +21,6 @@ import com.example.application.SportsLoader;
 import com.example.application.Tag;
 import com.example.application.animations.Animations;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 

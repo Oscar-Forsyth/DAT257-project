@@ -44,6 +44,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The activity for CIS-Missions and Daily Challenges (the 2 tabs only change the content of the recyclerView)
+ */
 public class ChallengesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;

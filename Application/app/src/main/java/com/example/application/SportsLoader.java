@@ -3,11 +3,7 @@ package com.example.application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-
-import com.example.application.challenges.Challenge;
 import com.example.application.sports.Sport;
-import com.example.application.sports.SportsAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -17,12 +13,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * This class is responsible for:
