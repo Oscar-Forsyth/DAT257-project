@@ -18,7 +18,7 @@ Mockup - https://miro.com/app/board/o9J_lLFV7rY=/
 
 Individual and Team Reflections - https://github.com/goatlover/DAT257-project/tree/main/doc
 
-Technical Description - doc/Technical Description.pdf
+Technical Description - https://github.com/goatlover/DAT257-project/blob/main/doc/Technical%20Description.pdf
 
 Test Documentation - https://github.com/goatlover/DAT257-project/blob/main/doc/Test%20Dokument.pdf
 
