@@ -7,21 +7,11 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.application.MainMenu;
 import com.example.application.R;
-import com.example.application.SportsLoader;
-import com.example.application.sports.Sport;
-
-import org.json.JSONException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The activity that is created when "Your Sports" is clicked in the main menu

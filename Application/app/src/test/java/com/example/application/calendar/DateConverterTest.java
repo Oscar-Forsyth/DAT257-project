@@ -1,4 +1,4 @@
-package com.example.application;
+package com.example.application.calendar;
 
 import com.example.application.calendar.DateConverter;
 

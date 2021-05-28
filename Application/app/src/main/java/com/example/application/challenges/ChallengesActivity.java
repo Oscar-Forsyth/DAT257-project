@@ -44,6 +44,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The activity for CIS-Missions and Daily Challenges (the 2 tabs only change the content of the recyclerView)
+ */
 public class ChallengesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -212,9 +215,6 @@ public class ChallengesActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
-    //TODO This method now only adds challenges that has not ended. The check can't be made right
-    // after the try-catch (probably because the error takes some time to catch when the date has a
-    // time) so I put it just before the add
     private void addChallengesFromJSON(JSONObject response) {
         String currentDate = dateToday();
         try {
@@ -225,11 +225,6 @@ public class ChallengesActivity extends AppCompatActivity {
                     challenge.setTitle(items.getJSONObject(i).getString("summary"));
                 }   catch (JSONException e) {
                     challenge.setTitle("CIS Challenge");
-                }
-                try {
-                    challenge.setStartDate(items.getJSONObject(i).getJSONObject("start").getString("dateTime"));
-                } catch (JSONException e) {
-                    challenge.setStartDate(items.getJSONObject(i).getJSONObject("start").getString("date"));
                 }
                 try {
                     challenge.setEndDate(items.getJSONObject(i).getJSONObject("end").getString("dateTime"));
@@ -275,12 +270,7 @@ public class ChallengesActivity extends AppCompatActivity {
      * sorts challenges by due date
      */
     private void sortChallenges() {
-        Collections.sort(challenges, new Comparator<Challenge>() {
-            @Override
-            public int compare(Challenge object1, Challenge object2) {
-                return object1.getStartDate().compareTo(object2.getStartDate());
-            }
-        });
+        Collections.sort(challenges, (object1, object2) -> object1.getEndDate().compareTo(object2.getEndDate()));
 
 
     }
@@ -338,17 +328,6 @@ public class ChallengesActivity extends AppCompatActivity {
         ChallengesAdapter adapter = new ChallengesAdapter(getApplicationContext(), missions,this);
         updateNoChallengesText("You've completed all active challenges!", adapter.getItemCount() == 0);
         recyclerView.setAdapter(adapter);
-    }
-
-    private void scrollToToday() {
-        String currentDate = dateToday();
-        int i;
-        for (i = 0; i < challenges.size()-1; i++) {
-            if(challenges.get(i).getEndDate().compareTo(currentDate) >= 0) {
-                break;
-            }
-        }
-        recyclerView.scrollToPosition(i);
     }
 
     /**

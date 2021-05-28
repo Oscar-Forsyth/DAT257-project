@@ -125,6 +125,10 @@ public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommended
         });
     }
 
+    /**
+     * removes a sport from the list of favourites
+     * @param sport the sport that is to be removed
+     */
     private void removeSportFromFavourites(Sport sport){
         int indexOfSportToBeRemoved=-1;
         for (int i=0; i<favouriteSports.size(); i++){
@@ -137,6 +141,10 @@ public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommended
         }
     }
 
+    /**
+     * remove item at position index from recyclerview
+     * @param index position of item in recyclerview
+     */
     private void removeItemFromRecyclerView(int index){
         this.notifyItemRemoved(index);
     }

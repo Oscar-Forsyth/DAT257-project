@@ -85,7 +85,6 @@ public class Sport {
      */
     public void setLogo(String logo) {
         this.logo = "android.resource://" + BuildConfig.APPLICATION_ID + logo;
-        //Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + logo);
         System.out.println(this.logo);
     }
 
@@ -128,10 +127,6 @@ public class Sport {
         return tags;
     }
 
-    //TODO vad är det för skillnad på setTag och addTag??? De gör väll samma sak bara att ena tar in en string och den andra en tag. Borde gå att ändra, känns dumt med båda metoderna.
-    public void setTag(String tag){
-        this.tags.add(Tag.valueOf(tag));
-    }
 
     /**
      * Adds a Tag to the list of tags.

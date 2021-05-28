@@ -1,7 +1,5 @@
 package com.example.application.challenges;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -11,15 +9,10 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.application.R;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,7 +22,6 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
     private final LayoutInflater inflater;
     private final List<Challenge> challenges;
     private final ChallengesActivity parent;
-    private final List<View> viewList = new ArrayList<>();
 
     /**
      *
@@ -55,7 +47,6 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
     @Override
     public ChallengesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.custom_challenges,parent,false);
-        viewList.add(view);
         return new ViewHolder(view);
     }
 
@@ -88,19 +79,15 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
 
     }
     private void addDescriptionListener(ChallengesAdapter.ViewHolder holder, int position){
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(holder.description.getVisibility() == View.GONE && !challenges.get(position).getDescription().equals(" ")) {
-                    holder.description.setVisibility(View.VISIBLE);
-                    holder.title.setSingleLine(false);
-                } else {
-                    holder.description.setVisibility(View.GONE);
-                    holder.title.setSingleLine(true);
-                }
-
-
+        holder.itemView.setOnClickListener(v -> {
+            if(holder.description.getVisibility() == View.GONE && !challenges.get(position).getDescription().equals(" ")) {
+                holder.description.setVisibility(View.VISIBLE);
+                holder.title.setSingleLine(false);
+            } else {
+                holder.description.setVisibility(View.GONE);
+                holder.title.setSingleLine(true);
             }
+
 
         });
     }
@@ -125,28 +112,6 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
 
 
         });
-
-    }
-
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void animateBoxes(View view, int direction){
-        CardView cardView = view.findViewById(R.id.cardView);
-        TextView deadlineText = view.findViewById(R.id.deadlineText);
-        TextView dateText = view.findViewById(R.id.endDate);
-
-        ObjectAnimator animationForBox = ObjectAnimator.ofFloat(cardView, "translationX", direction * 1500f);
-        ObjectAnimator animationForDeadlineText = ObjectAnimator.ofFloat(deadlineText, "translationX", direction * 1500f);
-        ObjectAnimator animationForDateText = ObjectAnimator.ofFloat(dateText, "translationX", direction * 1500f);
-
-        AnimatorSet animations = new AnimatorSet();
-        animations.play(animationForBox).with(animationForDeadlineText);
-        animations.play(animationForBox).with(animationForDateText);
-        animations.setDuration(550);
-        animations.start();
-
-
-
 
     }
 

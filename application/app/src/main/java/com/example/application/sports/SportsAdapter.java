@@ -101,33 +101,30 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
             }
         });
 
-        holder.button_favorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                String nameOfListItem = holder.name.getText().toString();
-                int index=0;
-                for(int i=0;i<sports.size();i++){
-                    if(sports.get(i).getName().equals(nameOfListItem)){
-                        index=i;
-                        break;
-                    }
+        holder.button_favorite.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            String nameOfListItem = holder.name.getText().toString();
+            int index=0;
+            for(int i=0;i<sports.size();i++){
+                if(sports.get(i).getName().equals(nameOfListItem)){
+                    index=i;
+                    break;
                 }
-                Sport sportOfCurrentCard = sports.get(index);
-                if(isChecked){
-                    favouriteSports.add(sportOfCurrentCard);
+            }
+            Sport sportOfCurrentCard = sports.get(index);
+            if(isChecked){
+                favouriteSports.add(sportOfCurrentCard);
+            }
+            else{
+                removeSportFromFavourites(sportOfCurrentCard);
+                if(favouriteFilterOn){
+                    sports.remove(sportOfCurrentCard);
+                    removeItemFromRecyclerView(index);
                 }
-                else{
-                    removeSportFromFavourites(sportOfCurrentCard);
-                    if(favouriteFilterOn){
-                        sports.remove(sportOfCurrentCard);
-                        removeItemFromRecyclerView(index);
-                    }
-                }
-                SportsLoader.saveList(favouriteSports, "SavedFavouritesFile", "SavedFavouritesKey", ctx);
-                System.out.println("current saved favourites: -------------------------");
-                for(Sport s : favouriteSports){
-                    System.out.println(s.getName());
-                }
+            }
+            SportsLoader.saveList(favouriteSports, "SavedFavouritesFile", "SavedFavouritesKey", ctx);
+            System.out.println("current saved favourites: -------------------------");
+            for(Sport s : favouriteSports){
+                System.out.println(s.getName());
             }
         });
     }

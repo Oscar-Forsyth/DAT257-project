@@ -23,6 +23,19 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This is the start of the application and the main menu. This is the hub where all the other parts
+ * of the application can be reached.
+ * These are the authors of this project: (name - github)
+ * @author Hannes Svahn - Hemlos
+ * @author Mantas Trakanavicius - Trakanavicius
+ * @author Oscar Forsyth - goatlover
+ * @author Oscar Johansson - OscarJohansson1
+ * @author Simon Larsson - silarss
+ * @author Simon Schuster - simonindek
+ * @author Victor Koch - victor-koch
+ */
+
 public class MainMenu extends AppCompatActivity {
 
     private Toolbar toolbar;

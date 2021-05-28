@@ -30,7 +30,7 @@ public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardView
             "Do you prefer to play sports indoors or outdoors?",
             "Do you prefer to play sports in a group or individually?",
             "What type of of performance level do you prefer?",
-            "If you had to choose a a category of sports, which would it be?"
+            "If you had to choose a category of sports, which would it be?"
     };
 
     public String[] radioButtonGroup1 = {

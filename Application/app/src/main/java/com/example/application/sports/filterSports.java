@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,16 +34,12 @@ public class filterSports extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private ImageButton closeButton;
-
     private Button saveButton, clearButton;
     private ArrayList<Button> allButtons;
     private ArrayList<Tag> savedButtons;
     private List<Sport> sports;
     private RecyclerView recyclerView;
     private SportsAdapter sportsAdapter;
-
-    private final Fragment frag = this;
     private FrameLayout background;
 
 

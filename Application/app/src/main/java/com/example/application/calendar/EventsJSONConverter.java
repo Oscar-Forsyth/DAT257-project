@@ -153,7 +153,7 @@ public class EventsJSONConverter {
      * @param noOfDays number of days to the desired date
      * @return the new date x days after the original date
      */
-    private Date addDaysToDate(Date date, int noOfDays) {
+    private Date addDaysToDate(Date date, Integer noOfDays) {
         Date newDate = new Date(date.getTime());
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.setTime(newDate);
