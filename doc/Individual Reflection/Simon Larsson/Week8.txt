@@ -1,0 +1,10 @@
+what do I want to learn or understand better?
+Jag lärde mig att URL och String i princip är två sidor av samma mynt när det kommer till vilken typ som används för ett sådant attribut i en klass. Dessutom har jag fått en ökad förståelse för hur listor sparas med hjälp av Gson. I själva verket är det bara en String som sparas så objekten i listan kommer inte nödvändigtvis ha samma state när de extractas. 
+how can I help someone else, or the entire team, to learn something new?
+Denna vecka har jag varit mer aktiv med avseende på att dokumentera kod, vilket förhoppningsvis kommer hjälpa andra att förstå hur saker och ting hänger ihop. 
+ 
+what is my contribution towards the team’s use of Scrum?
+Separeringen av arbetsuppgifter har fungerat bättre denna sprint. Dock har de inte varit lika anknutna till koden som tidigare. Istället låg fokus på presentation, final report och diverse annat som behövde göras. 
+---------------------------
+what is my contribution towards the team’s deliveries?
+Det blev lite problem med favoritmarkeringen i “Sports and Committees”, och eftersom jag varit delaktig i skapandet av de relaterade klasserna samt lagt ut lite grundläggande struktur för favoritmarkering i “Your Sports” ordnade jag så att favoritmarkeringen fungerade korrekt i tid till demonstrationen av applikationen. 
