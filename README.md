@@ -6,9 +6,9 @@ Project name - Chalmers Sports
 This Android application is developed by students at Chalmers University of Technology as a part of the course DAT257, in collaboration with CIS (Chalmers Sports Society). The purpose of the application is to promote the sports under CIS, and help students find activities and sports that they are interested in. Please refer to the Application Demo below for a more in-depth explanation.
 
 
-All relevant documentation can be found in the /doc folder
-
-Links:
+All relevant documentation can be found in the **/doc** folder
+##
+### Links:
 
 Trello - https://trello.com/b/OXNdosqv/ibm-systems-360-scrumboard
 
@@ -22,9 +22,9 @@ Technical Description - https://github.com/goatlover/DAT257-project/blob/main/do
 
 Test Documentation - https://github.com/goatlover/DAT257-project/blob/main/doc/Test%20Dokument.pdf
 
-Application Demo - https://drive.google.com/file/d/1lpSQjsHaBJmKrv94kAhCRouL7M6VtEnT/view?usp=sharing
-
-Team members:
+Application Demo - https://drive.google.com/file/d/1lpSQjsHaBJmKrv94kAhCRouL7M6VtEnT/view?usp=sharing (Also available at: https://github.com/goatlover/DAT257-project/blob/main/doc/Chalmers_Sports_Presentation.mp4)
+##
+### Team members:
 
 - Hannes Svahn - Hemlos
 - Mantas Trakanavicius - Trakanavicius
