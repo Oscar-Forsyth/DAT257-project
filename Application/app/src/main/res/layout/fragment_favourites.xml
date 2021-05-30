@@ -20,7 +20,7 @@
         android:layout_marginRight="40dp"
         android:background="#FFCD06"
         android:gravity="center_horizontal|center_vertical"
-        android:text="Favourites"
+        android:text="Your Favourite Sports"
         android:textColor="#020202"
         android:textColorHint="#020202"
         android:textSize="24sp"
