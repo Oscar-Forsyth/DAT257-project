@@ -12,6 +12,8 @@ All relevant documentation can be found in the **/doc** folder
 
 Trello - https://trello.com/b/OXNdosqv/ibm-systems-360-scrumboard
 
+Drive Folder - https://drive.google.com/drive/folders/1oHCUrzWH2RPpbc1Hp6eNmaQItq-PIpmL?usp=sharing
+
 KPI - https://docs.google.com/spreadsheets/d/15tQEvGoZsbjJtdT7QCStofYVAN74xMPMvo0v1NbbLhM/edit?usp=sharing
 
 Mockup - https://miro.com/app/board/o9J_lLFV7rY=/
