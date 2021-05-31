@@ -12,6 +12,8 @@ All relevant documentation can be found in the **/doc** folder
 
 Final report - https://github.com/goatlover/DAT257-project/blob/main/doc/IBM%20System_360%20Final%20Report.pdf
 
+APK - https://github.com/goatlover/DAT257-project/blob/main/Chalmers_Sports.apk
+
 Trello - https://trello.com/b/OXNdosqv/ibm-systems-360-scrumboard
 
 Drive Folder - https://drive.google.com/drive/folders/1oHCUrzWH2RPpbc1Hp6eNmaQItq-PIpmL?usp=sharing
