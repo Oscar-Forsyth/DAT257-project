@@ -10,7 +10,7 @@ All relevant documentation can be found in the **/doc** folder
 ##
 ### Links:
 
-Final report - [To be added]
+Final report - https://github.com/goatlover/DAT257-project/blob/main/doc/IBM%20System_360%20Final%20Report.pdf
 
 Trello - https://trello.com/b/OXNdosqv/ibm-systems-360-scrumboard
 
