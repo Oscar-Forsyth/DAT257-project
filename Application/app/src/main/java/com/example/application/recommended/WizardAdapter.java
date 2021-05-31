@@ -15,6 +15,9 @@ import com.example.application.R;
 
 import java.util.ArrayList;
 
+/**
+ * defines the quiz questions and paints
+ */
 public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardViewHolder> {
 
     Context context;
@@ -188,8 +191,6 @@ public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardView
             radioButton4 = itemView.findViewById(R.id.radioButton4);
             radioButton5 = itemView.findViewById(R.id.radioButton5);
             radioGroup = itemView.findViewById(R.id.radioGroup);
-            //radioGroup.check(radioGroup.getChildAt(0).getId());
-           // radioGroup.clearCheck();
 
         }
 

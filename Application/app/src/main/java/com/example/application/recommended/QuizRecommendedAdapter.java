@@ -91,7 +91,6 @@ public class QuizRecommendedAdapter extends RecyclerView.Adapter<QuizRecommended
             @Override
             public void onClick(View v) {
                 String url = sports.get(position).getLink();
-                System.out.println(url);
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.setData(Uri.parse(url));

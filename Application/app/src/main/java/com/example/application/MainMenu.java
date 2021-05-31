@@ -76,9 +76,6 @@ public class MainMenu extends AppCompatActivity {
                 e.printStackTrace();
             }
             SportsLoader.saveList(sports, "SavedSportsFile","SavedSportsKey", this);
-            for (Sport s : sports){
-                System.out.println(s.getName());
-            }
         }
     }
 

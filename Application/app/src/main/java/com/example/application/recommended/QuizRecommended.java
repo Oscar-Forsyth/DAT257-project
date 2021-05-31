@@ -282,7 +282,6 @@ public class QuizRecommended extends Fragment {
 
         for(Sport e : list)
             Sports = Sports + e.getName() + ",";
-        System.out.println(Sports);
         editor.putString("savedRecommendations", Sports);
         editor.apply();
     }

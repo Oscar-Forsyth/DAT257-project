@@ -21,7 +21,9 @@ import com.example.application.R;
 
 import java.util.ArrayList;
 
-
+/**
+ * responsible for the view and functionality of the quiz
+ */
 public class Wizard extends AppCompatActivity {
     private ViewPager2 mSlideViewPager;
     private LinearLayout mDotLayout;

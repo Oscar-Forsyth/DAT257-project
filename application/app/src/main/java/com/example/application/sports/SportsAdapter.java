@@ -92,7 +92,6 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
             @Override
             public void onClick(View v) {
                 String url = sports.get(position).getLink();
-                System.out.println(url);
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.setData(Uri.parse(url));
@@ -121,10 +120,6 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
                 }
             }
             SportsLoader.saveList(favouriteSports, "SavedFavouritesFile", "SavedFavouritesKey", ctx);
-            System.out.println("current saved favourites: -------------------------");
-            for(Sport s : favouriteSports){
-                System.out.println(s.getName());
-            }
         });
     }
     private void removeSportFromFavourites(Sport sport){

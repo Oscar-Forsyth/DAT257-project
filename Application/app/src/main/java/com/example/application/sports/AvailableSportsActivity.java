@@ -137,6 +137,9 @@ public class AvailableSportsActivity extends AppCompatActivity {
         return savedTags;
     }
 
+    /**
+     * changes boolean value of variable filterExpanded
+     */
     protected static void toggleFilterExpanded() {
         filterExpanded = !filterExpanded;
     }

@@ -117,15 +117,9 @@ public class ChallengesActivity extends AppCompatActivity {
         SharedPreferences completedMissions = getSharedPreferences("CompletedMissions", MODE_PRIVATE);
         Set<String> set = completedMissions.getStringSet("completedMission",new HashSet<>());
         for (int i = 0; i < set.size(); i++) {
-            System.out.println("SET:" + i + ":" +set.toArray()[i].toString());
-        }
-        for (int i = 0; i < set.size(); i++) {
             for (int j = 0; j < missions.size(); j++) {
-                System.out.println(set.toArray()[i].toString()+ ":" +missions.get(j).getTitle());
                 if(set.toArray()[i].toString().equals(missions.get(j).getTitle())){
                     missions.get(j).setCompleted(!missions.get(j).isCompleted());
-
-                    System.out.println("accepted");
                     break;
                 }
             }

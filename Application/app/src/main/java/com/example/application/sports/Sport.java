@@ -72,7 +72,6 @@ public class Sport {
      */
     public void setLogo(String logo) {
         this.logo = "android.resource://" + BuildConfig.APPLICATION_ID + logo;
-        System.out.println(this.logo);
     }
 
     /**
