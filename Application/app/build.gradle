@@ -56,6 +56,8 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.0' //circularImageView
     implementation 'com.balysv:material-ripple:1.0.2' // for ripple effect
     implementation 'com.google.android:flexbox:2.0.1'
+    implementation 'com.google.code.gson:gson:2.8.6' // enables saving lists
+    compile 'com.github.sundeepk:compact-calendar-view:3.0.0'
 
 
 }

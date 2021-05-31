@@ -1,28 +1,26 @@
 package com.example.application.sports;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.appcompat.widget.Toolbar;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 
 import android.view.View;
-import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.application.R;
+import com.example.application.SportsLoader;
 import com.example.application.Tag;
+import com.example.application.animations.Animations;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,17 +32,15 @@ public class AvailableSportsActivity extends AppCompatActivity {
     /**
      * the framework of the list displaying the sports
      */
-    RecyclerView recyclerView;
-    FrameLayout frameLayout, backgroundFilter;
-    Button filterButton;
-    protected List<Sport> sports;
-    SportsAdapter sportsAdapter;
-    FragmentManager fm;
+    private RecyclerView recyclerView;
+    private FrameLayout backgroundFilter;
+
     private List<Tag> savedTags;
+    private static boolean filterExpanded;
+    private CheckBox favoriteCheckBox;
+    protected List<Sport> sports;
+    private List<Sport>favouriteSports;
 
-
-    private Toolbar toolbar;
-    private TextView textView;
     /**
      * the URL for our JSON-file
      * For every update to the JSON-file, a new URL has to be generated so there is probably a better solution
@@ -55,104 +51,70 @@ public class AvailableSportsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_available_sports);
 
-        toolbar = findViewById(R.id.customToolbar);
-        textView = (TextView) findViewById(R.id.toolbarText);
-        textView.setText("Sports and Committiees");
+        TextView textView = findViewById(R.id.toolbarText);
+        textView.setText("Sports and Committees");
 
 
-        frameLayout = findViewById(R.id.frameLayout);
-        filterButton = findViewById(R.id.filterButton);
         recyclerView = findViewById(R.id.sportsList);
-        backgroundFilter = findViewById(R.id.backgroundFilter);
-        backgroundFilter.setAlpha((float)(0.6)); //TODO Move to xml
+        Fragment filterFragment = new filterSports();
+        filterExpanded = false;
+
+        favoriteCheckBox = findViewById(R.id.favoriteCheckBox);
 
 
-        //Fragments
-        fm = getSupportFragmentManager();
+        extractSports();
 
 
-        sports = new ArrayList<>();
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.frameLayout, filterFragment).commit();
+        RelativeLayout filterButton = findViewById(R.id.filterButton);
 
-        try {
-            extractSports();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        //Start filterFragment
-        filterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fm.beginTransaction().replace(R.id.frameLayout, new filterSports()).commit();
-                backgroundFilter.setVisibility(View.VISIBLE);
+        filterButton.setOnClickListener(v -> {
+            if(filterExpanded){
+                Animations.toggleArrow(findViewById(R.id.downFilterImg), false);
+                Animations.collapse(findViewById(R.id.frameLayout));
+                filterExpanded = false;
+            } else {
+                Animations.toggleArrow(findViewById(R.id.downFilterImg), true);
+                Animations.expand(findViewById(R.id.frameLayout));
+                filterExpanded = true;
             }
         });
+        favoriteCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                extractSports();
+
+                if(isChecked){
+                    refreshView(favouriteSports);
+                }
+                else{
+                    refreshView(sports);
+                }
+            }
+        });
+        refreshView(sports);
     }
 
-    protected void backgroundFilterInvis(){
-        backgroundFilter.setVisibility(View.INVISIBLE);
-    }
 
-
-
-
-    /**
-     * JSON content is read from local file
-     */
-
-    private String loadJSONFromAsset()  {
-        String json = null;
-        try {
-            InputStream is = getAssets().open("sports.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
 
     /**
      * JSON content is translated from loadJSONFromAsset
      */
-    private void extractSports() throws JSONException {
-
-        JSONArray arr = new JSONArray(loadJSONFromAsset());
-
-        for (int i = 0; i < arr.length(); i++) {
-            try {
-                JSONObject sportObject = arr.getJSONObject(i);
-
-                Sport sport = new Sport();
-                sport.setName(sportObject.getString("name").toString());
-                sport.setDescription(sportObject.getString("description".toString()));
-                sport.setLogo(sportObject.getString("logo"));
-                sport.setLink(sportObject.getString("link"));
-
-
-                JSONArray tagList = sportObject.getJSONArray("tags");
-                for(int j = 0; j < tagList.length(); j++)
-                    sport.addTag(Tag.valueOf(tagList.getString(j)));
-
-
-                sports.add(sport);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        sportsAdapter = new SportsAdapter(getApplicationContext(),sports);
-        recyclerView.setAdapter(sportsAdapter);
-
-
+    private void extractSports(){
+        sports = SportsLoader.extractSavedSports("SavedSportsFile", "SavedSportsKey", this);
+        favouriteSports = SportsLoader.extractSavedSports("SavedFavouritesFile", "SavedFavouritesKey", this);
     }
+    private void refreshView(List<Sport>theSports){
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        SportsAdapter sportsAdapter = new SportsAdapter(getApplicationContext(), theSports, favoriteCheckBox.isChecked());
+        recyclerView.setItemViewCacheSize(theSports.size());
+        recyclerView.setAdapter(sportsAdapter);
+    }
+    public boolean getStateOfFavoriteCheckBox(){
+        return favoriteCheckBox.isChecked();
+    }
+
     public void goBack(View view){
         this.onBackPressed();
     }
@@ -173,5 +135,9 @@ public class AvailableSportsActivity extends AppCompatActivity {
 
     protected List<Tag> getSavedTags(){
         return savedTags;
+    }
+
+    protected static void toggleFilterExpanded() {
+        filterExpanded = !filterExpanded;
     }
 }

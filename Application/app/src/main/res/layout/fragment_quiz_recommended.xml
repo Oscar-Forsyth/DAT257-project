@@ -8,34 +8,27 @@
     android:background="#FFCD06"
     tools:context=".recommended.QuizRecommended">
 
-    <!-- TODO: Update blank fragment layout -->
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/custom_toolbar"/>
-
     <TextView
         android:id="@+id/textView"
-        android:layout_width="301dp"
+        android:layout_width="0dp"
         android:layout_height="93dp"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
-        android:layout_marginBottom="24dp"
         android:background="#FFCD06"
-        android:gravity="center_horizontal"
-        android:text="Your Top 5 Recommended Sports"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Your Recommended Sports"
         android:textColor="#020202"
         android:textColorHint="#020202"
-        android:textSize="28sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/recommendedList"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recommendedList"
@@ -43,7 +36,7 @@
         android:layout_height="0dp"
         android:alwaysDrawnWithCache="true"
         android:animateLayoutChanges="false"
-        android:background="@color/white"
+        android:background="@color/cis_yellow"
         app:layout_constraintBottom_toTopOf="@+id/retakeQuizButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,13 +46,14 @@
         android:id="@+id/retakeQuizButton"
         android:layout_width="135dp"
         android:layout_height="48dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:text="Retake Quiz"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recommendedList" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

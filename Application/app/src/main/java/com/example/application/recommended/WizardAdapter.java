@@ -13,77 +13,153 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.application.R;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardViewHolder> {
 
     Context context;
     LayoutInflater layoutInflater;
-    View view;
-    Map<Integer, WizardViewHolder> map = new HashMap<>();
-    int count= 0;
+
+    private final ArrayList<Integer> quizResults = new ArrayList<>();
 
     public WizardAdapter(Context context) {
         this.context = context;
+        initializeArrayList();
     }
-
     public String[] wizardQuestions = {
-            "I like to work with others towards a common goal",
-            "I like playing sports outside",
-            "I like longer training sessions rather than short and intense",
-            "I like to move ...",
-            "I like to swim",
-            "Which sport sounds most interesting?"
+            "Do you prefer to play sports indoors or outdoors?",
+            "Do you prefer to play sports in a group or individually?",
+            "What type of of performance level do you prefer?",
+            "If you had to choose a category of sports, which would it be?"
     };
 
     public String[] radioButtonGroup1 = {
-            "Yes",
-            "No",
-            "Sometimes"
+            "Indoors",
+            "Outdoors",
+            "No preference"
     };
-    public String[] radioButtonGroupLast = {
+    public String[] radioButtonGroup2 = {
+            "In groups",
+            "Individually",
+            "No preference"
+    };
+    public String[] radioButtonGroup3 = {
+            "Intensive",
+            "Endurance",
+            "Both"
+    };
+    public String[] radioButtonGroup4 = {
             "Ball sports",
-            "Sports played with rackets",
-            "Extreme sports (i.e snowboarding, mountain climbing)"
+            "Racket sports",
+            "Precision sports",
+            "Sports that are close to nature",
+            "Sports with complex movements"
     };
 
 
-    public int getRadioButton(int key){
-        WizardViewHolder wizardViewHolder = map.get(key);
-        //System.out.println("map: "+ map.get(key) + "key: "+ key);
-        assert wizardViewHolder != null;
-        RadioGroup radioGroup = wizardViewHolder.getRadioGroup();
-        return radioGroup.getCheckedRadioButtonId();
+
+    public ArrayList<Integer> getQuizResults() {
+        return quizResults;
+    }
+
+    private void initializeArrayList(){
+        for (int i = 0; i < getItemCount(); i++) {
+            quizResults.add(0);
+        }
+
     }
 
 
     @NonNull
     @Override
     public WizardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.wizard_layout, parent, false);
-        WizardViewHolder wizardViewHolder = new WizardViewHolder(view);
-        map.put(count,wizardViewHolder);
-        count++;
-        return wizardViewHolder;
+        return new WizardViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull WizardViewHolder holder, int position) {
-        view = holder.itemView;
         holder.wizardQuestion.setText(wizardQuestions[position]);
-        if(position <5){
+        holder.radioButton4.setVisibility(View.GONE);
+        holder.radioButton5.setVisibility(View.GONE);
+        if(position == 0){
             holder.radioButton1.setText(radioButtonGroup1[0]);
             holder.radioButton2.setText(radioButtonGroup1[1]);
             holder.radioButton3.setText(radioButtonGroup1[2]);
-        }else{
-            holder.radioButton1.setText(radioButtonGroupLast[0]);
-            holder.radioButton2.setText(radioButtonGroupLast[1]);
-            holder.radioButton3.setText(radioButtonGroupLast[2]);
+
+        }else if(position == 1){
+            holder.radioButton1.setText(radioButtonGroup2[0]);
+            holder.radioButton2.setText(radioButtonGroup2[1]);
+            holder.radioButton3.setText(radioButtonGroup2[2]);
+        }
+        else if(position == 2){
+            holder.radioButton1.setText(radioButtonGroup3[0]);
+            holder.radioButton2.setText(radioButtonGroup3[1]);
+            holder.radioButton3.setText(radioButtonGroup3[2]);
+        }
+        else if(position == 3){
+            holder.radioButton4.setVisibility(View.VISIBLE);
+            holder.radioButton5.setVisibility(View.VISIBLE);
+            holder.radioButton1.setText(radioButtonGroup4[0]);
+            holder.radioButton2.setText(radioButtonGroup4[1]);
+            holder.radioButton3.setText(radioButtonGroup4[2]);
+            holder.radioButton4.setText(radioButtonGroup4[3]);
+            holder.radioButton5.setText(radioButtonGroup4[4]);
         }
 
+        RadioGroup radioGroup = holder.getRadioGroup();
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            RadioButton radioButton = holder.itemView.findViewById(checkedId);
+            setButtonResult(checkedId,radioButton,position);
+        });
+    }
+    private void setButtonResult(int id,RadioButton radioButton,int position){
+        if(id!=-1){
+            String result = radioButton.getText().toString();
+            if(position == 0){
+                if (result.equalsIgnoreCase(radioButtonGroup1[0])) {
+                    quizResults.set(position, 1);
+                } else if (result.equalsIgnoreCase(radioButtonGroup1[1])) {
+                    quizResults.set(position, 2);
+                } else if (result.equalsIgnoreCase(radioButtonGroup1[2])) {
+                    quizResults.set(position, 3);
+                }
+            }
+            else if(position == 1){
+                if (result.equalsIgnoreCase(radioButtonGroup2[0])) {
+                    quizResults.set(position, 1);
+                } else if (result.equalsIgnoreCase(radioButtonGroup2[1])) {
+                    quizResults.set(position, 2);
+                } else if (result.equalsIgnoreCase(radioButtonGroup2[2])) {
+                    quizResults.set(position, 3);
+                }
+            }
+            else if(position == 2){
+                if (result.equalsIgnoreCase(radioButtonGroup3[0])) {
+                    quizResults.set(position, 1);
+                } else if (result.equalsIgnoreCase(radioButtonGroup3[1])) {
+                    quizResults.set(position, 2);
+                } else if (result.equalsIgnoreCase(radioButtonGroup3[2])) {
+                    quizResults.set(position, 3);
+                }
+            }else{ //Sista frågan
+                if (result.equalsIgnoreCase(radioButtonGroup4[0])) {
+                    quizResults.set(position, 1);
+                } else if (result.equalsIgnoreCase(radioButtonGroup4[1])) {
+                    quizResults.set(position, 2);
+                } else if (result.equalsIgnoreCase(radioButtonGroup4[2])) {
+                    quizResults.set(position, 3);
+                } else if (result.equalsIgnoreCase(radioButtonGroup4[3])) {
+                    quizResults.set(position, 4);
+                } else if (result.equalsIgnoreCase(radioButtonGroup4[4])) {
+                    quizResults.set(position, 5);
+                }
+            }
 
+
+
+        }
     }
 
     @Override
@@ -93,12 +169,12 @@ public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardView
 
 
     /**
-     * assigns values to and holds attributes necessary for the items in recyclerView
+     * Assigns values to and holds attributes necessary for the items in recyclerView
      */
     public static class WizardViewHolder extends RecyclerView.ViewHolder {
 
         TextView wizardQuestion;
-        RadioButton radioButton1, radioButton2, radioButton3;
+        RadioButton radioButton1, radioButton2, radioButton3, radioButton4, radioButton5;
         RadioGroup radioGroup;
 
 
@@ -109,9 +185,11 @@ public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardView
             radioButton1 = itemView.findViewById(R.id.radioButton1);
             radioButton2 = itemView.findViewById(R.id.radioButton2);
             radioButton3 = itemView.findViewById(R.id.radioButton3);
+            radioButton4 = itemView.findViewById(R.id.radioButton4);
+            radioButton5 = itemView.findViewById(R.id.radioButton5);
             radioGroup = itemView.findViewById(R.id.radioGroup);
-            radioGroup.check(radioGroup.getChildAt(0).getId());
-            radioGroup.clearCheck();
+            //radioGroup.check(radioGroup.getChildAt(0).getId());
+           // radioGroup.clearCheck();
 
         }
 

@@ -4,25 +4,28 @@ package com.example.application.calendar;
  * Class that holds information about one Activity. It also has methods
  * to retrieve and set useful information regarding activities.
  */
-public class Activity {
+public class Event {
     private String title;
     private String date;
     private String prettyDate;
     private String location;
+    private String description;
+    private String creator;
 
-    public Activity(){}
+    public Event(){}
 
     /** Creates an activity with the specified title, date and location.
      * @param title The activity’s title.
      * @param date The activity’s date.
      * @param location The activity's location.
      */
-    public Activity(String title, String date, String location){
+    public Event(String title, String date, String location){
         this.title = title;
         this.date = date;
         // Converts date to more readable format
         prettyDate = DateConverter.convertDateFromCalendar(date);
         this.location= location;
+        this.description = description;
     }
 
     /** Gets the activity’s title.
@@ -73,5 +76,27 @@ public class Activity {
      */
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    /** Gets the activity description.
+     * @return A string representing the activity description.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /** Sets the activity location.
+     * @param description A String containing the activity description.
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 }

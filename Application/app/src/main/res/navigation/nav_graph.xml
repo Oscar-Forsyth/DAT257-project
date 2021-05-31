@@ -5,7 +5,6 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/mainMenu">
 
-
     <activity
         android:id="@+id/availableSportsActivity"
         android:name="com.example.application.sports.AvailableSportsActivity"
@@ -29,17 +28,20 @@
     </activity>
     <activity
         android:id="@+id/activitiesActivity"
-        android:name="com.example.application.calendar.ActivitiesActivity"
+        android:name="com.example.application.calendar.EventsActivity"
         android:label="activity_activities"
-        tools:layout="@layout/activity_activities" />
+        tools:layout="@layout/activity_events" />
     <fragment
         android:id="@+id/quizRecommended"
         android:name="com.example.application.recommended.QuizRecommended"
         android:label="fragment_quiz_recommended"
         tools:layout="@layout/fragment_quiz_recommended">
-        <action
-            android:id="@+id/action_quizRecommended_to_mainMenu"
-            app:destination="@id/mainMenu" />
+        <translate
+            android:duration="500"
+            android:fromXDelta="0%"
+            android:fromYDelta="0%"
+            android:toXDelta="-100%"
+            android:toYDelta="0%" />
     </fragment>
 
     <activity

@@ -9,13 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.application.R;
 import com.example.application.Tag;
+import com.example.application.animations.Animations;
 import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.ArrayList;
@@ -29,12 +29,9 @@ import java.util.List;
  */
 public class filterSports extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    private ImageButton closeButton;
 
     private Button saveButton, clearButton;
     private ArrayList<Button> allButtons;
@@ -42,13 +39,9 @@ public class filterSports extends Fragment {
     private List<Sport> sports;
     private RecyclerView recyclerView;
     private SportsAdapter sportsAdapter;
-
-    private final Fragment frag = this;
-    private FrameLayout upperFrame;
+    private FrameLayout background;
 
 
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -64,7 +57,6 @@ public class filterSports extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment filterSports.
      */
-    // TODO: Rename and change types and number of parameters
     public static filterSports newInstance(String param1, String param2) {
         filterSports fragment = new filterSports();
         Bundle args = new Bundle();
@@ -123,12 +115,11 @@ public class filterSports extends Fragment {
         //Sets the saved buttons when exiting the fragment
         setSavedButtons();
 
-        upperFrame = rootView.findViewById(R.id.upperFrame);
-        upperFrame.setOnClickListener(new View.OnClickListener() {
+        background = rootView.findViewById(R.id.filterBackground);
+        background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requireActivity().getSupportFragmentManager().beginTransaction().remove(filterSports.this).commit();
-                requireActivity().findViewById(R.id.backgroundFilter).setVisibility(View.GONE);
+                hideFilter();
             }
         });
 
@@ -145,11 +136,13 @@ public class filterSports extends Fragment {
                 //Gets the whole list unfiltered
                 sports = ((AvailableSportsActivity) requireActivity()).getSportsList();
 
+
                 removeFromSportList();
 
                 //Update recycler view (Same as Activity)
                 recyclerView = getActivity().findViewById(R.id.sportsList);
-                sportsAdapter = new SportsAdapter(getActivity().getApplicationContext(), sports);
+                sportsAdapter = new SportsAdapter(getActivity().getApplicationContext(), sports, ((AvailableSportsActivity) requireActivity()).getStateOfFavoriteCheckBox());
+                recyclerView.setItemViewCacheSize(sports.size());
                 recyclerView.setAdapter(sportsAdapter);
 
                 //No sports text
@@ -159,8 +152,7 @@ public class filterSports extends Fragment {
                 ((AvailableSportsActivity) requireActivity()).setSavedTags(savedButtons);
 
                 //Makes fragment invisible
-                requireActivity().getSupportFragmentManager().beginTransaction().remove(filterSports.this).commit();
-                requireActivity().findViewById(R.id.backgroundFilter).setVisibility(View.GONE);
+                hideFilter();
 
             }
         });
@@ -234,6 +226,12 @@ public class filterSports extends Fragment {
             }
 
         }
+    }
+
+    private void hideFilter(){
+        AvailableSportsActivity.toggleFilterExpanded();
+        Animations.toggleArrow(requireActivity().findViewById(R.id.downFilterImg), false);
+        Animations.collapse(requireActivity().findViewById(R.id.frameLayout));
     }
 
 }

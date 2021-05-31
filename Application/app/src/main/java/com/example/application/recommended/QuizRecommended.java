@@ -17,14 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -34,41 +27,42 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import com.example.application.MainMenu;
 import com.example.application.R;
+import com.example.application.SportsLoader;
 import com.example.application.Tag;
 import com.example.application.sports.Sport;
 
 /**
+ * the fragment that contains the recommended sports
+ * it refreshes its recyclerview based on the user's quiz answers
  * A simple {@link Fragment} subclass.
  * Use the {@link QuizRecommended#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class QuizRecommended extends Fragment {
 
-    Button buttonToMainMenu;
     Button buttonToRetakeQuiz;
     RecyclerView recommendedList;
 
     List<Sport> sports;
-    AdapterQuizRecommended adapter;
+    QuizRecommendedAdapter adapter;
     HashMap<Sport, Integer> sportsWithPointsHashMap = new HashMap<>();
     List <Tag> tagsWithPoints = new ArrayList<>();
-
+    // Used in fragments, don't need to change
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     List<Integer> resultList;
 
+    // Could be used when factory method is
     private String mParam1;
     private String mParam2;
-
-    private Toolbar toolbar;
-    private TextView textView;
 
     public QuizRecommended() {
         // Required empty public constructor
     }
 
+    //Required for fragment, just leave
     public static QuizRecommended newInstance(String param1, String param2) {
         QuizRecommended fragment = new QuizRecommended();
         Bundle args = new Bundle();
@@ -78,6 +72,10 @@ public class QuizRecommended extends Fragment {
         return fragment;
     }
 
+    /**
+     * called when this fragment is being created, atm default implementation of onCreate, ie does nothing particular for our fragment
+     * @param savedInstanceState last state
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,128 +85,96 @@ public class QuizRecommended extends Fragment {
         }
     }
 
+    /**
+     * assigns xml-file to the view, and sets listener to a button
+     * @return a view of fragment_quiz_recommended.xml
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_quiz_recommended, container, false);
-        /*
-        buttonToMainMenu= view.findViewById(R.id.buttonToMainMenu);
-        buttonToMainMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainMenu.class);
-                startActivity(intent);
-            }
-        });
-
-         */
         buttonToRetakeQuiz= view.findViewById(R.id.retakeQuizButton);
-        buttonToRetakeQuiz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Wizard.class);
-                startActivity(intent);
-            }
+        buttonToRetakeQuiz.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Wizard.class);
+            startActivity(intent);
         });
         resultList = requireActivity().getIntent().getIntegerArrayListExtra("QUIZ_RESULTS");
-        if(resultList!=null){
-            System.out.println("--\n");
-            for (int i = 0; i < resultList.size(); i++) {
-                System.out.println("Question: " + i + "result: " + resultList.get(i).toString());
-            }
-            System.out.println("--\n");
-        }
-        // Inflate the layout for this fragment
 
-        toolbar = view.findViewById(R.id.customToolbar);
-        textView = (TextView) view.findViewById(R.id.toolbarText);
-        textView.setText("Recommended Sports");
         return view;
     }
 
+    //Required for fragment, just leave
+
+    /**
+     * gets list of sports
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recommendedList= requireActivity().findViewById(R.id.recommendedList);
         sports=new ArrayList<>();
+        extractSports();
 
-        try {
-            extractSports();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-    private String loadJSONFromAsset() throws JSONException {
-        String json = null;
-        try {
-            InputStream is = requireActivity().getAssets().open("sports.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
     }
 
-    private void converter(List<Integer>list){
+    /**
+     * adds points to a tag itself based on the user's answers in the quiz
+     * @param list the user's answers from the quiz
+     */
+    private void addQuizPoints(List<Integer>list){
+
         fillSportsWithPointsHashMapWithDefaultValues();
-        //adds point to the tag itself by putting it into tagWithPoints
-        //TODO information from the previous quiz is not saved anywhere, which is why the list is null if the user comes from the main menu
+
         if(list!=null){
             for (int questionNr=0; questionNr<list.size(); questionNr++){
                 //answer to question (0,1,2,3) where 0=No answer, 1=Yes, 2=No, 3=Sometimes
                 int ans = list.get(questionNr);
                 switch (questionNr){
+
                     case 0:
                         if (ans==1){
-                            tagsWithPoints.add(Tag.GROUP);
+                            tagsWithPoints.add(Tag.INDOOR);
                         }
                         if (ans==2){
                             //add INDIVIDUAL
-                            tagsWithPoints.add(Tag.INDIVIDUAL);
+                            tagsWithPoints.add(Tag.OUTDOOR);
                         }
                         break;
                     case 1:
                         if (ans==1){
-                            tagsWithPoints.add(Tag.OUTDOORS);
+                            tagsWithPoints.add(Tag.GROUP);
 
                         }
                         if (ans==2){
-                            tagsWithPoints.add(Tag.INDOORS);
+                            tagsWithPoints.add(Tag.INDIVIDUAL);
+                        }
+                        if (ans==3){
+                            tagsWithPoints.add(Tag.GROUP_AND_INDIVIDUAL);
                         }
                         break;
                     case 2:
                         if (ans==1){
-                            tagsWithPoints.add(Tag.ENDURANCE);
+                            tagsWithPoints.add(Tag.INTENSE);
 
                         }
                         if (ans==2){
-                            tagsWithPoints.add(Tag.HIGHINTENSITY);
+                            tagsWithPoints.add(Tag.ENDURANCE);
                         }
                         break;
                     case 3:
                         if (ans==1){
-                            tagsWithPoints.add(Tag.TECHNIQUE);
-                        }
-                        break;
-                    case 4:
-                        if (ans==1){
-                            tagsWithPoints.add(Tag.WATERSPORT);
-                        }
-                        break;
-                    case 5:
-                        if (ans==1){
                             tagsWithPoints.add(Tag.BALLGAME);
-
                         }
-                        if (ans==2){
-                            tagsWithPoints.add(Tag.RACKETSPORT);
+                        if(ans ==2){
+                            tagsWithPoints.add(Tag.RACKET_SPORT);
                         }
-                        if (ans==3){
-                            tagsWithPoints.add(Tag.EXTREMESPORT);
+                        if(ans ==3){
+                            tagsWithPoints.add(Tag.PRECISION);
+                        }
+                        if(ans ==4){
+                            tagsWithPoints.add(Tag.NATURE);
+                        }
+                        if(ans ==5){
+                            tagsWithPoints.add(Tag.COMPLEX_MOVEMENTS);
                         }
                         break;
                 }
@@ -218,7 +184,9 @@ public class QuizRecommended extends Fragment {
         }
     }
 
-    //for each tag in tagWithPoints, add points to the sports with that tag
+    /**
+     * for each tag in tagWithPoints, add points to the sports with that tag
+     */
     private void addPointsToSportsWithTag(){
         for (Tag t : tagsWithPoints){
             for (Sport s : sportsWithPointsHashMap.keySet()){
@@ -235,6 +203,10 @@ public class QuizRecommended extends Fragment {
         }
     }
 
+    /**
+     * sorts the list of sports based on how many paints they got from the quiz and returns top 5
+     * @return list with the 5 sports that got the greatest number of points
+     */
     //returns a list that only contains the 5 sports with the most points
     private List<Sport> onlyTop5(){
         List<Sport>top5Sports = new ArrayList<>();
@@ -246,16 +218,6 @@ public class QuizRecommended extends Fragment {
                 return o1.getValue().compareTo(o2.getValue());
             }
         }));
-        int b=0;
-
-        System.out.println("Sorterat: -----------------------------------");
-        for (Map.Entry<Sport, Integer> a : tmpListForSorting){
-
-            System.out.println("tmpList på plats " +b+": " + a.getKey().getName()+ ", poäng: " + a.getValue());
-
-            b++;
-        }
-
         int iterationCount=0;
         for (Map.Entry<Sport, Integer> a : tmpListForSorting){
             if(iterationCount>=5){
@@ -268,49 +230,22 @@ public class QuizRecommended extends Fragment {
         return top5Sports;
     }
 
+    /**
+     * fills the hashmap with default values (0).
+     * These values are later modified based on quiz answers
+     */
     private void fillSportsWithPointsHashMapWithDefaultValues(){
         sportsWithPointsHashMap = new HashMap<>();
         for (Sport s : sports){
             sportsWithPointsHashMap.put(s, 0);
         }
     }
-    private void extractSports() throws JSONException {
 
-        JSONArray arr = new JSONArray(loadJSONFromAsset());
-
-        for (int i = 0; i < arr.length(); i++) {
-            try {
-                JSONObject sportObject = arr.getJSONObject(i);
-
-                Sport sport = new Sport();
-                sport.setName(sportObject.getString("name").toString());
-                sport.setDescription(sportObject.getString("description".toString()));
-                sport.setLogo(sportObject.getString("logo"));
-                sport.setLink(sportObject.getString("link"));
-                JSONArray arrOfTags = sportObject.getJSONArray("tags");
-                for (int j = 0; j < arrOfTags.length(); j++) {
-                    sport.setTag(arrOfTags.getString(j));
-                }
-                
-                sports.add(sport);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        //temporary for tests
-
-        List <Integer> randList = new ArrayList<>();
-        //adds INDIVIDUAL to tagsWithPoints
-        randList.add(2);
-        //adds OUTDOORS
-        randList.add(1);
-        //adds HIGHINTENSITY
-        randList.add(2);
-        randList.add(0);
-        randList.add(0);
-        //adds RACKETSPORT
-        randList.add(2);
+    /**
+     * loads the saved recommended sports and displays them
+     */
+    private void extractSports(){
+        sports = SportsLoader.extractSavedSports("SavedSportsFile", "SavedSportsKey", requireActivity());
 
         //adds points to every sport that can be found in tagsWithPoints
         SharedPreferences prefs = this.getActivity().getSharedPreferences("Save", Context.MODE_PRIVATE);
@@ -318,21 +253,31 @@ public class QuizRecommended extends Fragment {
         List <Sport> top5Sports;
 
         if(savedSports == null) {
-            converter(resultList);
+            addQuizPoints(resultList);
             top5Sports = onlyTop5();
             saveList(top5Sports);
         } else
             top5Sports = retrieveList(savedSports);
+       displayTop5(top5Sports);
+    }
 
-
-        adapter = new AdapterQuizRecommended(requireActivity().getApplicationContext(), top5Sports);
+    /**
+     * displays the top 5 sports in the recyclerview
+     * @param top5Sports the sports to be displayed in the recyclerview
+     */
+    private void displayTop5(List <Sport> top5Sports){
+        adapter = new QuizRecommendedAdapter(requireActivity().getApplicationContext(), top5Sports, false);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireActivity().getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
         recommendedList.setLayoutManager(gridLayoutManager);
         recommendedList.setAdapter(adapter);
     }
 
+    /**
+     * saves list of recommendations
+     * @param list the list to be saved
+     */
     private void saveList(List<Sport> list){
-        SharedPreferences.Editor editor = this.getActivity().getSharedPreferences("Save", Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = this.requireActivity().getSharedPreferences("Save", Context.MODE_PRIVATE).edit();
         String Sports = "";
 
         for(Sport e : list)
@@ -342,6 +287,11 @@ public class QuizRecommended extends Fragment {
         editor.apply();
     }
 
+    /**
+     * converts recommendations in string format to an actual list with Sport-objects
+     * @param string recommendations in string format
+     * @return list of recommendations
+     */
     private List<Sport> retrieveList(String string){
         List <Sport> list = new ArrayList<>();
         Scanner sc = new Scanner(string).useDelimiter(",");
@@ -355,5 +305,4 @@ public class QuizRecommended extends Fragment {
         sc.close();
         return list;
     }
-
 }

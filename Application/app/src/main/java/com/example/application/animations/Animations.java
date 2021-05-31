@@ -5,8 +5,16 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
+/**
+ * Class that holds different kinds of animations 
+ */
+
 public class Animations {
 
+    /**
+     * This method expands the view with the view that is with the method calling.
+     * @param view The view to be expanded
+     */
     public static void expand(View view) {
         Animation animation = expandAction(view);
         view.startAnimation(animation);
@@ -20,13 +28,13 @@ public class Animations {
         view.getLayoutParams().height = 0;
         view.setVisibility(View.VISIBLE);
 
+        //Starts the animation with a timer based on the height of the object
         Animation animation = new Animation() {
             @Override
             protected void applyTransformation(float interpolatedTime, Transformation t) {
-
                 view.getLayoutParams().height = interpolatedTime == 1
                         ? ViewGroup.LayoutParams.WRAP_CONTENT
-                        : (int) (actualheight * interpolatedTime);
+                        : Math.max(1, (int) (actualheight * interpolatedTime));
                 view.requestLayout();
             }
         };
@@ -41,6 +49,10 @@ public class Animations {
 
     }
 
+    /**
+     * This method collapses the view with the view that is with the method calling.
+     * @param view The view to be collapsed.
+     */
     public static void collapse(final View view) {
 
         final int actualHeight = view.getMeasuredHeight();
@@ -64,7 +76,12 @@ public class Animations {
     }
 
 
-
+    /**
+     * Rotates a view by 180 degrees, mostly used to rotate the arrow on each card
+     * @param view The view to be rotated
+     * @param isExpanded Checks which way the arrow need to be rotated (Up/Down)
+     * @return Whether or not the view that the arrow is with is now rotated or not.
+     */
     public static boolean toggleArrow(View view, boolean isExpanded) {
 
         if (isExpanded) {
@@ -75,5 +92,4 @@ public class Animations {
             return false;
         }
     }
-
 }

@@ -11,82 +11,132 @@ import java.util.List;
 /**
  * Controls one instance of a sport in the AvailableSports section.
  * A sport has a name, a description of what the sport is about and an URL to the logo of the sport
- * from the CIS website.
+ * The logo are stored locally.
  */
 public class Sport {
     private String name;
     private String description;
-
-    //private String logo;  //If the logos are moved to the application, this should be a int. To reference the correct bytes.
-    private Uri logo;
+    private String logo;
     private String link;
+    private String email; // Needed to filter activities
     private boolean isExpanded;
-    private List<Tag> tags;
+    private final List<Tag> tags;
 
-    public  Sport(){ tags = new ArrayList<>(); }
-    public Sport(String name,String description,String logo, String link, Boolean isExpanded,  List<Tag> tags){
-        this.name = name;
-        this.description= description;
-        this.logo = Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + logo);
-        this.link = link;
-        this.isExpanded = isExpanded;
-        this.tags = tags;
+
+    public Sport(){
+        tags = new ArrayList<>();
     }
 
+    /** Gets the Sport's name.
+     * @return A string representing the name.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name of the sport.
+     * @param name A string with the name of the sport.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets the description of the sport.
+     * @return A string with a short description of the sport.
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Sets the sports description.
+     * @param description A string containing a short description of the sport.
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Gets the logo logo for the sport.
+     * @return A URI-path that specifies the location of the logo.jpg.
+     */
     public Uri getLogo() {
-        return logo;
+        return Uri.parse(logo);
     }
 
+    /**
+     * Sets the logo for the sport.
+     * @param logo A string with the name of the logo.jpg
+     */
     public void setLogo(String logo) {
-        this.logo = Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + logo);
+        this.logo = "android.resource://" + BuildConfig.APPLICATION_ID + logo;
         System.out.println(this.logo);
     }
 
+    /**
+     * Gets the URL to the website of the sport.
+     * @return A string representing the URL of the sport's website.
+     */
     public String getLink() {
         return link;
     }
 
+    /**
+     * Sets the link to the sports website.
+     * @param link A string representing the URL to the sports website.
+     */
     public void setLink(String link) {
         this.link = link;
     }
 
+    /**
+     * @return whether or not the card is expanded
+     */
     public boolean isExpanded() {
-        return isExpanded;
+        return !isExpanded;
     }
 
+    /**
+     * Sets the state of the card's expansion.
+     * @param expanded Is true if the card is expanded.
+     */
     public void setExpanded(boolean expanded) {
         isExpanded = expanded;
     }
 
+    /**
+     * Gets the tags defining the sport.
+     * @return A List containing all the sport's tags.
+     */
     public List<Tag> getTags() {
         return tags;
     }
 
-    public void setTag(String tag){
-        this.tags.add(Tag.valueOf(tag));
-    }
 
     /**
      * Adds a Tag to the list of tags.
      * @param tag Must match an Enum Tag.
      */
     public void addTag(Tag tag) { tags.add(tag); }
+
+    /**
+     * Sets the email of the sport's administrator.
+     * @param email A string representing the email.
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * Gets the email of the sport's administrator.
+     * @return A string representing the email.
+     */
+    public String getEmail() {
+        return email;
+    }
+
 
 }
 
