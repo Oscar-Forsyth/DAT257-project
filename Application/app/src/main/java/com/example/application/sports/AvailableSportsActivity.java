@@ -36,7 +36,6 @@ public class AvailableSportsActivity extends AppCompatActivity {
     private FrameLayout backgroundFilter;
 
     private List<Tag> savedTags;
-    private Fragment filterFragment;
     private static boolean filterExpanded;
     private CheckBox favoriteCheckBox;
     protected List<Sport> sports;
@@ -57,7 +56,7 @@ public class AvailableSportsActivity extends AppCompatActivity {
 
 
         recyclerView = findViewById(R.id.sportsList);
-        filterFragment = new filterSports();
+        Fragment filterFragment = new filterSports();
         filterExpanded = false;
 
         favoriteCheckBox = findViewById(R.id.favoriteCheckBox);

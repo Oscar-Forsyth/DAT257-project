@@ -88,7 +88,6 @@ public class MainMenu extends AppCompatActivity {
 
     /** Called when the user taps the 'Recommended Sports' button */
     public void openRecommendedSports(View view) {
-        //Intent intent = new Intent(this, Wizard.class);
         Intent intent = new Intent(this, RecommendedActivity.class);
 
         startActivity(intent);
@@ -115,7 +114,6 @@ public class MainMenu extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //TODO Should not be needed here !?
     public void goBack(View view){
         this.onBackPressed();
     }
@@ -124,7 +122,4 @@ public class MainMenu extends AppCompatActivity {
     @Override
     public void onBackPressed(){ moveTaskToBack(true); }
 
-    private void saveList (){
-
-    }
 }

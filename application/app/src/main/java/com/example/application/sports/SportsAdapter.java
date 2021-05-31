@@ -29,12 +29,11 @@ import java.util.List;
  */
 
 public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder> {
-    //TODO make changes that Intellij recommends here
-    private LayoutInflater inflater;
-    private List<Sport> sports;
-    private List<Sport> favouriteSports;
-    private boolean favouriteFilterOn;
-    private Context ctx;
+    private final LayoutInflater inflater;
+    private final List<Sport> sports;
+    private final List<Sport> favouriteSports;
+    private final boolean favouriteFilterOn;
+    private final Context ctx;
 
 
     public SportsAdapter(Context ctx, List<Sport> sports, boolean isFavouriteFilterOn){
@@ -182,7 +181,6 @@ public class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder
      * Own small class needed for the adapter.
      * Binds values to and holds attributes necessary for the items in recyclerView
      */
-    //TODO change to static (Intellij recommendation)
     protected class ViewHolder extends  RecyclerView.ViewHolder{
         TextView name, description;
         Button linkButton;

@@ -90,7 +90,6 @@ public class Favourites extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favourites, container, false);
-        //TODO  om favourites är tom ska emptyListTextView.setVisibility(View.INVISIBLE)
         emptyListTextView = view.findViewById(R.id.emptyListTextView);
         // Inflate the layout for this fragment
         return view;

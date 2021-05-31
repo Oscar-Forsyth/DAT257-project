@@ -52,13 +52,9 @@
                 android:layout_marginStart="2dp"
                 android:layout_marginLeft="2dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="316dp"
-                android:layout_marginRight="316dp"
                 android:text="Location"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/locationLogo"
                 app:layout_constraintTop_toBottomOf="@+id/title" />
 
@@ -111,37 +107,33 @@
 
     <TextView
         android:id="@+id/deadlineText"
-        android:layout_width="52dp"
+        android:layout_width="wrap_content"
 
         android:layout_height="18dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginLeft="17dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="2dp"
-        android:text="Deadline:"
+        android:text="Deadline: "
         android:textColor="@color/black"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintEnd_toStartOf="@+id/endDate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/endDate"
-        android:layout_width="232dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
 
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="110dp"
-        android:layout_marginRight="110dp"
         android:layout_marginBottom="1dp"
         android:text="End Date"
         android:textColor="@color/black"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/deadlineText"
         app:layout_constraintTop_toTopOf="parent" />
 

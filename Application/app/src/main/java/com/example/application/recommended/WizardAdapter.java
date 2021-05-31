@@ -79,7 +79,6 @@ public class WizardAdapter extends RecyclerView.Adapter<WizardAdapter.WizardView
     }
 
     @Override
-    //TODO Change this method to fill with each question.
     public void onBindViewHolder(@NonNull WizardViewHolder holder, int position) {
         holder.wizardQuestion.setText(wizardQuestions[position]);
         holder.radioButton4.setVisibility(View.GONE);
