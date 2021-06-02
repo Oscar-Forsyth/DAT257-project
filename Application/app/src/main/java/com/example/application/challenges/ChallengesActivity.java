@@ -75,7 +75,6 @@ public class ChallengesActivity extends AppCompatActivity {
     private final String currentDailyChallengesJson = "currentDailyChallengesJson";
 
     //the URL for the google calendar that CIS Missions are gathered from
-    //private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/c6isg5rcllc2ki81mnpnv92g90@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
     private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/c_odn6sl5ek8radngjjs6jst44js@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
 
     /**
@@ -239,8 +238,7 @@ public class ChallengesActivity extends AppCompatActivity {
                 }
                 try {
                     String description = items.getJSONObject(i).getString("description");
-                    challenge.setDescription(Html.fromHtml(description, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
-                    );
+                    challenge.setDescription(Html.fromHtml(description, HtmlCompat.FROM_HTML_MODE_LEGACY).toString());
                 } catch (JSONException e) {
                     challenge.setDescription(" ");
                 }

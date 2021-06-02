@@ -1,5 +1,11 @@
 package com.example.application.calendar;
 
+import android.os.Build;
+import android.text.Html;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.text.HtmlCompat;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,6 +49,7 @@ public class EventsJSONConverter {
      * to the list of all events.
      * @param item one event in the Google Calendar
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void addJSONObjectToEvents(JSONObject item) {
         Event event = new Event();
         String startDate;
@@ -78,7 +85,7 @@ public class EventsJSONConverter {
         // Get the events description if there is one
         try {
             String description = item.getString("description");
-            event.setDescription(description);
+            event.setDescription(Html.fromHtml(description, HtmlCompat.FROM_HTML_MODE_LEGACY).toString());
         } catch (JSONException e) {
             event.setDescription(" ");
         }

@@ -21,8 +21,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.application.R;
 import com.example.application.SportsLoader;
-import com.example.application.recommended.Favourites;
-import com.example.application.recommended.QuizRecommended;
 import com.example.application.sports.Sport;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 
@@ -31,13 +29,11 @@ import org.json.JSONObject;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -57,7 +53,6 @@ public class EventsActivity extends AppCompatActivity {
 
     private final EventsJSONConverter eventsJSONConverter = new EventsJSONConverter();
     private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/cis-chalmers.se_295gphnnjamvidi831rg4f0120@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
-
     private TextView headerTitle, monthView, noEventsText;
     private CheckBox recommendedFilterButton, favouriteFilterButton;
     private CompactCalendarView calendarView;
