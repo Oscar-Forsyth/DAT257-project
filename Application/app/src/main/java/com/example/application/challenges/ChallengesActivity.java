@@ -1,19 +1,21 @@
 package com.example.application.challenges;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.text.HtmlCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,7 +40,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -74,7 +75,8 @@ public class ChallengesActivity extends AppCompatActivity {
     private final String currentDailyChallengesJson = "currentDailyChallengesJson";
 
     //the URL for the google calendar that CIS Missions are gathered from
-    private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/c6isg5rcllc2ki81mnpnv92g90@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
+    //private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/c6isg5rcllc2ki81mnpnv92g90@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
+    private final static String JSON_URL = "https://www.googleapis.com/calendar/v3/calendars/c_odn6sl5ek8radngjjs6jst44js@group.calendar.google.com/events?key=AIzaSyAfe6owfkgrW0GjN5c3N_DDLELAHagbKEg";
 
     /**
      * sets attributes for UI-elements, and loads lists with what was saved from the previous time this Activity was opened
@@ -215,6 +217,7 @@ public class ChallengesActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void addChallengesFromJSON(JSONObject response) {
         String currentDate = dateToday();
         try {
@@ -242,7 +245,8 @@ public class ChallengesActivity extends AppCompatActivity {
                 }
                 try {
                     String description = items.getJSONObject(i).getString("description");
-                    challenge.setDescription(description);
+                    challenge.setDescription(Html.fromHtml(description, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
+                    );
                 } catch (JSONException e) {
                     challenge.setDescription(" ");
                 }
