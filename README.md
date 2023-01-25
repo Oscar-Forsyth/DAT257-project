@@ -32,12 +32,12 @@ Application Demo - https://drive.google.com/file/d/1lpSQjsHaBJmKrv94kAhCRouL7M6V
 ##
 ### Team members:
 
-- Hannes Svahn - Hemlos
-- Mantas Trakanavicius - Trakanavicius
-- Oscar Forsyth - goatlover
-- Oscar Johansson - OscarJohansson1
-- Simon Larsson - silarss
-- Simon Schuster - simonindek
-- Victor Koch - victor-koch
+- Hannes Svahn 
+- Mantas Trakanavicius 
+- Oscar Forsyth 
+- Oscar Johansson 
+- Simon Larsson 
+- Simon Schuster 
+- Victor Koch 
 
 © 2021 All rights reserved.
